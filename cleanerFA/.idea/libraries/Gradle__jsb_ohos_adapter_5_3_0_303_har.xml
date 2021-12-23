@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: jsb-ohos-adapter-5.3.0.303@har">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/00c7d61af818bea7bba8f7b346087d70/jsb-ohos-adapter-5.3.0.303/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/00c7d61af818bea7bba8f7b346087d70/jsb-ohos-adapter-5.3.0.303/resources" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/00c7d61af818bea7bba8f7b346087d70/jsb-ohos-adapter-5.3.0.303/config.json" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

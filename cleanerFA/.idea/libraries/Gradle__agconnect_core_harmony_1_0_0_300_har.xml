@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: agconnect-core-harmony-1.0.0.300@har">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b314b42a739429311402f7b34772c97/agconnect-core-harmony-1.0.0.300/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b314b42a739429311402f7b34772c97/agconnect-core-harmony-1.0.0.300/resources" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b314b42a739429311402f7b34772c97/agconnect-core-harmony-1.0.0.300/config.json" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

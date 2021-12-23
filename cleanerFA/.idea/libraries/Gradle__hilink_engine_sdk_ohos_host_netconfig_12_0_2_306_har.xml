@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: hilink_engine-sdk-ohos-host-netconfig-12.0.2.306@har">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df758ee2ea39ebc9e061f0de00ce0c77/hilink_engine-sdk-ohos-host-netconfig-12.0.2.306/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df758ee2ea39ebc9e061f0de00ce0c77/hilink_engine-sdk-ohos-host-netconfig-12.0.2.306/resources" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df758ee2ea39ebc9e061f0de00ce0c77/hilink_engine-sdk-ohos-host-netconfig-12.0.2.306/config.json" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df758ee2ea39ebc9e061f0de00ce0c77/hilink_engine-sdk-ohos-host-netconfig-12.0.2.306/libs/interwork_java.interface.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0.0" package="com.newpower.ohoscleaner" split="device" android:isFeatureSplit="true" android:versionCode="1000000">
+    
+  <uses-feature android:name="zidane.software.ability" android:required="false"/>
+    
+  <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="29"/>
+    
+  <uses-permission android:name="com.huawei.hilink.framework.permission.BIND_AI_LIFE_CORE_SERVICE"/>
+    
+  <application android:allowBackup="false" android:persistent="false" android:debuggable="true" android:usesCleartextTraffic="false" android:name="com.huawei.cleaner.device.ShellDeviceApplication" android:directBootAware="false">
+        
+    <meta-data android:value="true" android:name="permZA"/>
+        
+    <activity android:taskAffinity="com.newpower.ohoscleaner.device" android:launchMode="standard" android:icon="@drawable/icon" android:exported="true" android:windowSoftInputMode="adjustResize" android:label="@string/device_DeviceAbility" android:name="com.huawei.cleaner.device.DeviceAbilityShellActivity"/>
+        
+    <service android:description="@string/bleserviceability_description" android:icon="@drawable/icon" android:name="com.huawei.cleaner.device.service.BleServiceAbilityShellService" android:exported="true"/>
+        
+    <service android:label="NetConfigAbility" android:description="@string/ability_description" android:icon="@drawable/aa_icon" android:name="com.huawei.ailifeability.NetConfigAbilityShellService" android:exported="true"/>
+        
+    <service android:label="DeviceMgrAbility" android:description="@string/devicemgr_ability_description" android:icon="@drawable/aa_icon" android:name="com.huawei.ailifeability.DeviceMgrAbilityShellService" android:exported="true"/>
+      
+  </application>
+    
+  <dist:delivery xmlns:dist="http://schemas.android.com/apk/distribution">
+        
+    <dist:install-time/>
+      
+  </dist:delivery>
+  
+</manifest>

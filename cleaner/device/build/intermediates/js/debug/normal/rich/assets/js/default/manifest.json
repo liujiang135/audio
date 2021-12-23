@@ -1,0 +1,18 @@
+{
+    "appID": "com.newpower.ohoscleaner",
+    "appName": "$string:device_DeviceAbility",
+    "versionName": "1.0.0",
+    "versionCode": 1000000,
+    "minPlatformVersion": 4,
+    "pages": [
+        "pages/index/index",
+        "pages/setting/setting"
+    ],
+    "deviceType": [
+        "phone"
+    ],
+    "window": {
+        "autoDesignWidth": true,
+        "designWidth": 720
+    }
+}

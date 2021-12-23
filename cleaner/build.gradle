@@ -1,0 +1,70 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'com.huawei.ohos.app'
+
+//For instructions on signature configuration, see https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ide_debug_device-0000001053822404#ZH-CN_TOPIC_0000001154985555__section1112183053510
+ohos {
+    signingConfigs {
+        debug {
+            storeFile file('/Users/joe/Documents/appspace/hms_keystore/test.p12')
+            storePassword '00000018D8237856B240F5FD577C72C5CD68BC06DA2B1E9784DC11A7821E80F5B25BDC66C21E30D9'
+            keyAlias = 'test.p12'
+            keyPassword '00000018E4446D9F1652D62485D64363D1A2EE8033F1758822E3BF84F95A85FA9B8DDC8E52E3D793'
+            signAlg = 'SHA256withECDSA'
+            profile file('/Users/joe/Documents/appspace/hms_keystore/test.debugDebug.p7b')
+            certpath file('/Users/joe/Documents/appspace/hms_keystore/test.debug.cer')
+        }
+
+        /* debug{
+             storeFile file('/Users/joe/Documents/appspace/hms_keystore/newpower.p12')
+             storePassword '0000001E3572678AAE12717EF0B044D842DD9FAF6D1DFF95043E2234A28FA6184096157BF673888531A77755EC18'
+             keyAlias = 'newpower.p12'
+             keyPassword '0000001E941F888DC59E51220FE048523A52BB636ECB5B7BDB0CD4234689B5ADE47A9504AD0D9B97E71B135380CD'
+             signAlg = 'SHA256withECDSA'
+             profile file('/Users/joe/Documents/appspace/hms_keystore/newpower_debug.p7b')
+             certpath file('/Users/joe/Documents/appspace/hms_keystore/newpower_debug.cer')
+         }
+
+         release {
+             storeFile file('/Users/joe/Documents/appspace/hms_keystore/newpower.p12')
+             storePassword '0000001E3572678AAE12717EF0B044D842DD9FAF6D1DFF95043E2234A28FA6184096157BF673888531A77755EC18'
+             keyAlias = 'newpower.p12'
+             keyPassword '0000001E941F888DC59E51220FE048523A52BB636ECB5B7BDB0CD4234689B5ADE47A9504AD0D9B97E71B135380CD'
+             signAlg = 'SHA256withECDSA'
+             profile file('/Users/joe/Documents/appspace/hms_keystore/newpower_release.p7b')
+             certpath file('/Users/joe/Documents/appspace/hms_keystore/newpower_release.cer')
+         } */
+    }
+    compileSdkVersion 5
+    defaultConfig {
+        compatibleSdkVersion 4
+    }
+}
+
+buildscript {
+    repositories {
+        maven {
+            url 'https://repo.huaweicloud.com/repository/maven/'
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.huawei.ohos:hap:3.0.3.4'
+        classpath 'com.huawei.ohos:decctest:1.2.6.0'
+        classpath 'com.huawei.agconnect:agcp-harmony:1.0.0.300'
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url 'https://repo.huaweicloud.com/repository/maven/'
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+        jcenter()
+    }
+}

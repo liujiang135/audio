@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "device_DeviceAbility",
+      "value": "HarmonyOSConnectDemoControl"
+    },
+    {
+      "name": "deviceability_description",
+      "value": "JS_Empty Ability"
+    },
+    {
+      "name": "bleserviceability_description",
+      "value": "hap sample empty service"
+    }
+  ]
+}

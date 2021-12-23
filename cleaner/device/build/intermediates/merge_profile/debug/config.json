@@ -1,0 +1,112 @@
+{
+    "app": {
+        "bundleName": "com.newpower.ohoscleaner",
+        "vendor": "huawei",
+        "apiVersion": {
+            "compatible": 4,
+            "target": 5,
+            "releaseType": "Release"
+        },
+        "version": {
+            "code": 1000000,
+            "name": "1.0.0"
+        }
+    },
+    "deviceConfig": {
+        "default": {
+            "debug": true
+        }
+    },
+    "module": {
+        "name": "com.huawei.cleaner.device.DeviceApplication",
+        "deviceType": [
+            "phone"
+        ],
+        "distro": {
+            "deliveryWithInstall": true,
+            "moduleName": "device",
+            "moduleType": "feature",
+            "installationFree": true
+        },
+        "abilities": [
+            {
+                "name": "com.huawei.cleaner.device.DeviceAbility",
+                "description": "$string:deviceability_description",
+                "icon": "$media:icon",
+                "label": "$string:device_DeviceAbility",
+                "type": "page",
+                "launchType": "standard",
+                "visible": true,
+                "mission": "com.newpower.ohoscleaner.device",
+                "homeAbility": false
+            },
+            {
+                "name": "com.huawei.cleaner.device.service.BleServiceAbility",
+                "description": "$string:bleserviceability_description",
+                "icon": "$media:icon",
+                "type": "service",
+                "visible": true,
+                "homeAbility": false
+            },
+            {
+                "name": "com.huawei.ailifeability.NetConfigAbility",
+                "description": "$string:ability_description",
+                "icon": "$media:aa_icon",
+                "label": "NetConfigAbility",
+                "type": "service",
+                "permissions": [
+                    
+                ],
+                "visible": true,
+                "skills": [
+                    
+                ],
+                "homeAbility": false
+            },
+            {
+                "name": "com.huawei.ailifeability.DeviceMgrAbility",
+                "description": "$string:devicemgr_ability_description",
+                "icon": "$media:aa_icon",
+                "label": "DeviceMgrAbility",
+                "type": "service",
+                "permissions": [
+                    
+                ],
+                "visible": true,
+                "skills": [
+                    
+                ],
+                "homeAbility": false
+            }
+        ],
+        "js": [
+            {
+                "name": "default",
+                "pages": [
+                    "pages/index/index",
+                    "pages/setting/setting"
+                ],
+                "window": {
+                    "designWidth": 720,
+                    "autoDesignWidth": true
+                }
+            }
+        ],
+        "reqPermissions": [
+            {
+                "name": "com.huawei.hilink.framework.permission.BIND_AI_LIFE_CORE_SERVICE",
+                "reason": "",
+                "usedScene": {
+                    "ability": [
+                        "com.huawei.ailifeability.NetConfigAbility",
+                        "com.huawei.ailifeability.DeviceMgrAbility"
+                    ],
+                    "when": "inuse"
+                }
+            }
+        ],
+        "mainAbility": "com.huawei.cleaner.device.DeviceAbility",
+        "colorMode": "light",
+        "package": "com.huawei.cleaner.device"
+    }
+}

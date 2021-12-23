@@ -1,0 +1,8 @@
+media icon 0x3000007
+string agconnectinitializeability_description 0x3000000
+string app_name 0x3000001
+string bleserviceability_description 0x3000002
+string entry_MainAbility 0x3000003
+string har_name 0x3000004
+string mainability_description 0x3000005
+string serviceabilitydiscover_description 0x3000006

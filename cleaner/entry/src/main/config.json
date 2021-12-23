@@ -1,0 +1,86 @@
+{
+  "app": {
+    "bundleName": "com.newpower.ohoscleaner",
+    "vendor": "huawei",
+    "version": {
+      "code": 1000000,
+      "name": "1.0.0"
+    }
+  },
+  "deviceConfig": {
+    "default": {
+      "allowComponentsProxy": true
+    }
+  },
+  "module": {
+    "colorMode": "light",
+    "package": "com.huawei.cleaner",
+    "name": "com.huawei.cleaner.EntryApplication",
+    "mainAbility": "com.huawei.cleaner.MainAbility",
+    "deviceType": [
+      "phone"
+    ],
+    "distro": {
+      "deliveryWithInstall": true,
+      "moduleName": "entry",
+      "moduleType": "entry",
+      "installationFree": true
+    },
+    "abilities": [
+      {
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ],
+        "name": "com.huawei.cleaner.MainAbility",
+        "icon": "$media:icon",
+        "description": "$string:mainability_description",
+        "label": "$string:entry_MainAbility",
+        "type": "page",
+        "launchType": "standard",
+        "mission": "com.newpower.ohoscleaner"
+      }
+    ],
+    "js": [
+      {
+        "name": "default",
+        "window": {
+          "designWidth": 720,
+          "autoDesignWidth": true
+        },
+        "pages": [
+          "pages/index/index"
+        ]
+      }
+    ],
+    "metaData": {
+      "customizeData": [
+        {
+          "name": "com.huawei.hms.client.appid",
+          "value": "105081943"
+        },
+        {
+          "name": "hwc-theme",
+          "value": "androidhwext:style/Theme.Emui.Translucent.NoTitleBar"
+        }
+      ]
+    },
+    "reqPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      },
+      {
+        "name": "ohos.permission.GET_WIFI_INFO"
+      },
+      {
+        "name": "com.huawei.hilink.framework.permission.BIND_AI_LIFE_CORE_SERVICE"
+      }
+    ]
+  }
+}

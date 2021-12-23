@@ -1,0 +1,21 @@
+<element name="nav" src="../../common/navbar/navbar"></element>
+<div class="container">
+    <div if="{{isFullWindow}}">
+        <nav title="{{deviceName}}" show-menu="true" menu="{{menu}}" @menu-item-click="menuClick"></nav>
+    </div>
+    <image class="device-img top-margin-90" src="{{deviceImage}}"></image>
+    <text class="device-name-text" show="{{!isFullWindow}}">{{deviceName}}</text>
+    <image class="logo-img" src="{{$t('files.logo')}}"></image>
+    <div class="option-container option-top">
+        <text class="switch-text">
+            {{linkStatus}}
+        </text>
+    </div>
+    <div class="option-container option-top" onclick="switchClick" disabled="{{switchDisable}}">
+        <text class="switch-text">
+            {{switchText}}
+        </text>
+        <image src="{{ switchTextImg }}" class="switch-icon"></image>
+    </div>
+    <button class="view-more" onclick="viewMoreClick()" show="{{!isFullWindow}}">{{ $t('strings.view_more') }}</button>
+</div>

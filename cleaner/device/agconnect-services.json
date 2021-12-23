@@ -1,0 +1,37 @@
+{
+	"agcgw_all":{
+		"CN":"connect-drcn.dbankcloud.cn",
+		"CN_back":"connect-drcn.hispace.hicloud.com",
+		"DE":"connect-dre.dbankcloud.cn",
+		"DE_back":"connect-dre.hispace.hicloud.com",
+		"RU":"connect-drru.dbankcloud.cn",
+		"RU_back":"connect-drru.hispace.hicloud.com",
+		"SG":"connect-dra.dbankcloud.cn",
+		"SG_back":"connect-dra.hispace.hicloud.com"
+	},
+	"client":{
+		"cp_id":"2850086000363504491",
+		"product_id":"737518067793971405",
+		"client_id":"777647888401451392",
+		"client_secret":"[!00C41312378AED2282920F2F97D485610E7E5DED6C5305D04A309551AE96764D950FE19FADEC7F6530BC1CA8F34BE65C334E10AECACC35DD91143F964D6723B2C69C1844418608208D32B2A630477306A3E3386BB2D8FE8D1300E172CEB8FA286A]",
+		"project_id":"737518067793971405",
+		"app_id":"105081943",
+		"api_key":"[!00D709D5FF9165B1288719B589AE2E5C35CD9097C1E77CE3C5BC4D3678DCE8459033DD5878F1E6F5EE78084C95E6C31FC6F374B75541A378F7E0C7CC83B65FE8ED17720AA0324E840182C94B528A1D5E1BFF1E821F5582067183254329B5D07364A0352337B9D5CB76A5B78B6B5B70A5A834CD22F6FA29884BD68D456FB1EDBE3C]",
+		"package_name":"com.newpower.ohoscleaner"
+	},
+	"oauth_client":{
+		"client_id":"105081943",
+		"client_type":30
+	},
+	"app_info":{
+		"app_id":"777648534156487488",
+		"package_name":"com.newpower.ohoscleaner"
+	},
+	"code":{
+		"code1":"02BBF4C03535B461F6EFAA373526FD18",
+		"code2":"ACC685E427602310128DA243DD001988",
+		"code3":"415BEE624A2E6ACE165734CFB59B6098",
+		"code4":"DAF1884D738D3B13198545FCA594C33F"
+	},
+	"configuration_version":"3.0"
+}

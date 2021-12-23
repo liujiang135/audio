@@ -1,0 +1,58 @@
+{
+  "app": {
+    "bundleName": "com.newpower.ohoscleaner",
+    "vendor": "huawei",
+    "version": {
+      "code": 1000000,
+      "name": "1.0.0"
+    }
+  },
+  "deviceConfig": {},
+  "module": {
+    "colorMode": "light",
+    "package": "com.huawei.cleaner.device",
+    "name": "com.huawei.cleaner.device.DeviceApplication",
+    "mainAbility": "com.huawei.cleaner.device.DeviceAbility",
+    "deviceType": [
+      "phone"
+    ],
+    "distro": {
+      "deliveryWithInstall": true,
+      "moduleName": "device",
+      "moduleType": "feature",
+      "installationFree": true
+    },
+    "abilities": [
+      {
+        "visible": true,
+        "name": "com.huawei.cleaner.device.DeviceAbility",
+        "icon": "$media:icon",
+        "description": "$string:deviceability_description",
+        "label": "$string:device_DeviceAbility",
+        "type": "page",
+        "launchType": "standard",
+        "mission": "com.newpower.ohoscleaner.device"
+      },
+      {
+        "visible": true,
+        "name": "com.huawei.cleaner.device.service.BleServiceAbility",
+        "icon": "$media:icon",
+        "description": "$string:bleserviceability_description",
+        "type": "service"
+      }
+    ],
+    "js": [
+      {
+        "pages": [
+          "pages/index/index",
+          "pages/setting/setting"
+        ],
+        "name": "default",
+        "window": {
+          "designWidth": 720,
+          "autoDesignWidth": true
+        }
+      }
+    ]
+  }
+}

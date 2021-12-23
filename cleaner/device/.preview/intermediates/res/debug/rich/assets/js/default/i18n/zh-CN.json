@@ -1,0 +1,10 @@
+{
+  "strings": {
+    "deviceName": "设备名称",
+    "location": "摆放位置",
+    "view_more": "查看更多"
+  },
+  "files": {
+    "logo": "common/images/logo.png"
+  }
+}

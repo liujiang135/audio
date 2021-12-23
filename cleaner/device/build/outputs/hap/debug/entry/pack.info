@@ -1,0 +1,108 @@
+{
+    "summary": {
+        "app": {
+            "bundleName": "com.newpower.ohoscleaner",
+            "version": {
+                "code": 1000000,
+                "name": "1.0.0"
+            }
+        },
+        "modules": [
+            {
+                "mainAbility": "com.huawei.cleaner.device.DeviceAbility",
+                "deviceType": [
+                    "phone"
+                ],
+                "abilities": [
+                    {
+                        "visible": true,
+                        "name": "com.huawei.cleaner.device.DeviceAbility",
+                        "label": "$string:device_DeviceAbility"
+                    },
+                    {
+                        "visible": true,
+                        "name": "com.huawei.cleaner.device.service.BleServiceAbility"
+                    },
+                    {
+                        "visible": true,
+                        "name": "com.huawei.ailifeability.NetConfigAbility",
+                        "label": "NetConfigAbility"
+                    },
+                    {
+                        "visible": true,
+                        "name": "com.huawei.ailifeability.DeviceMgrAbility",
+                        "label": "DeviceMgrAbility"
+                    }
+                ],
+                "distro": {
+                    "moduleType": "feature",
+                    "installationFree": true,
+                    "deliveryWithInstall": true,
+                    "moduleName": "device"
+                },
+                "apiVersion": {
+                    "compatible": 4,
+                    "releaseType": "Release",
+                    "target": 5
+                }
+            },
+            {
+                "mainAbility": "com.huawei.cleaner.MainAbility",
+                "deviceType": [
+                    "phone"
+                ],
+                "abilities": [
+                    {
+                        "visible": true,
+                        "name": "com.huawei.cleaner.MainAbility",
+                        "label": "$string:entry_MainAbility"
+                    },
+                    {
+                        "visible": false,
+                        "name": "com.huawei.hms.jsb.adapter.har.stub.FgStubAbility",
+                        "label": "stub ability"
+                    },
+                    {
+                        "visible": false,
+                        "name": "com.huawei.hms.jsb.adapter.har.stub.BridgeStubAbility",
+                        "label": "stub ability"
+                    },
+                    {
+                        "visible": false,
+                        "name": "com.huawei.hms.jsb.adapter.har.stub.KitUpdateAbility",
+                        "label": "stub ability"
+                    },
+                    {
+                        "visible": false,
+                        "name": "com.huawei.hms.jsb.adapter.har.stub.JsbKitUpdateStubAbility",
+                        "label": "stub ability"
+                    },
+                    {
+                        "name": "com.huawei.agconnect.core.ServiceDiscovery"
+                    }
+                ],
+                "distro": {
+                    "moduleType": "entry",
+                    "installationFree": true,
+                    "deliveryWithInstall": true,
+                    "moduleName": "entry"
+                },
+                "apiVersion": {
+                    "compatible": 4,
+                    "releaseType": "Release",
+                    "target": 5
+                }
+            }
+        ]
+    },
+    "packages": [
+        {
+            "deviceType": [
+                "phone"
+            ],
+            "moduleType": "entry",
+            "deliveryWithInstall": true,
+            "name": "entry-debug-rich-unsigned"
+        }
+    ]
+}

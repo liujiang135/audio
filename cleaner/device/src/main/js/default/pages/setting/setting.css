@@ -1,0 +1,46 @@
+.container {
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.option-flag {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    flex: 0;
+}
+.option-text {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+    text-align: right;
+    flex: 1;
+}
+
+.option-item-container{
+    display: flex;
+}
+
+.line{
+    background-color: lightgray;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 1px;
+    width: 100%;
+}
+
+.option-container {
+    background-color: white;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 20px;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.top-margin-70 {
+    margin-top: 70px;
+}

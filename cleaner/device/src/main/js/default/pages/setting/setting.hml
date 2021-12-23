@@ -1,0 +1,15 @@
+<element name="nav" src="../../common/navbar/navbar"></element>
+<div class="container">
+    <nav title="设置" show-menu="false"></nav>
+    <div class="option-container top-margin-70">
+        <div class="option-item-container">
+            <text class="option-flag" >{{ $t('strings.deviceName') }}</text>
+            <text class="option-text">{{ deviceName }}</text>
+        </div>
+        <div class="line"></div>
+        <div class="option-item-container">
+            <text class="option-flag">{{ $t('strings.location') }}</text>
+            <text class="option-text">{{ roomName }}</text>
+        </div>
+    </div>
+</div>

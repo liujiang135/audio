@@ -1,0 +1,10 @@
+{
+  "strings": {
+    "deviceName": "Device name",
+    "location": "Location",
+    "view_more": "view more"
+  },
+  "files": {
+    "logo": "common/images/logo.png"
+  }
+}

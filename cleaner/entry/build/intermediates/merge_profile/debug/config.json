@@ -1,0 +1,231 @@
+{
+    "app": {
+        "bundleName": "com.newpower.ohoscleaner",
+        "vendor": "huawei",
+        "apiVersion": {
+            "compatible": 4,
+            "target": 5,
+            "releaseType": "Release"
+        },
+        "version": {
+            "code": 1000000,
+            "name": "1.0.0"
+        }
+    },
+    "deviceConfig": {
+        "default": {
+            "allowComponentsProxy": true,
+            "debug": true
+        }
+    },
+    "module": {
+        "name": "com.huawei.cleaner.EntryApplication",
+        "deviceType": [
+            "phone"
+        ],
+        "distro": {
+            "deliveryWithInstall": true,
+            "moduleName": "entry",
+            "moduleType": "entry",
+            "installationFree": true
+        },
+        "metaData": {
+            "customizeData": [
+                {
+                    "name": "com.huawei.hms.client.appid",
+                    "value": "105081943"
+                },
+                {
+                    "name": "hwc-theme",
+                    "value": "androidhwext:style/Theme.Emui.Translucent.NoTitleBar"
+                },
+                {
+                    "name": "com.huawei.hms.min_api_level:dynamic-api:huawei_module_dynamicloader",
+                    "value": "4"
+                },
+                {
+                    "name": "com.huawei.hms.min_api_level:bridge-sdk:huawei_module_jsb",
+                    "value": "7"
+                }
+            ]
+        },
+        "abilities": [
+            {
+                "name": "com.huawei.cleaner.MainAbility",
+                "description": "$string:mainability_description",
+                "icon": "$media:icon",
+                "label": "$string:entry_MainAbility",
+                "type": "page",
+                "launchType": "standard",
+                "skills": [
+                    {
+                        "actions": [
+                            "action.system.home"
+                        ],
+                        "entities": [
+                            "entity.system.home"
+                        ]
+                    }
+                ],
+                "mission": "com.newpower.ohoscleaner",
+                "homeAbility": true
+            },
+            {
+                "name": "com.huawei.hms.jsb.adapter.har.stub.FgStubAbility",
+                "description": "stub",
+                "label": "stub ability",
+                "type": "page",
+                "launchType": "standard",
+                "metaData": {
+                    "customizeData": [
+                        {
+                            "name": "hwc-theme",
+                            "value": "androidhwext:style/Theme.Emui.Translucent.NoTitleBar"
+                        }
+                    ]
+                },
+                "permissions": [
+                    
+                ],
+                "visible": false,
+                "skills": [
+                    {
+                        "actions": [
+                            "com.huawei.hms.jsb.proxy.ForegroundShadowActivity"
+                        ],
+                        "entities": [
+                            "android.intent.category.DEFAULT"
+                        ]
+                    }
+                ],
+                "formEnabled": false,
+                "homeAbility": false
+            },
+            {
+                "name": "com.huawei.hms.jsb.adapter.har.stub.BridgeStubAbility",
+                "description": "stub",
+                "label": "stub ability",
+                "type": "page",
+                "launchType": "standard",
+                "metaData": {
+                    "customizeData": [
+                        {
+                            "name": "hwc-theme",
+                            "value": "androidhwext:style/Theme.Emui.Translucent.NoTitleBar"
+                        }
+                    ]
+                },
+                "permissions": [
+                    
+                ],
+                "visible": false,
+                "skills": [
+                    {
+                        "actions": [
+                            "com.huawei.hms.jsb.proxy.BridgeActivity"
+                        ],
+                        "entities": [
+                            "android.intent.category.DEFAULT"
+                        ]
+                    }
+                ],
+                "formEnabled": false,
+                "homeAbility": false
+            },
+            {
+                "name": "com.huawei.hms.jsb.adapter.har.stub.KitUpdateAbility",
+                "description": "stub",
+                "label": "stub ability",
+                "type": "page",
+                "launchType": "standard",
+                "metaData": {
+                    "customizeData": [
+                        {
+                            "name": "hwc-theme",
+                            "value": "androidhwext:style/Theme.Emui.Translucent.NoTitleBar"
+                        }
+                    ]
+                },
+                "permissions": [
+                    
+                ],
+                "visible": false,
+                "skills": [
+                    {
+                        "actions": [
+                            "com.huawei.hms.jsb.proxy.KitUpdateStubActivity"
+                        ],
+                        "entities": [
+                            "android.intent.category.DEFAULT"
+                        ]
+                    }
+                ],
+                "formEnabled": false,
+                "homeAbility": false
+            },
+            {
+                "name": "com.huawei.hms.jsb.adapter.har.stub.JsbKitUpdateStubAbility",
+                "description": "stub",
+                "label": "stub ability",
+                "type": "page",
+                "launchType": "standard",
+                "metaData": {
+                    "customizeData": [
+                        {
+                            "name": "hwc-theme",
+                            "value": "androidhwext:style/Theme.Emui.Translucent.NoTitleBar"
+                        }
+                    ]
+                },
+                "permissions": [
+                    
+                ],
+                "visible": false,
+                "skills": [
+                    {
+                        "actions": [
+                            "com.huawei.hms.jsb.JsbKitUpdateStub"
+                        ],
+                        "entities": [
+                            "android.intent.category.DEFAULT"
+                        ]
+                    }
+                ],
+                "formEnabled": false,
+                "homeAbility": false
+            },
+            {
+                "name": "com.huawei.agconnect.core.ServiceDiscovery",
+                "type": "service",
+                "homeAbility": false
+            }
+        ],
+        "js": [
+            {
+                "name": "default",
+                "pages": [
+                    "pages/index/index"
+                ],
+                "window": {
+                    "designWidth": 720,
+                    "autoDesignWidth": true
+                }
+            }
+        ],
+        "reqPermissions": [
+            {
+                "name": "ohos.permission.INTERNET"
+            },
+            {
+                "name": "ohos.permission.GET_WIFI_INFO"
+            },
+            {
+                "name": "com.huawei.hilink.framework.permission.BIND_AI_LIFE_CORE_SERVICE"
+            }
+        ],
+        "allowClassMap": true,
+        "mainAbility": "com.huawei.cleaner.MainAbility",
+        "colorMode": "light",
+        "package": "com.huawei.cleaner"
+    }
+}

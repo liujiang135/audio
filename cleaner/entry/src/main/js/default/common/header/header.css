@@ -1,0 +1,32 @@
+@import '../css/common.css';
+
+.logo-img-top {
+    margin-top: 48px;
+}
+
+.logo-img {
+    width: 92px;
+    height: 92px;
+    border-radius: 15px;
+    border-width: 0.5px;
+    border-color: #979797;
+}
+
+.fa-name {
+    margin-top: 32px;
+    color: #000000;
+    font-size: 18px;
+}
+
+.net-name {
+    margin-top: 32px;
+    color: #000000;
+    font-size: 20px;
+}
+
+.fa-version {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #000000;
+    opacity: 0.6;
+}

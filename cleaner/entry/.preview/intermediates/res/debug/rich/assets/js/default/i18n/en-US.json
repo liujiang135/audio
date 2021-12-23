@@ -1,0 +1,16 @@
+{
+  "strings": {
+    "faName": "HarmonyOSConnectDemo",
+    "faVersion": "Version",
+    "authorizeDescription": "Requires authorization to continue using the mobile number to log in.",
+    "hwAccountLoginValue": "Login",
+    "cancelValue": "Cancel",
+    "authValue": "Authorisation",
+    "agree": "Agree",
+    "protocol": "XXX user agreement and privacy statement"
+  },
+  "files": {
+    "hwSignLogo": "/common/images/huawei_logo.png",
+    "cpLogo": "/common/images/cp_logo.png"
+  }
+}

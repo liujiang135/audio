@@ -1,0 +1,245 @@
+#second{
+    width:100%;
+    height:100%;
+    background: #f7f7f7;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#second::-webkit-scrollbar {
+    width:0px;
+    height:0px;
+}
+
+.dark {
+    width: 100%;
+}
+
+
+.seHeader {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    background: #f7f7f7;
+}
+
+.dark .seHeader {
+    background: black;
+}
+
+.seHeaderWrap {
+    margin:0 16px;
+}
+.seHeader .seIphone {
+    width: 100%;
+    height:37px;
+}
+
+.seHeader .seTitle {
+    width:100%;
+    height:56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.seHeader .seTitle .seName {
+    flex:1;
+    margin-left: 0 16px;
+    height:36px;
+    line-height: 36px;
+    color: rgba(0, 0, 0, 0.9);
+    font-size: 2.4rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+
+.dark .seHeader .seTitle .seName {
+    color:rgba(255, 255, 255, 0.86);
+}
+
+.seHeader .seLeft {
+    width:36px;
+    height:36px;
+    display: flex;
+    align-items: center;
+}
+
+.seLeft .seBack {
+    width:24px;
+    height: 24px;
+    background: url('../img/light/public/ic_back.png') no-repeat;
+    background-size: cover;
+}
+.dark .seLeft .seBack {
+    background: url('../img/dark/public/ic_back.png')  no-repeat ;
+    background-size: cover;
+}
+
+.sContent{
+    margin: 0 16px;
+    position: relative;
+    flex: 1;
+    overflow: auto;
+    font-size: 1.6rem;
+}
+
+.sContent .sRules{
+    margin:8px 0;
+    color: rgba(0,0,0,0.6);
+}
+
+.dark .sContent{
+    color:rgba(255, 255, 255, 0.86);
+}
+
+.sContent .sRules{
+    margin:8px 0;
+    color: rgba(255,255,255,0.6);
+}
+
+.revocation {
+    width:50%;
+    height:36px;
+    line-height: 36px;
+    text-align: center;
+    position:fixed;
+    left: 50%;
+    bottom: 24px;
+    -webkit-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+    background: rgba(0,0,0,0.05);
+    color: #007DFF;
+    font-size: 1.6rem;
+    border-radius: 30px;
+}
+
+.dark .revocation{
+    background: #262626; 
+    color: #006CDE;
+}
+
+
+/* 隐私声明弹窗 -----------------------*/
+.stopPopup {
+    width:100%;
+    position: fixed;
+    z-index: 100;
+    padding:0 16px;
+    bottom:16px;
+    display: none;
+}
+
+.stopPopup .stopWrap{
+    width: 100%;
+    border-radius: 16px;
+    padding: 0 24px;
+    overflow: hidden;
+    background: white;
+}
+
+.dark .stopPopup .stopWrap{
+    background: #262626;
+}
+
+.stopPopup .stopWrap .stopTitle{
+    font-size: 2rem;
+    letter-spacing: 1px;
+    color: rgba(0,0,0,0.9);
+    height: 56px;
+    line-height: 56px;
+}
+
+.dark .stopPopup .stopWrap .stopTitle{
+    color: rgba(255,255,255,0.9);
+}
+
+.stopPopup .stopWrap .stopContent{
+    font-size: 1.6rem;
+    color: rgba(0,0,0,0.9);
+    overflow-y: auto;
+    display: inline-block;
+}
+
+.dark .stopPopup .stopWrap .stopContent{
+    color: rgba(255, 255, 255, 0.86);
+}
+
+.stopPopup .stopWrap .stopBox{
+    max-height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.stopPopup .stopWrap .stopContent .stateRules{
+    margin: 8px 0px;
+}
+
+.stopBtn{
+    margin-top:8px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stopBtn .stopFn{
+    height:24px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    flex:1;
+    text-align: center;
+    color: #007dff;
+    font-size: 1.6rem;
+}
+
+.stopBtn div:nth-child(3){
+    color:#fa2a2d;
+}
+
+.dark .stopBtn .stopFn{
+    color: #3F97E9;
+}
+
+.dark .stopBtn div:nth-child(3){
+    color:#e64548;
+}
+
+.stopBtn .line{
+    width:1px;
+    height:24px;
+    align-self: center;
+    background: rgba(0, 0, 0, 0.5);
+    transform: scaleX(0.25);
+}
+
+.dark .stopBtn .line{
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.backgroundColor {
+    display: none;
+    width:100%;
+    height:100%;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top:0;
+    background-color: rgba(0,0,0,0.2);
+    box-sizing: border-box;
+}
+
+.stopAppear {
+    animation: stopAppear 300ms ease-in-out 0ms;
+}
+
+@keyframes stopAppear {
+    0% {
+        bottom: -100%;
+    }
+    to {
+        bottom: 16px;
+    }
+}

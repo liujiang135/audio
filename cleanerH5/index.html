@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+
+    <script src="./js/jquery.min.js"></script>
+	<script src="./js/jquery.i18n.properties.js"></script>
+	<script src="./js/vconsole.min.js"></script>
+	<script>
+		var vConsole = new VConsole();
+		console.log('开始调试');
+	</script>
+
+    <title>OHOS-Cleaner</title>
+</head>
+<body>
+    <div id="app">
+        <script>
+			var app = document.getElementById('app');
+			function getDarkMode(){
+				var isIOS = !!navigator.userAgent.match(/iPhone/i);
+			    if(window.hilink && !isIOS){
+			        var dark = window.hilink.getDarkMode();
+			        if(dark == 2){//暗黑模式
+			            app.style.background = 'black';
+			            app.classList.add("dark");
+						document.body.classList.add("dark")
+			        } else {
+						app.style.background = '#f7f7f7';
+			            app.classList.remove("dark")
+						document.body.classList.remove("dark")
+			        }
+			    }
+			}
+			getDarkMode()
+			// dp换算
+			function initDp(){
+				if (window.hilink) {
+					hilink.getSystemInfoSync("getSystemInfoSync")
+					window.getSystemInfoSync = (res) => {
+					    console.log("系统信息")
+					    console.log(res)
+					}
+				}
+			}
+			initDp()
+		</script>
+
+        <!-- 头部导航栏 -->
+        <header class="header">
+            <div class="headerWrap">
+                <div class="iphoneStatus"></div>
+                <div class="devTitle">
+                    <div class="barLeft">
+                        <div class="goApp"></div>
+                    </div>
+                    <div class="devName">清蜓智能随手吸尘器C2S</div>
+                    <div class="barRight">
+                        <div class="devMore"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="appMargin"> 
+            <!-- 设备图片+logo -->
+            <section class="devImg">
+                <div class="devTop"></div>
+                <div class="deviceImg"></div>
+                <div class="logo"></div>
+            </section>
+            <!-- 设备状态栏-->
+            <section class="devStatus">
+                <div class="statusLeft" data-locale="turned_on">已开启</div>
+                <div class="statusMiddle">
+                    <div class="up"  data-locale="turned_on">00:20:00</div>
+                    <div class="down"  data-locale="turned_on">倒计时关</div>
+                </div>
+                <div class="statusRight">
+                    <img class="statusImg" src="./img/light/public/ic_kaiguan.png" alt="开关">
+                </div>
+            </section>
+            <!-- 信息展示区 -->
+            <section class="devInfo">
+                <ul class="infoList">
+                    <li class="infoItem">
+                        <div class="infoWrap">
+                            <p class="infoNum">
+                                <span class="number">2</span>
+                                <span class="unit">%</span>
+                            </p>
+                            <p class="infoName">信息展示</p>
+                        </div>
+                    </li>
+                    <div class="infoLine"></div>
+                    <li class="infoItem">
+                        <div class="infoWrap">
+                            <p class="infoNum">
+                                <span class="number">1200</span>
+                                <span class="unit">㎡</span>
+                            </p>
+                            <p class="infoName">净化空气</p>
+                        </div>
+                    </li>
+                    <div class="infoLine"></div>
+                    <li class="infoItem">
+                        <div class="infoWrap">
+                            <p class="infoNum">
+                                <span class="number">800</span>
+                                <span class="unit">mg</span>
+                            </p>
+                            <p class="infoName">过滤颗粒物</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <!-- 功能操作区 -->
+            <section class="devFn">
+                <ul class="fnList">
+                    <li class="fnItem">
+                        <div class="fnWrap">
+                            <p class="fnName">短卡片</p>
+                        </div>
+                        <div class="fnBox">
+                            <div class="fnImg fnImgItem1"></div>
+                            <!-- <img class="fnImg" src="./img/light/ic_countdown.png"></img> -->
+                        </div>
+                    </li>
+                    <li class="fnItem">
+                        <div class="fnWrap">
+                            <p class="fnName">功能启用</p>
+                            <p class="fnStatus">已启用</p>
+                        </div>
+                        <div class="fnBox">
+                            <div class="fnImg fnImgItem2"></div>
+                            <!-- <img class="fnImg" src="./img/light/ic_huanqi_blue.png"></img> -->
+                        </div>  
+                    </li>
+                    <li class="fnItem spinner">
+                        <div class="fnWrap">
+                            <p class="fnName">列表弹窗</p>
+                        </div>
+                        <div class="fnBox">
+                            <div class="fnImg fnImgItem3"></div>
+                        </div>
+                        <ul class="spinnerWrap appear">
+                            <li class="spinnerList">1档</li>
+                            <li class="spinnerList">2档</li>
+                            <li class="spinnerList checkedBg">3档</li>
+                            <li class="spinnerList">4档</li>
+                            <li class="spinnerList">5档</li>
+                            <li class="spinnerList">6档</li>
+                            <li class="spinnerList">7档</li>
+                        </ul>
+                    </li>
+        
+                    <li class="fnItem singleList">
+                        <div class="fnWrap">
+                            <p class="fnName">底部弹窗</p>
+                        </div>
+                        <div class="fnBox">
+                            <div class="fnImg fnImgItem4"></div>
+                        </div>
+                    </li>
+                    <li class="fnItem">
+                        <div class="fnWrap">
+                            <p class="fnName">滑动开关</p>
+                            <p class="fnSubtitle">长卡片</p>
+                        </div>
+                        <div class="fnBox">
+                            <div class="fnSlider">
+                                <div class="sliderBtn"></div>
+                            </div>
+                        </div>
+                        
+                    </li>
+                </ul>
+                
+                <div class="sliderBar">
+                    <div class="sliderWrap">
+                        <p class="sliderName">滑动条</p>
+                        <p class="sliderStatus">11%</p>
+                    </div>
+                    <div class="rangWrap">
+                        <div class="rang"> 
+                            <div class="stripLeft"></div>
+                            <div class="stripRight"></div>
+                            <div class="slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement">
+                    <div class="stateWrap">
+                        <p class="stateName">隐私协议</p>
+                    </div>
+                    <div class="stateBox">
+                        <div class="stateImg"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- 模式列表弹窗 -->
+        <div class="modeList modeListAppear">
+            <div class="modeWrap">
+                <div class="modeTitle">模式列表</div>
+                <ul>
+                    <li class="modeItem">
+                        <div class="modeName">节能模式</div>
+                        <div class="modeImg modeImgOff"></div>
+                        <!-- <img class="modeImg" src="./img/light/public/Radiobtn_off.png"></img> -->
+                    </li>
+                    <li class="modeItem">
+                        <div class="modeName">流光模式</div>
+                        <div class="modeImg modeImgOn"></div>
+                        <!-- <img class="modeImg" src="./img/light/public/Radiobtn_on.png"></img> -->
+                    </li>
+                    <li class="modeItem">
+                        <div class="modeName">七彩模式</div>
+                        <div class="modeImg modeImgOff"></div>
+                    </li>
+                    <li class="modeItem">
+                        <div class="modeName">温馨模式</div>
+                        <div class="modeImg modeImgOff"></div>
+                    </li>
+                </ul>
+
+                <div class="bottomBtn">
+                    <div class="fnbtn">取消</div>
+                    <div class="line"></div>
+                    <div class="fnbtn">确定</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 隐私协议弹窗 -->
+        <div class="statementPopup">
+            <div class="statementWrap">
+                <div class="statementTitle">隐私声明</div>
+                <div class="statementContent">
+                    <div class="statementBox">
+                        <p class="">XXXXX公司向您提供XXXX产品的XXXXX服务，请您务必认真阅读本声明，在确认充分了解并同意后使用我们的产品和服务。如果您不同意声明的内容，
+                            您应当立即停止使用。
+                        </p>
+                        <div class="stateRules">
+                            <p>在我们向您提供产品和服务的过程中，我们需要收集您的以下信息：</p>
+                            <p>1.为了实现测量声音分贝功能，我们会调用您的麦克风进行声音的采集。</p>
+                            <p>2.为了实现睡眠报告功能，我们会收集您使用本产品所产生的睡眠数据，包括：睡眠时间、睡眠效率、睡眠时长。</p>
+                        </div>
+                        <p>点击“同意”，即代表您已充分了解并同意上述内容。</p>
+                    </div>
+                </div>
+                <div class="stateBtn">
+                    <div class="stateFn">取消</div>
+                    <div class="line"></div>
+                    <div class="stateFn">同意</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 氛围灯迁移过来的 -->
+        <div class="shelter"></div>
+        <div class="msg-div">
+            <div class="msg-main">
+                <div class="msg-title" data-locale="connect_fail">连接失败</div>
+                <p class="msg-content">
+                    <span data-locale="try_again">请尝试以下操作：</span>
+                    <br><span data-locale="tip1">1.请确认设备接通电源，并处开机状态 </span>
+                    <br><span data-locale="tip2">2.将设备靠近要连接的手机(10米以内) </span>
+                    <br><span data-locale="tip3">3. 关闭手机蓝牙，再重新开启（尤其是安卓设备）</span>
+                </p>
+                <div class="msg-footer">
+                    <div class="btn_ok" id="btn_ok" data-locale="got_it">知道了</div>
+                </div>
+            </div>
+        </div>
+        <!-- 氛围灯迁移过来的 end -->
+
+        <div class="backgroundColor"></div>
+        <div class="addHeight"></div>
+    </div>
+</body>
+
+<script>
+    var isIOS = !!navigator.userAgent.match(/iPhone/i);
+	if (isIOS) {
+		$(".devMore").hide()
+	} else {
+		$(".devMore").show()
+	}
+    
+    function loadProperties(lang) {
+		$.i18n.properties({
+			name: 'strings',  //资源文件名称 ， 命名格式： 文件名_国家代号.properties
+			path: 'lang/',    //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
+			mode: 'map',     //用 Map 的方式使用资源文件中的值
+			language: lang,  //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
+			callback: function () {
+				$("[data-locale]").each(function () {
+					$(this).html($.i18n.prop($(this).data("locale")));
+				});
+			}
+		});
+	}
+    $(function(){
+		// 语言
+		if (window.hilink) {
+			let language = window.hilink.getAppLanguageSync()
+			console.log(language)
+			if (language == "zh-CN") {
+				loadProperties("zh")
+			} else if (language == "en-UK") {
+				loadProperties("en")
+			} else if (language.indexOf("zh") > -1) {
+				loadProperties("zh")
+			} else if (language.indexOf("en") > -1) {
+				loadProperties("en")
+			} else {
+				loadProperties("en")
+			} 
+        }else {
+			loadProperties("zh")
+		}
+    })
+   
+</script>
+<script src='./js/ble.js'></script>
+<script src='./js/index.js'></script>
+</html>

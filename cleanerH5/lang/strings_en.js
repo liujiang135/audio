@@ -1,3 +1,43 @@
+devName=清蜓智能随手吸尘器C2S
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 car_atmosphere_lamp =Showei Car Atmosphere Lamp
 connecting = Connecting
 reconnection = Reconnnect

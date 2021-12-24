@@ -5,50 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="./css/common.css">
     <link rel="stylesheet" type="text/css" href="./css/index.css">
-
-    <script src="./js/jquery.min.js"></script>
-	<script src="./js/jquery.i18n.properties.js"></script>
-	<script src="./js/vconsole.min.js"></script>
-	<script>
-		var vConsole = new VConsole();
-		console.log('开始调试');
-	</script>
-
     <title>OHOS-Cleaner</title>
 </head>
 <body>
     <div id="app">
-        <script>
-			var app = document.getElementById('app');
-			function getDarkMode(){
-				var isIOS = !!navigator.userAgent.match(/iPhone/i);
-			    if(window.hilink && !isIOS){
-			        var dark = window.hilink.getDarkMode();
-			        if(dark == 2){//暗黑模式
-			            app.style.background = 'black';
-			            app.classList.add("dark");
-						document.body.classList.add("dark")
-			        } else {
-						app.style.background = '#f7f7f7';
-			            app.classList.remove("dark")
-						document.body.classList.remove("dark")
-			        }
-			    }
-			}
-			getDarkMode()
-			// dp换算
-			function initDp(){
-				if (window.hilink) {
-					hilink.getSystemInfoSync("getSystemInfoSync")
-					window.getSystemInfoSync = (res) => {
-					    console.log("系统信息")
-					    console.log(res)
-					}
-				}
-			}
-			initDp()
-		</script>
-
         <!-- 头部导航栏 -->
         <header class="header">
             <div class="headerWrap">
@@ -57,7 +17,7 @@
                     <div class="barLeft">
                         <div class="goApp"></div>
                     </div>
-                    <div class="devName">清蜓智能随手吸尘器C2S</div>
+                    <div class="devName" data-loacle="devName">清蜓智能随手吸尘器C2S</div>
                     <div class="barRight">
                         <div class="devMore"></div>
                     </div>
@@ -74,10 +34,10 @@
             </section>
             <!-- 设备状态栏-->
             <section class="devStatus">
-                <div class="statusLeft" data-locale="turned_on">已开启</div>
+                <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>
                 <div class="statusMiddle">
-                    <div class="up"  data-locale="turned_on">00:20:00</div>
-                    <div class="down"  data-locale="turned_on">倒计时关</div>
+                    <div class="up"  data-locale="turned_on">25%</div>
+                    <div class="down"  data-locale="turned_on">电池电量</div>
                 </div>
                 <div class="statusRight">
                     <img class="statusImg" src="./img/light/public/ic_kaiguan.png" alt="开关">
@@ -86,7 +46,7 @@
             <!-- 信息展示区 -->
             <section class="devInfo">
                 <ul class="infoList">
-                    <li class="infoItem">
+                   <!-- <li class="infoItem">
                         <div class="infoWrap">
                             <p class="infoNum">
                                 <span class="number">2</span>
@@ -95,24 +55,28 @@
                             <p class="infoName">信息展示</p>
                         </div>
                     </li>
-                    <div class="infoLine"></div>
+                    <div class="infoLine"></div> -->
                     <li class="infoItem">
                         <div class="infoWrap">
                             <p class="infoNum">
-                                <span class="number">1200</span>
-                                <span class="unit">㎡</span>
+                                <span class="number">2</span>
+                                <span class="unit">分</span>
+                                <span class="number">44</span>
+                                <span class="unit">秒</span>
                             </p>
-                            <p class="infoName">净化空气</p>
+                            <p class="infoName">上次清扫时间</p>
                         </div>
                     </li>
                     <div class="infoLine"></div>
                     <li class="infoItem">
                         <div class="infoWrap">
                             <p class="infoNum">
-                                <span class="number">800</span>
-                                <span class="unit">mg</span>
+                                <span class="number">6</span>
+                                <span class="unit">分</span>
+                                <span class="number">20</span>
+                                <span class="unit">秒</span>
                             </p>
-                            <p class="infoName">过滤颗粒物</p>
+                            <p class="infoName">累计清扫时间</p>
                         </div>
                     </li>
                 </ul>
@@ -120,44 +84,59 @@
             <!-- 功能操作区 -->
             <section class="devFn">
                 <ul class="fnList">
-                    <li class="fnItem">
+                    
+                    <li class="fnItem spinner">
                         <div class="fnWrap">
-                            <p class="fnName">短卡片</p>
+                            <p class="fnName">模式</p>
                         </div>
                         <div class="fnBox">
-                            <div class="fnImg fnImgItem1"></div>
-                            <!-- <img class="fnImg" src="./img/light/ic_countdown.png"></img> -->
+                            <div class="fnImg fnImgItem3"></div>
                         </div>
+                        <ul class="spinnerWrap appear">
+                            <li class="spinnerList checkedBg">节能模式</li>
+                            <li class="spinnerList">强劲模式</li>
+                        <!--    <li class="spinnerList checkedBg">3档</li>
+                            <li class="spinnerList">4档</li>
+                            <li class="spinnerList">5档</li>
+                            <li class="spinnerList">6档</li>
+                            <li class="spinnerList">7档</li> -->
+                        </ul>
                     </li>
+
+                    
                     <li class="fnItem">
                         <div class="fnWrap">
-                            <p class="fnName">功能启用</p>
-                            <p class="fnStatus">已启用</p>
+                            <p class="fnName">LED照明</p>
+                            <p class="fnStatus">已开启</p>
                         </div>
                         <div class="fnBox">
                             <div class="fnImg fnImgItem2"></div>
                             <!-- <img class="fnImg" src="./img/light/ic_huanqi_blue.png"></img> -->
                         </div>  
                     </li>
-                    <li class="fnItem spinner">
+
+                    <li class="fnItem">
                         <div class="fnWrap">
-                            <p class="fnName">列表弹窗</p>
+                            <p class="fnName">滤芯信息</p>
                         </div>
                         <div class="fnBox">
-                            <div class="fnImg fnImgItem3"></div>
+                            <div class="fnImg fnImgItem1"></div>
+                            <!-- <img class="fnImg" src="./img/light/ic_countdown.png"></img> -->
                         </div>
-                        <ul class="spinnerWrap appear">
-                            <li class="spinnerList">1档</li>
-                            <li class="spinnerList">2档</li>
-                            <li class="spinnerList checkedBg">3档</li>
-                            <li class="spinnerList">4档</li>
-                            <li class="spinnerList">5档</li>
-                            <li class="spinnerList">6档</li>
-                            <li class="spinnerList">7档</li>
-                        </ul>
                     </li>
         
-                    <li class="fnItem singleList">
+                    <li class="fnItem">
+                        <div class="fnWrap">
+                            <p class="fnName">使用说明</p>
+                        </div>
+                        <div class="fnBox">
+                            <div class="fnImg fnImgItem4"></div>
+                            <!-- <img class="fnImg" src="./img/light/ic_countdown.png"></img> -->
+                        </div>
+                    </li>
+
+
+                   <!-- <li class="fnItem singleList">
                         <div class="fnWrap">
                             <p class="fnName">底部弹窗</p>
                         </div>
@@ -176,10 +155,10 @@
                             </div>
                         </div>
                         
-                    </li>
+                    </li> -->
                 </ul>
                 
-                <div class="sliderBar">
+                <!-- <div class="sliderBar">
                     <div class="sliderWrap">
                         <p class="sliderName">滑动条</p>
                         <p class="sliderStatus">11%</p>
@@ -200,10 +179,59 @@
                     <div class="stateBox">
                         <div class="stateImg"></div>
                     </div>
+                </div>-->
+            </section>
+
+            <section class="devRecord">
+                <div class="devRecordWrap">
+                    <div class="recordTitleWrap">
+                        <p class="recordTitle">近3次清扫记录</p>
+                    </div>
+                    <ul class="recordList">
+                        <li class="recordItem">
+                                <div class="recordLeft">
+                                    <p class="circle">34</p>
+                                </div>
+                                <div class="recordMiddle">
+                                    <p class="up">清扫时长</p>
+                                    <p class="down">2021/11/12 14:26</p>
+                                </div>
+                                <div class="recordRight">2分48秒</div>
+                        </li>
+                        <div class="line"></div>
+                        <li class="recordItem">
+                            <div class="recordLeft">  
+                                <p class="circle">35</p>
+                            </div>
+                            <div class="recordMiddle">
+                                <p class="up">清扫时长</p>
+                                <p class="down">2021/11/12 14:26</p>
+                            </div>
+                            <div class="recordRight">
+                                <p>2分48秒</p>
+                            </div>
+                          
+                        </li>
+                        <div class="line"></div>
+                        <li class="recordItem">
+                            <div class="recordLeft">
+                                <p class="circle">36</p>
+                            </div>
+                            <div class="recordMiddle">
+                                <p class="up">清扫时长</p>
+                                <p class="down">2021/11/12 14:26</p>
+                            </div>
+                            <div class="recordRight">2分48秒</div>
+                        </li>
+                    </ul>
                 </div>
             </section>
+
         </div>
         
+        
+
+
         <!-- 模式列表弹窗 -->
         <div class="modeList modeListAppear">
             <div class="modeWrap">
@@ -286,8 +314,19 @@
     </div>
 </body>
 
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.i18n.properties.js"></script>
+<script src="./js/vconsole.min.js"></script>
+<script src='./js/ble.js'></script>
+<script src='./js/index.js'></script>
 <script>
+    var vConsole = new VConsole();
+	console.log('开始调试');
+
     var isIOS = !!navigator.userAgent.match(/iPhone/i);
+    console.log('iOS:' + isIOS);
+
 	if (isIOS) {
 		$(".devMore").hide()
 	} else {
@@ -295,6 +334,8 @@
 	}
     
     function loadProperties(lang) {
+        console.log("loadProperties:" + lang)
+        //这个方法有个跨域问题，需要解决. 
 		$.i18n.properties({
 			name: 'strings',  //资源文件名称 ， 命名格式： 文件名_国家代号.properties
 			path: 'lang/',    //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
@@ -307,8 +348,52 @@
 			}
 		});
 	}
+
+    function getDarkMode(){
+        console.log("getDarkMode")
+        var isIOS = !!navigator.userAgent.match(/iPhone/i);
+
+    if(window.hilink && !isIOS){
+        // if(true){
+            var dark = window.hilink.getDarkMode();
+        //    var dark =2 ;
+            if(dark == 2){//暗黑模式
+                app.style.background = 'black';
+                app.classList.add("dark");
+                document.body.classList.add("dark")
+            } else {
+                app.style.background = '#f7f7f7';
+                app.classList.remove("dark")
+                document.body.classList.remove("dark")
+            }
+        }
+       
+    }
+			
+    // dp换算
+    function initDp(){
+        console.log("initDp" )
+        if (window.hilink) {
+            hilink.getSystemInfoSync("getSystemInfoSync")
+            window.getSystemInfoSync = (res) => {
+                console.log("系统信息")
+                console.log(res)
+            }
+        }
+    }
+			
+
     $(function(){
-		// 语言
+
+        console.log("index html init" )
+
+        //设置暗黑模式
+        getDarkMode();
+
+        // 执行dp换算
+        initDp();
+
+		// 设置语言
 		if (window.hilink) {
 			let language = window.hilink.getAppLanguageSync()
 			console.log(language)
@@ -326,9 +411,15 @@
         }else {
 			loadProperties("zh")
 		}
-    })
+
+       
+    }
+    
+    
+    
+    
+    )
    
 </script>
-<script src='./js/ble.js'></script>
-<script src='./js/index.js'></script>
+
 </html>

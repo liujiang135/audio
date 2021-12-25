@@ -23,6 +23,8 @@
     position: relative;
 }
 
+
+
 .backgroundColor {
     display: none;
     width:100%;
@@ -31,8 +33,13 @@
     z-index: 99;
     left: 0;
     top:0;
-    background-color: rgba(0,0,0,0.2);
+    
+    background-color: rgba(255,255,255,0.2);
     box-sizing: border-box;
+}
+
+.dark .backgroundColor{
+    background-color: rgba(0,0,0,0.2);
 }
 
 /* ------------标题栏 ------------------*/
@@ -52,6 +59,7 @@
 .headerWrap {
     margin:0 16px;
 }
+
 .header .iphoneStatus {
     width: 100%;
     height:37px;
@@ -1081,99 +1089,10 @@
     color:rgba(255,255,255,0.86);
 }
 
-
-
-/* .devStatus {
-    width: 100%;
-    height: 88px;
-    margin-top:10px;
-    position: relative;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0px 3px 6px rgba(0,0,0,0.03);
-}
-
-.dark .devStatus {
-    background: #262626; 
-}
-
-.devStatus .statusLeft {
-    width:24%;
-    position: absolute;
-    left: 24px;
-    top: 50%;
-    -webkit-transform: translate(0,-50%);
-    transform: translate(0,-50%);
-    font-size: 1.8rem;
-    color: rgba(0, 0, 0, 0.9);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-}
-
-.dark .devStatus .statusLeft {
-    color:rgba(255, 255, 255, 0.86);
-}
-
-.devStatus .statusMiddle {
-    width:38%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-    text-align: center;
-}
-
-.devStatus .statusMiddle .up {
-    font-size: 2.4rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-}
-
-.dark .devStatus .statusMiddle .up {
-    color:rgba(255, 255, 255, 0.86);
-}
-
-.devStatus .statusMiddle .down {
-    font-size: 1.2rem;
-    color: rgba(0, 0, 0, 0.6);
-}
-
-.dark .devStatus .statusMiddle .down {
-    color:rgba(255, 255, 255, 0.86);
-}
-
-.devStatus .statusRight {
-    width:48px;
-    height: 48px;
-    margin-left: 16px;
-    position: absolute;
-    right:24px;
-    top: 50%;
-    background: #007DFF;
-    box-shadow: 0px 4px 8px rgba(0,125,225,0.25);
-    border-radius: 50%;
-    -webkit-transform: translate(0,-50%);
-    transform: translate(0,-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.dark .devStatus .statusRight {
-    background: #006CDE;
-}
-
-.devStatus .statusRight .statusImg {
-    width:24px;
-    height: 24px;
-} */
-
-
 .devRecord .devRecordWrap .recordList {
+    display: flex;
     width: calc(100%-32px);
+    margin-top: 18px;
     height: auto;
     position: relative;
     flex-direction: column;
@@ -1185,38 +1104,65 @@
 
 
 .devRecord .devRecordWrap .recordList .recordItem {
+    display: flex;
     height: 80px;
-    background-color: #007DFF;
     flex-direction: row;
     justify-content:space-around;
+    align-items:center  
 }
+
+
+.recordList .line{
+    width:100%;
+    height:1px;
+    margin-top: 3px;
+    margin-bottom: 8px;
+    align-self: center;
+    background: rgba(0, 0, 0, 0.3);
+    transform: scaleX(0.9);
+}
+
+.dark .recordList .line{
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
 
 .recordList .recordItem .recordLeft {
     width:18%;
     position: relative;
     left: 24px;
-    top: 50%;
-    font-size: 1.8rem;
-    color: rgba(0, 0, 0, 0.9);
+    text-align: center;
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
-    align-content: center;
-    background-color: brown;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    
+    
 }
 
 .dark .recordList .recordItem .recordLeft {
     color:rgba(255, 255, 255, 0.86);
 }
 
+
+
+
 .recordList .recordItem .recordLeft .circle{
-    width:36px;
-    height:36px;
+    position: relative;
+    width:60px;
+    height:60px;
+    line-height: 60px;
     border-radius:50%;
-    font-size:25px;
-    color:rgb(124, 124, 124);
+    font-size:1.8rem;
+    color:rgb(49, 49, 49);
     text-align:center;
-    background:#fff
+    background:rgb(124, 124, 124);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
 }
 
 
@@ -1224,17 +1170,15 @@
     width:38%;
     position: relative;
     left: 0%;
-    top: 50%;
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
     align-content: center;
-    background-color: gold;
 }
 
 .recordList .recordItem .recordMiddle .up {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
@@ -1245,7 +1189,7 @@
 }
 
 .recordList .recordItem .recordMiddle .down {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: rgba(0, 0, 0, 0.6);
 }
 
@@ -1257,101 +1201,21 @@
     width:24%;
     position: relative;
     right: 24px;
-    top: 50%;
+
     font-size: 1.8rem;
-    color: rgba(0, 0, 0, 0.9);
+    color: rgba(0, 0, 0, 0.6);
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
-}
-
-.recordList .recordItem .line{
-    width:100%;
-    height:1px;
-    align-self: center;
-    background: rgba(0, 0, 0, 0.5);
-    transform: scaleX(0.25);
-}
-
-.dark .recordList .recordItem .line{
-    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content:center;
 }
 
 
-/*
-.devRecordWrap .recordList .recordItem {
-    position: relative;
-    width: calc(100% - 36px);
-    height:64px;
-    flex-grow: 1;
-    margin-top:8px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 3px 6px rgba(0,0,0,0.03);
-}
 
-.dark .devRecordWrap  .recordList .recordItem {
-    background: #262626;
-}
 
-.devRecordWrap .recordList .recordItem:nth-child(even) {
-    margin-left: 8px;
-} 
 
-.devRecordWrap .recordList .recordItem .recordWrap {
-    width:48%;
-    position: absolute;
-    left: 24px;
-    top: 50%;
-    -webkit-transform: translate(0,-50%);
-    transform: translate(0,-50%);
-}
-
-.devRecordWrap .recordList .recordItem .recordWrap .recordName {
-    font-size: 1.6rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-    color:rgba(0,0,0,0.9);
-}
-
-.dark .devRecordWrap .recordList .recordItem .recordWrap .recordName{
-    color: rgba(255, 255, 255, 0.86);
-}
-
-.devRecordWrap .recordList .recordItem .recordWrap .recordStatus {
-    font-size: 1.2rem;
-    color: #007DFF;
-}
-
-.dark .devRecordWrap .recordList .recordItem .recordWrap .recordStatus{
-    color: #3F97E9;
-}
-
-.devRecordWrap .recordList .recordItem .recordWrap .recordSubtitle {
-    font-size: 1.2rem;
-    color: rgba(0,0,0,0.6)
-}
-
-.dark .devRecordWrap .recordList .recordItem .recordWrap .recordSubtitle{
-    color: rgba(255,255,255,0.6)
-}
-
-.devRecordWrap .recordList .recordItem .recordBox {
-    position: absolute;
-    right:24px;
-    top: 50%;
-    -webkit-transform: translate(0,-50%);
-    transform: translate(0,-50%);
-}
-
-.devRecordWrap .recordList .recordItem .recordBox .recordImg{
-    width:24px;
-    height:24px;
-    display : block;
-}
-
-*/
 
 
 

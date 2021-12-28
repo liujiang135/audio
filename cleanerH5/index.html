@@ -29,23 +29,18 @@
             <!-- 设备图片+logo -->
             <section class="devImg">
 
-                <div class="devTop lowPowerAlert">
-                    <div class="devTopLeft">
-                        <div class="msgIcon"></div>
+                <div class="devTop">
+                    <div class="devTopWrap">
+                        <div class="devTopLeft">
+                            <div class="msgIcon"></div>
+                        </div>
+                        <div class="devTopMsg" data-loacle="devTopMsg">请更换滤芯<br>更换完成后请手动重置滤芯</div>
+                        <!-- <div class="devTopMsg" data-loacle="devTopMsg" display:none>电量低，请充电!</div>
+                        <div class="devTopMsg" data-loacle="devTopMsg">请清理尘杯及滤芯!</div> -->
+                        <div class="devTopRight">
+                            <div class="msgIcon"></div>
+                        </div>
                     </div>
-                    <div class="devTopMsg" data-loacle="devTopMsg">电量低，请充电!</div>
-                </div>
-                
-                <div class='devTop luxingAlert'>
-                    <div class="devTopLeft">
-                        <div class="msgIcon"></div>
-                    </div>
-                    <div class="devTopMsg" data-loacle="devTopMsg">电量低，请充电!</div>
-                    <div class="devTopRight">
-                        <div class="msgIcon"></div>
-                    </div>
-                </div>
-
                 </div>
                 <div class="deviceImg"></div>
                 <div class="logo"></div>
@@ -423,7 +418,8 @@
 				//TODO
         } else if (recordStatus == 1) { //重连
             //TODO
-        } 
+        }
+
     }
 
 

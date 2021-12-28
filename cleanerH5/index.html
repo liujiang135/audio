@@ -34,11 +34,11 @@
                         <div class="devTopLeft">
                             <div class="msgIcon"></div>
                         </div>
-                        <div class="devTopMsg" data-loacle="devTopMsg">请更换滤芯<br>更换完成后请手动重置滤芯</div>
-                        <!-- <div class="devTopMsg" data-loacle="devTopMsg" display:none>电量低，请充电!</div>
-                        <div class="devTopMsg" data-loacle="devTopMsg">请清理尘杯及滤芯!</div> -->
+                        <!--<div class="devTopMsg" data-loacle="devTopMsg">请更换滤芯<br>更换完成后请手动重置滤芯</div>
+                        <div class="devTopMsg" data-loacle="devTopMsg" display:none>电量低，请充电!</div>-->
+                        <div class="devTopMsg" data-loacle="devTopMsg">请清理尘杯及滤芯!</div> 
                         <div class="devTopRight">
-                            <div class="msgIcon"></div>
+                            <!--<div class="msgIcon"></div>-->
                         </div>
                     </div>
                 </div>
@@ -47,18 +47,23 @@
             </section>
             <!-- 设备状态栏-->
             <section class="devStatus">
-                <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>
+                <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">已连接</div> -->
+                <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">工作中</div> -->
+                <div class="statusLeft" data-locale="statusLeft_unconnect">待机</div>
+                <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">连接中</div> -->
+                <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>  -->
                 <div class="statusMiddle">
                     <div class="up"  data-locale="turned_on">25%</div>
                     <div class="down"  data-locale="turned_on">电池电量</div>
                 </div>
                 <div class="statusRight">
                     <div class="statusImg"></div>
+                    <!-- <div class="statusTxt">重新连接</div> -->
                 </div>
             </section>
             <!-- 信息展示区 -->
-            <section class="devInfo">
-                <ul class="infoList">
+            <section class="devInfo disable">
+                <ul class="infoList ">
                    <!-- <li class="infoItem">
                         <div class="infoWrap">
                             <p class="infoNum">
@@ -72,10 +77,14 @@
                     <li class="infoItem">
                         <div class="infoWrap">
                             <p class="infoNum">
-                                <span class="number">2</span>
+                                <!-- <span class="number">2</span>
                                 <span class="unit">分</span>
                                 <span class="number">44</span>
-                                <span class="unit">秒</span>
+                                <span class="unit">秒</span> -->
+                                <span class="number">-</span>
+                                <span class="unit"></span>
+                                <span class="number">-</span>
+                                <span class="unit"></span>
                             </p>
                             <p class="infoName">上次清扫时间</p>
                         </div>
@@ -84,10 +93,14 @@
                     <li class="infoItem">
                         <div class="infoWrap">
                             <p class="infoNum">
-                                <span class="number">6</span>
+                                <!-- <span class="number">6</span>
                                 <span class="unit">分</span>
                                 <span class="number">20</span>
-                                <span class="unit">秒</span>
+                                <span class="unit">秒</span> -->
+                                <span class="number">-</span>
+                                <span class="unit"></span>
+                                <span class="number">-</span>
+                                <span class="unit"></span>
                             </p>
                             <p class="infoName">累计清扫时间</p>
                         </div>
@@ -98,10 +111,10 @@
             <section class="devFn">
                 <ul class="fnList">
                     
-                    <li class="fnItem spinner">
+                    <li class="fnItem spinner disable">
                         <div class="fnWrap">
                             <p class="fnName">模式</p>
-                            <p class="fnStatus">节能模式</p>
+                            <!-- <p class="fnStatus">节能模式</p> -->
                         </div>
                         <div class="fnBox">
                             <div class="fnImg fnImgItem3"></div>
@@ -118,10 +131,10 @@
                     </li>
 
                     
-                    <li class="fnItem">
+                    <li class="fnItem disable">
                         <div class="fnWrap">
                             <p class="fnName">LED照明</p>
-                            <p class="fnStatus">已开启</p>
+                            <!-- <p class="fnStatus">已开启</p> -->
                         </div>
                         <div class="fnBox">
                             <div class="fnImg fnImgItem2"></div>
@@ -201,7 +214,11 @@
                     <div class="recordTitleWrap">
                         <p class="recordTitle">近3次清扫记录</p>
                     </div>
-                    <ul class="recordList">
+                    <div class="recordEmptyList">
+                        <div class="recordEmptyImg"></div>
+                        <div class="recordEmptyTxt">暂无记录</div>
+                    </div>
+                    <!-- <ul class="recordList">
                         <li class="recordItem">
                                 <div class="recordLeft">
                                     <p class="circle">34</p>
@@ -237,7 +254,7 @@
                             </div>
                             <div class="recordRight">2分48秒</div>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </section>
 
@@ -309,15 +326,17 @@
         <div class="shelter" display="block"></div>
         <div class="msg-div" display="block">
             <div class="msg-main">
-                <div class="msg-title" data-locale="connect_fail">连接失败</div>
+                <div class="msg-title" data-locale="connect_fail">连接超时</div>
                 <p class="msg-content">
                     <span data-locale="try_again">请尝试以下操作：</span>
-                    <br><span data-locale="tip1">1.请确认设备接通电源，并处开机状态 </span>
-                    <br><span data-locale="tip2">2.将设备靠近要连接的手机(10米以内) </span>
-                    <br><span data-locale="tip3">3. 关闭手机蓝牙，再重新开启（尤其是安卓设备）</span>
+                    <br><span data-locale="tip1">1.请确认设备接通电源并处开机状态 </span>
+                    <br><span data-locale="tip2">2.将手机靠近设备 </span>
+                    <br><span data-locale="tip3">3.重启手机蓝牙</span>
                 </p>
                 <div class="msg-footer">
-                    <div class="btn_ok" id="btn_ok" data-locale="got_it">知道了</div>
+                    <div class="btn_ok" id="btn_ok">稍后重试</div>
+                    <div class="line" ></div>
+                    <div class="btn_ok" id="btn_ok">重新连接</div>
                 </div>
             </div>
         </div>
@@ -428,7 +447,10 @@
 
         console.log("index html init" )
 
-        //showError();
+        // showError();
+
+        hideAlert(); 
+    
 
         //设置暗黑模式
         getDarkMode();

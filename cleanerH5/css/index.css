@@ -9,6 +9,11 @@
     width: 100%;
 }
 
+.disable{
+    pointer-events: none;
+    opacity: 0.4;
+}
+
 #app::-webkit-scrollbar {
     width:0px;
     height:0px;
@@ -294,7 +299,7 @@
 }
 
 .devStatus .statusRight {
-    width:48px;
+    width:33%;
     height: 48px;
     margin-left: 16px;
     position: absolute;
@@ -303,7 +308,7 @@
     -webkit-transform: translate(0,-50%);
     transform: translate(0,-50%);
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -314,6 +319,7 @@
 .devStatus .statusRight .statusImg {
     width:48px;
     height:48px;
+    /* background: url('../img/loading/loading48.png') no-repeat; */
     background: url('../img/light/ic_kaishi.png') no-repeat;
     background-size: cover;
 }
@@ -321,6 +327,18 @@
 .dark .devStatus .statusRight .statusImg {
     background: url('../img/dark/ic_kaishi.png') no-repeat;
     background-size: cover;
+}
+
+.devStatus .statusRight .statusTxt {
+    font-size: 1.8rem;
+    color: #46B1E3;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+
+.dark .devStatus .statusRight .statusTxt {
+    color: #46B1E3;
 }
 
 
@@ -576,6 +594,34 @@
     color:rgba(255,255,255,0.86);
 }
 
+.devRecord .devRecordWrap .recordEmptyList{
+    width: 100%;
+    height: 252px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.devRecord .devRecordWrap .recordEmptyImg{
+    background: url('../img/light/img_wujilu.png') no-repeat;
+    background-size: cover;
+    width:108px;
+    height:108px;
+    align-self: center;
+}
+
+.devRecord .devRecordWrap .recordEmptyTxt{
+    margin-top: 8px;
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    color:rgba(0,0,0,0.3);
+}
+
+
 .devRecord .devRecordWrap .recordList {
     display: flex;
     margin-top: 12px;
@@ -589,6 +635,8 @@
 .dark .devRecord .devRecordWrap .recordList {
     background: black; 
 }
+
+
 
 
 .devRecord .devRecordWrap .recordList .recordItem {
@@ -705,7 +753,7 @@
 /* 连接失败弹窗 -----------------------*/
 .msg-div{
 	position: fixed;
-	bottom: 30px;
+	bottom: 12px;
 	width: 100%;
 	z-index: 10;
 	display: none;
@@ -719,10 +767,8 @@
 }
 .msg-title{
 	padding: 16px 0;
-	font-size: 20px;
-	font-family: HYQiHei 65S;
-	font-weight: 500;
-	line-height: 24px;
+	font-size: 18px;
+	line-height: 20px;
 	color: #000000;
 	opacity: 0.9;
 }
@@ -731,9 +777,7 @@
 	opacity: 0.9;
 }
 .msg-content{
-	font-size: 16px;
-	font-family: HYQiHei 55S;
-	font-weight: 400;
+	font-size: 14px;
 	line-height: 22px;
 	color: rgba(0, 0, 0, 0.9);
 	opacity: 0.9;
@@ -742,12 +786,38 @@
 	color: rgba(255, 255, 255, 0.9);
 	opacity: 0.86;
 }
-.btn_ok{
-	text-align: center;
-	font-size: 16px;
-	padding: 19px 0;
-	color: #007DFF;
+.msg-footer{
+    margin-top:8px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+.msg-footer .btn_ok{
+    height:24px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    flex:1;
+    text-align: center;
+    color: #007dff;
+    font-size: 1.4rem;
+}
+.dark .msg-footer .btn_ok{
+    color: #3F97E9;
+}
+
+.msg-footer .line{
+    width:1px;
+    height:24px;
+    align-self: center;
+    background: rgba(0, 0, 0, 0.5);
+    transform: scaleX(0.25);
+}
+
+.dark .msg-footer .line{
+    background: rgba(255, 255, 255, 0.5);
+}
+
 .shelter{
 	position: absolute;
 	top: 0;
@@ -1310,6 +1380,7 @@
 .dark .stateBtn .line{
     background: rgba(255, 255, 255, 0.5);
 }
+
 
 
 

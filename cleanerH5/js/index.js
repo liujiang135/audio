@@ -194,13 +194,12 @@ function showError () {
 
 //展示或者隐藏错误
 function hideAlert () {
-	$(".devTop").hide()
+	$(".devTopWrap").hide()
 }
 
 function showAlert () {
     console.log('showAlert');
-    $(".devTop").show()
-
+    $(".devTopWrap").show()
 }
 
 

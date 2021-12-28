@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css/intro.css">
+    <title>OHOS-Cleaner</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 头部导航栏 -->
+        <header class="header">
+            <div class="headerWrap">
+                <div class="iphoneStatus"></div>
+                <div class="devTitle">
+                    <div class="barLeft">
+                        <div class="goApp"></div>
+                    </div>
+                    <div class="devName" data-loacle="devName">产品说明书</div>
+                    <div class="barRight">
+                        <!-- <div class="devMore"></div> -->
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="appMargin"> 
+            <div class="msg-div">
+                <div class="msg-main">
+                    <div class="msg-title" >使用准备</div>
+                    <p class="msg-content">
+                        <span data-locale="try_again">1. 首次使用或长期存放后使用时，请先将本产品连接至兼容5V==2A充电标准的适配器上进行充电。</span>
+                    </p>
+                </div>
+                <div class="msg-main">
+                    <div class="msg-title" >如何充电</div>
+                    <p class="msg-content">
+                        <span data-locale="tip1">1. 电源线连接到吸尘器。 </span>
+                        <br><span data-locale="tip2">2. Type-C线连接车充或电源适配器。 </span>
+                        <br><span data-locale="tip3">3. 连接车充时需把车充插入汽车点烟器处，并启动汽车以供电。</span>
+                    </p>
+                </div>
+                <div class="msg-main">
+                    <div class="msg-title" >安装华为智慧生活App</div>
+                    <p class="msg-content">
+                        <span data-locale="try_again">手机扫描二维码，或在应用市场搜索“华为智能生
+                            活”，下载安装App。</span>
+                    
+                    </p>
+                    <p class="msg-content">
+                    <span class="msg-sub-content">若手机已下载华为智慧生活App，请确保App版本为最新。 </span>
+                    <div class="msg-img">
+                        <img src='./img/light/ic_bitmap.png'></img>
+                    </div>
+                    
+                    </p>
+                </div>
+                <div class="msg-main">
+                    <div class="msg-title" >添加设备</div>
+                    <p class="msg-content">
+                        <span data-locale="tip1">1. 打开华为智慧生活App，首次使用时，请根据App指引注册/登录华为账号。 </span>
+                        <br><span data-locale="tip2">2. 进入App首页“家居”，点击“+”选择“添加设备”，App将扫描待配置的智能设备。</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+       
+</body>
+
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.i18n.properties.js"></script>
+<script src="./js/vconsole.min.js"></script>
+
+<script>
+    var vConsole = new VConsole();
+	console.log('开始调试');
+
+    var isIOS = !!navigator.userAgent.match(/iPhone/i);
+    console.log('iOS:' + isIOS);
+
+	if (isIOS) {
+		$(".devMore").hide()
+	} else {
+		$(".devMore").show()
+	}
+    
+    function loadProperties(lang) {
+        console.log("loadProperties:" + lang)
+        //这个方法有个跨域问题，需要解决. 
+		$.i18n.properties({
+			name: 'strings',  //资源文件名称 ， 命名格式： 文件名_国家代号.properties
+			path: 'lang/',    //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
+			mode: 'map',     //用 Map 的方式使用资源文件中的值
+			language: lang,  //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
+			callback: function () {
+				$("[data-locale]").each(function () {
+					$(this).html($.i18n.prop($(this).data("locale")));
+				});
+			}
+		});
+	}
+
+    function getDarkMode(){
+        console.log("getDarkMode")
+        var isIOS = !!navigator.userAgent.match(/iPhone/i);
+
+        if(window.hilink && !isIOS){
+        // if(true){
+            var dark = window.hilink.getDarkMode();
+        //    var dark =2 ;
+            if(dark == 2){//暗黑模式
+                app.style.background = 'black';
+                app.classList.add("dark");
+                document.body.classList.add("dark")
+            } else {
+                app.style.background = '#f7f7f7';
+                app.classList.remove("dark")
+                document.body.classList.remove("dark")
+            }
+        }
+    }
+			
+    // dp换算
+    function initDp(){
+        console.log("initDp" )
+        if (window.hilink) {
+            hilink.getSystemInfoSync("getSystemInfoSync")
+            window.getSystemInfoSync = (res) => {
+                console.log("系统信息")
+                console.log(res)
+            }
+        }
+    }
+			
+   
+
+
+    $(function(){
+
+        console.log("intro html init" )
+
+
+
+        //设置暗黑模式
+        getDarkMode();
+
+        // 执行dp换算
+        initDp();
+
+		// 设置语言
+		if (window.hilink) {
+			let language = window.hilink.getAppLanguageSync()
+			console.log(language)
+			if (language == "zh-CN") {
+				loadProperties("zh")
+			} else if (language == "en-UK") {
+				loadProperties("en")
+			} else if (language.indexOf("zh") > -1) {
+				loadProperties("zh")
+			} else if (language.indexOf("en") > -1) {
+				loadProperties("en")
+			} else {
+				loadProperties("en")
+			} 
+        }else {
+			loadProperties("zh")
+		} 
+
+    })
+
+
+    
+
+
+
+    
+   
+</script>
+
+</html>

@@ -96,6 +96,25 @@
 	color: #000000;
 	opacity: 0.6;
 }
+
+.dark .progressDes {
+	color: #ffffff;
+	opacity: 0.6;
+}
+
+.connectDes{
+		margin-top: 16px;
+		text-align: center;
+		font-size: 1.8rem;
+		color: #000000;
+		opacity: 0.9;
+}
+
+.dark .connectDes{
+	color: #ffffff;
+	opacity: 0.9;
+}
+
 .progress{
 	text-align: center;
 	opacity: 0.9;

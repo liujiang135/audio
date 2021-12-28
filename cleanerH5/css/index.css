@@ -78,7 +78,7 @@
     height:36px;
     line-height: 36px;
     color: rgba(0, 0, 0, 0.9);
-    font-size: 2.4rem;
+    font-size: 20px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
@@ -132,6 +132,7 @@
     height: auto;
     display: flex;
     flex-direction: column;
+    margin-top: 80px; /*header height 93px*/
 }
 
 .devImg .devTop{
@@ -148,7 +149,6 @@
     background: #fce3df;
     position: relative;
     padding: 12px;
-    margin-top: 105px; /*header height 93px*/
     margin-bottom: 12px;
     box-shadow: 0px 3px 6px rgba(0,0,0,0.03);
 }
@@ -246,9 +246,9 @@
 }
 
 .devStatus .statusLeft {
-    width:24%;
+    width:33%;
     position: absolute;
-    left: 24px;
+    left: 16px;
     top: 50%;
     -webkit-transform: translate(0,-50%);
     transform: translate(0,-50%);
@@ -264,7 +264,7 @@
 }
 
 .devStatus .statusMiddle {
-    width:38%;
+    width:33%;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -298,10 +298,8 @@
     height: 48px;
     margin-left: 16px;
     position: absolute;
-    right:24px;
+    right:16px;
     top: 50%;
-    box-shadow: 0px 4px 8px rgba(0,125,225,0.25);
-    border-radius: 50%;
     -webkit-transform: translate(0,-50%);
     transform: translate(0,-50%);
     display: flex;
@@ -310,18 +308,25 @@
 }
 
 .dark .devStatus .statusRight {
+    /*nothing to do*/
 }
 
 .devStatus .statusRight .statusImg {
     width:48px;
-    height: 48px;
+    height:48px;
+    background: url('../img/light/ic_kaishi.png') no-repeat;
+    background-size: cover;
+}
+
+.dark .devStatus .statusRight .statusImg {
+    background: url('../img/dark/ic_kaishi.png') no-repeat;
+    background-size: cover;
 }
 
 
 /*-------------- 信息展示栏 ---------------*/
 .devInfo {
     width: 100%;
-    margin-top:8px;
     height: 88px;
     border-radius: 16px;
     background: white;
@@ -341,9 +346,10 @@
     overflow: hidden;
     display: flex;
     text-align: center;
+    padding: 8px;
 }
 .devInfo .infoList .infoItem {
-    width: calc((100% - 6px)/3);
+    width: 100%;
     flex:1;
     display: flex;
     align-items: center;
@@ -351,6 +357,7 @@
 }
 .devInfo .infoList .infoItem .infoWrap {
     width:100%;
+    padding: 0 4px;
 }
 
 .devInfo .infoList .infoItem .infoWrap .infoNum {
@@ -416,7 +423,7 @@
 }
 .fnList .fnItem {
     position: relative;
-    width: calc((100% - 8px)/2);
+    width: calc((100% - 12px)/2);
     height:64px;
     flex-grow: 1;
     margin-top:12px;
@@ -430,7 +437,7 @@
 }
 
 .fnList .fnItem:nth-child(even) {
-    margin-left: 8px;
+    margin-left: 12px;
 } 
 
 .fnList .fnItem .fnWrap {
@@ -456,11 +463,11 @@
 
 .fnList .fnItem .fnWrap .fnStatus {
     font-size: 1.2rem;
-    color: #007DFF;
+    color: rgba(0,0,0,0.6);
 }
 
 .dark .fnList .fnItem .fnWrap .fnStatus{
-    color: #3F97E9;
+    color: rgba(255,255,255,0.6);
 }
 
 .fnList .fnItem .fnWrap .fnSubtitle {
@@ -793,11 +800,12 @@
     overflow: hidden;
     overflow-y: auto;
     background: white;
-    border-radius: 16px;
-    bottom: 72px;
+    border-radius: 12px;
+    bottom: 76px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
     display: none;
     z-index: 9;
+    
 }
 
 .dark .spinnerWrap {
@@ -820,6 +828,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis; 
+    margin: 4px;
 }
 
 .dark .spinnerWrap .spinnerList {
@@ -828,6 +837,7 @@
 
 .spinnerWrap .spinnerList .spinnerItem{
     width:100%;
+    color: #0a59f7;
 }
 
 .spinnerWrap .spinnerList:after {
@@ -851,7 +861,12 @@
 } 
 
 .checkedBg {
-    background: rgba(0,125,255, 0.1);
+    background: rgba(10,89,247, 0.1);
+    border-radius: 12px;
+}
+
+.checkedText {
+   color:#0a59f7 !important;
 }
 
 .dark .checkedBg {

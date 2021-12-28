@@ -48,12 +48,12 @@
     position: fixed;
     display: flex;
     flex-direction: column;
-    background: #f7f7f7;
+   background: #f7f7f7; 
     z-index:10;
 }
 
 .dark .header {
-    background: black;
+    background: black; 
 }
 
 .headerWrap {
@@ -99,11 +99,11 @@
 .barLeft .goApp {
     width:24px;
     height: 24px;
-    background: url('../img/light/public/ic_back.png') no-repeat;
+    background: url('../img/light/ic_back.png') no-repeat;
     background-size: cover;
 }
 .dark .barLeft .goApp {
-    background: url('../img/dark/public/ic_back.png')  no-repeat ;
+    background: url('../img/dark/ic_back.png')  no-repeat ;
     background-size: cover;
 }
 
@@ -116,14 +116,14 @@
 }
 
 .barRight .devMore {
-    width:12px;
+    width:24px;
     height: 24px;
-    background: url('../img/light/public/ic_set.png') no-repeat;
+    background: url('../img/light/ic_more.png') no-repeat;
     background-size: cover;
 }
 
 .dark .barRight .devMore {
-    background: url('../img/dark/public/ic_set.png') no-repeat;
+    background: url('../img/dark/ic_more.png') no-repeat;
     background-size: cover;
 }
 
@@ -135,14 +135,55 @@
 }
 
 .devImg .devTop{
+    display:flex;
+    align-items: center;
     height:84px;
+    width: 100%;
+    border-radius: 8px;
+    background: #fbe6e2;
+    position: relative;
+    margin-top: 105px; /*head height 93px*/
+    margin-bottom: 12px;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.03);
 }
+
+.devImg .devTop .devTopLeft {
+    width:36px;
+    height:36px;
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.devImg .devTop .devTopLeft .msgIcon {
+    width:36px;
+    height: 36px;
+    background: url('../img/light/ic_error.png') no-repeat;
+    background-size: cover;
+}
+
+.dark .devImg .devTop .devTopLeft .msgIcon {
+    background: url('../img/dark/ic_error.png')  no-repeat ;
+    background-size: cover;
+}
+
+.devImg .devTop .devTopMsg {
+    align-self: center;
+    margin-left: 16px;
+    font-size: 1.6rem;
+    color: #eb4a2b;
+}
+
+
+
+
+
 
 .devImg .deviceImg {
     width:252px;
     height:252px;
     align-self: center;
-    background: url('../img/light/device.png') no-repeat;
+    background: url('../img/light/icon_D_1008px.png') no-repeat;
     background-size: cover;
 }
 
@@ -154,7 +195,7 @@
     width:70px;
     height: 18px;
     align-self: center;
-    background-image: url('../img/light/logo.png');
+    background-image: url('../img/light/ic_logo.png');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -232,7 +273,6 @@
     position: absolute;
     right:24px;
     top: 50%;
-    background: #007DFF;
     box-shadow: 0px 4px 8px rgba(0,125,225,0.25);
     border-radius: 50%;
     -webkit-transform: translate(0,-50%);
@@ -243,12 +283,11 @@
 }
 
 .dark .devStatus .statusRight {
-    background: #006CDE;
 }
 
 .devStatus .statusRight .statusImg {
-    width:24px;
-    height: 24px;
+    width:60px;
+    height: 60px;
 }
 
 
@@ -420,44 +459,274 @@
 }
 
 .fnList .fnItem .fnBox .fnImgItem1 {
-    background: url('../img/light/ic_countdown.png') no-repeat;
+    background: url('../img/light/ic_lvxin_on.png') no-repeat;
     background-size: cover;
 }
 
 .dark .fnList .fnItem .fnBox .fnImgItem1 {
-    background: url('../img/dark/ic_countdown.png') no-repeat;
+    background: url('../img/dark/ic_lvxin_on.png') no-repeat;
     background-size: cover;
 }
 
 .fnList .fnItem .fnBox .fnImgItem2 {
-    background: url('../img/light/ic_huanqi_blue.png') no-repeat;
+    background: url('../img/light/ic_led_on.png') no-repeat;
     background-size: cover;
 }
 
 .dark .fnList .fnItem .fnBox .fnImgItem2 {
-    background: url('../img/dark/ic_huanqi_blue.png') no-repeat;
+    background: url('../img/dark/ic_led_on.png') no-repeat;
     background-size: cover;
 }
 
 .fnList .fnItem .fnBox .fnImgItem3 {
-    background: url('../img/light/ic_drying.png') no-repeat;
+    background: url('../img/light/ic_moshi_on.png') no-repeat;
     background-size: cover;
 }
 
 .dark .fnList .fnItem .fnBox .fnImgItem3 {
-    background: url('../img/dark/ic_drying.png') no-repeat;
+    background: url('../img/dark/ic_moshi_on.png') no-repeat;
     background-size: cover;
 }
 
 .fnList .fnItem .fnBox .fnImgItem4 {
-    background: url('../img/light/ic_moon.png') no-repeat;
+    background: url('../img/light/ic_instructions.png') no-repeat;
     background-size: cover;
 }
 
 .dark .fnList .fnItem .fnBox .fnImgItem4 {
-    background: url('../img/dark/ic_moon.png') no-repeat;
+    background: url('../img/dark/ic_instructions.png') no-repeat;
     background-size: cover;
 }
+
+
+/* 连接失败弹窗 -----------------------*/
+.msg-div{
+	position: fixed;
+	bottom: 30px;
+	width: 100%;
+	z-index: 10;
+	display: none;
+}
+.msg-main{
+	margin: 0 16px;
+	border-radius: 8px;
+	background: #FFFFFF;
+	box-shadow: 0px 3px 6px rgb(0 0 0 / 3%);
+	padding: 0px 24px;
+}
+.msg-title{
+	padding: 16px 0;
+	font-size: 20px;
+	font-family: HYQiHei 65S;
+	font-weight: 500;
+	line-height: 24px;
+	color: #000000;
+	opacity: 0.9;
+}
+.dark .msg-title{
+	color: #FFFFFF;
+	opacity: 0.9;
+}
+.msg-content{
+	font-size: 16px;
+	font-family: HYQiHei 55S;
+	font-weight: 400;
+	line-height: 22px;
+	color: rgba(0, 0, 0, 0.9);
+	opacity: 0.9;
+}
+.dark .msg-content{
+	color: rgba(255, 255, 255, 0.9);
+	opacity: 0.86;
+}
+.btn_ok{
+	text-align: center;
+	font-size: 16px;
+	padding: 19px 0;
+	color: #007DFF;
+}
+.shelter{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: #000000;
+	opacity: 0.2;
+	z-index: 9;
+	display: none;
+}
+
+
+
+/*   新增：清扫记录 */
+.devRecord {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    overflow: hidden;
+    
+}
+.devRecord .devRecordWrap {
+    position: relative;
+    width: calc((100% - 16px));
+    flex-grow: 1;
+    margin-top: 8px;    
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.03);
+    flex-direction: column;
+}
+
+.dark .devRecord .devRecordWrap {
+    background: black;
+}
+
+.devRecord .devRecordWrap .recordTitleWrap  {
+    position: relative;
+    flex-grow: 1;
+    margin-top:24px;
+    margin-left: 24px;
+}
+
+.devRecord .devRecordWrap .recordTitleWrap .recordTitle {
+    font-size: 1.4rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    color:#717171;
+}
+
+.dark .devRecord .devRecordWrap .recordTitleWrap .recordTitle {
+    color:rgba(255,255,255,0.8);
+}
+
+.devRecord .devRecordWrap .recordList {
+    display: flex;
+    width: calc(100%-32px);
+    margin-top: 18px;
+    margin-bottom: 18px;
+    height: auto;
+    position: relative;
+    flex-direction: column;
+}
+
+.dark .devRecord .devRecordWrap .recordList {
+    background: black; 
+}
+
+
+.devRecord .devRecordWrap .recordList .recordItem {
+    display: flex;
+    height: 80px;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items:center  
+}
+
+
+.devRecord .devRecordWrap .recordList .line{
+    display: inline-flex;
+    align-self: end;
+    align-items: flex-end;
+    align-content: flex-end;
+    width:82%;
+    height:1px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    background: rgba(0, 0, 0, 0.1);
+    transform: scaleX(0.9);
+}
+
+.dark .devRecord .devRecordWrap .recordList .line{
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+
+.recordList .recordItem .recordLeft {
+    width:18%;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    display: flex;
+    align-items:flex-start;
+    justify-content:center;
+    
+    
+}
+
+.dark .recordList .recordItem .recordLeft {
+    color:rgba(255, 255, 255, 0.86);
+}
+
+
+
+
+.recordList .recordItem .recordLeft .circle{
+    position: relative;
+    width:70px;
+    height:70px;
+    line-height: 70px;
+    border-radius:50%;
+    font-size:1.8rem;
+    color:rgb(255, 255, 255);
+    text-align:center;
+    background:#c8c8c8;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+
+
+.recordList .recordItem .recordMiddle {
+    width:48%;
+    position: relative;
+    left: 0%;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    align-content: left;
+}
+
+.recordList .recordItem .recordMiddle .up {
+    font-size: 2.2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+
+.dark .recordList .recordItem .recordMiddle .up {
+    color:rgba(255, 255, 255, 0.86);
+}
+
+.recordList .recordItem .recordMiddle .down {
+    font-size: 1.6rem;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.dark .recordList .recordItem .recordMiddle .down {
+    color:rgba(255, 255, 255, 0.4);
+}
+
+.recordList .recordItem .recordRight {
+    width:24%;
+    position: relative;
+    right: 24px;
+    font-size: 1.8rem;
+    color: rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+
 
 
 /* -------------滑块 -------------*/
@@ -841,6 +1110,13 @@
     touch-action:none;
 }
 
+
+
+
+
+
+
+
 /* -----------------隐私声明----------------- */
 .statement{
     position: relative;
@@ -896,6 +1172,11 @@
     background: url(../img/dark/ic_note.png) no-repeat;
     background-size: cover;
 }
+
+
+
+
+
 
 /* 隐私声明弹窗 -----------------------*/
 .statementPopup {
@@ -986,231 +1267,8 @@
     background: rgba(255, 255, 255, 0.5);
 }
 
-/* 氛围灯 迁移过来的 弹窗 */
-.msg-div{
-	position: fixed;
-	bottom: 30px;
-	width: 100%;
-	z-index: 10;
-	display: none;
-}
-.msg-main{
-	margin: 0 16px;
-	border-radius: 10px;
-	background: #FFFFFF;
-	box-shadow: 0px 3px 6px rgb(0 0 0 / 3%);
-	padding: 0px 24px;
-}
-.msg-title{
-	padding: 16px 0;
-	font-size: 20px;
-	font-family: HYQiHei 65S;
-	font-weight: 500;
-	line-height: 24px;
-	color: #000000;
-	opacity: 0.9;
-}
-.dark .msg-title{
-	color: #FFFFFF;
-	opacity: 0.9;
-}
-.msg-content{
-	font-size: 16px;
-	font-family: HYQiHei 55S;
-	font-weight: 400;
-	line-height: 22px;
-	color: rgba(0, 0, 0, 0.9);
-	opacity: 0.9;
-}
-.dark .msg-content{
-	color: rgba(255, 255, 255, 0.9);
-	opacity: 0.86;
-}
-.btn_ok{
-	text-align: center;
-	font-size: 16px;
-	padding: 19px 0;
-	color: #007DFF;
-}
-.shelter{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background: #000000;
-	opacity: 0.1;
-	z-index: 9;
-	display: none;
-}
 
 
-
-/*   新增：清扫记录 */
-.devRecord {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-    overflow: hidden;
-    
-}
-.devRecord .devRecordWrap {
-    position: relative;
-    width: calc((100% - 16px));
-    flex-grow: 1;
-    margin-top: 8px;    
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 3px 6px rgba(0,0,0,0.03);
-    flex-direction: column;
-}
-
-.dark .devRecord .devRecordWrap {
-    background: black;
-}
-
-.devRecord .devRecordWrap .recordTitleWrap  {
-    position: relative;
-    flex-grow: 1;
-    margin-top:24px;
-    margin-left: 16px;
-}
-
-.devRecord .devRecordWrap .recordTitleWrap .recordTitle {
-    font-size: 1.6rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-    color:rgba(0,0,0,0.9);
-}
-
-.dark .devRecord .devRecordWrap .recordTitleWrap .recordTitle {
-    color:rgba(255,255,255,0.86);
-}
-
-.devRecord .devRecordWrap .recordList {
-    display: flex;
-    width: calc(100%-32px);
-    margin-top: 18px;
-    height: auto;
-    position: relative;
-    flex-direction: column;
-}
-
-.dark .devRecord .devRecordWrap .recordList {
-    background: black; 
-}
-
-
-.devRecord .devRecordWrap .recordList .recordItem {
-    display: flex;
-    height: 80px;
-    flex-direction: row;
-    justify-content:space-around;
-    align-items:center  
-}
-
-
-.recordList .line{
-    width:100%;
-    height:1px;
-    margin-top: 3px;
-    margin-bottom: 8px;
-    align-self: center;
-    background: rgba(0, 0, 0, 0.3);
-    transform: scaleX(0.9);
-}
-
-.dark .recordList .line{
-    background: rgba(255, 255, 255, 0.3);
-}
-
-
-
-.recordList .recordItem .recordLeft {
-    width:18%;
-    position: relative;
-    left: 24px;
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-    display: flex;
-    align-items: center;
-    justify-content:center;
-    
-    
-}
-
-.dark .recordList .recordItem .recordLeft {
-    color:rgba(255, 255, 255, 0.86);
-}
-
-
-
-
-.recordList .recordItem .recordLeft .circle{
-    position: relative;
-    width:60px;
-    height:60px;
-    line-height: 60px;
-    border-radius:50%;
-    font-size:1.8rem;
-    color:rgb(49, 49, 49);
-    text-align:center;
-    background:rgb(124, 124, 124);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-}
-
-
-.recordList .recordItem .recordMiddle {
-    width:38%;
-    position: relative;
-    left: 0%;
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-    align-content: center;
-}
-
-.recordList .recordItem .recordMiddle .up {
-    font-size: 2.2rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-}
-
-.dark .recordList .recordItem .recordMiddle .up {
-    color:rgba(255, 255, 255, 0.86);
-}
-
-.recordList .recordItem .recordMiddle .down {
-    font-size: 1.4rem;
-    color: rgba(0, 0, 0, 0.6);
-}
-
-.dark .recordList .recordItem .recordMiddle .down {
-    color:rgba(255, 255, 255, 0.86);
-}
-
-.recordList .recordItem .recordRight {
-    width:24%;
-    position: relative;
-    right: 24px;
-
-    font-size: 1.8rem;
-    color: rgba(0, 0, 0, 0.6);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-    display: flex;
-    align-items: center;
-    justify-content:center;
-}
 
 
 

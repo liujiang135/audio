@@ -28,7 +28,12 @@
         <div class="appMargin"> 
             <!-- 设备图片+logo -->
             <section class="devImg">
-                <div class="devTop"></div>
+                <div class="devTop">
+                    <div class="devTopLeft">
+                        <div class="msgIcon"></div>
+                    </div>
+                    <div class="devTopMsg" data-loacle="devTopMsg">电量低，请充电!</div>
+                </div>
                 <div class="deviceImg"></div>
                 <div class="logo"></div>
             </section>
@@ -40,7 +45,7 @@
                     <div class="down"  data-locale="turned_on">电池电量</div>
                 </div>
                 <div class="statusRight">
-                    <img class="statusImg" src="./img/light/public/ic_kaiguan.png" alt="开关">
+                    <img class="statusImg" src="./img/light/ic_kaishi.png" alt="开始工作">
                 </div>
             </section>
             <!-- 信息展示区 -->
@@ -292,8 +297,8 @@
         </div>
 
         <!-- 氛围灯迁移过来的 -->
-        <div class="shelter"></div>
-        <div class="msg-div">
+        <div class="shelter" display="block"></div>
+        <div class="msg-div" display="block">
             <div class="msg-main">
                 <div class="msg-title" data-locale="connect_fail">连接失败</div>
                 <p class="msg-content">
@@ -353,7 +358,7 @@
         console.log("getDarkMode")
         var isIOS = !!navigator.userAgent.match(/iPhone/i);
 
-    if(window.hilink && !isIOS){
+        if(window.hilink && !isIOS){
         // if(true){
             var dark = window.hilink.getDarkMode();
         //    var dark =2 ;
@@ -367,7 +372,6 @@
                 document.body.classList.remove("dark")
             }
         }
-       
     }
 			
     // dp换算
@@ -382,10 +386,39 @@
         }
     }
 			
+    let workStatus = 0 ; // 0 连接失败，1 连接超时，2 连接中，连接正常[3 工作中，4 待机]
+    let recordStatus = 0 //0 没几率 ，1 三条记录
+
+    // 设置状态
+    function initStatus(workStatus,recordStatus ){
+        if (workStatus == 0) { //未连接
+				//TODO
+        } else if (workStatus == 1) { //重连
+            //TODO
+        } else if (workStatus == 2) { //连接失败
+            //TODO
+        } else if (workStatus == 3) { //工作中，空记录
+            //TODO
+        } else if (workStatus == 4) { //待机中，充电中， 三条记录
+            //TODO
+        }else if (workStatus == 5) { //工作中，三条记录
+            //TODO
+        }
+
+    
+        if (recordStatus == 0) { //未连接
+				//TODO
+        } else if (recordStatus == 1) { //重连
+            //TODO
+        } 
+    }
+
 
     $(function(){
 
         console.log("index html init" )
+
+        //showError();
 
         //设置暗黑模式
         getDarkMode();
@@ -410,15 +443,16 @@
 			} 
         }else {
 			loadProperties("zh")
-		}
+		} 
 
-       
-    }
+    })
+
+
     
+
+
+
     
-    
-    
-    )
    
 </script>
 

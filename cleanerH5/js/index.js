@@ -33,6 +33,9 @@ function dataChange(res) {
 
 // 获取手机状态栏高度
 function getStatusBarHeight(){
+
+    console.log("index getStatusBarHeight" )
+
     if(window.hilink){
         hilink.getStatusBarHeight('BarHeightRes');
     }
@@ -46,9 +49,8 @@ function getStatusBarHeight(){
 // 设定状态栏高度
 function setStatusBarHeight(num){
     iphoneStatus.style.height = num + 'px';
-    devTop.style.height = (56 + num) + 'px';
+    devTop.style.height = (84 + num) + 'px';
 }
-getStatusBarHeight();
 
 // 隐藏原生标题栏
 if(window.hilink){
@@ -183,8 +185,22 @@ function hideError () {
 }
 
 function showError () {
+    console.log('showError');
 	$(".shelter").show()
 	$(".msg-div").show()
+    $(".devTop").show()
+
+}
+
+//展示或者隐藏错误
+function hideAlert () {
+	$(".devTop").hide()
+}
+
+function showAlert () {
+    console.log('showAlert');
+    $(".devTop").show()
+
 }
 
 

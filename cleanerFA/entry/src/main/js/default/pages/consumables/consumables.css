@@ -1,0 +1,99 @@
+@import '../../common/css/common.css';
+
+.content {
+    margin-top: 76px;
+}
+
+progress {
+    width: 40px;
+    height: 40px;
+    margin: 30px;
+    color: #FF000000;
+}
+
+.authorizeDescription {
+    font-size: 10px;
+    line-height: 14px;
+    color: #98000000;
+    text-align: center;
+}
+
+.confirm-button-base-red:active {
+    color: white;
+    background-color: gray;
+}
+
+.confirm-button-base-red {
+    height: 40px;
+    width: 240px;
+    margin-left: 25px;
+    margin-right: 25px;
+    border-radius: 40px;
+    color: #FFFFFF;
+    background-color: #0D000000;
+    margin-top: 8px;
+    opacity: 1;
+}
+
+.confirm-button-base-red:disabled {
+    opacity: 0.3;
+}
+
+.cancel-button:active {
+    color: white;
+    background-color: gray;
+}
+
+
+.cancel-button {
+    height: 40px;
+    width: 240px;
+    margin-left: 25px;
+    margin-right: 25px;
+    border-radius: 40px;
+    color: #358CFD;
+    background-color: #0D000000;
+    margin-top: 16px;
+}
+
+.hw-img {
+    width: 22px;
+    height: 22px;
+}
+
+.cancel-text {
+    color: #FF000000;
+    font-size: 14px;
+}
+
+.sign-text {
+    color: #FF000000;
+    margin-left: 16px;
+    font-size: 14px;
+}
+
+.protocol_tip {
+    font-size: 10px;
+    color: #000000;
+}
+
+.protocol_tip_link {
+    font-size: 10px;
+    color: #0A59F7;
+    allow-scale: false;
+}
+
+.protocol_input {
+    width: 37px;
+    height: 37px;
+    position: relative;
+    right: -5px;
+}
+
+.protocol_container {
+    margin-top: 12px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+    allow-scale: false;
+}

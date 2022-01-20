@@ -156,14 +156,21 @@
     align-self: center;
     align-items: center;
 }
+
 .appMargin .mainWrap .title{
     position: relative;
 	font-size: 16px;
 	line-height: 20px;
 	color: #000000;
 	opacity: 0.9;
-    margin-top: -50px;
+    margin-top: -5  0px;
 }
+
+.dark .appMargin .mainWrap .title{
+    color: #ffffff;
+	opacity: 0.86;
+}
+
 .appMargin .mainWrap .msg{
     position: relative;
     padding:12px;
@@ -177,6 +184,12 @@
     background: #fff;
 	
 }
+
+.dark .appMargin .mainWrap .msg{
+	color: rgba(255, 255, 255, 0.86);
+    background: #303030;
+}
+
 
 .appMargin .mainWrap .btnContainer{
 	display: flex;
@@ -205,6 +218,13 @@
 }
 
 
+.dark .appMargin .mainWrap .btnContainer .btn{
+
+	background: #3171f7;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+
 /** 重置滤芯 */
 .msg-div{
 	position: fixed;
@@ -220,6 +240,10 @@
 	box-shadow: 0px 3px 6px rgb(0 0 0 / 3%);
 	padding: 0px 24px;
 }
+
+.dark .msg-main{
+    background: #363636;
+}
 .msg-title{
 	padding: 16px 0;
 	font-size: 18px;
@@ -229,7 +253,7 @@
 }
 .dark .msg-title{
 	color: #FFFFFF;
-	opacity: 0.9;
+	opacity: 0.86;
 }
 .msg-content{
 	font-size: 14px;
@@ -238,7 +262,7 @@
 	opacity: 0.9;
 }
 .dark .msg-content{
-	color: rgba(255, 255, 255, 0.9);
+	color: rgba(255, 255, 255, 0.86);
 	opacity: 0.86;
 }
 .msg-footer{
@@ -279,10 +303,16 @@
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	background: #000000;
+	background: #000000;    
 	opacity: 0.2;
 	z-index: 9;
 	display: none;
+}
+
+.dark .shelter{
+    background: #000000;
+    opacity: 0.4;
+
 }
 
 

@@ -5,39 +5,6 @@ devName=清蜓智能随手吸尘器C2S
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 car_atmosphere_lamp = 烁为汽车氛围灯
 connecting = 连接中
 reconnection = 重新连接

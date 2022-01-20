@@ -214,11 +214,11 @@
                     <div class="recordTitleWrap">
                         <p class="recordTitle">近3次清扫记录</p>
                     </div>
-                    <div class="recordEmptyList">
+                  <!--  <div class="recordEmptyList">
                         <div class="recordEmptyImg"></div>
                         <div class="recordEmptyTxt">暂无记录</div>
-                    </div>
-                    <!-- <ul class="recordList">
+                    </div> -->
+                     <ul class="recordList">
                         <li class="recordItem">
                                 <div class="recordLeft">
                                     <p class="circle">34</p>
@@ -254,7 +254,7 @@
                             </div>
                             <div class="recordRight">2分48秒</div>
                         </li>
-                    </ul> -->
+                    </ul> 
                 </div>
             </section>
 
@@ -380,16 +380,16 @@
 				});
 			}
 		});
-	}
+	}   
 
     function getDarkMode(){
         console.log("getDarkMode")
         var isIOS = !!navigator.userAgent.match(/iPhone/i);
 
-        if(window.hilink && !isIOS){
-        // if(true){
-            var dark = window.hilink.getDarkMode();
-        //    var dark =2 ;
+        // if(window.hilink && !isIOS){
+        if(true){
+            // var dark = window.hilink.getDarkMode();
+            var dark =2 ;
             if(dark == 2){//暗黑模式
                 app.style.background = 'black';
                 app.classList.add("dark");
@@ -424,7 +424,7 @@
         } else if (workStatus == 1) { //重连
             //TODO
         } else if (workStatus == 2) { //连接失败
-            //TODO
+            //TODO  
         } else if (workStatus == 3) { //工作中，空记录
             //TODO
         } else if (workStatus == 4) { //待机中，充电中， 三条记录
@@ -449,7 +449,7 @@
 
         // showError();
 
-        hideAlert(); 
+        // hideAlert(); 
     
 
         //设置暗黑模式

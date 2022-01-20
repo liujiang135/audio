@@ -188,8 +188,6 @@ function showError () {
     console.log('showError');
 	$(".shelter").show()
 	$(".msg-div").show()
-    $(".devTop").show()
-
 }
 
 //展示或者隐藏错误

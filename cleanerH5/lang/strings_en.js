@@ -1,4 +1,4 @@
-devName=清蜓智能随手吸尘器C2S
+index.header.headerWrap.devName=ENENEN清蜓智能随手吸尘器C2S
 
 
 

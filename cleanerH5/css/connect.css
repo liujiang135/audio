@@ -2,6 +2,7 @@
 	background: #ffffff;
 	overflow: scroll;
 }
+
 .connect-content {
 	/*height: 100%;*/
 	/*display: flex;*/
@@ -67,6 +68,9 @@
     background: #fff;
 
 }
+
+
+
 .btn {
 	font-family: HWtext-65ST;
 	font-size: 1.6rem;
@@ -80,6 +84,9 @@
     position: absolute;
     bottom: 2.4rem;
 }
+
+
+
 .fillDiv{
     width: 100%;
     height: 8.4rem;

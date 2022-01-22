@@ -2,7 +2,7 @@ window.onload = function() {
 	
 	internationalizes();
 	setImg();
-	
+	setDarkMode();
 	if(window.hilink) {
 		setDarkMode();
 
@@ -14,7 +14,8 @@ window.onload = function() {
 	//注册30s以上，提示连接超时
 	setTimeout(() => {
 		this.document.getElementById("btnContainer").style.cssText = "display:flex";
-		if(isDark){
+		//if(isDark){
+		if(true){
 			this.document.getElementById("btnContainer").style.background = "#000000";
 			this.document.getElementsByClassName("btn")[0].style.background = "rgba(255,255,255,0.1)";
 			this.document.getElementsByClassName("btn")[0].style.color = "#3F97E9 ";
@@ -51,13 +52,20 @@ function setDarkMode(){
     } catch (error) {
         
     }
-	if(isDark){
+	
+	//if(isDark){
+	if(true){
+		this.document.getElementsByClassName("btnContainer")[0].style.background = "#000000";
 		this.document.getElementsByClassName("connect-content")[0].style.background = "#000000";
 		this.document.getElementById("app").style.background = "#000000";
+	
+
 		this.document.getElementsByClassName("detail")[0].style.color = "rgba(255,255,255,0.86)";
 		this.document.getElementsByClassName("failConnect")[0].style.color = "rgba(255,255,255,0.86)";
 		this.document.getElementsByClassName("progress")[0].style.color = "rgba(255,255,255,0.86)";
-		this.document.getElementsByClassName("progressDes")[0].style.color = "rgba(255,255,255,0.66)";
+		this.document.getElementsByClassName("progressDes")[0].style.color = "rgba(255,255,255,0.6)";
+		this.document.getElementsByClassName("connectDes")[0].style.color = "rgba(255,255,255,0.86)";
+		
 	}
 }
 

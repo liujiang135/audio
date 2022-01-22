@@ -17,7 +17,7 @@
                     <div class="barLeft">
                         <div class="goApp"></div>
                     </div>
-                    <div class="devName" data-loacle="devName">清蜓智能随手吸尘器C2S</div>
+                    <div class="devName" data-loacle="index.header.headerWrap.devName">清蜓智能随手吸尘器C2S</div>
                     <div class="barRight">
                         <div class="devMore"></div>
                     </div>
@@ -34,11 +34,11 @@
                         <div class="devTopLeft">
                             <div class="msgIcon"></div>
                         </div>
-                        <!--<div class="devTopMsg" data-loacle="devTopMsg">请更换滤芯<br>更换完成后请手动重置滤芯</div>
-                        <div class="devTopMsg" data-loacle="devTopMsg" display:none>电量低，请充电!</div>-->
-                        <div class="devTopMsg" data-loacle="devTopMsg">请清理尘杯及滤芯!</div> 
+                        <div class="devTopMsg" data-loacle="devTopMsg">请更换滤芯<br>更换完成后请手动重置滤芯</div>
+                        <!-- <div class="devTopMsg" data-loacle="devTopMsg" display:none>电量低，请充电!</div> -->
+                        <!-- <div class="devTopMsg" data-loacle="devTopMsg">请清理尘杯及滤芯!</div>  -->
                         <div class="devTopRight">
-                            <!--<div class="msgIcon"></div>-->
+                            <div class="msgIcon"></div>
                         </div>
                     </div>
                 </div>
@@ -48,8 +48,8 @@
             <!-- 设备状态栏-->
             <section class="devStatus">
                 <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">已连接</div> -->
-                <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">工作中</div> -->
-                <div class="statusLeft" data-locale="statusLeft_unconnect">待机</div>
+                <div class="statusLeft" data-locale="statusLeft_unconnect">工作中</div>
+                <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">待机</div> -->
                 <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">连接中</div> -->
                 <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>  -->
                 <div class="statusMiddle">
@@ -62,7 +62,7 @@
                 </div>
             </section>
             <!-- 信息展示区 -->
-            <section class="devInfo disable">
+            <section class="devInfo">
                 <ul class="infoList ">
                    <!-- <li class="infoItem">
                         <div class="infoWrap">
@@ -77,14 +77,14 @@
                     <li class="infoItem">
                         <div class="infoWrap">
                             <p class="infoNum">
-                                <!-- <span class="number">2</span>
+                                <span class="number">2</span>
                                 <span class="unit">分</span>
                                 <span class="number">44</span>
-                                <span class="unit">秒</span> -->
-                                <span class="number">-</span>
+                                <span class="unit">秒</span>
+                                <!-- <span class="number">-</span>
                                 <span class="unit"></span>
                                 <span class="number">-</span>
-                                <span class="unit"></span>
+                                <span class="unit"></span> -->
                             </p>
                             <p class="infoName">上次清扫时间</p>
                         </div>
@@ -93,14 +93,14 @@
                     <li class="infoItem">
                         <div class="infoWrap">
                             <p class="infoNum">
-                                <!-- <span class="number">6</span>
+                                <span class="number">6</span>
                                 <span class="unit">分</span>
                                 <span class="number">20</span>
-                                <span class="unit">秒</span> -->
-                                <span class="number">-</span>
+                                <span class="unit">秒</span>
+                                <!-- <span class="number">-</span>
                                 <span class="unit"></span>
                                 <span class="number">-</span>
-                                <span class="unit"></span>
+                                <span class="unit"></span> -->
                             </p>
                             <p class="infoName">累计清扫时间</p>
                         </div>
@@ -111,7 +111,7 @@
             <section class="devFn">
                 <ul class="fnList">
                     
-                    <li class="fnItem spinner disable">
+                    <li class="fnItem spinner">
                         <div class="fnWrap">
                             <p class="fnName">模式</p>
                             <!-- <p class="fnStatus">节能模式</p> -->
@@ -131,7 +131,7 @@
                     </li>
 
                     
-                    <li class="fnItem disable">
+                    <li class="fnItem">
                         <div class="fnWrap">
                             <p class="fnName">LED照明</p>
                             <!-- <p class="fnStatus">已开启</p> -->
@@ -214,11 +214,11 @@
                     <div class="recordTitleWrap">
                         <p class="recordTitle">近3次清扫记录</p>
                     </div>
-                  <!--  <div class="recordEmptyList">
+                  <!-- <div class="recordEmptyList">
                         <div class="recordEmptyImg"></div>
                         <div class="recordEmptyTxt">暂无记录</div>
-                    </div> -->
-                     <ul class="recordList">
+                    </div>  -->
+                      <ul class="recordList">
                         <li class="recordItem">
                                 <div class="recordLeft">
                                     <p class="circle">34</p>
@@ -379,7 +379,7 @@
 					$(this).html($.i18n.prop($(this).data("locale")));
 				});
 			}
-		});
+		});     
 	}   
 
     function getDarkMode(){
@@ -449,7 +449,7 @@
 
         // showError();
 
-        // hideAlert(); 
+        hideAlert();    
     
 
         //设置暗黑模式
@@ -459,7 +459,7 @@
         initDp();
 
 		// 设置语言
-		if (window.hilink) {
+		/*if (window.hilink) {
 			let language = window.hilink.getAppLanguageSync()
 			console.log(language)
 			if (language == "zh-CN") {
@@ -475,8 +475,9 @@
 			} 
         }else {
 			loadProperties("zh")
-		} 
+		} */
 
+        loadProperties("en")
     })
 
 

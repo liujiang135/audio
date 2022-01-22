@@ -337,6 +337,7 @@
 }
 
 .dark .devStatus .statusRight .statusImg {
+    /* background: url('../img/loading/loading48.png') no-repeat; */
     background: url('../img/dark/ic_kaishi.png') no-repeat;
     background-size: cover;
 }

@@ -122,7 +122,7 @@ function getDarkMode(){
             app.classList.add("dark");
         } else {
             app.classList.remove("dark")
-            app.style.background = '#f7f7f7';
+            app.style.background = '#F1F3F5';
         }
     }
 }

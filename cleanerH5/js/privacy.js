@@ -43,7 +43,7 @@ function getDarkMode(){
             second.classList.add("dark");
         } else {
             second.classList.remove("dark")
-            second.style.background = '#f7f7f7';
+            second.style.background = '#F1F3F5';
         }
     }
 }

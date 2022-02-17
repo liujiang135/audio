@@ -66,6 +66,10 @@
 
 <script>
     var vConsole = new VConsole();
+    var eChartsLabelColor1 = '#000000e6';
+    var eChartsLabelColor2 = '#00000099';
+    var gaugeColor = '#00000008';//进度条底色
+    
 	console.log('开始调试');
 
     var isIOS = !!navigator.userAgent.match(/iPhone/i);
@@ -105,10 +109,20 @@
                 app.style.background = 'black';
                 app.classList.add("dark");
                 document.body.classList.add("dark")
+                eChartsLabelColor1 = '#ffffffdb';
+                eChartsLabelColor2 = '#ffffff99';
+                gaugeColor = '#ffffff1a';//进度条底色
+                console.log('暗黑模式')
+                setEcharts()
             } else {
                 app.style.background = '#F1F3F5';
                 app.classList.remove("dark")
                 document.body.classList.remove("dark")
+                eChartsLabelColor1 = '#000000e6';
+                eChartsLabelColor2 = '#00000099';
+                gaugeColor = '#00000008';//进度条底色
+                console.log('白天模式')
+                setEcharts()
             }
         }
     }
@@ -151,6 +165,7 @@
 
         // 执行dp换算
         initDp();
+        setEcharts();
 
 		/* 设置语言
 		if (window.hilink) {
@@ -175,19 +190,17 @@
 
     })
    
-</script>
-
-<script>
-
 var chartDom = document.getElementById('echarts_warp');
 var myChart = echarts.init(chartDom);
 var option;
 
+function setEcharts () {
 option = {
   tooltip: {
     formatter: '{a} <br/>{b} : {c}%'
   },
   series: [
+    // 底部 仪表盘
     {
       type: 'gauge',
       name: 'Pressure',
@@ -195,8 +208,8 @@ option = {
       endAngle: -30,
       min: 0,
       max: 100,
-      itemStyle: {
-        color: '#254ff7'
+      itemStyle: { // 进度条颜色  254ff700 为无色，将显示出底渐变色
+        color: '#254ff700'
       },
       progress: {
         show: true,
@@ -207,23 +220,19 @@ option = {
         roundCap: true,
         lineStyle: {
           width: 24,
-          // color: [
-          //           [1,new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-          //             {
-          //               offset: 0.1,
-          //               color: "#FFC600"
-          //             },
-          //             {
-          //               offset: 0.6,
-          //               color: "#30D27C"
-          //             },
-          //             {
-          //               offset: 1,
-          //               color: "#0B95FF"
-          //             }
-          //           ])
-          //         ]
-          //       ]
+          color: [
+                    [1,new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                      {
+                        offset: 0.1,
+                        color: gaugeColor
+                      },
+                      {
+                        offset: 1,
+                        color: gaugeColor
+                      }
+                    ])
+                  ]
+                ]
         }
       },
       axisTick: {
@@ -257,6 +266,7 @@ option = {
       title: {
         show: false
       },
+      // 显示字体
       detail: {
         valueAnimation: true,
         width: '60%',
@@ -268,22 +278,26 @@ option = {
           return '{value|' + value.toFixed(0) + '}{unit|%}{name|剩余}';
         },
         rich: {
+          // 字体颜色
           value: {
             fontSize: 28,
             fontWeight: 'bolder',
             //color: 'rgba(0,0,0,0.9)'
-            color: 'rgba(255,255,255,0.86)'
+            // color: 'rgba(255,255,255,0.86)'
+            color: eChartsLabelColor1
           },
           unit: {
             fontSize: 14,
             //color: 'rgba(0,0,0,0.6)',
-            color: 'rgba(255,255,255,0.86)',
+            // color: 'rgba(255,255,255,0.86)',
+            color: eChartsLabelColor2,
             padding: [0, 0, -10, 5]
           },
           name: {
             fontSize: 14,
             // color: 'rgba(0,0,0,0.6)',      
-            color: 'rgba(255,255,255,0.86)',
+            // color: 'rgba(255,255,255,0.86)',
+            color: eChartsLabelColor2,
             padding: [50, 0, 0, -40]
           }
         }
@@ -291,14 +305,84 @@ option = {
 
       data: [
         {
-          value: 50
+          value: 50 // 仪表盘显示值
         }
       ]
-    }
+    },
+    // 渐变仪表盘 滤芯寿命进度条
+    {
+      type: 'gauge',
+      name: 'Pressure',
+      startAngle: 210,
+      endAngle: 90,
+      min: 0,
+      max: 100,
+      itemStyle: { // 进度条颜色  254ff700 为无色，将显示出底渐变色
+        color: '#254ff700'
+      },
+      progress: {
+        show: true,
+        roundCap: true,
+        width: 24
+      },
+      axisLine: {
+        roundCap: true,
+        lineStyle: {
+          width: 24,
+          color: [
+                    [1,new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                      {
+                        offset: 0.1,
+                        color: "#86C1FF"
+                      },
+                      {
+                        offset: 1,
+                        color: "#254FF7"
+                      }
+                    ])
+                  ]
+                ]
+        }
+      },
+      axisTick: {
+        show: false
+      },
+      splitLine: {
+        length: 15,
+        show: false,
+        lineStyle: {
+          width: 2,
+          color: 'yellow'
+        }
+      },
+      axisLabel: {
+        distance: 25,
+        color: 'red',
+        fontSize: 20,
+        show: false
+      },
+      anchor: {
+        show: false,
+        showAbove: true,
+        size: 25,
+        itemStyle: {
+          borderWidth: 10
+        }
+      },
+      pointer: {
+        show: false
+      },
+      title: {
+        show: false
+      },
+      detail: {      },
+      data: [      ]
+    },
   ]
 };
 
-option && myChart.setOption(option);
+  option && myChart.setOption(option);
+}
 </script>
 
 

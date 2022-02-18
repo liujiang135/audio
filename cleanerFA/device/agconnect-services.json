@@ -1,4 +1,10 @@
 {
+	"agcgw":{
+		"backurl":"connect-drcn.hispace.hicloud.com",
+		"url":"connect-drcn.dbankcloud.cn",
+		"websocketbackurl":"connect-ws-drcn.hispace.dbankcloud.com",
+		"websocketurl":"connect-ws-drcn.hispace.dbankcloud.cn"
+	},
 	"agcgw_all":{
 		"CN":"connect-drcn.dbankcloud.cn",
 		"CN_back":"connect-drcn.hispace.hicloud.com",
@@ -10,28 +16,49 @@
 		"SG_back":"connect-dra.hispace.hicloud.com"
 	},
 	"client":{
-		"cp_id":"2850086000363504491",
-		"product_id":"737518067793971405",
-		"client_id":"777647888401451392",
-		"client_secret":"[!00C41312378AED2282920F2F97D485610E7E5DED6C5305D04A309551AE96764D950FE19FADEC7F6530BC1CA8F34BE65C334E10AECACC35DD91143F964D6723B2C69C1844418608208D32B2A630477306A3E3386BB2D8FE8D1300E172CEB8FA286A]",
-		"project_id":"737518067793971405",
-		"app_id":"105081943",
-		"api_key":"[!00D709D5FF9165B1288719B589AE2E5C35CD9097C1E77CE3C5BC4D3678DCE8459033DD5878F1E6F5EE78084C95E6C31FC6F374B75541A378F7E0C7CC83B65FE8ED17720AA0324E840182C94B528A1D5E1BFF1E821F5582067183254329B5D07364A0352337B9D5CB76A5B78B6B5B70A5A834CD22F6FA29884BD68D456FB1EDBE3C]",
-		"package_name":"com.newpower.ohoscleaner"
+		"cp_id":"2850086000503847935",
+		"product_id":"737518067794052782",
+		"client_id":"794165819037732160",
+		"client_secret":"[!00136091D85C341010E88BD3012C78910083C9A219935902DD8D18A1DC7A6EFF09B374F24ECBD5BF8B013785A59DFA40916A5F070034E89C447A7FC6D4AAD4CA7C82D6A6A20D8E184EE3DFAFA3B677755B20108F45796D46F45E1DA84773929B17]",
+		"project_id":"737518067794052782",
+		"app_id":"105377413",
+		"api_key":"[!00643BC498871BA17A53007538885007E80F276F054670625A07809D1F4F7132D209DCBAFB5277CE01F9ED3A9DD29AA546F896D32FB1E29B626612B4914E46A9CB8E1A2BCBC1AF8CCA3B12E2896C59E7146079991E43D93822A98669FD9AA403A9A5ECB7C391F591677F27D13E006F8B05C0976197C68AFAD5DB0E2B27DBDE2447]",
+		"package_name":"com.newpower.ohoscleaner2"
 	},
 	"oauth_client":{
-		"client_id":"105081943",
+		"client_id":"105377413",
 		"client_type":30
 	},
 	"app_info":{
-		"app_id":"777648534156487488",
-		"package_name":"com.newpower.ohoscleaner"
+		"app_id":"807162023384198016",
+		"package_name":"com.newpower.ohoscleaner2"
 	},
 	"code":{
-		"code1":"02BBF4C03535B461F6EFAA373526FD18",
-		"code2":"ACC685E427602310128DA243DD001988",
-		"code3":"415BEE624A2E6ACE165734CFB59B6098",
-		"code4":"DAF1884D738D3B13198545FCA594C33F"
+		"code1":"080AFA04632C82169878048CADC209C3",
+		"code2":"00AC5D918C97F3AB621F8F1A0D4C136C",
+		"code3":"2BFC5D5795D0E73A81BC6BE538CF3D05",
+		"code4":"210A684B4B91AED23AA0CC4632DC09BF"
 	},
+	"service":{
+		"analytics":{
+			"collector_url":"datacollector-drcn.dt.hicloud.com,datacollector-drcn.dt.dbankcloud.cn",
+			"collector_url_ru":"datacollector-drru.dt.hicloud.com,datacollector-drru.dt.dbankcloud.cn",
+			"collector_url_sg":"datacollector-dra.dt.hicloud.com,datacollector-dra.dt.dbankcloud.cn",
+			"collector_url_de":"datacollector-dre.dt.hicloud.com,datacollector-dre.dt.dbankcloud.cn",
+			"collector_url_cn":"datacollector-drcn.dt.hicloud.com,datacollector-drcn.dt.dbankcloud.cn",
+			"resource_id":"p1",
+			"channel_id":""
+		},
+		"search":{
+			"url":"https://search-drcn.cloud.huawei.com"
+		},
+		"cloudstorage":{
+			"storage_url":"https://agc-storage-drcn.platform.dbankcloud.cn"
+		},
+		"ml":{
+			"mlservice_url":"ml-api-drcn.ai.dbankcloud.com,ml-api-drcn.ai.dbankcloud.cn"
+		}
+	},
+	"region":"CN",
 	"configuration_version":"3.0"
 }

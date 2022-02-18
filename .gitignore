@@ -33,6 +33,6 @@ cleaner/*.apk
 cleaner/app/*.apk
 cleaner/app/build/
 cleaner/app/release/
-
-
+cleanerFA/device/build
+cleanerFA/entry/build/
 

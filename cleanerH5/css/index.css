@@ -341,12 +341,24 @@
     background-size: cover;
 }
 
+.devStatus .statusRight .statusImgLoading {
+    background: url('../img/loading/loading48.png') no-repeat;
+    background-size: cover;
+}
+
+.dark .devStatus .statusRight .statusImgLoading {
+    background: url('../img/loading/loading48.png') no-repeat;
+    background-size: cover;
+}
+
+
 .devStatus .statusRight .statusTxt {
     font-size: 1.8rem;
     color: #0A59F7;
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
+    display: none;
 }
 
 .dark .devStatus .statusRight .statusTxt {
@@ -395,6 +407,9 @@
     white-space: nowrap;
     text-overflow:ellipsis;
     font-size: 0;
+}
+.devInfo .infoList .infoItem .infoWrap .infoNum,.devInfo .infoList .infoItem .infoWrap .initTime{
+    display: none;
 }
 .devInfo .infoList .infoItem .infoWrap .infoNum .number {
     font-size:2.4rem;
@@ -612,6 +627,7 @@
     flex-direction: column; 
     align-items: center;
     justify-content: center;
+    display: none;
 }
 
 .devRecord .devRecordWrap .recordEmptyImg{
@@ -1412,6 +1428,26 @@
 }
 
 
+.mask{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 300vw;
+	background: #000000;
+	opacity: 0.2;
+	z-index: 97;
+	display: none;
+}
+
+.dark .mask{
+    background: #000000;
+    opacity: 0.4;
+
+}
+.highlighted{
+    z-index: 98;
+}
 
 
 

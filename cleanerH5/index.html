@@ -34,9 +34,9 @@
                         <div class="devTopLeft">
                             <div class="msgIcon"></div>
                         </div>
-                        <div class="devTopMsg" data-loacle="devTopMsg">请更换滤芯<br>更换完成后请手动重置滤芯</div>
-                        <!-- <div class="devTopMsg" data-loacle="devTopMsg" display:none>电量低，请充电!</div> -->
-                        <!-- <div class="devTopMsg" data-loacle="devTopMsg">请清理尘杯及滤芯!</div>  -->
+                        <div class="devTopMsg replaceLv" data-loacle="devTopMsg">请更换滤芯<br>更换完成后请手动重置滤芯</div>
+                        <div class="devTopMsg lowBatteryLv" data-loacle="devTopMsg" display:none>电量低，请充电!</div>
+                        <div class="devTopMsg clearLv" data-loacle="devTopMsg">请清理尘杯及滤芯!</div> 
                         <div class="devTopRight">
                             <div class="msgIcon"></div>
                         </div>
@@ -58,7 +58,8 @@
                 </div>
                 <div class="statusRight">
                     <div class="statusImg"></div>
-                    <!-- <div class="statusTxt">重新连接</div> -->
+                    <div class="statusImg statusImgLoading"></div>
+                    <div class="statusTxt">重新连接</div>
                 </div>
             </section>
             <!-- 信息展示区 -->
@@ -76,7 +77,7 @@
                     <div class="infoLine"></div> -->
                     <li class="infoItem">
                         <div class="infoWrap">
-                            <p class="infoNum">
+                            <p class="infoNum workTime">
                                 <span class="number">2</span>
                                 <span class="unit">分</span>
                                 <span class="number">44</span>
@@ -86,13 +87,19 @@
                                 <span class="number">-</span>
                                 <span class="unit"></span> -->
                             </p>
+                            <p class="infoNum initTime">
+                                <span class="number">-</span>
+                                <span class="unit"></span>
+                                <span class="number">-</span>
+                                <span class="unit"></span>
+                            </p>
                             <p class="infoName">上次清扫时间</p>
                         </div>
                     </li>
                     <div class="infoLine"></div>
                     <li class="infoItem">
                         <div class="infoWrap">
-                            <p class="infoNum">
+                            <p class="infoNum workTime">
                                 <span class="number">6</span>
                                 <span class="unit">分</span>
                                 <span class="number">20</span>
@@ -101,6 +108,12 @@
                                 <span class="unit"></span>
                                 <span class="number">-</span>
                                 <span class="unit"></span> -->
+                            </p>
+                            <p class="infoNum initTime">
+                                <span class="number">-</span>
+                                <span class="unit"></span>
+                                <span class="number">-</span>
+                                <span class="unit"></span>
                             </p>
                             <p class="infoName">累计清扫时间</p>
                         </div>
@@ -142,7 +155,7 @@
                         </div>  
                     </li>
 
-                    <li class="fnItem">
+                    <li class="fnItem lvInfo">
                         <div class="fnWrap">
                             <p class="fnName">滤芯信息</p>
                         </div>
@@ -152,7 +165,7 @@
                         </div>
                     </li>
         
-                    <li class="fnItem">
+                    <li class="fnItem instructions">
                         <div class="fnWrap">
                             <p class="fnName">使用说明</p>
                         </div>
@@ -214,10 +227,10 @@
                     <div class="recordTitleWrap">
                         <p class="recordTitle">近3次清扫记录</p>
                     </div>
-                  <!-- <div class="recordEmptyList">
+                  <div class="recordEmptyList">
                         <div class="recordEmptyImg"></div>
                         <div class="recordEmptyTxt">暂无记录</div>
-                    </div>  -->
+                    </div> 
                       <ul class="recordList">
                         <li class="recordItem">
                                 <div class="recordLeft">
@@ -322,6 +335,8 @@
             </div>
         </div>
 
+        <!-- 高亮部分控件时用的蒙层 -->
+        <div class="mask" display="block"></div>
         <!-- 氛围灯迁移过来的 -->
         <div class="shelter" display="block"></div>
         <div class="msg-div" display="block">
@@ -401,7 +416,128 @@
             }
         }
     }
+
+    // 移出高亮显示状态
+    function removeHighLighted(){
+        this.document.getElementsByClassName("mask")[0].style.display = "none";
+        this.document.getElementsByClassName("devStatus")[0].classList.remove('highlighted');
+        this.document.getElementsByClassName("instructions")[0].classList.remove('highlighted');
+        this.document.getElementsByClassName("lvInfo")[0].classList.remove('highlighted');
+        this.document.getElementsByClassName("devRecord")[0].classList.remove('highlighted');
+    }
+
+    // 初始化未连接之前的状态
+    function clearDataToStart(){
+        // 隐藏电池电量
+        this.document.getElementsByClassName("statusMiddle")[0].style.display = "none";
+        // 隐藏上次清扫时间
+        this.document.getElementsByClassName("workTime")[0].style.display = "none";
+        this.document.getElementsByClassName("initTime")[0].style.display = "block";
+        this.document.getElementsByClassName("workTime")[1].style.display = "none";
+        this.document.getElementsByClassName("initTime")[1].style.display = "block";
+        // 3次清扫记录为空
+        this.document.getElementsByClassName("recordList")[0].style.display = "none";
+        this.document.getElementsByClassName("recordEmptyList")[0].style.display = "flex";
+        // 连接中 icon 隐藏
+        this.document.getElementsByClassName("statusImgLoading")[0].style.display = "none";
+        // 移出高亮显示状态
+        removeHighLighted()
+    }
 			
+    let workStatus = 0 ; // 0 连接失败，1 连接超时，2 连接中，连接正常[3 工作中，4 待机]
+    let recordStatus = 0 //0 没几率 ，1 三条记录
+
+    // 设置状态
+    function initStatus(workStatus,recordStatus,topMsgStatus ){
+        if (workStatus == 0) { //未连接
+            clearDataToStart();
+		    this.document.getElementsByClassName("statusLeft")[0].innerText = "未连接";
+            // 显示'重新连接',隐藏'工作中'图标
+            this.document.getElementsByClassName("statusTxt")[0].style.display = "block";
+            this.document.getElementsByClassName("statusImg")[0].style.display = "none";
+            
+            // 蒙层显示 并高亮某部分
+            this.document.getElementsByClassName("mask")[0].style.display = "block";
+            this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
+            this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+        } else if (workStatus == 1) { //重连
+            //TODO
+            clearDataToStart();
+        } else if (workStatus == 2) { //连接失败 --> 连接超时
+            clearDataToStart();
+		    this.document.getElementsByClassName("statusLeft")[0].innerText = "未连接";
+            // 显示'重新连接',隐藏'工作中'图标
+            this.document.getElementsByClassName("statusTxt")[0].style.display = "block";
+            this.document.getElementsByClassName("statusImg")[0].style.display = "none";
+            // 显示连接超时弹窗
+            this.document.getElementsByClassName("shelter")[0].style.display = "block";
+            this.document.getElementsByClassName("msg-div")[0].style.display = "block";
+            // 蒙层显示 并高亮某部分
+            this.document.getElementsByClassName("mask")[0].style.display = "block";
+            this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
+            this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+        } else if (workStatus == 3) { //工作中，空记录
+            // 显示'工作中'图标,隐藏'重新连接' 
+            this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
+            this.document.getElementsByClassName("statusImg")[0].style.display = "none";
+        } else if (workStatus == 4) { //待机中，充电中， 三条记录
+            //TODO
+        } else if (workStatus == 5) { //工作中，三条记录
+            // 连接中 icon 隐藏
+            this.document.getElementsByClassName("statusImgLoading")[0].style.display = "none";
+            // 显示上次清扫时间
+            this.document.getElementsByClassName("workTime")[0].style.display = "block";
+            this.document.getElementsByClassName("initTime")[0].style.display = "none";
+            this.document.getElementsByClassName("workTime")[1].style.display = "block";
+            this.document.getElementsByClassName("initTime")[1].style.display = "none";
+        } else if (workStatus == 6) { //连接中
+            clearDataToStart();
+		    this.document.getElementsByClassName("statusLeft")[0].innerText = "连接中";
+            // 显示'重新连接',隐藏'工作中'图标
+            this.document.getElementsByClassName("statusImgLoading")[0].style.display = "block";
+            this.document.getElementsByClassName("statusImg")[0].style.background = "url('../img/loading/loading48.png') no-repeat";
+            // 蒙层显示 并高亮某部分
+            this.document.getElementsByClassName("mask")[0].style.display = "block";
+            this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
+            this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+        } else if (workStatus == 7) { //待机
+            clearDataToStart();
+		    this.document.getElementsByClassName("statusLeft")[0].innerText = "待机";
+            // 显示电量
+            this.document.getElementsByClassName("statusMiddle")[0].style.display = "block";
+            // 蒙层显示 并高亮某部分
+            this.document.getElementsByClassName("mask")[0].style.display = "block";
+            this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
+            this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+            this.document.getElementsByClassName("lvInfo")[0].classList.add('highlighted');
+            this.document.getElementsByClassName("devRecord")[0].classList.add('highlighted');
+        }
+
+        if (recordStatus == 0) { //未连接
+				//TODO
+        } else if (recordStatus == 1) { //重连
+            //TODO
+        }
+
+        if (topMsgStatus == 0) { //请更换滤芯
+				//TODO
+            this.document.getElementsByClassName("replaceLv")[0].style.display = "block";
+            this.document.getElementsByClassName("lowBatteryLv")[0].style.display = "none";
+            this.document.getElementsByClassName("clearLv")[0].style.display = "none";
+        } else if (topMsgStatus == 1) { //电量低，请充电
+            //TODO
+            this.document.getElementsByClassName("replaceLv")[0].style.display = "none";
+            this.document.getElementsByClassName("lowBatteryLv")[0].style.display = "block";
+            this.document.getElementsByClassName("clearLv")[0].style.display = "none";
+        } else if (topMsgStatus == 2) { //请清理尘杯及滤芯
+            //TODO
+            this.document.getElementsByClassName("replaceLv")[0].style.display = "none";
+            this.document.getElementsByClassName("lowBatteryLv")[0].style.display = "none";
+            this.document.getElementsByClassName("clearLv")[0].style.display = "block";
+        }
+
+    }
+
     // dp换算
     function initDp(){
         console.log("initDp" )
@@ -412,36 +548,15 @@
                 console.log(res)
             }
         }
+
+        // hideAlert() 隐藏前提下 topMsgStatus 生效
+        
+        initStatus(5,0,1);
+        // initStatus(workStatus,recordStatus,topMsgStatus )
+        // workStatus 0:未连接 1:重连 2:连接失败 3:工作中，空记录 4:待机中，充电中， 三条记录 5:工作中，三条记录 6:连接中 7:待机
+        // recordStatus 0:未连接 1:重连
+        // topMsgStatus  0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
     }
-			
-    let workStatus = 0 ; // 0 连接失败，1 连接超时，2 连接中，连接正常[3 工作中，4 待机]
-    let recordStatus = 0 //0 没几率 ，1 三条记录
-
-    // 设置状态
-    function initStatus(workStatus,recordStatus ){
-        if (workStatus == 0) { //未连接
-				//TODO
-        } else if (workStatus == 1) { //重连
-            //TODO
-        } else if (workStatus == 2) { //连接失败
-            //TODO  
-        } else if (workStatus == 3) { //工作中，空记录
-            //TODO
-        } else if (workStatus == 4) { //待机中，充电中， 三条记录
-            //TODO
-        }else if (workStatus == 5) { //工作中，三条记录
-            //TODO
-        }
-
-    
-        if (recordStatus == 0) { //未连接
-				//TODO
-        } else if (recordStatus == 1) { //重连
-            //TODO
-        }
-
-    }
-
 
     $(function(){
 
@@ -449,7 +564,7 @@
 
         // showError();
 
-        hideAlert();    
+        // hideAlert();    
     
 
         //设置暗黑模式

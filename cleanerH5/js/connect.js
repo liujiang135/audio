@@ -1,14 +1,14 @@
 window.onload = function() {
 	
 	internationalizes();
-	setImg();
+	// setImg();
 	setDarkMode();
 	if(window.hilink) {
 		setDarkMode();
 
 		getSystemInfo();
 		
-		listeningBleChange();
+		
 	}
 	
 	//注册30s以上，提示连接超时
@@ -53,8 +53,8 @@ function setDarkMode(){
         
     }
 	
-	//if(isDark){
-	if(true){
+	if(isDark){
+	// if(true){
 		this.document.getElementsByClassName("btnContainer")[0].style.background = "#000000";
 		this.document.getElementsByClassName("connect-content")[0].style.background = "#000000";
 		this.document.getElementById("app").style.background = "#000000";
@@ -71,10 +71,12 @@ function setDarkMode(){
 
 // 监听蓝牙变化,主动打开或关闭蓝牙会触发
 function listeningBleChange() {
+	console.log('listeningBleChange')
 	window.hilink.onBluetoothAdapterStateChange('onBlueToothAdapterStateChangeCallback')
 
-	window.onBlueToothAdapterStateChangeCallback = res => { // 监听蓝牙状态回调函数
+	window.onBlueToothAdapterStateChangeCallback = (res) => { // 监听蓝牙状态回调函数
 		let data = JSON.parse(res)
+		console.log('onBlueToothAdapterStateChangeCallback data:', data)
 		console.log('打开/关闭蓝牙开关:', data.available)
 		if(data.available) { // 检测到蓝牙打开
 			getUnRegisterDeviceFun();
@@ -82,12 +84,12 @@ function listeningBleChange() {
 			openBlueTooth();
 		}
 	}
-}
+}	
 
 // 获取手机系统信息,判断手机操作系统是 Android 还是 iOS
 function getSystemInfo() {
 	window.hilink.getSystemInfoSync('getSystemInfoSyncCallBack')
-	window.getSystemInfoSyncCallBack = info => {
+	window.getSystemInfoSyncCallBack = (info) => {
 		let data = JSON.parse(info);
 		console.log('设备信息~~~~~~~~~~~~~~~~',data);
 		if(data.platform == "iOS") {
@@ -97,6 +99,7 @@ function getSystemInfo() {
 			console.log("andorid设备")
 			isIOS = false;
 		}
+		listeningBleChange();
 		getBluetoothAdapterState();
 	}
 }
@@ -105,7 +108,7 @@ function getSystemInfo() {
 function getBluetoothAdapterState() {
 	window.hilink.getBluetoothAdapterState("getBlueToothAdapterStateCallback")
 
-	window.getBlueToothAdapterStateCallback = res => {
+	window.getBlueToothAdapterStateCallback = (res) => {
 		let data = JSON.parse(res);
 		console.log('蓝牙模块当前状态:', data.available);
 
@@ -124,18 +127,19 @@ function openBlueTooth() {
 
 // 获取当前页面被选中的未注册的设备,拿去注册
 function getUnRegisterDeviceFun() {
+	console.log('getUnRegisterDeviceFun');
 	window.hilink.getCurrentUnregisteredDevice('getCurrentUnregisteredDeviceCallback')
 
-	window.getCurrentUnregisteredDeviceCallback = res => {
+	window.getCurrentUnregisteredDeviceCallback = (res) => {
 		let data = JSON.parse(res);
-		deviceId = data.deviceId
-		console.log('获取安卓的MAC地址(ios的uuid):', data.deviceId);
+		console.log('getCurrentUnregisteredDeviceCallback:', res);
+		// deviceId = data.deviceId
+		// console.log('获取安卓的MAC地址(ios的uuid):', data.deviceId);
 
 		if(isIOS) { // IOS设备注册
 			getIOSdevices();
 		} else {    // 安卓设备注册
 			mac = deviceId;
-
 			connectDevice();
 		}
 	}
@@ -145,9 +149,17 @@ function getUnRegisterDeviceFun() {
 function connectDevice() {
 	console.log('开始尝试连接蓝牙设备...');
 
-	window.hilink.onBLEConnectionStateChange('onBLEConnectionStateChangeCallback'); // 监听蓝牙设备连接结果
-	window.onBLEConnectionStateChangeCallback = res => { 
+	window.hilink.getConnectedBluetoothDevices ('[15f1e600-a277-43fc-a484-dd39ef8a9100]', 'getConnectedBluetoothDevicesCallback')
+	window.getConnectedBluetoothDevicesCallback = (res) => { 
 		let data = JSON.parse(res)
+		console.log('onBLEConnectionStateChangeCallback data', data);
+	}
+
+
+	window.hilink.onBLEConnectionStateChange('onBLEConnectionStateChangeCallback'); // 监听蓝牙设备连接结果
+	window.onBLEConnectionStateChangeCallback = (res) => { 
+		let data = JSON.parse(res)
+		console.log('onBLEConnectionStateChangeCallback data', data);
 		console.log('蓝牙设备连接结果', data.connected);
 
 		if(data.connected) { // 连接成功，去到云端注册设备。
@@ -168,7 +180,7 @@ function connectDevice() {
 function registerBleDevice(mac) {
 	console.log('开始注册蓝牙设备:', mac)
 	window.hilink.registerBleDevice(mac, fwv, hwv, 'registerBleDeviceCallback')
-	window.registerBleDeviceCallback = res => {
+	window.registerBleDeviceCallback = (res) => {
 		console.log('蓝牙设备注册结果:',res)
 	}
 }
@@ -178,7 +190,7 @@ function getIOSdevices() {
 	console.log('IOS,发现附近蓝牙设备,获取其MAC地址')
 	window.hilink.onBluetoothDeviceFound("onBluetoothDeviceFoundCallBack");
 
-	window["onBluetoothDeviceFoundCallBack"] = info => {
+	window["onBluetoothDeviceFoundCallBack"] = (info) => {
 		let data = JSON.parse(info);
 
 		let macInfo = getMAC(data); // 处理设备信息，获取设备MAC
@@ -293,19 +305,19 @@ function internationalizes(){
 }
 
 // 设备图片
-function setImg(){
-	try{
-		var imgSrc = './connect/img/iconD.png';
-		if(window.location.href && window.location.href.indexOf('h5_001') > -1){
-			imgSrc = '../../iconD.png'; 
-		}else if(window.location.href && window.location.href.indexOf('template') > -1){
-			imgSrc = '../../../iconD.png'; 
-		}
-		this.document.getElementsByClassName("deviceImg")[0].src = imgSrc;
-	}catch(e){
-		console.log('图片设置报错:',e)
-	}
-}
+// function setImg(){
+// 	try{
+// 		var imgSrc = './img/iconD.png';
+// 		if(window.location.href && window.location.href.indexOf('h5_001') > -1){
+// 			imgSrc = '../../iconD.png'; 
+// 		}else if(window.location.href && window.location.href.indexOf('template') > -1){
+// 			imgSrc = '../../../iconD.png'; 
+// 		}
+// 		this.document.getElementsByClassName("deviceImg")[0].src = imgSrc;
+// 	}catch(e){
+// 		console.log('图片设置报错:',e)
+// 	}
+// }
 
 // 解析mac地址
 function analysisMac(str) { 

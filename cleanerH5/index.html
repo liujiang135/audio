@@ -386,10 +386,10 @@
         console.log("getDarkMode")
         var isIOS = !!navigator.userAgent.match(/iPhone/i);
 
-        // if(window.hilink && !isIOS){
-        if(true){
-            // var dark = window.hilink.getDarkMode();
-            var dark =2 ;
+        if(window.hilink && !isIOS){
+        // if(true){
+            var dark = window.hilink.getDarkMode();
+            // var dark =2 ;
             if(dark == 2){//暗黑模式
                 app.style.background = 'black';
                 app.classList.add("dark");
@@ -459,7 +459,7 @@
         initDp();
 
 		// 设置语言
-		/*if (window.hilink) {
+		if (window.hilink) {
 			let language = window.hilink.getAppLanguageSync()
 			console.log(language)
 			if (language == "zh-CN") {
@@ -475,9 +475,9 @@
 			} 
         }else {
 			loadProperties("zh")
-		} */
+		} 
 
-        loadProperties("en")
+        //loadProperties("en")
     })
 
 

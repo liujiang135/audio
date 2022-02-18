@@ -14,8 +14,8 @@ var notifyUuids = [
     {
         switchOn:'00',  //下发数据为16进制, 不要带0x
         switchOff:'01',
-        serviceUuid:'0000fee9-000-1000-8000-00805f9b34fb',
-        characteristicUuid:'D44BC439-ABFD-45A2-B575-925416129601'
+        serviceUuid:'15f1e600-a277-43fc-a484-dd39ef8a9100',
+        characteristicUuid:'15f1e602-a277-43fc-a484-dd39ef8a9100'
     }
 ];
 
@@ -120,12 +120,15 @@ function onBLEConnectionStateChange(){
     // 有设备连接后才会触发回调
     window.bleConnectionStateCallBack = res => {
         let data = dataChange(res);
+        console.log('bleConnectionStateCallBack:',data);
         console.log('蓝牙设备连接结果:',data.connected);
         
         if(data.connected){ 
             statusLeft.innerHTML = '已连接';
             onBLECharacteristicValueChange(); // 监听低功耗蓝牙设备的特征值变化
             notifyBle();                      // 信道建立
+
+           
         }else{ 
             isDiscover = false;
             onBluetoothDeviceFound();         // 重新发现，匹配
@@ -140,6 +143,8 @@ function getCurrentRegisteredDevice(){
     window.currentRegisteredDeviceCallBack = res =>{
         let data = dataChange(res);
         deviceIdMac = data.deviceId;
+        deviceIdMac = 'FA:34:56:78:79:A2' //debug test 
+        console.log('currentRegisteredDeviceCallBack data:',data)
         console.log('当前设备mac地址:',deviceIdMac)
     
         // 开始扫描
@@ -153,7 +158,7 @@ function onBluetoothDeviceFound(){
     window.bluetoothDeviceCallBack = res =>{
         let data = dataChange(res);
         statusLeft.innerHTML = '连接中...';
-        // console.log('附近设备的信息:',data);
+        console.log('附近设备的信息:',data);
     
         // 把被扫描到的蓝牙设备的mac地址与当前要建立连接设备的mac地址做对比，
         if(isIOS){
@@ -186,6 +191,7 @@ function onBluetoothDeviceFound(){
                 bleConnection(UUID_OR_Mac);
             }
         }else{
+            console.log('安卓:附近设备的MAC data:',data);
             console.log('安卓:附近设备的MAC:',data[0].deviceId);
             if(data[0].deviceId == deviceIdMac){
                 isDiscover = true;
@@ -231,6 +237,9 @@ function onBLECharacteristicValueChange(){
 // 通知低功耗蓝牙设备的特征值的值 ,返回0表示通知成功。
 function notifyBle() {
     console.log('信道建立...')
+
+   
+
     try {
         let i = 0;
         var timer = setInterval(() => {
@@ -238,12 +247,18 @@ function notifyBle() {
                 // console.log(UUID_OR_Mac,  notifyUuids[i].serviceUuid, notifyUuids[i].characteristicUuid);
                 var status = window.hilink.notifyBLECharacteristicValueChange(UUID_OR_Mac,  notifyUuids[i].serviceUuid, notifyUuids[i].characteristicUuid, true);
                 console.log(notifyUuids[i].sid + " notify status" + status);
+                console.log(notifyUuids[i].sid + " ；" + notifyUuids[i].characteristicUuid);
                 if(status === 0){
                     i++
                 }
+
+                writeBLECharacteristicValue('123') //debug test
             }else{
                 console.log('notify 成功');
                 clearInterval(timer);
+
+                writeBLECharacteristicValue('123') //debug test
+               
             }
         }, 100);
     } catch (error) {
@@ -253,6 +268,7 @@ function notifyBle() {
 
 // 3.对蓝牙设备发送数据 
 function writeBLECharacteristicValue(data){
+    console.log('call writeBLECharacteristicValue',data)
     window.hilink.writeBLECharacteristicValue(UUID_OR_Mac,notifyUuids[0].serviceUuid,notifyUuids[0].characteristicUuid, data,'writeBLECharacteristicValueCallBack');
     window.writeBLECharacteristicValueCallBack = res =>{
         let data = dataChange(res);

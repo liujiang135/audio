@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-package com.newpower.ohoscleaner;
+package com.newpower.ohoscleaner2;
 
-import com.newpower.ohoscleaner.util.LogUtil;
+import com.newpower.ohoscleaner2.util.LogUtil;
 
 import ohos.aafwk.content.Intent;
 import ohos.ace.ability.AceAbility;
@@ -30,8 +30,8 @@ import ohos.utils.zson.ZSONObject;
  */
 public class MainAbility extends AceAbility {
     private static final String TAG = "MainAbility";
-    private static final String BUNDLE_NAME = "com.newpower.ohoscleaner";
-    private static final String DEVICE_ABILITY_NAME = "com.newpower.ohoscleaner.device.DeviceAbility";
+    private static final String BUNDLE_NAME = "com.newpower.ohoscleaner2";
+    private static final String DEVICE_ABILITY_NAME = "com.newpower.ohoscleaner2.device.DeviceAbility";
 
     private static final String KEY_DEVICE_ID = "deviceId";
     private static final int WINDOW_MODAL = 3;

@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-package com.newpower.ohoscleaner;
+package com.newpower.ohoscleaner2;
 
-import com.newpower.ohoscleaner.util.EntryUtil;
-import com.newpower.ohoscleaner.util.LogUtil;
+import com.newpower.ohoscleaner2.util.EntryUtil;
+import com.newpower.ohoscleaner2.util.LogUtil;
 
 import ohos.aafwk.content.Intent;
 import ohos.aafwk.content.Operation;
@@ -43,9 +43,9 @@ import java.util.Map;
  */
 public class EntryInternalAbility extends AceInternalAbility implements AceInternalAbility.AceInternalAbilityHandler {
     private static final String TAG = "EntryInternalAbility";
-    private static final String BUNDLE_NAME = "com.newpower.ohoscleaner";
-    private static final String ABILITY_NAME = "com.newpower.ohoscleaner.EntryInternalAbility";
-    private static final String DEVICE_ABILITY_NAME = "com.newpower.ohoscleaner.device.DeviceAbility";
+    private static final String BUNDLE_NAME = "com.newpower.ohoscleaner2";
+    private static final String ABILITY_NAME = "com.newpower.ohoscleaner2.EntryInternalAbility";
+    private static final String DEVICE_ABILITY_NAME = "com.newpower.ohoscleaner2.device.DeviceAbility";
     private static final String HILINK_NET_CONFIG_URI =
             "hilink://hilinksvc.huawei.com/device?action=deviceAdd&prodId=%s&fromApp=%s";
     private static final int SUCCESS = 0;

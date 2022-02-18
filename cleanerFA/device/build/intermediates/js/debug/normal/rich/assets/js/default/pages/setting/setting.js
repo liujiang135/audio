@@ -81,22 +81,22 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.hml?entry");
+/******/ 	return __webpack_require__(__webpack_require__.s = "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.hml?entry");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.hml?entry":
-/*!********************************************************************************************************************!*\
-  !*** /Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.hml?entry ***!
-  \********************************************************************************************************************/
+/***/ "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.hml?entry":
+/*!***********************************************************************************************************************************!*\
+  !*** /Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.hml?entry ***!
+  \***********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/loader.js!../../common/navbar/navbar.hml?name=nav */ "./lib/loader.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.hml?name=nav")
-var $app_template$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/template.js!./setting.hml */ "./lib/json.js!./lib/template.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.hml")
-var $app_style$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/style.js!./setting.css */ "./lib/json.js!./lib/style.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.css")
-var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./setting.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.js")
+__webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/loader.js!../../common/navbar/navbar.hml?name=nav */ "./lib/loader.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.hml?name=nav")
+var $app_template$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/template.js!./setting.hml */ "./lib/json.js!./lib/template.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.hml")
+var $app_style$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/style.js!./setting.css */ "./lib/json.js!./lib/style.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.css")
+var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./setting.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.js")
 
 $app_define$('@app-component/setting', [], function($app_require$, $app_exports$, $app_module$) {
 
@@ -114,10 +114,10 @@ $app_bootstrap$('@app-component/setting',undefined,undefined)
 
 /***/ }),
 
-/***/ "./lib/json.js!./lib/style.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.css":
-/*!******************************************************************************************************************************************!*\
-  !*** ./lib/json.js!./lib/style.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.css ***!
-  \******************************************************************************************************************************************/
+/***/ "./lib/json.js!./lib/style.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.css":
+/*!*********************************************************************************************************************************************************!*\
+  !*** ./lib/json.js!./lib/style.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.css ***!
+  \*********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -159,10 +159,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./lib/json.js!./lib/style.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.css":
-/*!*******************************************************************************************************************************************!*\
-  !*** ./lib/json.js!./lib/style.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.css ***!
-  \*******************************************************************************************************************************************/
+/***/ "./lib/json.js!./lib/style.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.css":
+/*!**********************************************************************************************************************************************************!*\
+  !*** ./lib/json.js!./lib/style.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.css ***!
+  \**********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -217,10 +217,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./lib/json.js!./lib/template.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.hml":
-/*!*********************************************************************************************************************************************!*\
-  !*** ./lib/json.js!./lib/template.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.hml ***!
-  \*********************************************************************************************************************************************/
+/***/ "./lib/json.js!./lib/template.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.hml":
+/*!************************************************************************************************************************************************************!*\
+  !*** ./lib/json.js!./lib/template.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.hml ***!
+  \************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -305,10 +305,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./lib/json.js!./lib/template.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.hml":
-/*!**********************************************************************************************************************************************!*\
-  !*** ./lib/json.js!./lib/template.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.hml ***!
-  \**********************************************************************************************************************************************/
+/***/ "./lib/json.js!./lib/template.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.hml":
+/*!*************************************************************************************************************************************************************!*\
+  !*** ./lib/json.js!./lib/template.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.hml ***!
+  \*************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -426,16 +426,16 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./lib/loader.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.hml?name=nav":
-/*!**************************************************************************************************************************************!*\
-  !*** ./lib/loader.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.hml?name=nav ***!
-  \**************************************************************************************************************************************/
+/***/ "./lib/loader.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.hml?name=nav":
+/*!*****************************************************************************************************************************************************!*\
+  !*** ./lib/loader.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.hml?name=nav ***!
+  \*****************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $app_template$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/template.js!./navbar.hml */ "./lib/json.js!./lib/template.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.hml")
-var $app_style$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/style.js!./navbar.css */ "./lib/json.js!./lib/style.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.css")
-var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./navbar.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.js")
+var $app_template$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/template.js!./navbar.hml */ "./lib/json.js!./lib/template.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.hml")
+var $app_style$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/style.js!./navbar.css */ "./lib/json.js!./lib/style.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.css")
+var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./navbar.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.js")
 
 $app_define$('@app-component/nav', [], function($app_require$, $app_exports$, $app_module$) {
 
@@ -453,10 +453,10 @@ $app_module$.exports.style = $app_style$
 
 /***/ }),
 
-/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.js":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/common/navbar/navbar.js ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.js":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/common/navbar/navbar.js ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -521,10 +521,10 @@ if (moduleOwn.data && accessors.some(function (acc) {
 
 /***/ }),
 
-/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.js":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/pages/setting/setting.js ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.js":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.js ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

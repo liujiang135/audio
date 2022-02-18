@@ -1,7 +1,7 @@
 {
     "summary": {
         "app": {
-            "bundleName": "com.newpower.ohoscleaner",
+            "bundleName": "com.newpower.ohoscleaner2",
             "version": {
                 "code": 1000000,
                 "name": "1.0.0"
@@ -9,14 +9,13 @@
         },
         "modules": [
             {
-                "mainAbility": "com.huawei.cleaner.MainAbility",
+                "mainAbility": "com.newpower.ohoscleaner2.MainAbility",
                 "deviceType": [
                     "phone"
                 ],
                 "abilities": [
                     {
-                        "visible": true,
-                        "name": "com.huawei.cleaner.MainAbility",
+                        "name": "com.newpower.ohoscleaner2.MainAbility",
                         "label": "$string:entry_MainAbility"
                     },
                     {
@@ -45,7 +44,7 @@
                 ],
                 "distro": {
                     "moduleType": "entry",
-                    "installationFree": true,
+                    "installationFree": false,
                     "deliveryWithInstall": true,
                     "moduleName": "entry"
                 },

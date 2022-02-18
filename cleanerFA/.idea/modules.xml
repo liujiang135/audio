@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cleaner.iml" filepath="$PROJECT_DIR$/.idea/modules/cleaner.iml" group="cleaner" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/device/device.iml" filepath="$PROJECT_DIR$/.idea/modules/device/device.iml" group="cleaner/device" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/entry/entry.iml" filepath="$PROJECT_DIR$/.idea/modules/entry/entry.iml" group="cleaner/entry" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cleanerFA.iml" filepath="$PROJECT_DIR$/.idea/modules/cleanerFA.iml" group="cleanerFA" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/device/device.iml" filepath="$PROJECT_DIR$/.idea/modules/device/device.iml" group="cleanerFA/device" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/entry/entry.iml" filepath="$PROJECT_DIR$/.idea/modules/entry/entry.iml" group="cleanerFA/entry" />
     </modules>
   </component>
 </project>

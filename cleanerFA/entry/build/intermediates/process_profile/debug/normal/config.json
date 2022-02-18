@@ -5,8 +5,8 @@
             "releaseType": "Release",
             "target": 5
         },
-        "vendor": "huawei",
-        "bundleName": "com.newpower.ohoscleaner",
+        "vendor": "newpower",
+        "bundleName": "com.newpower.ohoscleaner2",
         "version": {
             "code": 1000000,
             "name": "1.0.0"
@@ -34,8 +34,8 @@
                         ]
                     }
                 ],
-                "mission": "com.newpower.ohoscleaner",
-                "name": "com.huawei.cleaner.MainAbility",
+                "mission": "com.newpower.ohoscleaner2",
+                "name": "com.newpower.ohoscleaner2.MainAbility",
                 "icon": "$media:icon",
                 "description": "$string:mainability_description",
                 "label": "$string:entry_MainAbility",
@@ -173,10 +173,10 @@
                 "homeAbility": false
             }
         ],
-        "mainAbility": "com.huawei.cleaner.MainAbility",
+        "mainAbility": "com.newpower.ohoscleaner2.MainAbility",
         "distro": {
             "moduleType": "entry",
-            "installationFree": true,
+            "installationFree": false,
             "deliveryWithInstall": true,
             "moduleName": "entry"
         },
@@ -184,7 +184,7 @@
             "customizeData": [
                 {
                     "name": "com.huawei.hms.client.appid",
-                    "value": "105081943"
+                    "value": "105377413"
                 },
                 {
                     "name": "hwc-theme",
@@ -200,9 +200,9 @@
                 }
             ]
         },
-        "package": "com.huawei.cleaner",
+        "package": "com.newpower.ohoscleaner2",
         "allowClassMap": true,
-        "name": "com.huawei.cleaner.EntryApplication",
+        "name": "com.newpower.ohoscleaner2.EntryApplication",
         "js": [
             {
                 "pages": [

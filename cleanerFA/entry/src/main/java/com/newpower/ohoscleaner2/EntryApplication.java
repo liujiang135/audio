@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.newpower.ohoscleaner;
+package com.newpower.ohoscleaner2;
 
 import com.huawei.hms.jsb.adapter.har.bridge.HmsBridge;
 

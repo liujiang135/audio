@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.newpower.ohoscleaner.util;
+package com.newpower.ohoscleaner2.util;
 
 /**
  * entry 工具类

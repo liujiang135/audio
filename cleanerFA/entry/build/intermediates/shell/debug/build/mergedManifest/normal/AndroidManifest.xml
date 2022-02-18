@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.newpower.ohoscleaner" android:versionCode="1000000" android:versionName="1.0.0">
+<?xml version="1.0" encoding="UTF-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.newpower.ohoscleaner2" android:versionCode="1000000" android:versionName="1.0.0">
     
   <uses-feature android:name="zidane.software.ability" android:required="false"/>
     
@@ -10,11 +10,21 @@
     
   <uses-permission android:name="com.huawei.hilink.framework.permission.BIND_AI_LIFE_CORE_SERVICE"/>
     
-  <application android:usesCleartextTraffic="false" android:icon="@drawable/icon" android:directBootAware="false" android:allowBackup="false" android:label="@string/entry_MainAbility" tools:replace="android:appComponentFactory" xmlns:tools="http://schemas.android.com/tools" android:name="com.huawei.cleaner.ShellEntryApplication" android:persistent="false" android:appComponentFactory="com.huawei.cleaner.ShellComponentProxy" android:debuggable="true">
+  <application android:usesCleartextTraffic="false" android:icon="@drawable/icon" android:directBootAware="false" android:allowBackup="false" android:label="@string/entry_MainAbility" tools:replace="android:appComponentFactory" xmlns:tools="http://schemas.android.com/tools" android:name="com.newpower.ohoscleaner2.ShellEntryApplication" android:persistent="false" android:appComponentFactory="com.newpower.ohoscleaner2.ShellComponentProxy" android:debuggable="true">
         
     <meta-data android:value="true" android:name="permZA"/>
         
-    <activity android:taskAffinity="com.newpower.ohoscleaner" android:icon="@drawable/icon" android:windowSoftInputMode="adjustResize" android:label="@string/entry_MainAbility" android:name="com.huawei.cleaner.MainAbilityShellActivity" android:launchMode="standard" android:exported="true"/>
+    <activity android:taskAffinity="com.newpower.ohoscleaner2" android:icon="@drawable/icon" android:windowSoftInputMode="adjustResize" android:label="@string/entry_MainAbility" android:name="com.newpower.ohoscleaner2.MainAbilityShellActivity" android:launchMode="standard">
+            
+      <intent-filter>
+                
+        <action android:name="android.intent.action.MAIN"/>
+                
+        <category android:name="android.intent.category.LAUNCHER"/>
+              
+      </intent-filter>
+          
+    </activity>
         
     <activity android:windowSoftInputMode="adjustResize" android:label="stub ability" android:name="com.huawei.hms.jsb.adapter.har.stub.FgStubAbilityShellActivity" android:launchMode="standard" android:exported="false">
             
@@ -74,7 +84,7 @@
         
     <service android:name="com.huawei.agconnect.core.ServiceDiscoveryShellService"/>
         
-    <meta-data android:value="105081943" android:name="com.huawei.hms.client.appid"/>
+    <meta-data android:value="105377413" android:name="com.huawei.hms.client.appid"/>
         
     <meta-data android:value="androidhwext:style/Theme.Emui.Translucent.NoTitleBar" android:name="hwc-theme"/>
         

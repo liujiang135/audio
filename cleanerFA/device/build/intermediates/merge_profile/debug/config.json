@@ -1,7 +1,7 @@
 {
     "app": {
-        "bundleName": "com.newpower.ohoscleaner",
-        "vendor": "huawei",
+        "bundleName": "com.newpower.ohoscleaner2",
+        "vendor": "newpower",
         "apiVersion": {
             "compatible": 4,
             "target": 5,
@@ -18,7 +18,7 @@
         }
     },
     "module": {
-        "name": "com.huawei.cleaner.device.DeviceApplication",
+        "name": "com.newpower.ohoscleaner2.device.DeviceApplication",
         "deviceType": [
             "phone"
         ],
@@ -26,22 +26,22 @@
             "deliveryWithInstall": true,
             "moduleName": "device",
             "moduleType": "feature",
-            "installationFree": true
+            "installationFree": false
         },
         "abilities": [
             {
-                "name": "com.huawei.cleaner.device.DeviceAbility",
+                "name": "com.newpower.ohoscleaner2.device.DeviceAbility",
                 "description": "$string:deviceability_description",
                 "icon": "$media:icon",
                 "label": "$string:device_DeviceAbility",
                 "type": "page",
                 "launchType": "standard",
                 "visible": true,
-                "mission": "com.newpower.ohoscleaner.device",
+                "mission": "com.newpower.ohoscleaner2.device",
                 "homeAbility": false
             },
             {
-                "name": "com.huawei.cleaner.device.service.BleServiceAbility",
+                "name": "com.newpower.ohoscleaner2.device.service.BleServiceAbility",
                 "description": "$string:bleserviceability_description",
                 "icon": "$media:icon",
                 "type": "service",
@@ -105,8 +105,8 @@
                 }
             }
         ],
-        "mainAbility": "com.huawei.cleaner.device.DeviceAbility",
+        "mainAbility": "com.newpower.ohoscleaner2.device.DeviceAbility",
         "colorMode": "light",
-        "package": "com.huawei.cleaner.device"
+        "package": "com.newpower.ohoscleaner2.device"
     }
 }

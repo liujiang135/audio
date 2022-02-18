@@ -1,7 +1,7 @@
 {
     "app": {
-        "bundleName": "com.newpower.ohoscleaner",
-        "vendor": "huawei",
+        "bundleName": "com.newpower.ohoscleaner2",
+        "vendor": "newpower",
         "apiVersion": {
             "compatible": 4,
             "target": 5,
@@ -19,7 +19,7 @@
         }
     },
     "module": {
-        "name": "com.huawei.cleaner.EntryApplication",
+        "name": "com.newpower.ohoscleaner2.EntryApplication",
         "deviceType": [
             "phone"
         ],
@@ -27,13 +27,13 @@
             "deliveryWithInstall": true,
             "moduleName": "entry",
             "moduleType": "entry",
-            "installationFree": true
+            "installationFree": false
         },
         "metaData": {
             "customizeData": [
                 {
                     "name": "com.huawei.hms.client.appid",
-                    "value": "105081943"
+                    "value": "105377413"
                 },
                 {
                     "name": "hwc-theme",
@@ -51,7 +51,7 @@
         },
         "abilities": [
             {
-                "name": "com.huawei.cleaner.MainAbility",
+                "name": "com.newpower.ohoscleaner2.MainAbility",
                 "description": "$string:mainability_description",
                 "icon": "$media:icon",
                 "label": "$string:entry_MainAbility",
@@ -67,7 +67,7 @@
                         ]
                     }
                 ],
-                "mission": "com.newpower.ohoscleaner",
+                "mission": "com.newpower.ohoscleaner2",
                 "homeAbility": true
             },
             {
@@ -224,8 +224,8 @@
             }
         ],
         "allowClassMap": true,
-        "mainAbility": "com.huawei.cleaner.MainAbility",
+        "mainAbility": "com.newpower.ohoscleaner2.MainAbility",
         "colorMode": "light",
-        "package": "com.huawei.cleaner"
+        "package": "com.newpower.ohoscleaner2"
     }
 }

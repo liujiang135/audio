@@ -3,6 +3,15 @@ apply plugin: 'com.huawei.ohos.decctest'
 //For instructions on signature configuration, see https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ide_debug_device-0000001053822404#ZH-CN_TOPIC_0000001154985555__section1112183053510
 ohos {
     signingConfigs {
+        debug {
+            storeFile file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/newpower2022.p12')
+            storePassword '000000204BD6AB5EBFFFBDEA8F1F43E7E7C13911A29FE03266F019D307735D9F58D020FD8976C55BED765E5531296CFB'
+            keyAlias = 'newpower2022'
+            keyPassword '00000020AA435B1135D47815D07CF7FD57EAE1881EAB72514C39CC7D17F6CD3DC83FD9B926BB32CB65196EFE1E9FB803'
+            signAlg = 'SHA256withECDSA'
+            profile file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/newpower2022Debug.p7b')
+            certpath file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/newpower2022.cer')
+        }
     }
     compileSdkVersion 5
     defaultConfig {

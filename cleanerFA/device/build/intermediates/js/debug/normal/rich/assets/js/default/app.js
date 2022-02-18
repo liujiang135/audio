@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/app.js?entry");
+/******/ 	return __webpack_require__(__webpack_require__.s = "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/app.js?entry");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/app.js?entry":
-/*!*************************************************************************************************!*\
-  !*** /Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/app.js?entry ***!
-  \*************************************************************************************************/
+/***/ "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/app.js?entry":
+/*!****************************************************************************************************************!*\
+  !*** /Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/app.js?entry ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/manifest-loader.js?path=/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/app.js!./app.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/app.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/app.js")
+var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/manifest-loader.js?path=/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/app.js!./app.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/app.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/app.js")
 
       $app_define$('@app-application/app', [], function($app_require$, $app_exports$, $app_module$) {
       
@@ -107,21 +107,21 @@ var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../Librar
 
 /***/ }),
 
-/***/ "./lib/manifest-plugin.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/build/intermediates/js/debug/jsManifest/default/manifest.json":
-/*!*******************************************************************************************************************************************************!*\
-  !*** ./lib/manifest-plugin.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/build/intermediates/js/debug/jsManifest/default/manifest.json ***!
-  \*******************************************************************************************************************************************************/
+/***/ "./lib/manifest-plugin.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/build/intermediates/js/debug/jsManifest/default/manifest.json":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./lib/manifest-plugin.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/build/intermediates/js/debug/jsManifest/default/manifest.json ***!
+  \**********************************************************************************************************************************************************************/
 /*! exports provided: appID, appName, versionName, versionCode, minPlatformVersion, pages, deviceType, window, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"appID\":\"com.newpower.ohoscleaner\",\"appName\":\"$string:device_DeviceAbility\",\"versionName\":\"1.0.0\",\"versionCode\":1000000,\"minPlatformVersion\":4,\"pages\":[\"pages/index/index\",\"pages/setting/setting\"],\"deviceType\":[\"phone\"],\"window\":{\"autoDesignWidth\":true,\"designWidth\":720}}");
+module.exports = JSON.parse("{\"appID\":\"com.newpower.ohoscleaner2\",\"appName\":\"$string:device_DeviceAbility\",\"versionName\":\"1.0.0\",\"versionCode\":1000000,\"minPlatformVersion\":4,\"pages\":[\"pages/index/index\",\"pages/setting/setting\"],\"deviceType\":[\"phone\"],\"window\":{\"autoDesignWidth\":true,\"designWidth\":720}}");
 
 /***/ }),
 
-/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/app.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/app.js":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/app.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/src/main/js/default/app.js ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/app.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/app.js":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/app.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/app.js ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -141,7 +141,7 @@ var _default = {
 };
 exports["default"] = _default;
 ;
-(exports["default"] || module.exports).manifest = __webpack_require__(/*! !../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/manifest-plugin.js!../../../../build/intermediates/js/debug/jsManifest/default/manifest.json */ "./lib/manifest-plugin.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/吸尘器/cleaner/device/build/intermediates/js/debug/jsManifest/default/manifest.json");}
+(exports["default"] || module.exports).manifest = __webpack_require__(/*! !../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/manifest-plugin.js!../../../../build/intermediates/js/debug/jsManifest/default/manifest.json */ "./lib/manifest-plugin.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/build/intermediates/js/debug/jsManifest/default/manifest.json");}
 /* generated by ace-loader */
 
 

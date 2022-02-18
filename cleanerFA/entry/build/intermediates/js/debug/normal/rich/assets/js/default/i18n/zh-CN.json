@@ -1,13 +1,13 @@
 {
   "strings": {
     "faName": "鸿蒙智联Demo",
-    "faVersion": "版本",
+    "faVersion": "1.0",
     "authorizeDescription": "继续使用需要授权并用手机号登录",
     "hwAccountLoginValue": "华为帐号快捷登录",
     "cancelValue": "取消",
     "authValue": "授权",
     "agree": "同意",
-    "protocol": "XXX用户协议与隐私声明"
+    "protocol": "鸿蒙智联用户协议与隐私声明"
   },
   "files": {
     "hwSignLogo": "/common/images/huawei_logo.png",

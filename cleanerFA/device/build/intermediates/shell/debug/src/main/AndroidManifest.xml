@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:dist="http://schemas.android.com/apk/distribution" xmlns:tools="http://schemas.android.com/tools" package="com.newpower.ohoscleaner" android:versionCode="1000000" android:versionName="1.0.0" android:isFeatureSplit="true" split="device">
+<?xml version="1.0" encoding="UTF-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:dist="http://schemas.android.com/apk/distribution" xmlns:tools="http://schemas.android.com/tools" package="com.newpower.ohoscleaner2" android:versionCode="1000000" android:versionName="1.0.0" android:isFeatureSplit="true" split="device">
     
   <uses-feature android:name="zidane.software.ability" android:required="false"/>
     
@@ -6,13 +6,13 @@
     
   <uses-permission android:name="com.huawei.hilink.framework.permission.BIND_AI_LIFE_CORE_SERVICE"/>
     
-  <application android:usesCleartextTraffic="false" android:directBootAware="false" android:allowBackup="false" android:name="com.huawei.cleaner.device.ShellDeviceApplication" android:persistent="false">
+  <application android:usesCleartextTraffic="false" android:directBootAware="false" android:allowBackup="false" android:name="com.newpower.ohoscleaner2.device.ShellDeviceApplication" android:persistent="false">
         
     <meta-data android:value="true" android:name="permZA"/>
         
-    <activity android:taskAffinity="com.newpower.ohoscleaner.device" android:icon="@drawable/icon" android:windowSoftInputMode="adjustResize" android:label="@string/device_DeviceAbility" android:name="com.huawei.cleaner.device.DeviceAbilityShellActivity" android:launchMode="standard" android:exported="true"/>
+    <activity android:taskAffinity="com.newpower.ohoscleaner2.device" android:icon="@drawable/icon" android:windowSoftInputMode="adjustResize" android:label="@string/device_DeviceAbility" android:name="com.newpower.ohoscleaner2.device.DeviceAbilityShellActivity" android:launchMode="standard" android:exported="true"/>
         
-    <service android:icon="@drawable/icon" android:description="@string/bleserviceability_description" android:name="com.huawei.cleaner.device.service.BleServiceAbilityShellService" android:exported="true"/>
+    <service android:icon="@drawable/icon" android:description="@string/bleserviceability_description" android:name="com.newpower.ohoscleaner2.device.service.BleServiceAbilityShellService" android:exported="true"/>
         
     <service android:icon="@drawable/aa_icon" android:label="NetConfigAbility" android:description="@string/ability_description" android:name="com.huawei.ailifeability.NetConfigAbilityShellService" android:exported="true"/>
         

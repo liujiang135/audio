@@ -7,9 +7,9 @@
             "target": 5
         },
         "labelId": 16777222,
-        "vendor": "huawei",
+        "vendor": "newpower",
         "icon": "$media:icon_entry",
-        "bundleName": "com.newpower.ohoscleaner",
+        "bundleName": "com.newpower.ohoscleaner2",
         "label": "$string:entry_MainAbility_entry",
         "version": {
             "code": 1000000,
@@ -25,12 +25,12 @@
         "abilities": [
             {
                 "iconId": 16777226,
-                "mission": "com.newpower.ohoscleaner.device",
+                "mission": "com.newpower.ohoscleaner2.device",
                 "descriptionId": 16777220,
                 "visible": true,
                 "labelId": 16777219,
                 "icon": "$media:icon",
-                "name": "com.huawei.cleaner.device.DeviceAbility",
+                "name": "com.newpower.ohoscleaner2.device.DeviceAbility",
                 "description": "$string:deviceability_description",
                 "label": "$string:device_DeviceAbility",
                 "type": "page",
@@ -42,7 +42,7 @@
                 "descriptionId": 16777218,
                 "visible": true,
                 "icon": "$media:icon",
-                "name": "com.huawei.cleaner.device.service.BleServiceAbility",
+                "name": "com.newpower.ohoscleaner2.device.service.BleServiceAbility",
                 "description": "$string:bleserviceability_description",
                 "type": "service",
                 "homeAbility": false
@@ -85,15 +85,15 @@
         "deviceType": [
             "phone"
         ],
-        "mainAbility": "com.huawei.cleaner.device.DeviceAbility",
+        "mainAbility": "com.newpower.ohoscleaner2.device.DeviceAbility",
         "distro": {
             "moduleType": "feature",
-            "installationFree": true,
+            "installationFree": false,
             "deliveryWithInstall": true,
             "moduleName": "device"
         },
-        "package": "com.huawei.cleaner.device",
-        "name": "com.huawei.cleaner.device.DeviceApplication",
+        "package": "com.newpower.ohoscleaner2.device",
+        "name": "com.newpower.ohoscleaner2.device.DeviceApplication",
         "colorMode": "light",
         "js": [
             {

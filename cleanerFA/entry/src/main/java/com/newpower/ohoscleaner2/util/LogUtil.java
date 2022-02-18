@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.newpower.ohoscleaner.util;
+package com.newpower.ohoscleaner2.util;
 
 import ohos.hiviewdfx.HiLog;
 import ohos.hiviewdfx.HiLogLabel;

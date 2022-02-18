@@ -27,7 +27,7 @@ import com.huawei.ailife.service.kit.manager.DeviceManager;
 import com.huawei.ailife.service.kit.model.AiLifeServiceParamBuilder;
 import com.huawei.ailife.service.kit.model.CommandParam;
 import com.huawei.ailife.service.kit.model.HiLinkDevice;
-import com.huawei.cleaner.device.util.LogUtil;
+import com.newpower.ohoscleaner2.device.util.LogUtil;
 
 import ohos.interwork.utils.PacMapEx;
 import ohos.utils.zson.ZSONObject;

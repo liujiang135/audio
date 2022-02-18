@@ -1,70 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="./css/common.css">
-    <link rel="stylesheet" type="text/css" href="./css/index.css">
-    <title>OHOS-Cleaner</title>
-</head>
-<body>
-    <div id="app">
-        <!-- 头部导航栏 -->
-        <header class="header">
-            <div class="headerWrap">
-                <div class="iphoneStatus"></div>
-                <div class="devTitle">
-                    <div class="barLeft">
-                        <div class="goApp"></div>
-                    </div>
-                    <div class="devName" data-loacle="index.header.headerWrap.devName">清蜓智能随手吸尘器C2S</div>
-                    <div class="barRight">
-                        <div class="devMore"></div>
-                    </div>
-                </div>
-            </div>
-        </header>
 
-        <div class="appMargin"> 
-            <!-- 设备图片+logo -->
-            <section class="devImg">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="./css/common.css">
+        <link rel="stylesheet" type="text/css" href="./css/index.css">
+        <title>OHOS-Cleaner</title>
+    </head>
 
-                <div class="devTop">
-                    <div class="devTopWrap">
-                        <div class="devTopLeft">
-                            <div class="msgIcon"></div>
+    <body>
+        <div id="app">
+            <!-- 头部导航栏 -->
+            <header class="header">
+                <div class="headerWrap">
+                    <div class="iphoneStatus"></div>
+                    <div class="devTitle">
+                        <div class="barLeft">
+                            <div class="goApp"></div>
                         </div>
-                        <div class="devTopMsg" data-loacle="devTopMsg">请更换滤芯<br>更换完成后请手动重置滤芯</div>
-                        <!-- <div class="devTopMsg" data-loacle="devTopMsg" display:none>电量低，请充电!</div> -->
-                        <!-- <div class="devTopMsg" data-loacle="devTopMsg">请清理尘杯及滤芯!</div>  -->
-                        <div class="devTopRight">
-                            <div class="msgIcon"></div>
+                        <div class="devName" data-loacle="index.header.headerWrap.devName">清蜓智能随手吸尘器C2S</div>
+                        <div class="barRight">
+                            <div class="devMore"></div>
                         </div>
                     </div>
                 </div>
-                <div class="deviceImg"></div>
-                <div class="logo"></div>
-            </section>
-            <!-- 设备状态栏-->
-            <section class="devStatus">
-                <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">已连接</div> -->
-                <div class="statusLeft" data-locale="statusLeft_unconnect">工作中</div>
-                <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">待机</div> -->
-                <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">连接中</div> -->
-                <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>  -->
-                <div class="statusMiddle">
-                    <div class="up"  data-locale="turned_on">25%</div>
-                    <div class="down"  data-locale="turned_on">电池电量</div>
-                </div>
-                <div class="statusRight">
-                    <div class="statusImg"></div>
-                    <!-- <div class="statusTxt">重新连接</div> -->
-                </div>
-            </section>
-            <!-- 信息展示区 -->
-            <section class="devInfo">
-                <ul class="infoList ">
-                   <!-- <li class="infoItem">
+            </header>
+
+            <div class="appMargin">
+                <!-- 设备图片+logo -->
+                <section class="devImg">
+
+                    <div class="devTop">
+                        <div class="devTopWrap">
+                            <div class="devTopLeft">
+                                <div class="msgIcon"></div>
+                            </div>
+                            <div class="devTopMsg replaceLv" data-loacle="devTopMsg">请更换滤芯<br>更换完成后请手动重置滤芯</div>
+                            <div class="devTopMsg lowBatteryLv" data-loacle="devTopMsg" display:none>电量低，请充电!</div>
+                            <div class="devTopMsg clearLv" data-loacle="devTopMsg">请清理尘杯及滤芯!</div>
+                            <div class="devTopRight">
+                                <div class="msgIcon"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="deviceImg"></div>
+                    <div class="logo"></div>
+                </section>
+                <!-- 设备状态栏-->
+                <section class="devStatus">
+                    <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">已连接</div> -->
+                    <div class="statusLeft" data-locale="statusLeft_unconnect">工作中</div>
+                    <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">待机</div> -->
+                    <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">连接中</div> -->
+                    <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>  -->
+                    <div class="statusMiddle">
+                        <div class="up" data-locale="turned_on">25%</div>
+                        <div class="down" data-locale="turned_on">电池电量</div>
+                    </div>
+                    <div class="statusRight">
+                        <div class="statusImg"></div>
+                        <div class="statusImg statusImgLoading"></div>
+                        <div class="statusTxt">重新连接</div>
+                    </div>
+                </section>
+                <!-- 信息展示区 -->
+                <section class="devInfo">
+                    <ul class="infoList ">
+                        <!-- <li class="infoItem">
                         <div class="infoWrap">
                             <p class="infoNum">
                                 <span class="number">2</span>
@@ -74,96 +78,108 @@
                         </div>
                     </li>
                     <div class="infoLine"></div> -->
-                    <li class="infoItem">
-                        <div class="infoWrap">
-                            <p class="infoNum">
-                                <span class="number">2</span>
-                                <span class="unit">分</span>
-                                <span class="number">44</span>
-                                <span class="unit">秒</span>
-                                <!-- <span class="number">-</span>
+                        <li class="infoItem">
+                            <div class="infoWrap">
+                                <p class="infoNum workTime">
+                                    <span class="number">2</span>
+                                    <span class="unit">分</span>
+                                    <span class="number">44</span>
+                                    <span class="unit">秒</span>
+                                    <!-- <span class="number">-</span>
                                 <span class="unit"></span>
                                 <span class="number">-</span>
                                 <span class="unit"></span> -->
-                            </p>
-                            <p class="infoName">上次清扫时间</p>
-                        </div>
-                    </li>
-                    <div class="infoLine"></div>
-                    <li class="infoItem">
-                        <div class="infoWrap">
-                            <p class="infoNum">
-                                <span class="number">6</span>
-                                <span class="unit">分</span>
-                                <span class="number">20</span>
-                                <span class="unit">秒</span>
-                                <!-- <span class="number">-</span>
+                                </p>
+                                <p class="infoNum initTime">
+                                    <span class="number">-</span>
+                                    <span class="unit"></span>
+                                    <span class="number">-</span>
+                                    <span class="unit"></span>
+                                </p>
+                                <p class="infoName">上次清扫时间</p>
+                            </div>
+                        </li>
+                        <div class="infoLine"></div>
+                        <li class="infoItem">
+                            <div class="infoWrap">
+                                <p class="infoNum workTime">
+                                    <span class="number">6</span>
+                                    <span class="unit">分</span>
+                                    <span class="number">20</span>
+                                    <span class="unit">秒</span>
+                                    <!-- <span class="number">-</span>
                                 <span class="unit"></span>
                                 <span class="number">-</span>
                                 <span class="unit"></span> -->
-                            </p>
-                            <p class="infoName">累计清扫时间</p>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-            <!-- 功能操作区 -->
-            <section class="devFn">
-                <ul class="fnList">
-                    
-                    <li class="fnItem spinner">
-                        <div class="fnWrap">
-                            <p class="fnName">模式</p>
-                            <!-- <p class="fnStatus">节能模式</p> -->
-                        </div>
-                        <div class="fnBox">
-                            <div class="fnImg fnImgItem3"></div>
-                        </div>
-                        <ul class="spinnerWrap appear">
-                            <li class="spinnerList checkedBg checkedText">节能模式</li>
-                            <li class="spinnerList">强劲模式</li>
-                        <!--    <li class="spinnerList checkedBg">3档</li>
+                                </p>
+                                <p class="infoNum initTime">
+                                    <span class="number">-</span>
+                                    <span class="unit"></span>
+                                    <span class="number">-</span>
+                                    <span class="unit"></span>
+                                </p>
+                                <p class="infoName">累计清扫时间</p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                <!-- 功能操作区 -->
+                <section class="devFn">
+                    <ul class="fnList">
+
+                        <li class="fnItem spinner">
+                            <div class="fnWrap">
+                                <p class="fnName">模式</p>
+                                <!-- <p class="fnStatus">节能模式</p> -->
+                            </div>
+                            <div class="fnBox">
+                                <div class="fnImg fnImgItem3"></div>
+                            </div>
+                            <ul class="spinnerWrap appear">
+                                <li class="spinnerList checkedBg checkedText">节能模式</li>
+                                <li class="spinnerList">强劲模式</li>
+                                <!--    <li class="spinnerList checkedBg">3档</li>
                             <li class="spinnerList">4档</li>
                             <li class="spinnerList">5档</li>
                             <li class="spinnerList">6档</li>
                             <li class="spinnerList">7档</li> -->
-                        </ul>
-                    </li>
-
-                    
-                    <li class="fnItem">
-                        <div class="fnWrap">
-                            <p class="fnName">LED照明</p>
-                            <!-- <p class="fnStatus">已开启</p> -->
-                        </div>
-                        <div class="fnBox">
-                            <div class="fnImg fnImgItem2"></div>
-                            <!-- <img class="fnImg" src="./img/light/ic_huanqi_blue.png"></img> -->
-                        </div>  
-                    </li>
-
-                    <li class="fnItem">
-                        <div class="fnWrap">
-                            <p class="fnName">滤芯信息</p>
-                        </div>
-                        <div class="fnBox">
-                            <div class="fnImg fnImgItem1"></div>
-                            <!-- <img class="fnImg" src="./img/light/ic_countdown.png"></img> -->
-                        </div>
-                    </li>
-        
-                    <li class="fnItem">
-                        <div class="fnWrap">
-                            <p class="fnName">使用说明</p>
-                        </div>
-                        <div class="fnBox">
-                            <div class="fnImg fnImgItem4"></div>
-                            <!-- <img class="fnImg" src="./img/light/ic_countdown.png"></img> -->
-                        </div>
-                    </li>
+                            </ul>
+                        </li>
 
 
-                   <!-- <li class="fnItem singleList">
+                        <li class="fnItem">
+                            <div class="fnWrap">
+                                <p class="fnName">LED照明</p>
+                                <!-- <p class="fnStatus">已开启</p> -->
+                            </div>
+                            <div class="fnBox">
+                                <div class="fnImg fnImgItem2"></div>
+                                <!-- <img class="fnImg" src="./img/light/ic_huanqi_blue.png"></img> -->
+                            </div>
+                        </li>
+
+                        <li class="fnItem lvInfo">
+                            <div class="fnWrap">
+                                <p class="fnName">滤芯信息</p>
+                            </div>
+                            <div class="fnBox">
+                                <div class="fnImg fnImgItem1"></div>
+                                <!-- <img class="fnImg" src="./img/light/ic_countdown.png"></img> -->
+                            </div>
+                        </li>
+
+                        <li class="fnItem instructions">
+                            <div class="fnWrap">
+                                <p class="fnName">使用说明</p>
+                            </div>
+                            <div class="fnBox">
+                                <div class="fnImg fnImgItem4"></div>
+                                <!-- <img class="fnImg" src="./img/light/ic_countdown.png"></img> -->
+                            </div>
+                        </li>
+
+
+                        <!-- <li class="fnItem singleList">
                         <div class="fnWrap">
                             <p class="fnName">底部弹窗</p>
                         </div>
@@ -183,9 +199,9 @@
                         </div>
                         
                     </li> -->
-                </ul>
-                
-                <!-- <div class="sliderBar">
+                    </ul>
+
+                    <!-- <div class="sliderBar">
                     <div class="sliderWrap">
                         <p class="sliderName">滑动条</p>
                         <p class="sliderStatus">11%</p>
@@ -207,19 +223,19 @@
                         <div class="stateImg"></div>
                     </div>
                 </div>-->
-            </section>
+                </section>
 
-            <section class="devRecord">
-                <div class="devRecordWrap">
-                    <div class="recordTitleWrap">
-                        <p class="recordTitle">近3次清扫记录</p>
-                    </div>
-                  <!-- <div class="recordEmptyList">
-                        <div class="recordEmptyImg"></div>
-                        <div class="recordEmptyTxt">暂无记录</div>
-                    </div>  -->
-                      <ul class="recordList">
-                        <li class="recordItem">
+                <section class="devRecord">
+                    <div class="devRecordWrap">
+                        <div class="recordTitleWrap">
+                            <p class="recordTitle">近3次清扫记录</p>
+                        </div>
+                        <div class="recordEmptyList">
+                            <div class="recordEmptyImg"></div>
+                            <div class="recordEmptyTxt">暂无记录</div>
+                        </div>
+                        <ul class="recordList">
+                            <li class="recordItem">
                                 <div class="recordLeft">
                                     <p class="circle">34</p>
                                 </div>
@@ -228,238 +244,341 @@
                                     <p class="down">2021/11/12 14:26</p>
                                 </div>
                                 <div class="recordRight">2分48秒</div>
-                        </li>
-                        <div class="line"></div>
-                        <li class="recordItem">
-                            <div class="recordLeft">  
-                                <p class="circle">35</p>
-                            </div>
-                            <div class="recordMiddle">
-                                <p class="up">清扫时长</p>
-                                <p class="down">2021/11/12 14:26</p>
-                            </div>
-                            <div class="recordRight">
-                                <p>2分48秒</p>
-                            </div>
-                          
-                        </li>
-                        <div class="line"></div>
-                        <li class="recordItem">
-                            <div class="recordLeft">
-                                <p class="circle">36</p>
-                            </div>
-                            <div class="recordMiddle">
-                                <p class="up">清扫时长</p>
-                                <p class="down">2021/11/12 14:26</p>
-                            </div>
-                            <div class="recordRight">2分48秒</div>
-                        </li>
-                    </ul> 
-                </div>
-            </section>
+                            </li>
+                            <div class="line"></div>
+                            <li class="recordItem">
+                                <div class="recordLeft">
+                                    <p class="circle">35</p>
+                                </div>
+                                <div class="recordMiddle">
+                                    <p class="up">清扫时长</p>
+                                    <p class="down">2021/11/12 14:26</p>
+                                </div>
+                                <div class="recordRight">
+                                    <p>2分48秒</p>
+                                </div>
 
-        </div>
-        
-        
+                            </li>
+                            <div class="line"></div>
+                            <li class="recordItem">
+                                <div class="recordLeft">
+                                    <p class="circle">36</p>
+                                </div>
+                                <div class="recordMiddle">
+                                    <p class="up">清扫时长</p>
+                                    <p class="down">2021/11/12 14:26</p>
+                                </div>
+                                <div class="recordRight">2分48秒</div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
 
-
-        <!-- 模式列表弹窗 -->
-        <div class="modeList modeListAppear">
-            <div class="modeWrap">
-                <div class="modeTitle">模式列表</div>
-                <ul>
-                    <li class="modeItem">
-                        <div class="modeName">节能模式</div>
-                        <div class="modeImg modeImgOff"></div>
-                        <!-- <img class="modeImg" src="./img/light/public/Radiobtn_off.png"></img> -->
-                    </li>
-                    <li class="modeItem">
-                        <div class="modeName">流光模式</div>
-                        <div class="modeImg modeImgOn"></div>
-                        <!-- <img class="modeImg" src="./img/light/public/Radiobtn_on.png"></img> -->
-                    </li>
-                    <li class="modeItem">
-                        <div class="modeName">七彩模式</div>
-                        <div class="modeImg modeImgOff"></div>
-                    </li>
-                    <li class="modeItem">
-                        <div class="modeName">温馨模式</div>
-                        <div class="modeImg modeImgOff"></div>
-                    </li>
-                </ul>
-
-                <div class="bottomBtn">
-                    <div class="fnbtn">取消</div>
-                    <div class="line"></div>
-                    <div class="fnbtn">确定</div>
-                </div>
             </div>
 
-        </div>
 
-        <!-- 隐私协议弹窗 -->
-        <div class="statementPopup">
-            <div class="statementWrap">
-                <div class="statementTitle">隐私声明</div>
-                <div class="statementContent">
-                    <div class="statementBox">
-                        <p class="">XXXXX公司向您提供XXXX产品的XXXXX服务，请您务必认真阅读本声明，在确认充分了解并同意后使用我们的产品和服务。如果您不同意声明的内容，
-                            您应当立即停止使用。
-                        </p>
-                        <div class="stateRules">
-                            <p>在我们向您提供产品和服务的过程中，我们需要收集您的以下信息：</p>
-                            <p>1.为了实现测量声音分贝功能，我们会调用您的麦克风进行声音的采集。</p>
-                            <p>2.为了实现睡眠报告功能，我们会收集您使用本产品所产生的睡眠数据，包括：睡眠时间、睡眠效率、睡眠时长。</p>
-                        </div>
-                        <p>点击“同意”，即代表您已充分了解并同意上述内容。</p>
+
+
+            <!-- 模式列表弹窗 -->
+            <div class="modeList modeListAppear">
+                <div class="modeWrap">
+                    <div class="modeTitle">模式列表</div>
+                    <ul>
+                        <li class="modeItem">
+                            <div class="modeName">节能模式</div>
+                            <div class="modeImg modeImgOff"></div>
+                            <!-- <img class="modeImg" src="./img/light/public/Radiobtn_off.png"></img> -->
+                        </li>
+                        <li class="modeItem">
+                            <div class="modeName">流光模式</div>
+                            <div class="modeImg modeImgOn"></div>
+                            <!-- <img class="modeImg" src="./img/light/public/Radiobtn_on.png"></img> -->
+                        </li>
+                        <li class="modeItem">
+                            <div class="modeName">七彩模式</div>
+                            <div class="modeImg modeImgOff"></div>
+                        </li>
+                        <li class="modeItem">
+                            <div class="modeName">温馨模式</div>
+                            <div class="modeImg modeImgOff"></div>
+                        </li>
+                    </ul>
+
+                    <div class="bottomBtn">
+                        <div class="fnbtn">取消</div>
+                        <div class="line"></div>
+                        <div class="fnbtn">确定</div>
                     </div>
                 </div>
-                <div class="stateBtn">
-                    <div class="stateFn">取消</div>
-                    <div class="line"></div>
-                    <div class="stateFn">同意</div>
+
+            </div>
+
+            <!-- 隐私协议弹窗 -->
+            <div class="statementPopup">
+                <div class="statementWrap">
+                    <div class="statementTitle">隐私声明</div>
+                    <div class="statementContent">
+                        <div class="statementBox">
+                            <p class="">XXXXX公司向您提供XXXX产品的XXXXX服务，请您务必认真阅读本声明，在确认充分了解并同意后使用我们的产品和服务。如果您不同意声明的内容，
+                                您应当立即停止使用。
+                            </p>
+                            <div class="stateRules">
+                                <p>在我们向您提供产品和服务的过程中，我们需要收集您的以下信息：</p>
+                                <p>1.为了实现测量声音分贝功能，我们会调用您的麦克风进行声音的采集。</p>
+                                <p>2.为了实现睡眠报告功能，我们会收集您使用本产品所产生的睡眠数据，包括：睡眠时间、睡眠效率、睡眠时长。</p>
+                            </div>
+                            <p>点击“同意”，即代表您已充分了解并同意上述内容。</p>
+                        </div>
+                    </div>
+                    <div class="stateBtn">
+                        <div class="stateFn">取消</div>
+                        <div class="line"></div>
+                        <div class="stateFn">同意</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 氛围灯迁移过来的 -->
-        <div class="shelter" display="block"></div>
-        <div class="msg-div" display="block">
-            <div class="msg-main">
-                <div class="msg-title" data-locale="connect_fail">连接超时</div>
-                <p class="msg-content">
-                    <span data-locale="try_again">请尝试以下操作：</span>
-                    <br><span data-locale="tip1">1.请确认设备接通电源并处开机状态 </span>
-                    <br><span data-locale="tip2">2.将手机靠近设备 </span>
-                    <br><span data-locale="tip3">3.重启手机蓝牙</span>
-                </p>
-                <div class="msg-footer">
-                    <div class="btn_ok btn_l" id="btn_ok">稍后重试</div>
-                    <div class="line" ></div>
-                    <div class="btn_ok btn_r" id="btn_ok">重新连接</div>
+            <!-- 高亮部分控件时用的蒙层 -->
+            <div class="mask" display="block"></div>
+            <!-- 氛围灯迁移过来的 -->
+            <div class="shelter" display="block"></div>
+            <div class="msg-div" display="block">
+                <div class="msg-main">
+                    <div class="msg-title" data-locale="connect_fail">连接超时</div>
+                    <p class="msg-content">
+                        <span data-locale="try_again">请尝试以下操作：</span>
+                        <br><span data-locale="tip1">1.请确认设备接通电源并处开机状态 </span>
+                        <br><span data-locale="tip2">2.将手机靠近设备 </span>
+                        <br><span data-locale="tip3">3.重启手机蓝牙</span>
+                    </p>
+                    <div class="msg-footer">
+                        <div class="btn_ok btn_l" id="btn_ok">稍后重试</div>
+                        <div class="line"></div>
+                        <div class="btn_ok btn_r" id="btn_ok">重新连接</div>
+                    </div>
                 </div>
             </div>
+            <!-- 氛围灯迁移过来的 end -->
+
+            <div class="backgroundColor"></div>
+            <div class="addHeight"></div>
         </div>
-        <!-- 氛围灯迁移过来的 end -->
-
-        <div class="backgroundColor"></div>
-        <div class="addHeight"></div>
-    </div>
-</body>
+    </body>
 
 
-<script src="./js/jquery.min.js"></script>
-<script src="./js/jquery.i18n.properties.js"></script>
-<script src="./js/vconsole.min.js"></script>
-<script src='./js/ble.js'></script>
-<script src='./js/index.js'></script>
-<script>
-    var vConsole = new VConsole();
-	console.log('开始调试');
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.i18n.properties.js"></script>
+    <script src="./js/vconsole.min.js"></script>
+    <script src='./js/ble.js'></script>
+    <script src='./js/index.js'></script>
+    <script>
+        var vConsole = new VConsole();
+        console.log('开始调试');
 
-    var isIOS = !!navigator.userAgent.match(/iPhone/i);
-    console.log('iOS:' + isIOS);
-
-	if (isIOS) {
-		$(".devMore").hide()
-	} else {
-		$(".devMore").show()
-	}
-    
-    function loadProperties(lang) {
-        console.log("loadProperties:" + lang)
-        //这个方法有个跨域问题，需要解决. 
-		$.i18n.properties({
-			name: 'strings',  //资源文件名称 ， 命名格式： 文件名_国家代号.properties
-			path: 'lang/',    //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
-			mode: 'map',     //用 Map 的方式使用资源文件中的值
-			language: lang,  //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
-			callback: function () {
-				$("[data-locale]").each(function () {
-					$(this).html($.i18n.prop($(this).data("locale")));
-				});
-			}
-		});     
-	}   
-
-    function getDarkMode(){
-        console.log("getDarkMode")
         var isIOS = !!navigator.userAgent.match(/iPhone/i);
+        console.log('iOS:' + isIOS);
 
-        if(window.hilink && !isIOS){
-        // if(true){
-            var dark = window.hilink.getDarkMode();
-            // var dark =2 ;
-            if(dark == 2){//暗黑模式
-                app.style.background = 'black';
-                app.classList.add("dark");
-                document.body.classList.add("dark")
-            } else {
-                app.style.background = '#F1F3F5';
-                app.classList.remove("dark")
-                document.body.classList.remove("dark")
+        if (isIOS) {
+            $(".devMore").hide()
+        } else {
+            $(".devMore").show()
+        }
+
+        function loadProperties(lang) {
+            console.log("loadProperties:" + lang)
+            //这个方法有个跨域问题，需要解决. 
+            $.i18n.properties({
+                name: 'strings', //资源文件名称 ， 命名格式： 文件名_国家代号.properties
+                path: 'lang/', //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
+                mode: 'map', //用 Map 的方式使用资源文件中的值
+                language: lang, //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
+                callback: function () {
+                    $("[data-locale]").each(function () {
+                        $(this).html($.i18n.prop($(this).data("locale")));
+                    });
+                }
+            });
+        }
+
+        function getDarkMode() {
+            console.log("getDarkMode")
+            var isIOS = !!navigator.userAgent.match(/iPhone/i);
+
+            // if(window.hilink && !isIOS){
+            if (true) {
+                // var dark = window.hilink.getDarkMode();
+                var dark = 2;
+                if (dark == 2) { //暗黑模式
+                    app.style.background = 'black';
+                    app.classList.add("dark");
+                    document.body.classList.add("dark")
+                } else {
+                    app.style.background = '#F1F3F5';
+                    app.classList.remove("dark")
+                    document.body.classList.remove("dark")
+                }
             }
         }
-    }
-			
-    // dp换算
-    function initDp(){
-        console.log("initDp" )
-        if (window.hilink) {
-            hilink.getSystemInfoSync("getSystemInfoSync")
-            window.getSystemInfoSync = (res) => {
-                console.log("系统信息")
-                console.log(res)
+
+        // 移出高亮显示状态
+        function removeHighLighted() {
+            this.document.getElementsByClassName("mask")[0].style.display = "none";
+            this.document.getElementsByClassName("devStatus")[0].classList.remove('highlighted');
+            this.document.getElementsByClassName("instructions")[0].classList.remove('highlighted');
+            this.document.getElementsByClassName("lvInfo")[0].classList.remove('highlighted');
+            this.document.getElementsByClassName("devRecord")[0].classList.remove('highlighted');
+        }
+
+        // 初始化未连接之前的状态
+        function clearDataToStart() {
+            // 隐藏电池电量
+            this.document.getElementsByClassName("statusMiddle")[0].style.display = "none";
+            // 隐藏上次清扫时间
+            this.document.getElementsByClassName("workTime")[0].style.display = "none";
+            this.document.getElementsByClassName("initTime")[0].style.display = "block";
+            this.document.getElementsByClassName("workTime")[1].style.display = "none";
+            this.document.getElementsByClassName("initTime")[1].style.display = "block";
+            // 3次清扫记录为空
+            this.document.getElementsByClassName("recordList")[0].style.display = "none";
+            this.document.getElementsByClassName("recordEmptyList")[0].style.display = "flex";
+            // 连接中 icon 隐藏
+            this.document.getElementsByClassName("statusImgLoading")[0].style.display = "none";
+            // 移出高亮显示状态
+            removeHighLighted()
+        }
+
+        let workStatus = 0; // 0 连接失败，1 连接超时，2 连接中，连接正常[3 工作中，4 待机]
+        let recordStatus = 0 //0 没几率 ，1 三条记录
+
+        // 设置状态
+        function initStatus(workStatus, recordStatus, topMsgStatus) {
+            if (workStatus == 0) { //未连接
+                clearDataToStart();
+                this.document.getElementsByClassName("statusLeft")[0].innerText = "未连接";
+                // 显示'重新连接',隐藏'工作中'图标
+                this.document.getElementsByClassName("statusTxt")[0].style.display = "block";
+                this.document.getElementsByClassName("statusImg")[0].style.display = "none";
+
+                // 蒙层显示 并高亮某部分
+                this.document.getElementsByClassName("mask")[0].style.display = "block";
+                this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
+                this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+            } else if (workStatus == 1) { //重连
+                //TODO
+                clearDataToStart();
+            } else if (workStatus == 2) { //连接失败 --> 连接超时
+                clearDataToStart();
+                this.document.getElementsByClassName("statusLeft")[0].innerText = "未连接";
+                // 显示'重新连接',隐藏'工作中'图标
+                this.document.getElementsByClassName("statusTxt")[0].style.display = "block";
+                this.document.getElementsByClassName("statusImg")[0].style.display = "none";
+                // 显示连接超时弹窗
+                this.document.getElementsByClassName("shelter")[0].style.display = "block";
+                this.document.getElementsByClassName("msg-div")[0].style.display = "block";
+                // 蒙层显示 并高亮某部分
+                this.document.getElementsByClassName("mask")[0].style.display = "block";
+                this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
+                this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+            } else if (workStatus == 3) { //工作中，空记录
+                // 显示'工作中'图标,隐藏'重新连接' 
+                this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
+                this.document.getElementsByClassName("statusImg")[0].style.display = "none";
+            } else if (workStatus == 4) { //待机中，充电中， 三条记录
+                //TODO
+            } else if (workStatus == 5) { //工作中，三条记录
+                // 连接中 icon 隐藏
+                this.document.getElementsByClassName("statusImgLoading")[0].style.display = "none";
+                // 显示上次清扫时间
+                this.document.getElementsByClassName("workTime")[0].style.display = "block";
+                this.document.getElementsByClassName("initTime")[0].style.display = "none";
+                this.document.getElementsByClassName("workTime")[1].style.display = "block";
+                this.document.getElementsByClassName("initTime")[1].style.display = "none";
+            } else if (workStatus == 6) { //连接中
+                clearDataToStart();
+                this.document.getElementsByClassName("statusLeft")[0].innerText = "连接中";
+                // 显示'重新连接',隐藏'工作中'图标
+                this.document.getElementsByClassName("statusImgLoading")[0].style.display = "block";
+                this.document.getElementsByClassName("statusImg")[0].style.background =
+                    "url('../img/loading/loading48.png') no-repeat";
+                // 蒙层显示 并高亮某部分
+                this.document.getElementsByClassName("mask")[0].style.display = "block";
+                this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
+                this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+            } else if (workStatus == 7) { //待机
+                clearDataToStart();
+                this.document.getElementsByClassName("statusLeft")[0].innerText = "待机";
+                // 显示电量
+                this.document.getElementsByClassName("statusMiddle")[0].style.display = "block";
+                // 蒙层显示 并高亮某部分
+                this.document.getElementsByClassName("mask")[0].style.display = "block";
+                this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
+                this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+                this.document.getElementsByClassName("lvInfo")[0].classList.add('highlighted');
+                this.document.getElementsByClassName("devRecord")[0].classList.add('highlighted');
             }
-        }
-    }
-			
-    let workStatus = 0 ; // 0 连接失败，1 连接超时，2 连接中，连接正常[3 工作中，4 待机]
-    let recordStatus = 0 //0 没几率 ，1 三条记录
 
-    // 设置状态
-    function initStatus(workStatus,recordStatus ){
-        if (workStatus == 0) { //未连接
-				//TODO
-        } else if (workStatus == 1) { //重连
-            //TODO
-        } else if (workStatus == 2) { //连接失败
-            //TODO  
-        } else if (workStatus == 3) { //工作中，空记录
-            //TODO
-        } else if (workStatus == 4) { //待机中，充电中， 三条记录
-            //TODO
-        }else if (workStatus == 5) { //工作中，三条记录
-            //TODO
-        }
+            if (recordStatus == 0) { //未连接
+                //TODO
+            } else if (recordStatus == 1) { //重连
+                //TODO
+            }
 
-    
-        if (recordStatus == 0) { //未连接
-				//TODO
-        } else if (recordStatus == 1) { //重连
-            //TODO
+            if (topMsgStatus == 0) { //请更换滤芯
+                //TODO
+                this.document.getElementsByClassName("replaceLv")[0].style.display = "block";
+                this.document.getElementsByClassName("lowBatteryLv")[0].style.display = "none";
+                this.document.getElementsByClassName("clearLv")[0].style.display = "none";
+            } else if (topMsgStatus == 1) { //电量低，请充电
+                //TODO
+                this.document.getElementsByClassName("replaceLv")[0].style.display = "none";
+                this.document.getElementsByClassName("lowBatteryLv")[0].style.display = "block";
+                this.document.getElementsByClassName("clearLv")[0].style.display = "none";
+            } else if (topMsgStatus == 2) { //请清理尘杯及滤芯
+                //TODO
+                this.document.getElementsByClassName("replaceLv")[0].style.display = "none";
+                this.document.getElementsByClassName("lowBatteryLv")[0].style.display = "none";
+                this.document.getElementsByClassName("clearLv")[0].style.display = "block";
+            }
+
         }
 
-    }
+        // dp换算
+        function initDp() {
+            console.log("initDp")
+            if (window.hilink) {
+                hilink.getSystemInfoSync("getSystemInfoSync")
+                window.getSystemInfoSync = (res) => {
+                    console.log("系统信息")
+                    console.log(res)
+                }
+            }
+
+            // hideAlert() 隐藏前提下 topMsgStatus 生效
+
+            initStatus(5, 0, 1);
+            // initStatus(workStatus,recordStatus,topMsgStatus )
+            // workStatus 0:未连接 1:重连 2:连接失败 3:工作中，空记录 4:待机中，充电中， 三条记录 5:工作中，三条记录 6:连接中 7:待机
+            // recordStatus 0:未连接 1:重连
+            // topMsgStatus  0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
+        }
+
+        $(function () {
+
+            console.log("index html init")
+
+            // showError();
+
+            // hideAlert();    
 
 
-    $(function(){
+            //设置暗黑模式
+            getDarkMode();
 
-        console.log("index html init" )
+            // 执行dp换算
+            initDp();
 
-        // showError();
-
-        hideAlert();    
-    
-
-        //设置暗黑模式
-        getDarkMode();
-
-        // 执行dp换算
-        initDp();
-
-		// 设置语言
-		if (window.hilink) {
+            // 设置语言
+            /*if (window.hilink) {
 			let language = window.hilink.getAppLanguageSync()
 			console.log(language)
 			if (language == "zh-CN") {
@@ -475,18 +594,10 @@
 			} 
         }else {
 			loadProperties("zh")
-		} 
+		} */
 
-        //loadProperties("en")
-    })
-
-
-    
-
-
-
-    
-   
-</script>
+            loadProperties("en")
+        })
+    </script>
 
 </html>

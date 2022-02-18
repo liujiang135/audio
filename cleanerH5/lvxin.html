@@ -1,173 +1,176 @@
 <!DOCTYPE html>
 <html lang="zh">
-<head>
+
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="./css/common.css">
     <link rel="stylesheet" type="text/css" href="./css/lvxin.css">
     <title>OHOS-Cleaner</title>
-</head>
-<body>
+  </head>
+
+  <body>
     <div id="app">
-        <!-- 头部导航栏 -->
-        <header class="header">
-            <div class="headerWrap">
-                <div class="iphoneStatus"></div>
-                <div class="devTitle">
-                    <div class="barLeft">
-                        <div class="goApp"></div>
-                    </div>
-                    <div class="devName" data-loacle="devName">滤芯信息</div>
-                    <div class="barRight">
-                         <!-- <div class="devMore"></div>  -->
-                    </div>
-                </div>
+      <!-- 头部导航栏 -->
+      <header class="header">
+        <div class="headerWrap">
+          <div class="iphoneStatus"></div>
+          <div class="devTitle">
+            <div class="barLeft">
+              <div class="goApp"></div>
             </div>
-        </header>
-
-        <div class="appMargin"> 
-            <div class="mainWrap">
-                <div class='main' id='echarts_warp'></div>
-                <div class='title'>滤芯寿命</div>
-                <div class='msg'>当滤芯耗尽后，清洁能力会大幅下降，请及时更换滤芯。</div>
-                <div class="btnContainer" id="btnContainer">
-                    <div class="btn" onclick="finishDeviceActivity()">
-                        重置滤芯
-                    </div>
-                </div>
+            <div class="devName" data-loacle="devName">滤芯信息</div>
+            <div class="barRight">
+              <!-- <div class="devMore"></div>  -->
             </div>
+          </div>
         </div>
+      </header>
 
-         <!-- 氛围灯迁移过来的 -->
-         <div class="shelter" display="block"></div>
-         <div class="msg-div" display="block">
-             <div class="msg-main">
-                 <div class="msg-title" data-locale="connect_fail">重置滤芯</div>
-                 <p class="msg-content">
-                     <span data-locale="try_again">请确认已更换新的滤芯或水洗晾干后的滤芯。是否重置？</span>
-                 </p>
-                 <div class="msg-footer">
-                     <div class="btn_ok" id="btn_ok">取消</div>
-                     <div class="line" ></div>
-                     <div class="btn_ok" id="btn_ok">确定</div>
-                 </div>
-             </div>
-         </div>
-         <!-- 氛围灯迁移过来的 end -->
-       
-</body>
+      <div class="appMargin">
+        <div class="mainWrap">
+          <div class='main' id='echarts_warp'></div>
+          <div class='title'>滤芯寿命</div>
+          <div class='msg'>当滤芯耗尽后，清洁能力会大幅下降，请及时更换滤芯。</div>
+          <div class="btnContainer" id="btnContainer">
+            <div class="btn" onclick="finishDeviceActivity()">
+              重置滤芯
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 氛围灯迁移过来的 -->
+      <div class="shelter" display="block"></div>
+      <div class="msg-div" display="block">
+        <div class="msg-main">
+          <div class="msg-title" data-locale="connect_fail">重置滤芯</div>
+          <p class="msg-content">
+            <span data-locale="try_again">请确认已更换新的滤芯或水洗晾干后的滤芯。是否重置？</span>
+          </p>
+          <div class="msg-footer">
+            <div class="btn_ok" id="btn_ok">取消</div>
+            <div class="line"></div>
+            <div class="btn_ok" id="btn_ok">确定</div>
+          </div>
+        </div>
+      </div>
+      <!-- 氛围灯迁移过来的 end -->
+
+  </body>
 
 
-<script src="./js/jquery.min.js"></script>
-<script src="./js/jquery.i18n.properties.js"></script>
-<script src="./js/vconsole.min.js"></script>
-<!-- <script src="./js/echarts.js"></script> -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/jquery.i18n.properties.js"></script>
+  <script src="./js/vconsole.min.js"></script>
+  <!-- <script src="./js/echarts.js"></script> -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
 
-<script>
+  <script>
     var vConsole = new VConsole();
     var eChartsLabelColor1 = '#000000e6';
     var eChartsLabelColor2 = '#00000099';
-    var gaugeColor = '#00000008';//进度条底色
-    
-	console.log('开始调试');
+    var gaugeColor = '#00000008'; //进度条底色
+
+    console.log('开始调试');
 
     var isIOS = !!navigator.userAgent.match(/iPhone/i);
     console.log('iOS:' + isIOS);
 
-	if (isIOS) {
-		$(".devMore").hide()
-	} else {
-		$(".devMore").show()
-	}
-    
+    if (isIOS) {
+      $(".devMore").hide()
+    } else {
+      $(".devMore").show()
+    }
+
     function loadProperties(lang) {
-        console.log("loadProperties:" + lang)
-        //这个方法有个跨域问题，需要解决. 
-		$.i18n.properties({
-			name: 'strings',  //资源文件名称 ， 命名格式： 文件名_国家代号.properties
-			path: 'lang/',    //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
-			mode: 'map',     //用 Map 的方式使用资源文件中的值
-			language: lang,  //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
-			callback: function () {
-				$("[data-locale]").each(function () {
-					$(this).html($.i18n.prop($(this).data("locale")));
-				});
-			}
-		});
-	}
+      console.log("loadProperties:" + lang)
+      //这个方法有个跨域问题，需要解决. 
+      $.i18n.properties({
+        name: 'strings', //资源文件名称 ， 命名格式： 文件名_国家代号.properties
+        path: 'lang/', //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
+        mode: 'map', //用 Map 的方式使用资源文件中的值
+        language: lang, //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
+        callback: function () {
+          $("[data-locale]").each(function () {
+            $(this).html($.i18n.prop($(this).data("locale")));
+          });
+        }
+      });
+    }
 
-    function getDarkMode(){
-        console.log("getDarkMode")
-        var isIOS = !!navigator.userAgent.match(/iPhone/i);
+    function getDarkMode() {
+      console.log("getDarkMode")
+      var isIOS = !!navigator.userAgent.match(/iPhone/i);
 
-        // if(window.hilink && !isIOS){
-        if(true){
+      // if(window.hilink && !isIOS){
+      if (true) {
         //    var dark = window.hilink.getDarkMode();
-            var dark =2 ;
-            if(dark == 2){//暗黑模式
-                app.style.background = 'black';
-                app.classList.add("dark");
-                document.body.classList.add("dark")
-                eChartsLabelColor1 = '#ffffffdb';
-                eChartsLabelColor2 = '#ffffff99';
-                gaugeColor = '#ffffff1a';//进度条底色
-                console.log('暗黑模式')
-                setEcharts()
-            } else {
-                app.style.background = '#F1F3F5';
-                app.classList.remove("dark")
-                document.body.classList.remove("dark")
-                eChartsLabelColor1 = '#000000e6';
-                eChartsLabelColor2 = '#00000099';
-                gaugeColor = '#00000008';//进度条底色
-                console.log('白天模式')
-                setEcharts()
-            }
+        var dark = 2;
+        if (dark == 2) { //暗黑模式
+          app.style.background = 'black';
+          app.classList.add("dark");
+          document.body.classList.add("dark")
+          eChartsLabelColor1 = '#ffffffdb';
+          eChartsLabelColor2 = '#ffffff99';
+          gaugeColor = '#ffffff1a'; //进度条底色
+          console.log('暗黑模式')
+          setEcharts()
+        } else {
+          app.style.background = '#F1F3F5';
+          app.classList.remove("dark")
+          document.body.classList.remove("dark")
+          eChartsLabelColor1 = '#000000e6';
+          eChartsLabelColor2 = '#00000099';
+          gaugeColor = '#00000008'; //进度条底色
+          console.log('白天模式')
+          setEcharts()
         }
+      }
     }
-			
+
     // dp换算
-    function initDp(){
-        console.log("initDp" )
-        if (window.hilink) {
-            hilink.getSystemInfoSync("getSystemInfoSync")
-            window.getSystemInfoSync = (res) => {
-                console.log("系统信息")
-                console.log(res)
-            }
+    function initDp() {
+      console.log("initDp")
+      if (window.hilink) {
+        hilink.getSystemInfoSync("getSystemInfoSync")
+        window.getSystemInfoSync = (res) => {
+          console.log("系统信息")
+          console.log(res)
         }
+      }
     }
-			
-   
+
+
     //展示或者隐藏错误
-    function hideError () {
-        $(".shelter").hide()
-        $(".msg-div").hide()
+    function hideError() {
+      $(".shelter").hide()
+      $(".msg-div").hide()
     }
 
-    function showError () {
-        console.log('showError');
-        $(".shelter").show()
-        $(".msg-div").show()
+    function showError() {
+      console.log('showError');
+      $(".shelter").show()
+      $(".msg-div").show()
     }
 
 
-    $(function(){
+    $(function () {
 
-        console.log("intro html init" )
+      console.log("intro html init")
 
-         showError();
-        //  hideError();
+      showError();
+      //  hideError();
 
-        //设置暗黑模式
-        getDarkMode();
+      //设置暗黑模式
+      getDarkMode();
 
-        // 执行dp换算
-        initDp();
-        setEcharts();
+      // 执行dp换算
+      initDp();
+      setEcharts();
 
-		/* 设置语言
+      /* 设置语言
 		if (window.hilink) {
 			let language = window.hilink.getAppLanguageSync()
 			console.log(language)
@@ -186,204 +189,202 @@
 			loadProperties("zh")
 		} */
 
-        
+
 
     })
-   
-var chartDom = document.getElementById('echarts_warp');
-var myChart = echarts.init(chartDom);
-var option;
 
-function setEcharts () {
-option = {
-  tooltip: {
-    formatter: '{a} <br/>{b} : {c}%'
-  },
-  series: [
-    // 底部 仪表盘
-    {
-      type: 'gauge',
-      name: 'Pressure',
-      startAngle: 210,
-      endAngle: -30,
-      min: 0,
-      max: 100,
-      itemStyle: { // 进度条颜色  254ff700 为无色，将显示出底渐变色
-        color: '#254ff700'
-      },
-      progress: {
-        show: true,
-        roundCap: true,
-        width: 24
-      },
-      axisLine: {
-        roundCap: true,
-        lineStyle: {
-          width: 24,
-          color: [
-                    [1,new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                      {
-                        offset: 0.1,
-                        color: gaugeColor
-                      },
-                      {
-                        offset: 1,
-                        color: gaugeColor
-                      }
-                    ])
-                  ]
-                ]
-        }
-      },
-      axisTick: {
-        show: false
-      },
-      splitLine: {
-        length: 15,
-        show: false,
-        lineStyle: {
-          width: 2,
-          color: '#999'
-        }
-      },
-      axisLabel: {
-        distance: 25,
-        color: '#999',
-        fontSize: 20,
-        show: false
-      },
-      anchor: {
-        show: false,
-        showAbove: true,
-        size: 25,
-        itemStyle: {
-          borderWidth: 10
-        }
-      },
-      pointer: {
-        show: false
-      },
-      title: {
-        show: false
-      },
-      // 显示字体
-      detail: {
-        valueAnimation: true,
-        width: '60%',
-        lineHeight: 40,
-        height: 40,
-        borderRadius: 8,
-        offsetCenter: [0, '10%'],
-        formatter: function (value) {
-          return '{value|' + value.toFixed(0) + '}{unit|%}{name|剩余}';
+    var chartDom = document.getElementById('echarts_warp');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    function setEcharts() {
+      option = {
+        tooltip: {
+          formatter: '{a} <br/>{b} : {c}%'
         },
-        rich: {
-          // 字体颜色
-          value: {
-            fontSize: 28,
-            fontWeight: 'bolder',
-            //color: 'rgba(0,0,0,0.9)'
-            // color: 'rgba(255,255,255,0.86)'
-            color: eChartsLabelColor1
-          },
-          unit: {
-            fontSize: 14,
-            //color: 'rgba(0,0,0,0.6)',
-            // color: 'rgba(255,255,255,0.86)',
-            color: eChartsLabelColor2,
-            padding: [0, 0, -10, 5]
-          },
-          name: {
-            fontSize: 14,
-            // color: 'rgba(0,0,0,0.6)',      
-            // color: 'rgba(255,255,255,0.86)',
-            color: eChartsLabelColor2,
-            padding: [50, 0, 0, -40]
-          }
-        }
-      },
-
-      data: [
-        {
-          value: 50 // 仪表盘显示值
-        }
-      ]
-    },
-    // 渐变仪表盘 滤芯寿命进度条
-    {
-      type: 'gauge',
-      name: 'Pressure',
-      startAngle: 210,
-      endAngle: 90,
-      min: 0,
-      max: 100,
-      itemStyle: { // 进度条颜色  254ff700 为无色，将显示出底渐变色
-        color: '#254ff700'
-      },
-      progress: {
-        show: true,
-        roundCap: true,
-        width: 24
-      },
-      axisLine: {
-        roundCap: true,
-        lineStyle: {
-          width: 24,
-          color: [
-                    [1,new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                      {
-                        offset: 0.1,
-                        color: "#86C1FF"
-                      },
-                      {
-                        offset: 1,
-                        color: "#254FF7"
-                      }
-                    ])
-                  ]
+        series: [
+          // 底部 仪表盘
+          {
+            type: 'gauge',
+            name: 'Pressure',
+            startAngle: 210,
+            endAngle: -30,
+            center: ['50%', '65%'],
+            radius: '120px',
+            min: 0,
+            max: 100,
+            itemStyle: { // 进度条颜色  254ff700 为无色，将显示出底渐变色
+              color: '#254ff700'
+            },
+            progress: {
+              show: true,
+              roundCap: true,
+              width: 24
+            },
+            axisLine: {
+              roundCap: true,
+              lineStyle: {
+                width: 24,
+                color: [
+                  [1, new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                      offset: 0.1,
+                      color: gaugeColor
+                    },
+                    {
+                      offset: 1,
+                      color: gaugeColor
+                    }
+                  ])]
                 ]
-        }
-      },
-      axisTick: {
-        show: false
-      },
-      splitLine: {
-        length: 15,
-        show: false,
-        lineStyle: {
-          width: 2,
-          color: 'yellow'
-        }
-      },
-      axisLabel: {
-        distance: 25,
-        color: 'red',
-        fontSize: 20,
-        show: false
-      },
-      anchor: {
-        show: false,
-        showAbove: true,
-        size: 25,
-        itemStyle: {
-          borderWidth: 10
-        }
-      },
-      pointer: {
-        show: false
-      },
-      title: {
-        show: false
-      },
-      detail: {      },
-      data: [      ]
-    },
-  ]
-};
+              }
+            },
+            axisTick: {
+              show: false
+            },
+            splitLine: {
+              length: 15,
+              show: false,
+              lineStyle: {
+                width: 2,
+                color: '#999'
+              }
+            },
+            axisLabel: {
+              distance: 25,
+              color: '#999',
+              fontSize: 20,
+              show: false
+            },
+            anchor: {
+              show: false,
+              showAbove: true,
+              size: 25,
+              itemStyle: {
+                borderWidth: 10
+              }
+            },
+            pointer: {
+              show: false
+            },
+            title: {
+              show: false
+            },
+            // 显示字体
+            detail: {
+              valueAnimation: true,
+              width: '60%',
+              lineHeight: 40,
+              height: 40,
+              borderRadius: 8,
+              offsetCenter: [0, '10%'],
+              formatter: function (value) {
+                return '{value|' + value.toFixed(0) + '}{unit|%}{name|剩余}';
+              },
+              rich: {
+                // 字体颜色
+                value: {
+                  fontSize: 28,
+                  fontWeight: 'bolder',
+                  //color: 'rgba(0,0,0,0.9)'
+                  // color: 'rgba(255,255,255,0.86)'
+                  color: eChartsLabelColor1
+                },
+                unit: {
+                  fontSize: 14,
+                  //color: 'rgba(0,0,0,0.6)',
+                  // color: 'rgba(255,255,255,0.86)',
+                  color: eChartsLabelColor2,
+                  padding: [0, 0, -10, 5]
+                },
+                name: {
+                  fontSize: 14,
+                  // color: 'rgba(0,0,0,0.6)',      
+                  // color: 'rgba(255,255,255,0.86)',
+                  color: eChartsLabelColor2,
+                  padding: [50, 0, 0, -40]
+                }
+              }
+            },
 
-  option && myChart.setOption(option);
-}
-</script>
+            data: [{
+              value: 50 // 仪表盘显示值
+            }]
+          },
+          // 渐变仪表盘 滤芯寿命进度条
+          {
+            type: 'gauge',
+            name: 'Pressure',
+            startAngle: 210,
+            endAngle: 90,
+            center: ['50%', '65%'],
+            radius: '120px',
+            min: 0,
+            max: 100,
+            itemStyle: { // 进度条颜色  254ff700 为无色，将显示出底渐变色
+              color: '#254ff700'
+            },
+            progress: {
+              show: true,
+              roundCap: true,
+              width: 24
+            },
+            axisLine: {
+              roundCap: true,
+              lineStyle: {
+                width: 24,
+                color: [
+                  [1, new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                      offset: 0.1,
+                      color: "#86C1FF"
+                    },
+                    {
+                      offset: 1,
+                      color: "#254FF7"
+                    }
+                  ])]
+                ]
+              }
+            },
+            axisTick: {
+              show: false
+            },
+            splitLine: {
+              length: 15,
+              show: false,
+              lineStyle: {
+                width: 2,
+                color: 'yellow'
+              }
+            },
+            axisLabel: {
+              distance: 25,
+              color: 'red',
+              fontSize: 20,
+              show: false
+            },
+            anchor: {
+              show: false,
+              showAbove: true,
+              size: 25,
+              itemStyle: {
+                borderWidth: 10
+              }
+            },
+            pointer: {
+              show: false
+            },
+            title: {
+              show: false
+            },
+            detail: {},
+            data: []
+          },
+        ]
+      };
+
+      option && myChart.setOption(option);
+    }
+  </script>
 
 
 

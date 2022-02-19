@@ -306,7 +306,7 @@
 }
 
 .dark .devStatus .statusMiddle .down {
-    color:rgba(255, 255, 255, 0.86);
+    color:rgba(255, 255, 255, 0.6);
 }
 
 .devStatus .statusRight {
@@ -337,7 +337,7 @@
 
 .dark .devStatus .statusRight .statusImg {
     /* background: url('../img/loading/loading48.png') no-repeat; */
-    background: url('../img/dark/ic_kaishi.png') no-repeat;
+    background: url('../img/dark/ic_kaishi_dark.png') no-repeat;
     background-size: cover;
 }
 
@@ -353,7 +353,7 @@
 
 
 .devStatus .statusRight .statusTxt {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: #0A59F7;
     overflow: hidden;
     white-space: nowrap;
@@ -365,6 +365,10 @@
     color: #5291FF;
 }
 
+.textAlignCenter{
+    text-align: center;
+    justify-content: center!important;
+}
 
 /*-------------- 信息展示栏 ---------------*/
 .devInfo {
@@ -716,7 +720,7 @@
     line-height: 40px;
     border-radius:50%;
     font-size:1.6rem;
-    color:rgb(255, 255, 255,0.6);
+    color:#fff;
     text-align:center;
     background:#c8c8c8;
     overflow: hidden;
@@ -805,7 +809,7 @@
 
 .msg-title{
 	padding: 16px 0;
-	font-size: 18px;
+	font-size: 20px;
 	line-height: 20px;
 	color: #000000;
 	opacity: 0.9;
@@ -815,7 +819,7 @@
 	opacity: 0.86;
 }
 .msg-content{
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 22px;
 	color: rgba(0, 0, 0, 0.9);
 	opacity: 0.9;

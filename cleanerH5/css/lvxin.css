@@ -150,7 +150,7 @@
 
 .appMargin .mainWrap .main{
 	position: relative;
-	z-index: 10;
+	z-index: 8;
     width: 100%;    
     height: 188px;
     display: flex;
@@ -183,7 +183,6 @@
 	color: rgba(0, 0, 0, 0.9);
 	opacity: 0.9;
     border-radius: 12px;
-    box-shadow: 0px 3px 6px rgba(0,0,0,0.03);
     background: #fff;
 	
 }
@@ -239,8 +238,8 @@
 	display: none;
 }
 .msg-main{
-	margin: 0 16px;
-	border-radius: 16px;
+	margin: 0 12px;
+	border-radius: 24px;
 	background: #FFFFFF;
 	box-shadow: 0px 3px 6px rgb(0 0 0 / 3%);
 	padding: 0px 24px;
@@ -251,7 +250,7 @@
 }
 .msg-title{
 	padding: 16px 0;
-	font-size: 18px;
+	font-size: 20px;
 	line-height: 20px;
 	color: #000000;
 	opacity: 0.9;
@@ -261,7 +260,7 @@
 	opacity: 0.86;
 }
 .msg-content{
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 22px;
 	color: rgba(0, 0, 0, 0.9);
 	opacity: 0.9;
@@ -271,23 +270,29 @@
 	opacity: 0.86;
 }
 .msg-footer{
-    margin-top:8px;
-    height: 48px;
+    margin-top: 8px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .msg-footer .btn_ok{
-    height:24px;
-    line-height: 24px;
+    height: 40px;
+    line-height: 40px;
     letter-spacing: 1px;
     flex:1;
     text-align: center;
-    color: #007dff;
+    color: #0A59F7;
     font-size: 1.4rem;
 }
 .dark .msg-footer .btn_ok{
     color: #5291FF;
+}
+.btn_l{
+    padding-right: 12px;
+}
+.btn_r{
+    padding-left: 12px;
 }
 
 .msg-footer .line{

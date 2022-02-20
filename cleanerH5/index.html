@@ -147,7 +147,7 @@
                         </li>
 
 
-                        <li class="fnItem">
+                        <li class="fnItem ledCard">
                             <div class="fnWrap">
                                 <p class="fnName">LED照明</p>
                                 <!-- <p class="fnStatus">已开启</p> -->
@@ -338,8 +338,6 @@
                 </div>
             </div>
 
-            <!-- 高亮部分控件时用的蒙层 -->
-            <div class="mask" display="block"></div>
             <!-- 氛围灯迁移过来的 -->
             <div class="shelter" display="block"></div>
             <div class="msg-div" display="block">
@@ -421,12 +419,13 @@
         }
 
         // 移出高亮显示状态
-        function removeHighLighted() {
-            this.document.getElementsByClassName("mask")[0].style.display = "none";
-            this.document.getElementsByClassName("devStatus")[0].classList.remove('highlighted');
-            this.document.getElementsByClassName("instructions")[0].classList.remove('highlighted');
-            this.document.getElementsByClassName("lvInfo")[0].classList.remove('highlighted');
-            this.document.getElementsByClassName("devRecord")[0].classList.remove('highlighted');
+        function removeDisableStatus() {
+            // 设置禁用状态
+            this.document.getElementsByClassName("devInfo")[0].classList.remove('disable');
+            this.document.getElementsByClassName("spinner")[0].classList.remove('disable');
+            this.document.getElementsByClassName("ledCard")[0].classList.remove('disable');
+            this.document.getElementsByClassName("lvInfo")[0].classList.remove('disable');
+            this.document.getElementsByClassName("devRecord")[0].classList.remove('disable');
         }
 
         // 初始化未连接之前的状态
@@ -443,8 +442,16 @@
             this.document.getElementsByClassName("recordEmptyList")[0].style.display = "flex";
             // 连接中 icon 隐藏
             this.document.getElementsByClassName("statusImgLoading")[0].style.display = "none";
-            // 移出高亮显示状态
-            removeHighLighted()
+            // 移除禁用状态。全部控件可用
+            removeDisableStatus()
+        }
+        // ‘未连接’时禁用部分控件
+        function disableControls(){
+            this.document.getElementsByClassName("devInfo")[0].classList.add('disable');
+            this.document.getElementsByClassName("spinner")[0].classList.add('disable');
+            this.document.getElementsByClassName("ledCard")[0].classList.add('disable');
+            this.document.getElementsByClassName("lvInfo")[0].classList.add('disable');
+            this.document.getElementsByClassName("devRecord")[0].classList.add('disable');
         }
 
         let workStatus = 0; // 0 连接失败，1 连接超时，2 连接中，连接正常[3 工作中，4 待机]
@@ -458,11 +465,8 @@
                 // 显示'重新连接',隐藏'工作中'图标
                 this.document.getElementsByClassName("statusTxt")[0].style.display = "block";
                 this.document.getElementsByClassName("statusImg")[0].style.display = "none";
-
-                // 蒙层显示 并高亮某部分
-                this.document.getElementsByClassName("mask")[0].style.display = "block";
-                this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
-                this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+                // 设置禁用状态
+                disableControls();
             } else if (workStatus == 1) { //重连
                 //TODO
                 clearDataToStart();
@@ -475,10 +479,8 @@
                 // 显示连接超时弹窗
                 this.document.getElementsByClassName("shelter")[0].style.display = "block";
                 this.document.getElementsByClassName("msg-div")[0].style.display = "block";
-                // 蒙层显示 并高亮某部分
-                this.document.getElementsByClassName("mask")[0].style.display = "block";
-                this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
-                this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+                // 设置禁用状态
+                disableControls();
             } else if (workStatus == 3) { //工作中，空记录
                 // 显示'工作中'图标,隐藏'重新连接' 
                 this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
@@ -500,21 +502,17 @@
                 this.document.getElementsByClassName("statusImgLoading")[0].style.display = "block";
                 this.document.getElementsByClassName("statusImg")[0].style.background =
                     "url('../img/loading/loading48.png') no-repeat";
-                // 蒙层显示 并高亮某部分
-                this.document.getElementsByClassName("mask")[0].style.display = "block";
-                this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
-                this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
+                // 设置禁用状态
+                disableControls();
             } else if (workStatus == 7) { //待机
                 clearDataToStart();
                 this.document.getElementsByClassName("statusLeft")[0].innerText = "待机";
                 // 显示电量
                 this.document.getElementsByClassName("statusMiddle")[0].style.display = "block";
-                // 蒙层显示 并高亮某部分
-                this.document.getElementsByClassName("mask")[0].style.display = "block";
-                this.document.getElementsByClassName("devStatus")[0].classList.add('highlighted');
-                this.document.getElementsByClassName("instructions")[0].classList.add('highlighted');
-                this.document.getElementsByClassName("lvInfo")[0].classList.add('highlighted');
-                this.document.getElementsByClassName("devRecord")[0].classList.add('highlighted');
+                // 设置禁用状态
+                this.document.getElementsByClassName("devInfo")[0].classList.add('disable');
+                this.document.getElementsByClassName("spinner")[0].classList.add('disable');
+                this.document.getElementsByClassName("ledCard")[0].classList.add('disable');
             }
 
             if (recordStatus == 0) { //未连接
@@ -542,6 +540,12 @@
 
         }
 
+        // 栅格化适配
+        function gridAdaptation(){
+            this.document.getElementsByClassName("statusLeft")[0].classList.add('textAlignCenter')
+            this.document.getElementsByClassName("statusRight")[0].classList.add('textAlignCenter')
+        }
+
         // dp换算
         function initDp() {
             console.log("initDp")
@@ -553,13 +557,16 @@
                 }
             }
 
-            // hideAlert() 隐藏前提下 topMsgStatus 生效
+            // hideAlert() // 隐藏前提下 topMsgStatus 生效
 
             initStatus(5, 0, 1);
             // initStatus(workStatus,recordStatus,topMsgStatus )
             // workStatus 0:未连接 1:重连 2:连接失败 3:工作中，空记录 4:待机中，充电中， 三条记录 5:工作中，三条记录 6:连接中 7:待机
             // recordStatus 0:未连接 1:重连
             // topMsgStatus  0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
+
+            // 栅格化适配
+            // gridAdaptation()
         }
 
         $(function () {

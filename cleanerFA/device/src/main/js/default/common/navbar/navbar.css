@@ -1,21 +1,25 @@
 .container {
-    height: 53px;
+    height: 56px;
     width: 100%;
     align-items: center;
     position: fixed;
 }
-
-.back_icon {
+.back_icon_box {
     width: 48px;
-    height: 48px;
+    height: 56px;
+    line-height: 56px;
     padding: 12px;
     margin-left: 12px;
+    align-items: center;
+}
+.back_icon {
+    width: 24px;
+    height: 24px;
 }
 .menu_icon {
-    width: 48px;
-    height: 48px;
-    padding: 12px;
-    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+    margin-right: 24px;
     object-fit: contain;
 }
 
@@ -24,6 +28,10 @@
     flex: 1;
     font-size: 20px;
     color: #000000;
-    line-height: 24px;
     max-lines: 1;
+    opacity: 0.9;
+}
+.popup_btn{
+    font-size: 14px;
+    background-color: rgba(0,0,0,0);
 }

@@ -27,7 +27,7 @@
             "deliveryWithInstall": true,
             "moduleName": "entry",
             "moduleType": "entry",
-            "installationFree": false
+            "installationFree": true
         },
         "metaData": {
             "customizeData": [

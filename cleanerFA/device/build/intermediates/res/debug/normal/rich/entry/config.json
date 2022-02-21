@@ -88,7 +88,7 @@
         "mainAbility": "com.newpower.ohoscleaner2.device.DeviceAbility",
         "distro": {
             "moduleType": "feature",
-            "installationFree": false,
+            "installationFree": true,
             "deliveryWithInstall": true,
             "moduleName": "device"
         },
@@ -99,7 +99,8 @@
             {
                 "pages": [
                     "pages/index/index",
-                    "pages/setting/setting"
+                    "pages/setting/setting",
+                    "pages/about/about"
                 ],
                 "name": "default",
                 "window": {

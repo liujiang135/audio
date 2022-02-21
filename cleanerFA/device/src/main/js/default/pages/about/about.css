@@ -1,0 +1,60 @@
+.container {
+    flex-direction: column;
+    align-items: center;
+}
+.bg-color{
+    height: 100%;
+    background-color: #f1f3f5;
+}
+.text-center {
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.flex-column {
+    flex-direction: column;
+}
+.logo-img-top{
+    margin-top: 102px;
+}
+.logo-img{
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
+    object-fit: contain;
+}
+.fa-name {
+    margin-top: 8px;
+    color: #000000;
+    font-size: 18px;
+    opacity: 0.9;
+}
+.fa-version {
+    font-size: 14px;
+    color: #000000;
+    opacity: 0.6;
+}
+
+.protocol-tip-link {
+    font-size: 10px;
+    color: #0A59F7;
+    allow-scale: false;
+}
+.protocol-tip {
+    font-size: 10px;
+    color: #000000;
+    opacity: 0.6;
+}
+
+.company-Rights{
+    font-size: 10px;
+    color: #000000;
+    opacity: 0.6;
+}
+.protocol-msg{
+    margin-top: 440px;
+}
+.company-msg{
+    margin-bottom: 48px;
+}

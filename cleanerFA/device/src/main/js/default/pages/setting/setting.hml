@@ -1,6 +1,6 @@
 <element name="nav" src="../../common/navbar/navbar"></element>
-<div class="container">
-    <nav title="设置" show-menu="false"></nav>
+<div class="container bg-color">
+    <nav title="{{ $t('strings.setting') }}" show-menu="false"></nav>
     <div class="option-container top-margin-70">
         <div class="option-item-container">
             <text class="option-flag" >{{ $t('strings.deviceName') }}</text>
@@ -10,6 +10,11 @@
         <div class="option-item-container">
             <text class="option-flag">{{ $t('strings.location') }}</text>
             <text class="option-text">{{ roomName }}</text>
+        </div>
+        <div class="line"></div>
+        <div class="option-img-box" onclick="goAboutPage">
+            <text class="option-img-flag">{{ $t('strings.about') }}</text>
+            <image src="{{ aboutImg }}" class="option-item-img"></image>
         </div>
     </div>
 </div>

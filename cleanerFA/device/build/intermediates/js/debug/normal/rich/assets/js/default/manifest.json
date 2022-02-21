@@ -6,7 +6,8 @@
     "minPlatformVersion": 4,
     "pages": [
         "pages/index/index",
-        "pages/setting/setting"
+        "pages/setting/setting",
+        "pages/about/about"
     ],
     "deviceType": [
         "phone"

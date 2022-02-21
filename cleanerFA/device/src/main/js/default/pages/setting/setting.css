@@ -1,7 +1,10 @@
 .container {
     flex-direction: column;
     align-items: center;
-
+}
+.bg-color{
+    height: 100%;
+    background-color: #f1f3f5;
 }
 
 .option-flag {
@@ -25,11 +28,12 @@
 }
 
 .line{
-    background-color: lightgray;
+    background-color: #000000;
     margin-left: 10px;
     margin-right: 10px;
-    height: 1px;
+    height: 0.25px;
     width: 100%;
+    opacity: 0.2;
 }
 
 .option-container {
@@ -43,4 +47,18 @@
 
 .top-margin-70 {
     margin-top: 70px;
+}
+.option-img-flag{
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.option-item-img{
+    width: 12px;
+    height: 24px;
+    margin: 10px;
+    object-fit: contain;
 }

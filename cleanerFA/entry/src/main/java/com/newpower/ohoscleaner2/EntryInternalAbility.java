@@ -140,6 +140,7 @@ public class EntryInternalAbility extends AceInternalAbility implements AceInter
      * 跳转配网或控制界面判断
      */
     private void goNetConfigOrDevicePage() {
+        LogUtil.info(TAG, "goNetConfigOrDevicePage: deviceId = " + deviceId);
         if (EntryUtil.isEmpty(deviceId)) {
             openHiLinkNetConfig();
         } else {
@@ -156,6 +157,7 @@ public class EntryInternalAbility extends AceInternalAbility implements AceInter
             LogUtil.info(TAG, "openHiLinkNetConfig: uriStr = " + uriStr);
             Intent intent = new Intent();
             intent.setParam("uuid", uuid);
+            LogUtil.info(TAG, "openHiLinkNetConfig: uuid = " + uuid);
             Operation operation = new Intent.OperationBuilder()
                     .withDeviceId("")
                     .withFlags(Intent.FLAG_ABILITY_NEW_MISSION | Intent.FLAG_NOT_OHOS_COMPONENT)

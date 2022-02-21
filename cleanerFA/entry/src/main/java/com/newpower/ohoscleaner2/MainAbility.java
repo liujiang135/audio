@@ -57,6 +57,15 @@ public class MainAbility extends AceAbility {
         String source = intent.getStringParam("source");
         int businessStage = intent.getIntParam("businessStage", 0);
 
+        Object businessInfo = intent.getParams().getParam("businessInfo");
+        if (businessInfo != null) {
+            ZSONObject objectBusinessInfo = ZSONObject.classToZSON(businessInfo);
+
+            // 91字段是Demo中NFC里面烧录的业务自定义内容
+            String data91 = objectBusinessInfo.getZSONObject("params").getString("91");
+            LogUtil.info(TAG, "onStart data91: " + data91);
+        }
+
         LogUtil.info(TAG, "onStart deviceId: " + deviceId);
         LogUtil.info(TAG, "onStart uuid: " + uuid);
         LogUtil.info(TAG, "onStart productId: " + productId);

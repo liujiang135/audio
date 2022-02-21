@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.hml?entry");
+/******/ 	return __webpack_require__(__webpack_require__.s = "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.hml?entry");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/entry-utils.js":
-/*!******************************************************************************************************!*\
-  !*** /Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/entry-utils.js ***!
-  \******************************************************************************************************/
+/***/ "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/entry-utils.js":
+/*!*****************************************************************************************************************!*\
+  !*** /Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/entry-utils.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -118,8 +118,8 @@ exports["default"] = void 0;
 var EntryUtils = {
   goNetConfigOrDevicePage: function goNetConfigOrDevicePage() {
     var action = {};
-    action.bundleName = 'com.huawei.suitedeom';
-    action.abilityName = 'com.huawei.suitedeom.EntryInternalAbility';
+    action.bundleName = 'com.newpower.ohoscleaner2';
+    action.abilityName = 'com.newpower.ohoscleaner2.EntryInternalAbility';
     action.messageCode = 1002;
     action.abilityType = 1;
     action.syncOption = 0;
@@ -127,8 +127,8 @@ var EntryUtils = {
   },
   openBrowser: function openBrowser(url) {
     var action = {};
-    action.bundleName = 'com.huawei.suitedeom';
-    action.abilityName = 'com.huawei.suitedeom.EntryInternalAbility';
+    action.bundleName = 'com.newpower.ohoscleaner2';
+    action.abilityName = 'com.newpower.ohoscleaner2.EntryInternalAbility';
     action.messageCode = 1001;
     action.data = {
       url: url
@@ -143,10 +143,10 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/fa-utils.js":
-/*!***************************************************************************************************!*\
-  !*** /Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/fa-utils.js ***!
-  \***************************************************************************************************/
+/***/ "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/fa-utils.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/fa-utils.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -230,17 +230,17 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.hml?entry":
-/*!*******************************************************************************************************************!*\
-  !*** /Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.hml?entry ***!
-  \*******************************************************************************************************************/
+/***/ "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.hml?entry":
+/*!******************************************************************************************************************************!*\
+  !*** /Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.hml?entry ***!
+  \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! !../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/loader.js!../../common/header/header.hml?name=header */ "./lib/loader.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.hml?name=header")
-var $app_template$ = __webpack_require__(/*! !../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/template.js!./index.hml */ "./lib/json.js!./lib/template.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.hml")
-var $app_style$ = __webpack_require__(/*! !../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/style.js!./index.css */ "./lib/json.js!./lib/style.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.css")
-var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./index.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.js")
+__webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/loader.js!../../common/header/header.hml?name=header */ "./lib/loader.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.hml?name=header")
+var $app_template$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/template.js!./index.hml */ "./lib/json.js!./lib/template.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.hml")
+var $app_style$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/style.js!./index.css */ "./lib/json.js!./lib/style.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.css")
+var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./index.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.js")
 
 $app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$) {
 
@@ -269,10 +269,10 @@ $app_bootstrap$('@app-component/index',undefined,undefined)
 
 /***/ }),
 
-/***/ "./lib/json.js!./lib/style.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.css":
-/*!*********************************************************************************************************************************************!*\
-  !*** ./lib/json.js!./lib/style.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.css ***!
-  \*********************************************************************************************************************************************/
+/***/ "./lib/json.js!./lib/style.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.css":
+/*!********************************************************************************************************************************************************!*\
+  !*** ./lib/json.js!./lib/style.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.css ***!
+  \********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -497,25 +497,19 @@ module.exports = {
     "borderBottomLeftRadius": "15px",
     "borderBottomRightRadius": "15px",
     "borderTopLeftRadius": "15px",
-    "borderTopRightRadius": "15px",
-    "borderTopWidth": "0.5px",
-    "borderRightWidth": "0.5px",
-    "borderBottomWidth": "0.5px",
-    "borderLeftWidth": "0.5px",
-    "borderTopColor": "#979797",
-    "borderRightColor": "#979797",
-    "borderBottomColor": "#979797",
-    "borderLeftColor": "#979797"
+    "borderTopRightRadius": "15px"
   },
   ".fa-name": {
-    "marginTop": "32px",
+    "marginTop": "28px",
     "color": "#000000",
-    "fontSize": "18px"
+    "fontSize": "18px",
+    "opacity": 0.9
   },
   ".net-name": {
-    "marginTop": "32px",
+    "marginTop": "28px",
     "color": "#000000",
-    "fontSize": "20px"
+    "fontSize": "20px",
+    "opacity": 0.9
   },
   ".fa-version": {
     "marginTop": "4px",
@@ -527,10 +521,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./lib/json.js!./lib/style.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.css":
-/*!******************************************************************************************************************************************!*\
-  !*** ./lib/json.js!./lib/style.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.css ***!
-  \******************************************************************************************************************************************/
+/***/ "./lib/json.js!./lib/style.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.css":
+/*!*****************************************************************************************************************************************************!*\
+  !*** ./lib/json.js!./lib/style.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.css ***!
+  \*****************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -747,7 +741,7 @@ module.exports = {
     "right": "0px"
   },
   ".content": {
-    "marginTop": "76px"
+    "marginTop": "84px"
   },
   "progress": {
     "width": "40px",
@@ -760,17 +754,16 @@ module.exports = {
   },
   ".authorizeDescription": {
     "fontSize": "10px",
-    "lineHeight": "14px",
-    "color": "#98000000",
-    "textAlign": "center"
+    "color": "#000000",
+    "opacity": 0.6
   },
   ".confirm-button-base-red": {
     "color:active": "#FFFFFF",
     "backgroundColor:active": "#808080",
     "height": "40px",
     "width": "240px",
-    "marginLeft": "25px",
-    "marginRight": "25px",
+    "marginLeft": "24px",
+    "marginRight": "24px",
     "borderBottomLeftRadius": "40px",
     "borderBottomRightRadius": "40px",
     "borderTopLeftRadius": "40px",
@@ -786,8 +779,8 @@ module.exports = {
     "backgroundColor:active": "#808080",
     "height": "40px",
     "width": "240px",
-    "marginLeft": "25px",
-    "marginRight": "25px",
+    "marginLeft": "24px",
+    "marginRight": "24px",
     "borderBottomLeftRadius": "40px",
     "borderBottomRightRadius": "40px",
     "borderTopLeftRadius": "40px",
@@ -797,21 +790,24 @@ module.exports = {
     "marginTop": "16px"
   },
   ".hw-img": {
-    "width": "22px",
-    "height": "22px"
+    "width": "24px",
+    "height": "24px"
   },
   ".cancel-text": {
-    "color": "#FF000000",
-    "fontSize": "14px"
+    "color": "#000000",
+    "fontSize": "14px",
+    "opacity": 0.9
   },
   ".sign-text": {
-    "color": "#FF000000",
-    "marginLeft": "16px",
-    "fontSize": "14px"
+    "color": "#000000",
+    "marginLeft": "5px",
+    "fontSize": "14px",
+    "opacity": 0.9
   },
   ".protocol_tip": {
     "fontSize": "10px",
-    "color": "#000000"
+    "color": "#000000",
+    "opacity": 0.6
   },
   ".protocol_tip_link": {
     "fontSize": "10px",
@@ -819,10 +815,8 @@ module.exports = {
     "allowScale": "false"
   },
   ".protocol_input": {
-    "width": "37px",
-    "height": "37px",
-    "position": "relative",
-    "right": "-5px"
+    "width": "32px",
+    "height": "32px"
   },
   ".protocol_container": {
     "marginTop": "12px",
@@ -835,10 +829,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./lib/json.js!./lib/template.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.hml":
-/*!************************************************************************************************************************************************!*\
-  !*** ./lib/json.js!./lib/template.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.hml ***!
-  \************************************************************************************************************************************************/
+/***/ "./lib/json.js!./lib/template.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.hml":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./lib/json.js!./lib/template.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.hml ***!
+  \***********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -916,10 +910,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./lib/json.js!./lib/template.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.hml":
-/*!*********************************************************************************************************************************************!*\
-  !*** ./lib/json.js!./lib/template.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.hml ***!
-  \*********************************************************************************************************************************************/
+/***/ "./lib/json.js!./lib/template.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.hml":
+/*!********************************************************************************************************************************************************!*\
+  !*** ./lib/json.js!./lib/template.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.hml ***!
+  \********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1114,14 +1108,39 @@ module.exports = {
                           "attr": {
                             "debugLine": "pages/index/index:26",
                             "className": "protocol_tip_link",
-                            "value": function () {return this.$t('strings.protocol')}
+                            "value": function () {return this.$t('strings.protocolUserAgreement')}
                           },
                           "type": "text",
                           "classList": [
                             "protocol_tip_link"
                           ],
                           "events": {
-                            "click": "protocolLink"
+                            "click": "protocolUserAgreementLink"
+                          }
+                        },
+                        {
+                          "attr": {
+                            "debugLine": "pages/index/index:27",
+                            "className": "protocol_tip",
+                            "value": function () {return this.$t('strings.and')}
+                          },
+                          "type": "text",
+                          "classList": [
+                            "protocol_tip"
+                          ]
+                        },
+                        {
+                          "attr": {
+                            "debugLine": "pages/index/index:28",
+                            "className": "protocol_tip_link",
+                            "value": function () {return this.$t('strings.protocolPrivacyStatement')}
+                          },
+                          "type": "text",
+                          "classList": [
+                            "protocol_tip_link"
+                          ],
+                          "events": {
+                            "click": "protocolPrivacyStatementLink"
                           }
                         }
                       ]
@@ -1139,16 +1158,16 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./lib/loader.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.hml?name=header":
-/*!********************************************************************************************************************************************!*\
-  !*** ./lib/loader.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.hml?name=header ***!
-  \********************************************************************************************************************************************/
+/***/ "./lib/loader.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.hml?name=header":
+/*!*******************************************************************************************************************************************************!*\
+  !*** ./lib/loader.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.hml?name=header ***!
+  \*******************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $app_template$ = __webpack_require__(/*! !../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/template.js!./header.hml */ "./lib/json.js!./lib/template.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.hml")
-var $app_style$ = __webpack_require__(/*! !../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/style.js!./header.css */ "./lib/json.js!./lib/style.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.css")
-var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./header.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.js")
+var $app_template$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/template.js!./header.hml */ "./lib/json.js!./lib/template.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.hml")
+var $app_style$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/json.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/style.js!./header.css */ "./lib/json.js!./lib/style.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.css")
+var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./header.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.js")
 
 $app_define$('@app-component/header', [], function($app_require$, $app_exports$, $app_module$) {
 
@@ -1166,10 +1185,10 @@ $app_module$.exports.style = $app_style$
 
 /***/ }),
 
-/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.js":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/common/header/header.js ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.js":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/common/header/header.js ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1229,10 +1248,10 @@ if (moduleOwn.data && accessors.some(function (acc) {
 
 /***/ }),
 
-/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.js":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/pages/index/index.js ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.js":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/pages/index/index.js ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1253,9 +1272,9 @@ var _newArrowCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runt
 
 var _system = _interopRequireDefault($app_require$("@app-module/system.app"));
 
-var _faUtils = _interopRequireDefault(__webpack_require__(/*! ../../fa-utils.js */ "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/fa-utils.js"));
+var _faUtils = _interopRequireDefault(__webpack_require__(/*! ../../fa-utils.js */ "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/fa-utils.js"));
 
-var _entryUtils = _interopRequireDefault(__webpack_require__(/*! ../../entry-utils.js */ "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/entry-utils.js"));
+var _entryUtils = _interopRequireDefault(__webpack_require__(/*! ../../entry-utils.js */ "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/entry-utils.js"));
 
 var _hmsJsbAccount = __webpack_require__(/*! @hmscore/hms-jsb-account */ "../../../../../../../node_modules/@hmscore/hms-jsb-account/src/index.js");
 
@@ -1323,6 +1342,7 @@ var _default = {
     _hmsJsbAccount.HuaweiIdAuthManager.getAuthApi().silentSignIn(signInOption).then(function (res) {
       (0, _newArrowCheck2["default"])(this, _this4);
       console.info("silentSignIn success. " + JSON.stringify(res));
+      console.info("silentSignIn openIdLocal= " + this.openIdLocal);
       this.result = JSON.stringify(res);
 
       if (this.openIdLocal == res.openId) {
@@ -1361,8 +1381,11 @@ var _default = {
   protocolAgreeCheck: function protocolAgreeCheck(e) {
     this.protocolAgreed = e.checked;
   },
-  protocolLink: function protocolLink() {
-    _entryUtils["default"].openBrowser('https://www.baidu.com');
+  protocolUserAgreementLink: function protocolUserAgreementLink() {
+    _entryUtils["default"].openBrowser('http://www.baidu.com');
+  },
+  protocolPrivacyStatementLink: function protocolPrivacyStatementLink() {
+    _entryUtils["default"].openBrowser('http://www.baidu.com');
   }
 };
 exports["default"] = _default;

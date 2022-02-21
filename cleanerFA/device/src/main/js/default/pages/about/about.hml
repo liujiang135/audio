@@ -1,0 +1,19 @@
+<element name="nav" src="../../common/navbar/navbar"></element>
+<div class="container bg-color">
+    <nav title="{{ $t('strings.about_title') }}" show-menu="false"></nav>
+    <div class="text-center flex-column logo-img-top">
+        <div class="text-center">
+            <image src="{{ $t('files.cpLogo') }}" class="logo-img"></image>
+        </div>
+        <text class="fa-name">{{ $t('strings.faName') }}</text>
+        <text class="fa-version">{{ $t('strings.faVersion') }}</text>
+    </div>
+    <div class="text-center protocol-msg">
+        <text class="protocol-tip-link" onclick="protocolUserAgreementLink">{{ $t('strings.protocolUserAgreement') }}</text>
+        <text class="protocol-tip" >{{ $t('strings.and') }}</text>
+        <text class="protocol-tip-link" onclick="protocolPrivacyStatementLink">{{ $t('strings.protocolPrivacyStatement') }}</text>
+    </div>
+    <div class="text-center company-msg">
+        <text class="company-Rights">{{ $t('strings.rightOwned') }}</text>
+    </div>
+</div>

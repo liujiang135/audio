@@ -123,28 +123,30 @@ $app_bootstrap$('@app-component/setting',undefined,undefined)
 
 module.exports = {
   ".container": {
-    "height": "53px",
+    "height": "56px",
     "width": "100%",
     "alignItems": "center",
     "position": "fixed"
   },
-  ".back_icon": {
+  ".back_icon_box": {
     "width": "48px",
-    "height": "48px",
+    "height": "56px",
+    "lineHeight": "56px",
     "paddingTop": "12px",
     "paddingRight": "12px",
     "paddingBottom": "12px",
     "paddingLeft": "12px",
-    "marginLeft": "12px"
+    "marginLeft": "12px",
+    "alignItems": "center"
+  },
+  ".back_icon": {
+    "width": "24px",
+    "height": "24px"
   },
   ".menu_icon": {
-    "width": "48px",
-    "height": "48px",
-    "paddingTop": "12px",
-    "paddingRight": "12px",
-    "paddingBottom": "12px",
-    "paddingLeft": "12px",
-    "marginRight": "12px",
+    "width": "24px",
+    "height": "24px",
+    "marginRight": "24px",
     "objectFit": "contain"
   },
   ".title": {
@@ -152,8 +154,12 @@ module.exports = {
     "flexGrow": 1,
     "fontSize": "20px",
     "color": "#000000",
-    "lineHeight": "24px",
-    "maxLines": 1
+    "maxLines": 1,
+    "opacity": 0.9
+  },
+  ".popup_btn": {
+    "fontSize": "14px",
+    "backgroundColor": "rgba(0,0,0,0)"
   }
 }
 
@@ -170,6 +176,10 @@ module.exports = {
   ".container": {
     "flexDirection": "column",
     "alignItems": "center"
+  },
+  ".bg-color": {
+    "height": "100%",
+    "backgroundColor": "#f1f3f5"
   },
   ".option-flag": {
     "marginLeft": "10px",
@@ -190,11 +200,12 @@ module.exports = {
     "display": "flex"
   },
   ".line": {
-    "backgroundColor": "#D3D3D3",
+    "backgroundColor": "#000000",
     "marginLeft": "10px",
     "marginRight": "10px",
-    "height": "1px",
-    "width": "100%"
+    "height": "0.25px",
+    "width": "100%",
+    "opacity": 0.2
   },
   ".option-container": {
     "backgroundColor": "#FFFFFF",
@@ -212,6 +223,23 @@ module.exports = {
   },
   ".top-margin-70": {
     "marginTop": "70px"
+  },
+  ".option-img-flag": {
+    "width": "100%",
+    "marginLeft": "10px",
+    "marginRight": "10px",
+    "fontSize": "15px",
+    "paddingTop": "10px",
+    "paddingBottom": "10px"
+  },
+  ".option-item-img": {
+    "width": "12px",
+    "height": "24px",
+    "marginTop": "10px",
+    "marginRight": "10px",
+    "marginBottom": "10px",
+    "marginLeft": "10px",
+    "objectFit": "contain"
   }
 }
 
@@ -237,20 +265,32 @@ module.exports = {
     {
       "attr": {
         "debugLine": "common/navbar/navbar:2",
-        "className": "back_icon",
-        "src": "/common/images/ic_back.png"
+        "className": "back_icon_box"
       },
-      "type": "image",
+      "type": "div",
       "classList": [
-        "back_icon"
+        "back_icon_box"
       ],
-      "events": {
-        "click": "backClick"
-      }
+      "children": [
+        {
+          "attr": {
+            "debugLine": "common/navbar/navbar:3",
+            "className": "back_icon",
+            "src": "/common/images/ic_back.png"
+          },
+          "type": "image",
+          "classList": [
+            "back_icon"
+          ],
+          "events": {
+            "click": "backClick"
+          }
+        }
+      ]
     },
     {
       "attr": {
-        "debugLine": "common/navbar/navbar:3",
+        "debugLine": "common/navbar/navbar:5",
         "className": "title",
         "value": function () {return this.title}
       },
@@ -261,7 +301,7 @@ module.exports = {
     },
     {
       "attr": {
-        "debugLine": "common/navbar/navbar:4",
+        "debugLine": "common/navbar/navbar:6",
         "id": "menu_icon",
         "className": "menu_icon",
         "src": "/common/images/ic_more.png",
@@ -273,30 +313,43 @@ module.exports = {
         "menu_icon"
       ],
       "events": {
-        "click": "menuClick"
+        "click": "showpopup"
       }
     },
     {
       "attr": {
-        "debugLine": "common/navbar/navbar:6",
-        "id": "menu_opts",
-        "target": "menu_icon"
+        "debugLine": "common/navbar/navbar:7",
+        "id": "popup",
+        "className": "popup",
+        "target": "menu_icon",
+        "placement": "bottom",
+        "keepalive": "true",
+        "clickable": "true",
+        "arrowoffset": "100px"
       },
-      "type": "menu",
-      "id": "menu_opts",
+      "type": "popup",
+      "id": "popup",
+      "classList": [
+        "popup"
+      ],
       "events": {
-        "selected": "itemClick"
+        "click": "hidepopup"
       },
       "children": [
         {
           "attr": {
-            "debugLine": "common/navbar/navbar:7",
-            "value": function () {return this.$item.value},
-            "action": "popup",
-            "content": function () {return this.$item.text}
+            "debugLine": "common/navbar/navbar:9",
+            "className": "popup_btn",
+            "value": function () {return this.$item.text}
           },
-          "type": "option",
-          "repeat": function () {return this.menu}
+          "type": "button",
+          "classList": [
+            "popup_btn"
+          ],
+          "repeat": function () {return this.menu},
+          "events": {
+            "click": "itemClick"
+          }
         }
       ]
     }
@@ -315,17 +368,18 @@ module.exports = {
 module.exports = {
   "attr": {
     "debugLine": "pages/setting/setting:2",
-    "className": "container"
+    "className": "container bg-color"
   },
   "type": "div",
   "classList": [
-    "container"
+    "container",
+    "bg-color"
   ],
   "children": [
     {
       "attr": {
         "debugLine": "pages/setting/setting:3",
-        "title": "设置",
+        "title": function () {return this.$t('strings.setting')},
         "showMenu": "false"
       },
       "type": "nav"
@@ -418,6 +472,53 @@ module.exports = {
               ]
             }
           ]
+        },
+        {
+          "attr": {
+            "debugLine": "pages/setting/setting:14",
+            "className": "line"
+          },
+          "type": "div",
+          "classList": [
+            "line"
+          ]
+        },
+        {
+          "attr": {
+            "debugLine": "pages/setting/setting:15",
+            "className": "option-img-box"
+          },
+          "type": "div",
+          "classList": [
+            "option-img-box"
+          ],
+          "events": {
+            "click": "goAboutPage"
+          },
+          "children": [
+            {
+              "attr": {
+                "debugLine": "pages/setting/setting:16",
+                "className": "option-img-flag",
+                "value": function () {return this.$t('strings.about')}
+              },
+              "type": "text",
+              "classList": [
+                "option-img-flag"
+              ]
+            },
+            {
+              "attr": {
+                "debugLine": "pages/setting/setting:17",
+                "src": function () {return this.aboutImg},
+                "className": "option-item-img"
+              },
+              "type": "image",
+              "classList": [
+                "option-item-img"
+              ]
+            }
+          ]
         }
       ]
     }
@@ -490,8 +591,18 @@ var _default = {
   menuClick: function menuClick() {
     this.$element('menu_opts').show();
   },
-  itemClick: function itemClick(e) {
+  itemClick: function itemClick() {
+    var e = {
+      value: 'setting'
+    };
+    this.$element("popup").hide();
     this.$emit('menuItemClick', e);
+  },
+  showpopup: function showpopup() {
+    this.$element("popup").show();
+  },
+  hidepopup: function hidepopup() {
+    this.$element("popup").hide();
   }
 };
 exports["default"] = _default;
@@ -526,18 +637,29 @@ if (moduleOwn.data && accessors.some(function (acc) {
   !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/device/src/main/js/default/pages/setting/setting.js ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 module.exports = function(module, exports, $app_require$){"use strict";
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
+
+var _system = _interopRequireDefault($app_require$("@app-module/system.router"));
+
 var _default = {
   data: {
     deviceName: '',
-    roomName: ''
+    roomName: '',
+    aboutImg: '/common/images/ic_right.png'
+  },
+  goAboutPage: function goAboutPage() {
+    _system["default"].push({
+      uri: 'pages/about/about'
+    });
   }
 };
 exports["default"] = _default;

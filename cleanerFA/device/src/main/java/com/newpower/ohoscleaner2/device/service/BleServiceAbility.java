@@ -15,9 +15,7 @@
 
 package com.newpower.ohoscleaner2.device.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.huawei.ailife.service.kit.AiLifeServiceHelper;
@@ -84,7 +82,6 @@ public class BleServiceAbility extends Ability {
      * 交互类
      */
     class BleRemoteObj extends RemoteObject implements IRemoteBroker {
-        private HiLinkDeviceHelper hiLinkDeviceHelper;
         private static final int SUCCESS = 0;
         private static final int ACTION_MESSAGE_CODE_SUBSCRIBE = 1001;
         private static final int ACTION_MESSAGE_CODE_UNSUBSCRIBE = 1002;
@@ -94,10 +91,25 @@ public class BleServiceAbility extends Ability {
         private static final String MESSAGE_KEY_CHARACTERISTIC = "param";
         private static final String STATE_SUCCESS = "success";
         private static final String STATE_FAIL = "fail";
-        int connectResult = -1;
+
+        private HiLinkDeviceHelper hiLinkDeviceHelper;
+
+        private int connectResult = ConnectResult.SERVICE_UNAVAILABLE;
         private String deviceId;
 
-        private List<IRemoteObject> remoteObjectHandlers = new ArrayList<>();
+        private IRemoteObject remoteObjectHandler = null;
+
+        private final HiLinkDataCallback hiLinkDataCallback = new HiLinkDataCallback() {
+            @Override
+            public void onSuccess(int dataType, String result) {
+                sendData(formatData(STATE_SUCCESS, dataType, result));
+            }
+
+            @Override
+            public void onFail(int dataType, int code, String result) {
+                sendData(formatData(STATE_FAIL, dataType, result));
+            }
+        };
 
         BleRemoteObj() {
             super("BleServiceAbility_BleRemoteObj");
@@ -108,11 +120,8 @@ public class BleServiceAbility extends Ability {
             LogUtil.info(TAG, "code:" + code);
             switch (code) {
                 case ACTION_MESSAGE_CODE_SUBSCRIBE: {
-                    if (remoteObjectHandlers.isEmpty()) {
-                        connectAiLifeService();
-                    }
-                    remoteObjectHandlers.add(data.readRemoteObject());
-                    LogUtil.info(TAG, "remoteObjectHandlers size = " + remoteObjectHandlers.size());
+                    connectAiLifeService();
+                    remoteObjectHandler = data.readRemoteObject();
                     break;
                 }
                 case ACTION_MESSAGE_CODE_SEND_COMMAND: {
@@ -140,8 +149,7 @@ public class BleServiceAbility extends Ability {
                     break;
                 }
                 case ACTION_MESSAGE_CODE_UNSUBSCRIBE: {
-                    remoteObjectHandlers.clear();
-                    LogUtil.info(TAG, "remoteObjectHandlers size = " + remoteObjectHandlers.size());
+                    remoteObjectHandler = null;
                     break;
                 }
                 default: {
@@ -157,18 +165,6 @@ public class BleServiceAbility extends Ability {
             return this;
         }
 
-        private final HiLinkDataCallback hiLinkDataCallback = new HiLinkDataCallback() {
-            @Override
-            public void onSuccess(int dataType, String result) {
-                sendData(formatData(STATE_SUCCESS, dataType, result));
-            }
-
-            @Override
-            public void onFail(int dataType, int code, String result) {
-                sendData(formatData(STATE_FAIL, dataType, result));
-            }
-        };
-
         /**
          * 向 FA 发送数据
          *
@@ -179,7 +175,7 @@ public class BleServiceAbility extends Ability {
             MessageParcel reply = MessageParcel.obtain();
             MessageOption option = new MessageOption();
             data.writeString(ZSONObject.toZSONString(dataMap));
-            for(IRemoteObject remoteObjectHandler : remoteObjectHandlers) {
+            if (remoteObjectHandler != null) {
                 try {
                     remoteObjectHandler.sendRequest(0, data, reply, option);
                 } catch (RemoteException e) {

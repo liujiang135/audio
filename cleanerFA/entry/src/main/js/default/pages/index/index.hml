@@ -23,7 +23,9 @@
                     <div class="protocol_container">
                         <input type="checkbox" class="protocol_input" onchange="protocolAgreeCheck"></input>
                         <text class="protocol_tip" >{{ $t('strings.agree') }}</text>
-                        <text class="protocol_tip_link" onclick="protocolLink">{{ $t('strings.protocol') }}</text>
+                        <text class="protocol_tip_link" onclick="protocolUserAgreementLink">{{ $t('strings.protocolUserAgreement') }}</text>
+                        <text class="protocol_tip" >{{ $t('strings.and') }}</text>
+                        <text class="protocol_tip_link" onclick="protocolPrivacyStatementLink">{{ $t('strings.protocolPrivacyStatement') }}</text>
                     </div>
                 </div>
             </div>

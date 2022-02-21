@@ -23,8 +23,8 @@ var Constants = {
 var getParams = function (code) {
   return {
     messageCode: code,
-    bundleName: 'cleaner',
-    abilityName: 'cleaner.device.service.BleServiceAbility',
+    bundleName: 'com.newpower.ohoscleaner2',
+    abilityName: 'com.newpower.ohoscleaner2.device.service.BleServiceAbility',
     abilityType: 0
   }
 }

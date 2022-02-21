@@ -159,8 +159,8 @@ var Constants = {
 var getParams = function getParams(code) {
   return {
     messageCode: code,
-    bundleName: 'cleaner',
-    abilityName: 'cleaner.device.service.BleServiceAbility',
+    bundleName: 'com.newpower.ohoscleaner2',
+    abilityName: 'com.newpower.ohoscleaner2.device.service.BleServiceAbility',
     abilityType: 0
   };
 };
@@ -241,28 +241,30 @@ exports["default"] = _default;
 
 module.exports = {
   ".container": {
-    "height": "53px",
+    "height": "56px",
     "width": "100%",
     "alignItems": "center",
     "position": "fixed"
   },
-  ".back_icon": {
+  ".back_icon_box": {
     "width": "48px",
-    "height": "48px",
+    "height": "56px",
+    "lineHeight": "56px",
     "paddingTop": "12px",
     "paddingRight": "12px",
     "paddingBottom": "12px",
     "paddingLeft": "12px",
-    "marginLeft": "12px"
+    "marginLeft": "12px",
+    "alignItems": "center"
+  },
+  ".back_icon": {
+    "width": "24px",
+    "height": "24px"
   },
   ".menu_icon": {
-    "width": "48px",
-    "height": "48px",
-    "paddingTop": "12px",
-    "paddingRight": "12px",
-    "paddingBottom": "12px",
-    "paddingLeft": "12px",
-    "marginRight": "12px",
+    "width": "24px",
+    "height": "24px",
+    "marginRight": "24px",
     "objectFit": "contain"
   },
   ".title": {
@@ -270,8 +272,12 @@ module.exports = {
     "flexGrow": 1,
     "fontSize": "20px",
     "color": "#000000",
-    "lineHeight": "24px",
-    "maxLines": 1
+    "maxLines": 1,
+    "opacity": 0.9
+  },
+  ".popup_btn": {
+    "fontSize": "14px",
+    "backgroundColor": "rgba(0,0,0,0)"
   }
 }
 
@@ -290,21 +296,31 @@ module.exports = {
     "alignItems": "center"
   },
   ".device-img": {
-    "width": "150px",
-    "height": "150px",
+    "width": "160px",
+    "height": "160px",
     "borderBottomLeftRadius": "10px",
     "borderBottomRightRadius": "10px",
     "borderTopLeftRadius": "10px",
-    "borderTopRightRadius": "10px",
-    "marginTop": "20px"
+    "borderTopRightRadius": "10px"
+  },
+  ".device-img-full": {
+    "width": "252px",
+    "height": "252px",
+    "borderBottomLeftRadius": "10px",
+    "borderBottomRightRadius": "10px",
+    "borderTopLeftRadius": "10px",
+    "borderTopRightRadius": "10px"
   },
   ".device-name-text": {
-    "marginTop": "15px",
-    "fontSize": "15px"
+    "marginTop": "10px",
+    "marginBottom": "8px",
+    "fontSize": "18px",
+    "color": "#000000",
+    "opacity": 0.9
   },
   ".logo-img": {
-    "height": "10px",
-    "marginTop": "10px",
+    "width": "70px",
+    "height": "18px",
     "objectFit": "contain"
   },
   ".progress-container": {
@@ -331,26 +347,29 @@ module.exports = {
     "borderTopLeftRadius": "20px",
     "borderTopRightRadius": "20px",
     "opacity": 1,
-    "opacity:disabled": 0.3
+    "opacity:disabled": 0.3,
+    "height": "88px"
   },
   ".option-top": {
-    "marginTop": "20px",
-    "marginLeft": "20px",
-    "marginRight": "20px",
-    "paddingTop": "15px",
-    "paddingRight": "15px",
-    "paddingBottom": "15px",
-    "paddingLeft": "15px",
+    "marginTop": "12px",
+    "marginLeft": "12px",
+    "marginRight": "12px",
+    "paddingTop": "16px",
+    "paddingRight": "16px",
+    "paddingBottom": "16px",
+    "paddingLeft": "16px",
     "justifyContent": "flex-start"
   },
   ".switch-text": {
-    "fontSize": "15px",
-    "width": "80%",
-    "fontWeight": "600"
+    "fontSize": "18px",
+    "color": "#000000",
+    "opacity": 0.9,
+    "width": "100%"
   },
   ".switch-icon": {
     "width": "48px",
-    "height": "48px"
+    "height": "48px",
+    "objectFit": "contain"
   },
   ".option-full-width-container": {
     "marginTop": "20px",
@@ -383,10 +402,75 @@ module.exports = {
     "fontSize": "15px"
   },
   ".container-bg-color": {
-    "backgroundColor": "#E8E8E8"
+    "backgroundColor": "#f1f3f5"
   },
-  ".top-margin-90": {
-    "marginTop": "90px"
+  ".occupying-item": {
+    "height": "26%",
+    "width": "100%"
+  },
+  ".top-margin-32": {
+    "marginTop": "32px"
+  },
+  ".top-margin-56": {
+    "marginTop": "56px"
+  },
+  ".device-box": {
+    "height": "72px",
+    "marginTop": "4px",
+    "marginBottom": "4px"
+  },
+  ".offline-text-half": {
+    "textAlign": "right",
+    "fontSize": "18px",
+    "color": "#0a59f7",
+    "width": "50%"
+  },
+  ".progress-half": {
+    "width": "48px",
+    "height": "48px"
+  },
+  ".dialog-timeout": {
+    "alignItems": "center",
+    "flexDirection": "column",
+    "marginTop": "16px"
+  },
+  ".pair-dialog-title": {
+    "width": "280px",
+    "color": "#000000",
+    "fontSize": "18px",
+    "lineHeight": "25px",
+    "marginBottom": "20px",
+    "fontFamily": "HWtext-55ST, HWtext"
+  },
+  ".pair-dialog-hint": {
+    "width": "280px",
+    "color": "#000000",
+    "fontSize": "14px",
+    "marginTop": "4px",
+    "fontFamily": "HWtext-55ST, HWtext"
+  },
+  ".bottom-button-wrapper": {
+    "flexDirection": "row",
+    "justifyContent": "center",
+    "marginTop": "4px"
+  },
+  ".split-line": {
+    "width": "2px",
+    "height": "20px",
+    "color": "#B2B6BE",
+    "marginLeft": "10px",
+    "marginRight": "10px",
+    "marginTop": "16px"
+  },
+  ".button-connect": {
+    "width": "136px",
+    "textAlign": "center",
+    "color": "#0A59F7",
+    "fontSize": "16px",
+    "fontFamily": "HWtext-65ST, HWtext",
+    "flexGrow": 1,
+    "marginBottom": "16px",
+    "marginTop": "16px"
   }
 }
 
@@ -412,20 +496,32 @@ module.exports = {
     {
       "attr": {
         "debugLine": "common/navbar/navbar:2",
-        "className": "back_icon",
-        "src": "/common/images/ic_back.png"
+        "className": "back_icon_box"
       },
-      "type": "image",
+      "type": "div",
       "classList": [
-        "back_icon"
+        "back_icon_box"
       ],
-      "events": {
-        "click": "backClick"
-      }
+      "children": [
+        {
+          "attr": {
+            "debugLine": "common/navbar/navbar:3",
+            "className": "back_icon",
+            "src": "/common/images/ic_back.png"
+          },
+          "type": "image",
+          "classList": [
+            "back_icon"
+          ],
+          "events": {
+            "click": "backClick"
+          }
+        }
+      ]
     },
     {
       "attr": {
-        "debugLine": "common/navbar/navbar:3",
+        "debugLine": "common/navbar/navbar:5",
         "className": "title",
         "value": function () {return this.title}
       },
@@ -436,7 +532,7 @@ module.exports = {
     },
     {
       "attr": {
-        "debugLine": "common/navbar/navbar:4",
+        "debugLine": "common/navbar/navbar:6",
         "id": "menu_icon",
         "className": "menu_icon",
         "src": "/common/images/ic_more.png",
@@ -448,30 +544,43 @@ module.exports = {
         "menu_icon"
       ],
       "events": {
-        "click": "menuClick"
+        "click": "showpopup"
       }
     },
     {
       "attr": {
-        "debugLine": "common/navbar/navbar:6",
-        "id": "menu_opts",
-        "target": "menu_icon"
+        "debugLine": "common/navbar/navbar:7",
+        "id": "popup",
+        "className": "popup",
+        "target": "menu_icon",
+        "placement": "bottom",
+        "keepalive": "true",
+        "clickable": "true",
+        "arrowoffset": "100px"
       },
-      "type": "menu",
-      "id": "menu_opts",
+      "type": "popup",
+      "id": "popup",
+      "classList": [
+        "popup"
+      ],
       "events": {
-        "selected": "itemClick"
+        "click": "hidepopup"
       },
       "children": [
         {
           "attr": {
-            "debugLine": "common/navbar/navbar:7",
-            "value": function () {return this.$item.value},
-            "action": "popup",
-            "content": function () {return this.$item.text}
+            "debugLine": "common/navbar/navbar:9",
+            "className": "popup_btn",
+            "value": function () {return this.$item.text}
           },
-          "type": "option",
-          "repeat": function () {return this.menu}
+          "type": "button",
+          "classList": [
+            "popup_btn"
+          ],
+          "repeat": function () {return this.menu},
+          "events": {
+            "click": "itemClick"
+          }
         }
       ]
     }
@@ -490,11 +599,12 @@ module.exports = {
 module.exports = {
   "attr": {
     "debugLine": "pages/index/index:2",
-    "className": "container"
+    "className": "container container-bg-color"
   },
   "type": "div",
   "classList": [
-    "container"
+    "container",
+    "container-bg-color"
   ],
   "children": [
     {
@@ -521,32 +631,71 @@ module.exports = {
     {
       "attr": {
         "debugLine": "pages/index/index:6",
-        "className": "device-img top-margin-90",
-        "src": function () {return this.deviceImage}
+        "className": "device-img top-margin-32",
+        "src": function () {return this.deviceImage},
+        "show": function () {return !this.isFullWindow}
       },
       "type": "image",
       "classList": [
         "device-img",
-        "top-margin-90"
+        "top-margin-32"
       ]
     },
     {
       "attr": {
         "debugLine": "pages/index/index:7",
-        "className": "device-name-text",
-        "show": function () {return !this.isFullWindow},
-        "value": function () {return this.deviceName}
+        "className": "device-img-full top-margin-56",
+        "src": function () {return this.deviceImage},
+        "show": function () {return this.isFullWindow}
       },
-      "type": "text",
+      "type": "image",
       "classList": [
-        "device-name-text"
+        "device-img-full",
+        "top-margin-56"
       ]
     },
     {
       "attr": {
         "debugLine": "pages/index/index:8",
+        "className": "container device-box",
+        "show": function () {return !this.isFullWindow}
+      },
+      "type": "div",
+      "classList": [
+        "container",
+        "device-box"
+      ],
+      "children": [
+        {
+          "attr": {
+            "debugLine": "pages/index/index:9",
+            "className": "device-name-text",
+            "value": function () {return this.deviceName}
+          },
+          "type": "text",
+          "classList": [
+            "device-name-text"
+          ]
+        },
+        {
+          "attr": {
+            "debugLine": "pages/index/index:10",
+            "className": "logo-img",
+            "src": function () {return this.$t('files.logo')}
+          },
+          "type": "image",
+          "classList": [
+            "logo-img"
+          ]
+        }
+      ]
+    },
+    {
+      "attr": {
+        "debugLine": "pages/index/index:12",
         "className": "logo-img",
-        "src": function () {return this.$t('files.logo')}
+        "src": function () {return this.$t('files.logo')},
+        "show": function () {return this.isFullWindow}
       },
       "type": "image",
       "classList": [
@@ -555,7 +704,7 @@ module.exports = {
     },
     {
       "attr": {
-        "debugLine": "pages/index/index:9",
+        "debugLine": "pages/index/index:13",
         "className": "option-container option-top"
       },
       "type": "div",
@@ -566,7 +715,7 @@ module.exports = {
       "children": [
         {
           "attr": {
-            "debugLine": "pages/index/index:10",
+            "debugLine": "pages/index/index:14",
             "className": "switch-text",
             "value": function () {return this.linkStatus}
           },
@@ -574,12 +723,39 @@ module.exports = {
           "classList": [
             "switch-text"
           ]
+        },
+        {
+          "attr": {
+            "debugLine": "pages/index/index:17",
+            "className": "offline-text-half",
+            "show": function () {return this.showOfflineReconnect},
+            "value": function () {return this.offlineText}
+          },
+          "type": "text",
+          "classList": [
+            "offline-text-half"
+          ],
+          "events": {
+            "click": "offlineReconnect"
+          }
+        },
+        {
+          "attr": {
+            "debugLine": "pages/index/index:18",
+            "className": "progress-half",
+            "type": "circular",
+            "show": function () {return !this.showOfflineReconnect&&this.showWaitingProgress}
+          },
+          "type": "progress",
+          "classList": [
+            "progress-half"
+          ]
         }
       ]
     },
     {
       "attr": {
-        "debugLine": "pages/index/index:14",
+        "debugLine": "pages/index/index:20",
         "className": "option-container option-top",
         "disabled": function () {return this.switchDisable}
       },
@@ -594,7 +770,7 @@ module.exports = {
       "children": [
         {
           "attr": {
-            "debugLine": "pages/index/index:15",
+            "debugLine": "pages/index/index:21",
             "className": "switch-text",
             "value": function () {return this.switchText}
           },
@@ -605,7 +781,7 @@ module.exports = {
         },
         {
           "attr": {
-            "debugLine": "pages/index/index:18",
+            "debugLine": "pages/index/index:24",
             "src": function () {return this.switchTextImg},
             "className": "switch-icon"
           },
@@ -618,7 +794,7 @@ module.exports = {
     },
     {
       "attr": {
-        "debugLine": "pages/index/index:20",
+        "debugLine": "pages/index/index:26",
         "className": "view-more",
         "show": function () {return !this.isFullWindow},
         "value": function () {return this.$t('strings.view_more')}
@@ -630,6 +806,136 @@ module.exports = {
       "events": {
         "click": "viewMoreClick"
       }
+    },
+    {
+      "attr": {
+        "debugLine": "pages/index/index:27",
+        "className": "occupying-item"
+      },
+      "type": "div",
+      "classList": [
+        "occupying-item"
+      ]
+    },
+    {
+      "attr": {
+        "debugLine": "pages/index/index:28",
+        "id": "dialog-repair-failed"
+      },
+      "type": "dialog",
+      "id": "dialog-repair-failed",
+      "style": {
+        "marginBottom": "10px"
+      },
+      "children": [
+        {
+          "attr": {
+            "debugLine": "pages/index/index:29",
+            "className": "dialog-timeout"
+          },
+          "type": "div",
+          "classList": [
+            "dialog-timeout"
+          ],
+          "children": [
+            {
+              "attr": {
+                "debugLine": "pages/index/index:30",
+                "className": "pair-dialog-title",
+                "value": function () {return this.$t('strings.public_connect_fail')}
+              },
+              "type": "text",
+              "classList": [
+                "pair-dialog-title"
+              ]
+            },
+            {
+              "attr": {
+                "debugLine": "pages/index/index:31",
+                "className": "pair-dialog-hint",
+                "value": function () {return this.$t('strings.public_connect_fail_msg')}
+              },
+              "type": "text",
+              "classList": [
+                "pair-dialog-hint"
+              ]
+            },
+            {
+              "attr": {
+                "debugLine": "pages/index/index:32",
+                "className": "pair-dialog-hint",
+                "value": function () {return this.$t('strings.public_connect_fail_hint_1')}
+              },
+              "type": "text",
+              "classList": [
+                "pair-dialog-hint"
+              ]
+            },
+            {
+              "attr": {
+                "debugLine": "pages/index/index:33",
+                "className": "pair-dialog-hint",
+                "value": function () {return this.$t('strings.public_connect_fail_hint_2')}
+              },
+              "type": "text",
+              "classList": [
+                "pair-dialog-hint"
+              ]
+            },
+            {
+              "attr": {
+                "debugLine": "pages/index/index:34",
+                "className": "bottom-button-wrapper"
+              },
+              "type": "div",
+              "classList": [
+                "bottom-button-wrapper"
+              ],
+              "children": [
+                {
+                  "attr": {
+                    "debugLine": "pages/index/index:35",
+                    "className": "button-connect",
+                    "value": function () {return this.$t('strings.public_try_again_later')}
+                  },
+                  "type": "text",
+                  "classList": [
+                    "button-connect"
+                  ],
+                  "events": {
+                    "click": "exit"
+                  }
+                },
+                {
+                  "attr": {
+                    "debugLine": "pages/index/index:36",
+                    "className": "split-line",
+                    "value": "|"
+                  },
+                  "type": "text",
+                  "classList": [
+                    "split-line"
+                  ]
+                },
+                {
+                  "attr": {
+                    "debugLine": "pages/index/index:37",
+                    "className": "button-connect",
+                    "value": function () {return this.$t('strings.public_reconnect')}
+                  },
+                  "type": "text",
+                  "classList": [
+                    "button-connect"
+                  ],
+                  "events": {
+                    "click": "reConnect"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
@@ -700,8 +1006,18 @@ var _default = {
   menuClick: function menuClick() {
     this.$element('menu_opts').show();
   },
-  itemClick: function itemClick(e) {
+  itemClick: function itemClick() {
+    var e = {
+      value: 'setting'
+    };
+    this.$element("popup").hide();
     this.$emit('menuItemClick', e);
+  },
+  showpopup: function showpopup() {
+    this.$element("popup").show();
+  },
+  hidepopup: function hidepopup() {
+    this.$element("popup").hide();
   }
 };
 exports["default"] = _default;
@@ -759,6 +1075,8 @@ var _hilinkDevice = _interopRequireDefault(__webpack_require__(/*! ../../../shar
 
 var _system2 = _interopRequireDefault($app_require$("@app-module/system.app"));
 
+var _system3 = _interopRequireDefault($app_require$("@app-module/system.prompt"));
+
 var _default = {
   data: {
     showProgress: true,
@@ -767,9 +1085,14 @@ var _default = {
     progressText: '',
     switchText: '开关',
     linkStatus: '',
-    switchTextImg: '',
+    offlineText: '重新连接',
+    switchTextImg: '/common/images/ic_off.png',
+    showOfflineReconnect: false,
+    showWaitingProgress: true,
+    tryReconnect: false,
     deviceImage: '/common/images/ic_device.png',
     deviceName: 'XXX某某设备',
+    roomName: 'XX',
     menu: [{
       value: 'setting',
       text: '更多设置'
@@ -785,8 +1108,8 @@ var _default = {
     switchDisable: false
   },
   onInit: function onInit() {
-    this.switchTextImg = this.device.off;
     this.linkStatus = this.device.linking;
+    this.switchTextImg = this.device.off;
     this.optionDisabled();
   },
   menuClick: function menuClick(e) {
@@ -806,7 +1129,8 @@ var _default = {
   onShow: function onShow() {
     var _this = this;
 
-    console.log("full page onShow");
+    console.info("full page onShow");
+    console.info("img = " + this.switchTextImg);
     setTimeout(function () {
       (0, _newArrowCheck2["default"])(this, _this);
       this.notifyDeviceId();
@@ -846,26 +1170,47 @@ var _default = {
     return notifyDeviceId;
   }(),
   handleEvents: function handleEvents(result) {
-    console.log("handleEvents result is" + result.data.type);
+    console.info("handleEvents result is " + result.data.type);
+    console.info("handleEvents state is " + result.data.state);
 
     if (result.data.state == 'fail') {
       this.linkStatus = this.device.unlinked;
+      this.showOfflineReconnect = true;
+      this.showWaitingProgress = false;
+      this.$element('dialog-repair-failed').show();
     } else {
-      console.log("handleEvents result is" + result.data.result);
+      console.info("handleEvents result is" + result.data.result);
 
       switch (result.data.type) {
         case _hilinkDevice["default"].DATA_TYPE_BLE_CONNECT:
           this.linkStatus = this.device.linked;
+          this.showWaitingProgress = false;
           break;
 
         case _hilinkDevice["default"].DATA_TYPE_BLE_UNCONNECT:
           this.linkStatus = this.device.unlinked;
+          this.showOfflineReconnect = true;
+          this.showWaitingProgress = false;
+          this.$element('dialog-repair-failed').show();
           break;
 
         case _hilinkDevice["default"].DATA_TYPE_BLE_CHARACTERISTIC_CHANGED:
           break;
 
         case _hilinkDevice["default"].DATA_TYPE_BLE_CONNECTION_STATE_CHANGED:
+          if (result.data.result == '0') {
+            this.linkStatus = this.device.unlinked;
+
+            if (this.tryReconnect) {
+              this.$element('dialog-repair-failed').show();
+            }
+
+            this.showOfflineReconnect = true;
+            this.showWaitingProgress = false;
+          } else if (result.data.result == '2') {
+            this.tryReconnect = false;
+          }
+
           break;
       }
     }
@@ -873,7 +1218,7 @@ var _default = {
     this.currentStateSet();
   },
   onHide: function onHide() {
-    console.log("full page onHide");
+    console.info("full page onHide");
 
     _hilinkDevice["default"].disConnect();
   },
@@ -881,7 +1226,7 @@ var _default = {
     console.log("full page onDestroy");
   },
   currentStateSet: function currentStateSet() {
-    console.log("currentStateSet is" + this.linkStatus);
+    console.info("currentStateSet is" + this.linkStatus);
 
     if (this.linkStatus == this.device.linked) {
       this.optionEnabled();
@@ -914,6 +1259,24 @@ var _default = {
 
       console.info("isFullWindow = " + this.isFullWindow);
     }
+  },
+  offlineReconnect: function offlineReconnect() {
+    this.tryReconnect = true;
+    this.showOfflineReconnect = false;
+    this.showWaitingProgress = true;
+    this.linkStatus = this.device.linking;
+    this.notifyDeviceId();
+  },
+  reConnect: function reConnect() {
+    this.tryReconnect = true;
+    this.showOfflineReconnect = false;
+    this.showWaitingProgress = true;
+    this.linkStatus = this.device.linking;
+    this.$element('dialog-repair-failed').close();
+    this.notifyDeviceId();
+  },
+  exit: function exit() {
+    this.$element('dialog-repair-failed').close();
   }
 };
 exports["default"] = _default;

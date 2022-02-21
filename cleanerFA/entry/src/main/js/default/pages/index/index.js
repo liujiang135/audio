@@ -60,6 +60,7 @@ export default {
     const signInOption = new HuaweiIdAuthParamsHelper().setId().setProfile().setDialogAuth().build();
     HuaweiIdAuthManager.getAuthApi().silentSignIn(signInOption).then((res) => {
       console.info("silentSignIn success. " + JSON.stringify(res));
+      console.info("silentSignIn openIdLocal= " + this.openIdLocal); //MDFAMTA1Mzc3NDE==ZmIwOTZhNTA
       this.result = JSON.stringify(res);
       if (this.openIdLocal == res.openId) {
         EntryUtils.goNetConfigOrDevicePage();
@@ -77,8 +78,12 @@ export default {
   protocolAgreeCheck: function (e) {
     this.protocolAgreed = e.checked;
   },
-  protocolLink: function () {
+  protocolUserAgreementLink: function () {
     // input protocol url
-    EntryUtils.openBrowser('https://www.baidu.com');
+    EntryUtils.openBrowser('http://www.baidu.com');
+  },
+  protocolPrivacyStatementLink: function () {
+    // input protocol url
+    EntryUtils.openBrowser('http://www.baidu.com');
   }
 }

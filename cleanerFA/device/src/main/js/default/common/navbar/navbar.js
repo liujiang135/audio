@@ -36,7 +36,15 @@ export default {
   menuClick: function () {
     this.$element('menu_opts').show();
   },
-  itemClick: function (e) {
+  itemClick: function () {
+    let e ={value:'setting'};
+    this.$element("popup").hide();
     this.$emit('menuItemClick', e);
+  },
+  showpopup() {
+    this.$element("popup").show();
+  },
+  hidepopup() {
+    this.$element("popup").hide();
   }
 }

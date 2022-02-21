@@ -15,6 +15,7 @@
                 ],
                 "abilities": [
                     {
+                        "visible": true,
                         "name": "com.newpower.ohoscleaner2.MainAbility",
                         "label": "$string:entry_MainAbility"
                     },
@@ -44,7 +45,7 @@
                 ],
                 "distro": {
                     "moduleType": "entry",
-                    "installationFree": false,
+                    "installationFree": true,
                     "deliveryWithInstall": true,
                     "moduleName": "entry"
                 },

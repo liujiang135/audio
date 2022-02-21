@@ -1,10 +1,26 @@
 {
   "strings": {
-    "deviceName": "Device name",
+    "setting": "Setting",
+    "about_title": "About",
+    "deviceName": "Device Name",
     "location": "Location",
-    "view_more": "view more"
+    "about": "about",
+    "view_more": "view more",
+    "public_connect_fail": "Connection failed",
+    "strings.public_connect_fail_msg": "Please try the following",
+    "strings.public_connect_fail_hint_1": "1.Check that the device has sufficient power and is powered on",
+    "strings.public_connect_fail_hint_2": "2.Place the device close to the phone to be connected (within 10 meters).",
+    "strings.public_try_again_later": "Try again later",
+    "strings.public_reconnect": "Reconnect",
+    "faName": "XXX",
+    "faVersion": "Version1.0.0",
+    "protocolUserAgreement": "XXX User Agreement",
+    "and": "and",
+    "protocolPrivacyStatement": "About XXX Privacy Statement",
+    "rightOwned": "Rights All Rights Reserved ©2021XXX Ltd"
   },
   "files": {
-    "logo": "common/images/logo.png"
+    "logo": "common/images/logo.png",
+    "cpLogo": "/common/images/cp_logo.png"
   }
 }

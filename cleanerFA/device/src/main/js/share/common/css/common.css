@@ -4,21 +4,26 @@
 }
 
 .device-img {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     border-radius: 10px;
-    margin-top: 20px;
 }
-
+.device-img-full {
+    width: 252px;
+    height: 252px;
+    border-radius: 10px;
+}
 .device-name-text {
-    margin-top: 15px;
-    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #000000;
+    opacity: 0.9;
 }
 
 .logo-img {
-    height: 10px;
-    margin-top: 10px;
-    object-fit: contain;
+    width: 70px;
+    height: 18px;
 }
 
 .progress-container {
@@ -52,17 +57,17 @@
 }
 
 .option-top {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding: 15px;
+    margin-top: 12px;
+    margin-left: 12px;
+    margin-right: 12px;
+    padding: 16px;
     justify-content: flex-start;
 }
 
 .switch-text {
-    font-size: 15px;
-    width: 80%;
-    font-weight: 600;
+    font-size: 18px;
+    color: #000000;
+    opacity: 0.9;
 }
 
 .switch-icon {

@@ -1,21 +1,41 @@
 <element name="nav" src="../../common/navbar/navbar"></element>
-<div class="container">
+<div class="container container-bg-color">
     <div if="{{isFullWindow}}">
         <nav title="{{deviceName}}" show-menu="true" menu="{{menu}}" @menu-item-click="menuClick"></nav>
     </div>
-    <image class="device-img top-margin-90" src="{{deviceImage}}"></image>
-    <text class="device-name-text" show="{{!isFullWindow}}">{{deviceName}}</text>
-    <image class="logo-img" src="{{$t('files.logo')}}"></image>
+    <image class="device-img top-margin-32"  src="{{deviceImage}}" show="{{!isFullWindow}}"></image>
+    <image class="device-img-full top-margin-56"  src="{{deviceImage}}" show="{{isFullWindow}}"></image>
+    <div class="container device-box" show="{{!isFullWindow}}">
+        <text class="device-name-text">{{deviceName}}</text>
+        <image class="logo-img" src="{{$t('files.logo')}}"></image>
+    </div>
+    <image class="logo-img" src="{{$t('files.logo')}}" show="{{isFullWindow}}"></image>
     <div class="option-container option-top">
         <text class="switch-text">
             {{linkStatus}}
         </text>
+        <text class="offline-text-half" show="{{showOfflineReconnect}}" onclick="offlineReconnect">{{offlineText}}</text>
+        <progress class="progress-half" type="circular" show="{{!showOfflineReconnect && showWaitingProgress}}"></progress>
     </div>
     <div class="option-container option-top" onclick="switchClick" disabled="{{switchDisable}}">
         <text class="switch-text">
             {{switchText}}
         </text>
-        <image src="{{ switchTextImg }}" class="switch-icon"></image>
+        <image src="{{switchTextImg}}" class="switch-icon"></image>
     </div>
     <button class="view-more" onclick="viewMoreClick()" show="{{!isFullWindow}}">{{ $t('strings.view_more') }}</button>
+    <div class="occupying-item"></div>
+    <dialog id = "dialog-repair-failed" style="margin-bottom : 10px;">
+        <div class="dialog-timeout">
+            <text class="pair-dialog-title">{{$t('strings.public_connect_fail')}}</text>
+            <text class="pair-dialog-hint">{{ $t('strings.public_connect_fail_msg') }}</text>
+            <text class="pair-dialog-hint">{{ $t('strings.public_connect_fail_hint_1') }}</text>
+            <text class="pair-dialog-hint">{{ $t('strings.public_connect_fail_hint_2') }}</text>
+            <div class="bottom-button-wrapper">
+                <text class="button-connect" onclick="exit">{{ $t('strings.public_try_again_later') }}</text>
+                <text class="split-line">|</text>
+                <text class="button-connect" onclick="reConnect">{{ $t('strings.public_reconnect') }}</text>
+            </div>
+        </div>
+    </dialog>
 </div>

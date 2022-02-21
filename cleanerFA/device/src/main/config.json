@@ -20,7 +20,7 @@
       "deliveryWithInstall": true,
       "moduleName": "device",
       "moduleType": "feature",
-      "installationFree": false
+      "installationFree": true
     },
     "abilities": [
       {
@@ -45,7 +45,8 @@
       {
         "pages": [
           "pages/index/index",
-          "pages/setting/setting"
+          "pages/setting/setting",
+          "pages/about/about"
         ],
         "name": "default",
         "window": {

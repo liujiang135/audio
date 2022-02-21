@@ -15,8 +15,8 @@
 var EntryUtils = {
   goNetConfigOrDevicePage: function () {
     var action = {};
-    action.bundleName = 'cleaner';
-    action.abilityName = 'cleaner.EntryInternalAbility';
+    action.bundleName = 'com.newpower.ohoscleaner2';
+    action.abilityName = 'com.newpower.ohoscleaner2.EntryInternalAbility';
     action.messageCode = 1002;
     action.abilityType = 1;
     action.syncOption = 0;
@@ -24,8 +24,8 @@ var EntryUtils = {
   },
   openBrowser: function (url) {
     var action = {};
-    action.bundleName = 'cleaner';
-    action.abilityName = 'cleaner.EntryInternalAbility';
+    action.bundleName = 'com.newpower.ohoscleaner2';
+    action.abilityName = 'com.newpower.ohoscleaner2.EntryInternalAbility';
     action.messageCode = 1001;
     action.data = {
       url: url

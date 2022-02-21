@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/app.js?entry");
+/******/ 	return __webpack_require__(__webpack_require__.s = "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/app.js?entry");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/app.js?entry":
-/*!****************************************************************************************************!*\
-  !*** /Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/app.js?entry ***!
-  \****************************************************************************************************/
+/***/ "../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/app.js?entry":
+/*!***************************************************************************************************************!*\
+  !*** /Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/app.js?entry ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $app_script$ = __webpack_require__(/*! !../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/manifest-loader.js?path=/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/app.js!./app.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/app.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/app.js")
+var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/script.js!../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/babel-loader?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/manifest-loader.js?path=/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/app.js!./app.js */ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/app.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/app.js")
 
       $app_define$('@app-application/app', [], function($app_require$, $app_exports$, $app_module$) {
       
@@ -127,21 +127,21 @@ t.read=function(e,t,o,r,n){var i,s,a=8*n-r-1,g=(1<<a)-1,l=g>>1,u=-7,c=o?n-1:0,p=
 
 /***/ }),
 
-/***/ "./lib/manifest-plugin.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/.preview/jsManifest/default/manifest.json":
-/*!**************************************************************************************************************************************!*\
-  !*** ./lib/manifest-plugin.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/.preview/jsManifest/default/manifest.json ***!
-  \**************************************************************************************************************************************/
+/***/ "./lib/manifest-plugin.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/.preview/jsManifest/default/manifest.json":
+/*!*************************************************************************************************************************************************!*\
+  !*** ./lib/manifest-plugin.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/.preview/jsManifest/default/manifest.json ***!
+  \*************************************************************************************************************************************************/
 /*! exports provided: appID, appName, versionName, versionCode, minPlatformVersion, pages, deviceType, window, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"appID\":\"com.huawei.suitedeom\",\"appName\":\"$string:entry_MainAbility\",\"versionName\":\"1.0.0\",\"versionCode\":1000000,\"minPlatformVersion\":4,\"pages\":[\"pages/index/index\"],\"deviceType\":[\"phone\"],\"window\":{\"autoDesignWidth\":true,\"designWidth\":720}}");
+module.exports = JSON.parse("{\"appID\":\"com.newpower.ohoscleaner2\",\"appName\":\"$string:entry_MainAbility\",\"versionName\":\"1.0.0\",\"versionCode\":1000000,\"minPlatformVersion\":4,\"pages\":[\"pages/index/index\"],\"deviceType\":[\"phone\"],\"window\":{\"autoDesignWidth\":true,\"designWidth\":720}}");
 
 /***/ }),
 
-/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/app.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/app.js":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/app.js!/Users/joe/Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/src/main/js/default/app.js ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./lib/script.js!./node_modules/babel-loader/lib/index.js?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/app.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/app.js":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./lib/script.js!./node_modules/babel-loader/lib?presets[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/preset-env&plugins[]=/Users/joe/Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/node_modules/@babel/plugin-transform-modules-commonjs&comments=false!./lib/manifest-loader.js?path=/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/app.js!/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/src/main/js/default/app.js ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -169,7 +169,7 @@ var _default = {
 };
 exports["default"] = _default;
 ;
-(exports["default"] || module.exports).manifest = __webpack_require__(/*! !../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/manifest-plugin.js!../../../../.preview/jsManifest/default/manifest.json */ "./lib/manifest-plugin.js!../../../../../../../Documents/00.棒棒哒/鸿蒙接入(ZCG)/L0SuiteFourDemo/entry/.preview/jsManifest/default/manifest.json");}
+(exports["default"] || module.exports).manifest = __webpack_require__(/*! !../../../../../../../../../../Library/Huawei/sdk/js/2.1.1.21/build-tools/ace-loader/lib/manifest-plugin.js!../../../../.preview/jsManifest/default/manifest.json */ "./lib/manifest-plugin.js!../../../../../../../Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/entry/.preview/jsManifest/default/manifest.json");}
 /* generated by ace-loader */
 
 

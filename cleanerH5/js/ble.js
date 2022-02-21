@@ -143,7 +143,7 @@ function getCurrentRegisteredDevice(){
     window.currentRegisteredDeviceCallBack = res =>{
         let data = dataChange(res);
         deviceIdMac = data.deviceId;
-        deviceIdMac = 'FA:34:56:78:79:A2' //debug test 
+        //deviceIdMac = 'FA:34:56:78:79:A2' //debug test 
         console.log('currentRegisteredDeviceCallBack data:',data)
         console.log('当前设备mac地址:',deviceIdMac)
     
@@ -251,13 +251,10 @@ function notifyBle() {
                 if(status === 0){
                     i++
                 }
-
-                writeBLECharacteristicValue('123') //debug test
+                
             }else{
                 console.log('notify 成功');
                 clearInterval(timer);
-
-                writeBLECharacteristicValue('123') //debug test
                
             }
         }, 100);
@@ -268,7 +265,6 @@ function notifyBle() {
 
 // 3.对蓝牙设备发送数据 
 function writeBLECharacteristicValue(data){
-    console.log('call writeBLECharacteristicValue',data)
     window.hilink.writeBLECharacteristicValue(UUID_OR_Mac,notifyUuids[0].serviceUuid,notifyUuids[0].characteristicUuid, data,'writeBLECharacteristicValueCallBack');
     window.writeBLECharacteristicValueCallBack = res =>{
         let data = dataChange(res);

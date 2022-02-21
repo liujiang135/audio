@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
  * Copyright (c) 2021 Huawei Device Co., Ltd.
  * Licensed under the Apache License,Version 2.0 (the 'License');
@@ -16,6 +17,7 @@
 import router from '@system.router';
 import HiLinkDevice from '../../../share/js/hilink-device.js';
 import app from '@system.app';
+import prompt from '@system.prompt';
 
 export default {
   data: {
@@ -25,9 +27,14 @@ export default {
     progressText: '',
     switchText: '开关',
     linkStatus: '',
-    switchTextImg: '',
+    offlineText:'重新连接',
+    switchTextImg: '/common/images/ic_off.png',
+    showOfflineReconnect:false,
+    showWaitingProgress:true,
+    tryReconnect : false,
     deviceImage: '/common/images/ic_device.png',
     deviceName: 'XXX某某设备',
+    roomName:'XX',
     menu: [
       {
         value: 'setting',
@@ -45,8 +52,8 @@ export default {
     switchDisable: false,
   },
   onInit() {
-    this.switchTextImg = this.device.off;
     this.linkStatus = this.device.linking;
+    this.switchTextImg = this.device.off;
     this.optionDisabled();
   },
   menuClick: function (e) {
@@ -63,7 +70,8 @@ export default {
     }
   },
   onShow() {
-    console.log("full page onShow");
+    console.info("full page onShow");
+    console.info("img = " + this.switchTextImg);
     setTimeout(() => {
       this.notifyDeviceId();
     }, 500);
@@ -77,35 +85,53 @@ export default {
     });
   },
   handleEvents: function (result) {
-    console.log("handleEvents result is" + result.data.type);
+    console.info("handleEvents result is " + result.data.type);
+    console.info("handleEvents state is " + result.data.state);
     if (result.data.state == 'fail') {
-          this.linkStatus = this.device.unlinked;
+        this.linkStatus = this.device.unlinked;
+        this.showOfflineReconnect = true;
+        this.showWaitingProgress = false;
+        this.$element('dialog-repair-failed').show();
     } else {
-      console.log("handleEvents result is" + result.data.result);
+      console.info("handleEvents result is" + result.data.result);
       switch (result.data.type) {
         case HiLinkDevice.DATA_TYPE_BLE_CONNECT:
           this.linkStatus = this.device.linked;
+          this.showWaitingProgress = false;
           break;
         case HiLinkDevice.DATA_TYPE_BLE_UNCONNECT:
           this.linkStatus = this.device.unlinked;
+          this.showOfflineReconnect = true;
+          this.showWaitingProgress = false;
+          this.$element('dialog-repair-failed').show();
           break;
         case HiLinkDevice.DATA_TYPE_BLE_CHARACTERISTIC_CHANGED:
           break;
         case HiLinkDevice.DATA_TYPE_BLE_CONNECTION_STATE_CHANGED:
+          if (result.data.result == '0') {
+            this.linkStatus = this.device.unlinked;
+            if (this.tryReconnect) {
+              this.$element('dialog-repair-failed').show();
+            }
+            this.showOfflineReconnect = true;
+            this.showWaitingProgress = false;
+          } else if (result.data.result == '2') {
+            this.tryReconnect = false;
+          }
           break;
       }
     }
     this.currentStateSet();
   },
   onHide() {
-    console.log("full page onHide");
+    console.info("full page onHide");
     HiLinkDevice.disConnect();
   },
   onDestroy(){
     console.log("full page onDestroy");
   },
   currentStateSet: function () {
-    console.log("currentStateSet is" + this.linkStatus);
+    console.info("currentStateSet is" + this.linkStatus);
     if (this.linkStatus == this.device.linked) {
       this.optionEnabled()
     } else {
@@ -135,5 +161,25 @@ export default {
       app.requestFullWindow();
       console.info("isFullWindow = " + this.isFullWindow)
     }
-  }
+  },
+  //点击重新连接重新调用通知设备连接方法
+  offlineReconnect: function (){
+    this.tryReconnect = true;
+    this.showOfflineReconnect = false;
+    this.showWaitingProgress = true;
+    this.linkStatus = this.device.linking;
+    this.notifyDeviceId();
+  },
+  reConnect : function (){
+    this.tryReconnect = true;
+    this.showOfflineReconnect = false;
+    this.showWaitingProgress = true;
+    this.linkStatus = this.device.linking;
+    this.$element('dialog-repair-failed').close();
+    this.notifyDeviceId();
+  },
+  exit : function (){
+    this.$element('dialog-repair-failed').close();
+  },
+
 }

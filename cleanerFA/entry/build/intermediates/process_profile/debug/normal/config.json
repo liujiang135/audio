@@ -176,7 +176,7 @@
         "mainAbility": "com.newpower.ohoscleaner2.MainAbility",
         "distro": {
             "moduleType": "entry",
-            "installationFree": false,
+            "installationFree": true,
             "deliveryWithInstall": true,
             "moduleName": "entry"
         },

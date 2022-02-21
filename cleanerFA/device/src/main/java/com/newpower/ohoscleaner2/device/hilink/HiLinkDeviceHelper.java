@@ -122,21 +122,7 @@ public class HiLinkDeviceHelper implements DataCallback<String> {
                                 hiLinkDataCallback.onSuccess(DATA_TYPE_BLE_CONNECT, "connect");
                                 LogUtil.info(TAG, "getHiLinkDevice connectBleDevice onSuccess = " + sessionId);
                                 bleSessionId = sessionId;
-                                mHiLinkDevice.subscribeBleDeviceEvent(sessionId, new BleDeviceDataListener() {
-                                    @Override
-                                    public void onCharacteristicChanged(String bleTransData) {
-                                        hiLinkDataCallback.onSuccess(DATA_TYPE_BLE_CHARACTERISTIC_CHANGED,
-                                                bleTransData);
-                                        super.onCharacteristicChanged(bleTransData);
-                                    }
-
-                                    @Override
-                                    public void onConnectionStateChange(String mac, int status, int newStatus) {
-                                        hiLinkDataCallback.onSuccess(DATA_TYPE_BLE_CONNECTION_STATE_CHANGED,
-                                                String.valueOf(newStatus));
-                                        super.onConnectionStateChange(mac, status, newStatus);
-                                    }
-                                });
+                                subscribeDeviceEvent(sessionId);
                             }
 
                             @Override
@@ -156,6 +142,27 @@ public class HiLinkDeviceHelper implements DataCallback<String> {
                 });
     }
 
+    /**
+     * 注册设备事件回调
+     * @param sessionId
+     */
+    public void subscribeDeviceEvent(String sessionId) {
+        Objects.requireNonNull(mHiLinkDevice).subscribeBleDeviceEvent(sessionId, new BleDeviceDataListener() {
+            @Override
+            public void onCharacteristicChanged(String bleTransData) {
+                hiLinkDataCallback.onSuccess(DATA_TYPE_BLE_CHARACTERISTIC_CHANGED,
+                        bleTransData);
+                super.onCharacteristicChanged(bleTransData);
+            }
+
+            @Override
+            public void onConnectionStateChange(String mac, int status, int newStatus) {
+                hiLinkDataCallback.onSuccess(DATA_TYPE_BLE_CONNECTION_STATE_CHANGED,
+                        String.valueOf(newStatus));
+                super.onConnectionStateChange(mac, status, newStatus);
+            }
+        });
+    }
 
     @Override
     public void onSuccess(String message) {

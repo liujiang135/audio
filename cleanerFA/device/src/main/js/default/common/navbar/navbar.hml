@@ -1,9 +1,14 @@
 <div class="container">
-    <image class="back_icon" src="/common/images/ic_back.png" onclick="backClick"></image>
+    <div class="back_icon_box">
+        <image class="back_icon" src="/common/images/ic_back.png" onclick="backClick"></image>
+    </div>
     <text class="title">{{title}}</text>
-    <image id="menu_icon" class="menu_icon" src="/common/images/ic_more.png" show="{{showMenu}}" onclick="menuClick"></image>
-
-    <menu id="menu_opts" target="menu_icon" onselected="itemClick" >
-        <option for="{{menu}}" value="{{$item.value}}" action="popup">{{$item.text}}</option>
-    </menu>
+    <image id="menu_icon" class="menu_icon" src="/common/images/ic_more.png" show="{{showMenu}}"onclick="showpopup"></image>
+    <popup id="popup" class="popup" target="menu_icon" placement="bottom" keepalive="true" clickable="true"
+           arrowoffset="100px" onclick="hidepopup">
+        <button class="popup_btn" for="{{menu}}" onclick="itemClick">{{$item.text}}</button>
+    </popup>
+<!--    <menu id="menu_opts" target="menu_icon" onselected="itemClick" >-->
+<!--        <option for="{{menu}}" value="{{$item.value}}" action="popup">{{$item.text}}</option>-->
+<!--    </menu>-->
 </div>

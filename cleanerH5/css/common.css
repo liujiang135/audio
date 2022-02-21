@@ -39,15 +39,15 @@ ul,li {
     html { font-size:10px;}
 }
 
-@media only screen and (min-width: 375px) {
+/* @media only screen and (min-width: 375px) {
     html {font-size:10.42px;}
 }
 
 @media only screen and (min-width: 400px) {
     html {font-size:11.11px;}
-}
+} */
 
-@media only screen and (min-width: 414px) {
+/* @media only screen and (min-width: 414px) {
     html {font-size:11.50px;}
 }
 
@@ -57,5 +57,5 @@ ul,li {
 
 @media only screen and (min-width: 540px) {
     html {font-size:15px;}
-} 
+}  */
   

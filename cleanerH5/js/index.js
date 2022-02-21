@@ -5,7 +5,7 @@ var spinner = document.getElementsByClassName("spinner")[0];
 var spinnerWrap = document.getElementsByClassName("spinnerWrap")[0];
 var spinnerItem = document.getElementsByClassName("spinnerItem")[0];
 
-var singleList = document.getElementsByClassName("singleList")[0];
+// var singleList = document.getElementsByClassName("singleList")[0];
 var modeList = document.getElementsByClassName("modeList")[0];
 
 var fnbtnLeft = document.getElementsByClassName("fnbtn")[0];
@@ -81,11 +81,11 @@ spinnerWrap.addEventListener('click',function(event){
     event.stopPropagation(); // 阻止事件冒泡
 })
 
-singleList.addEventListener('click',function(event){
-    backgroundColor.style.display = 'block';
-    modeList.style.display = 'block';
-    event.stopPropagation();
-})
+// singleList.addEventListener('click',function(event){
+//     backgroundColor.style.display = 'block';
+//     modeList.style.display = 'block';
+//     event.stopPropagation();
+// })
 
 fnbtnLeft.addEventListener('click',function(event){
     backgroundColor.style.display = 'none';
@@ -169,13 +169,13 @@ stateLeft.addEventListener('click',function(event){
 
 
 // 查看隐私协议&取消协议
-var statement = document.getElementsByClassName("statement")[0];
+// var statement = document.getElementsByClassName("statement")[0];
 
-statement.addEventListener('click',function(event){
+// statement.addEventListener('click',function(event){
     
-    window.location.href="privacy.html";
-    event.stopPropagation();
-})
+//     window.location.href="privacy.html";
+//     event.stopPropagation();
+// })
 
 
 //展示或者隐藏错误

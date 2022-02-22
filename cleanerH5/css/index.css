@@ -1456,3 +1456,23 @@
 .highlighted {
     z-index: 98;
 }
+
+.input1 {
+    font-size: 16px;
+    padding: 5px 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.sendBtn {
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.receive,
+.receiveId {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}

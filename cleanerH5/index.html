@@ -61,6 +61,14 @@
         <div class="deviceImg"></div>
         <div class="logo"></div>
       </section>
+
+      <section class="test">
+        <input type="text" class="input1">
+        <button class="sendBtn">发送</button>
+        <div class="receiveId">接收值ID：</div>
+        <div class="receive">接收值：</div>
+      </section>
+
       <!-- 设备状态栏-->
       <section class="devStatus">
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">已连接</div> -->
@@ -695,7 +703,7 @@
 
     hideAlert() // 隐藏前提下 topMsgStatus 生效
 
-    initStatus(2, 0, 2);
+    // initStatus(0, 0, 2);
     // initStatus(workStatus,recordStatus,topMsgStatus )
     // workStatus 0:未连接 1:重连 2:连接失败 3:工作中，空记录 4:待机中，充电中， 三条记录 5:工作中，三条记录 6:连接中 7:待机
     // recordStatus 0:未连接 1:重连
@@ -703,12 +711,23 @@
 
   }
 
+  function test() {
+    $('.sendBtn').click(function() {
+      var inputVal = $('.input1').val();
+      console.log('--------------')
+      console.log('-发送输入框的值-', inputVal)
+      console.log('--------------')
+      writeBLECharacteristicValue(inputVal)
+    });
+  }
+
   $(function() {
 
     console.log("index html init")
 
-    // 栅格化适配
-    gridAdaptation()
+    test()
+      // 栅格化适配
+      // gridAdaptation()
 
     // showError();
 

@@ -179,8 +179,14 @@
               <div class="fnImg fnImgItem3"></div>
             </div>
             <ul class="spinnerWrap appear">
-              <li class="spinnerList checkedBg checkedText">节能模式</li>
-              <li class="spinnerList">强劲模式</li>
+              <li class="spinnerList checkedBg checkedText">
+                <span class="cn_lang">节能模式</span>
+                <span class="en_lang">ECO Mode</span>
+              </li>
+              <li class="spinnerList">
+                <span class="cn_lang">强劲模式</span>
+                <span class="en_lang">Turbo Mode</span>
+              </li>
               <!--    <li class="spinnerList checkedBg">3档</li>
                             <li class="spinnerList">4档</li>
                             <li class="spinnerList">5档</li>
@@ -468,7 +474,7 @@
   console.log('开始调试');
   // 中文 zh   英文 en
   var ctLanguage = 'en'; // 语言
-  // ctLanguage = 'zh';
+  ctLanguage = 'zh';
 
   var isIOS = !!navigator.userAgent.match(/iPhone/i);
   console.log('iOS:' + isIOS);
@@ -687,9 +693,9 @@
       }
     }
 
-    // hideAlert() // 隐藏前提下 topMsgStatus 生效
+    hideAlert() // 隐藏前提下 topMsgStatus 生效
 
-    initStatus(2, 0, 0);
+    initStatus(2, 0, 2);
     // initStatus(workStatus,recordStatus,topMsgStatus )
     // workStatus 0:未连接 1:重连 2:连接失败 3:工作中，空记录 4:待机中，充电中， 三条记录 5:工作中，三条记录 6:连接中 7:待机
     // recordStatus 0:未连接 1:重连
@@ -702,7 +708,7 @@
     console.log("index html init")
 
     // 栅格化适配
-    // gridAdaptation()
+    gridAdaptation()
 
     // showError();
 

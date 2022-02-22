@@ -19,7 +19,10 @@
           <div class="barLeft">
             <div class="goApp"></div>
           </div>
-          <div class="devName" data-loacle="devName">滤芯信息</div>
+          <div class="devName" data-loacle="devName">
+            <span class="cn_lang">滤芯信息</span>
+            <span class="en_lang">Filter Information</span>
+          </div>
           <div class="barRight">
             <!-- <div class="devMore"></div>  -->
           </div>
@@ -30,11 +33,18 @@
     <div class="appMargin">
       <div class="mainWrap">
         <div class='main' id='echarts_warp'></div>
-        <div class='title'>滤芯寿命</div>
-        <div class='msg'>当滤芯耗尽后，清洁能力会大幅下降，请及时更换滤芯。</div>
+        <div class='title'>
+          <span class="cn_lang">滤芯寿命</span>
+          <span class="en_lang">Filter life</span>
+        </div>
+        <div class='msg'>
+          <span class="cn_lang">当滤芯耗尽后，清洁能力会大幅下降，请及时更换滤芯。</span>
+          <span class="en_lang">When the flter is exhausted, the cleaning capabilities will be greatly reduced. Please replace the flter in time.</span>
+        </div>
         <div class="btnContainer" id="btnContainer">
           <div class="btn" onclick="finishDeviceActivity()">
-            重置滤芯
+            <span class="cn_lang">重置滤芯</span>
+            <span class="en_lang">Reset Filter</span>
           </div>
         </div>
       </div>
@@ -44,14 +54,26 @@
     <div class="shelter" display="block"></div>
     <div class="msg-div" display="block">
       <div class="msg-main">
-        <div class="msg-title" data-locale="connect_fail">重置滤芯</div>
+        <div class="msg-title" data-locale="connect_fail">
+          <span class="cn_lang">重置滤芯</span>
+          <span class="en_lang">Reset Filter</span>
+        </div>
         <p class="msg-content">
-          <span data-locale="try_again">请确认已更换新的滤芯或水洗晾干后的滤芯。是否重置？</span>
+          <span data-locale="try_again">
+            <span class="cn_lang">请确认已更换新的滤芯或水洗晾干后的滤芯。是否重置？</span>
+          <span class="en_lang">Please confrm that the flter has been replaced with a new one or the flter has been washed and dried. Reset?</span>
+          </span>
         </p>
         <div class="msg-footer">
-          <div class="btn_ok btn_l" id="btn_ok">取消</div>
+          <div class="btn_ok btn_l" id="btn_ok">
+            <span class="cn_lang">取消</span>
+            <span class="en_lang">Cancel</span>
+          </div>
           <div class="line"></div>
-          <div class="btn_ok btn_r" id="btn_ok">确定</div>
+          <div class="btn_ok btn_r" id="btn_ok">
+            <span class="cn_lang">确定</span>
+            <span class="en_lang">Reset</span>
+          </div>
         </div>
       </div>
     </div>
@@ -71,6 +93,10 @@
   var eChartsLabelColor1 = '#000000e6';
   var eChartsLabelColor2 = '#00000099';
   var gaugeColor = '#00000008'; //进度条底色
+
+  // 中文 zh   英文 en
+  var ctLanguage = 'en'; // 语言
+  // ctLanguage = 'zh'; // 语言
 
   console.log('开始调试');
 
@@ -158,6 +184,8 @@
   // 栅格化适配
   function gridAdaptation() {
     console.log('-栅格化适配-')
+      // this.document.getElementsByClassName("msg")[0].style.width = "calc(100% - ((100% - 12px*9)/4 + 4*12))";
+    this.document.getElementsByClassName("msg")[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
     this.document.getElementsByClassName("msg-div")[0].style.width = "calc(50% + 6px)";
     this.document.getElementsByClassName("msg-div")[0].style.left = "0";
     this.document.getElementsByClassName("msg-div")[0].style.right = "0";
@@ -166,6 +194,13 @@
 
 
   $(function() {
+
+    console.log('中英文切换')
+    if (ctLanguage == 'en') {
+      $('.cn_lang').hide();
+      $('.en_lang').show();
+    }
+
     // 栅格化适配
     gridAdaptation();
 
@@ -288,7 +323,11 @@
             borderRadius: 8,
             offsetCenter: [0, '10%'],
             formatter: function(value) {
-              return '{value|' + value.toFixed(0) + '}{unit|%}{name|剩余}';
+              if (ctLanguage == 'en') {
+                return '{value|' + value.toFixed(0) + '}{unit|%}{name|remaining}';
+              } else {
+                return '{value|' + value.toFixed(0) + '}{unit|%}{name|剩余}';
+              }
             },
             rich: {
               // 字体颜色
@@ -389,6 +428,10 @@
         },
       ]
     };
+
+    if (ctLanguage == 'en') {
+      option.series[0].detail.rich.name.padding = [50, 0, 0, -65]
+    }
 
     option && myChart.setOption(option);
   }

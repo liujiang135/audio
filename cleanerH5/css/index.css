@@ -509,9 +509,9 @@
 
 .fnList .fnItem .fnWrap .fnName {
     font-size: 1.6rem;
-    overflow: hidden;
+    /* overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; */
     color: rgba(0, 0, 0, 0.9);
 }
 
@@ -1455,15 +1455,4 @@
 
 .highlighted {
     z-index: 98;
-}
-
-
-/* 中英文切换 */
-
-.cn_lang {
-    display: block;
-}
-
-.en_lang {
-    display: none;
 }

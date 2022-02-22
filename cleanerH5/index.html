@@ -19,8 +19,10 @@
           <div class="barLeft">
             <div class="goApp"></div>
           </div>
-          <div class="devName cn_lang" data-loacle="index.header.headerWrap.devName">清蜓智能随手吸尘器C2S</div>
-          <div class="devName en_lang" data-loacle="index.header.headerWrap.devName">Smart Vacuum C2S</div>
+          <div class="devName" data-loacle="index.header.headerWrap.devName">
+            <span class="cn_lang">清蜓智能随手吸尘器C2S</span>
+            <span class="en_lang">Smart Vacuum C2S</span>
+          </div>
           <div class="barRight">
             <div class="devMore"></div>
           </div>
@@ -39,10 +41,9 @@
             </div>
             <div class="devTopMsg replaceLv" data-loacle="devTopMsg">
               <span class="cn_lang">请更换滤芯</span>
-              <span class="en_lang">请更换滤芯</span>
-              <br>
+              <br class="cn_lang cn_lang_br">
               <span class="cn_lang">更换完成后请手动重置滤芯</span>
-              <span class="en_lang">更换完成后请手动重置滤芯</span>
+              <span class="en_lang">Please replace the filter. After replacement, please reset the filter manually.</span>
             </div>
             <div class="devTopMsg lowBatteryLv" data-loacle="devTopMsg" display:none>
               <span class="cn_lang">电量低，请充电!</span>
@@ -63,18 +64,27 @@
       <!-- 设备状态栏-->
       <section class="devStatus">
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">已连接</div> -->
-        <div class="statusLeft" data-locale="statusLeft_unconnect">工作中</div>
+        <div class="statusLeft" data-locale="statusLeft_unconnect">
+          <span class="cn_lang">工作中</span>
+          <span class="en_lang">Working</span>
+        </div>
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">待机</div> -->
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">连接中</div> -->
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>  -->
         <div class="statusMiddle">
           <div class="up" data-locale="turned_on">25%</div>
-          <div class="down" data-locale="turned_on">电池电量</div>
+          <div class="down" data-locale="turned_on">
+            <span class="cn_lang">电池电量</span>
+            <span class="en_lang">Batter</span>
+          </div>
         </div>
         <div class="statusRight">
           <div class="statusImg"></div>
           <div class="statusImg statusImgLoading"></div>
-          <div class="statusTxt">重新连接</div>
+          <div class="statusTxt">
+            <span class="cn_lang">重新连接</span>
+            <span class="en_lang">Reconnect</span>
+          </div>
         </div>
       </section>
       <!-- 信息展示区 -->
@@ -94,9 +104,15 @@
             <div class="infoWrap">
               <p class="infoNum workTime">
                 <span class="number">2</span>
-                <span class="unit">分</span>
+                <span class="unit">
+                  <span class="cn_lang">分</span>
+                <span class="en_lang">min</span>
+                </span>
                 <span class="number">44</span>
-                <span class="unit">秒</span>
+                <span class="unit">
+                  <span class="cn_lang">秒</span>
+                <span class="en_lang">s</span>
+                </span>
                 <!-- <span class="number">-</span>
                                 <span class="unit"></span>
                                 <span class="number">-</span>
@@ -108,7 +124,10 @@
                 <span class="number">-</span>
                 <span class="unit"></span>
               </p>
-              <p class="infoName">上次清扫时间</p>
+              <p class="infoName">
+                <span class="cn_lang">上次清扫时间</span>
+                <span class="en_lang">Last cleaning time</span>
+              </p>
             </div>
           </li>
           <div class="infoLine"></div>
@@ -116,9 +135,15 @@
             <div class="infoWrap">
               <p class="infoNum workTime">
                 <span class="number">6</span>
-                <span class="unit">分</span>
+                <span class="unit">
+                  <span class="cn_lang">分</span>
+                <span class="en_lang">min</span>
+                </span>
                 <span class="number">20</span>
-                <span class="unit">秒</span>
+                <span class="unit">
+                  <span class="cn_lang">分</span>
+                <span class="en_lang">s</span>
+                </span>
                 <!-- <span class="number">-</span>
                                 <span class="unit"></span>
                                 <span class="number">-</span>
@@ -130,7 +155,10 @@
                 <span class="number">-</span>
                 <span class="unit"></span>
               </p>
-              <p class="infoName">累计清扫时间</p>
+              <p class="infoName">
+                <span class="cn_lang">累计清扫时间</span>
+                <span class="en_lang">Cumulative usage time</span>
+              </p>
             </div>
           </li>
         </ul>
@@ -141,7 +169,10 @@
 
           <li class="fnItem spinner">
             <div class="fnWrap">
-              <p class="fnName">模式</p>
+              <p class="fnName">
+                <span class="cn_lang">模式</span>
+                <span class="en_lang">Mode</span>
+              </p>
               <!-- <p class="fnStatus">节能模式</p> -->
             </div>
             <div class="fnBox">
@@ -161,7 +192,10 @@
 
           <li class="fnItem ledCard">
             <div class="fnWrap">
-              <p class="fnName">LED照明</p>
+              <p class="fnName">
+                <span class="cn_lang">LED照明</span>
+                <span class="en_lang">LED Lighting</span>
+              </p>
               <!-- <p class="fnStatus">已开启</p> -->
             </div>
             <div class="fnBox">
@@ -172,7 +206,10 @@
 
           <li class="fnItem lvInfo">
             <div class="fnWrap">
-              <p class="fnName">滤芯信息</p>
+              <p class="fnName">
+                <span class="cn_lang">滤芯信息</span>
+                <span class="en_lang">Filter Information</span>
+              </p>
             </div>
             <div class="fnBox">
               <div class="fnImg fnImgItem1"></div>
@@ -182,7 +219,10 @@
 
           <li class="fnItem instructions">
             <div class="fnWrap">
-              <p class="fnName">使用说明</p>
+              <p class="fnName">
+                <span class="cn_lang">使用说明</span>
+                <span class="en_lang">Manual</span>
+              </p>
             </div>
             <div class="fnBox">
               <div class="fnImg fnImgItem4"></div>
@@ -240,11 +280,17 @@
       <section class="devRecord">
         <div class="devRecordWrap">
           <div class="recordTitleWrap">
-            <p class="recordTitle">近3次清扫记录</p>
+            <p class="recordTitle">
+              <span class="cn_lang">近3次清扫记录</span>
+              <span class="en_lang">Records of the last three cleanings</span>
+            </p>
           </div>
           <div class="recordEmptyList">
             <div class="recordEmptyImg"></div>
-            <div class="recordEmptyTxt">暂无记录</div>
+            <div class="recordEmptyTxt">
+              <span class="cn_lang">暂无记录</span>
+              <span class="en_lang">No record</span>
+            </div>
           </div>
           <ul class="recordList">
             <li class="recordItem">
@@ -252,10 +298,16 @@
                 <p class="circle">34</p>
               </div>
               <div class="recordMiddle">
-                <p class="up">清扫时长</p>
+                <p class="up">
+                  <span class="cn_lang">清扫时长</span>
+                  <span class="en_lang">Cleaning time</span>
+                </p>
                 <p class="down">2021/11/12 14:26</p>
               </div>
-              <div class="recordRight">2分48秒</div>
+              <div class="recordRight">
+                <span class="cn_lang">2分48秒</span>
+                <span class="en_lang">2min48s</span>
+              </div>
             </li>
             <div class="line"></div>
             <li class="recordItem">
@@ -263,11 +315,15 @@
                 <p class="circle">35</p>
               </div>
               <div class="recordMiddle">
-                <p class="up">清扫时长</p>
+                <p class="up">
+                  <span class="cn_lang">清扫时长</span>
+                  <span class="en_lang">Cleaning time</span>
+                </p>
                 <p class="down">2021/11/12 14:26</p>
               </div>
               <div class="recordRight">
-                <p>2分48秒</p>
+                <span class="cn_lang">2分48秒</span>
+                <span class="en_lang">2min48s</span>
               </div>
 
             </li>
@@ -277,10 +333,16 @@
                 <p class="circle">36</p>
               </div>
               <div class="recordMiddle">
-                <p class="up">清扫时长</p>
+                <p class="up">
+                  <span class="cn_lang">清扫时长</span>
+                  <span class="en_lang">Cleaning time</span>
+                </p>
                 <p class="down">2021/11/12 14:26</p>
               </div>
-              <div class="recordRight">2分48秒</div>
+              <div class="recordRight">
+                <span class="cn_lang">2分48秒</span>
+                <span class="en_lang">2min48s</span>
+              </div>
             </li>
           </ul>
         </div>
@@ -353,17 +415,38 @@
     <div class="shelter" display="block"></div>
     <div class="msg-div" display="block">
       <div class="msg-main">
-        <div class="msg-title" data-locale="connect_fail">连接超时</div>
+        <div class="msg-title" data-locale="connect_fail">
+          <span class="cn_lang">连接超时</span>
+          <span class="en_lang">Connection timed out</span>
+        </div>
         <p class="msg-content">
-          <span data-locale="try_again">请尝试以下操作：</span>
-          <br><span data-locale="tip1">1.请确认设备接通电源并处开机状态 </span>
-          <br><span data-locale="tip2">2.将手机靠近设备 </span>
-          <br><span data-locale="tip3">3.重启手机蓝牙</span>
+          <span class="cn_lang" data-locale="try_again">请尝试以下操作：</span>
+          <br class="cn_lang cn_lang_br">
+          <span data-locale="tip1">
+            <span class="cn_lang">1.请确认设备接通电源并处开机状态</span>
+          <span class="en_lang">1. Confrm that the batter power is normal.</span>
+          </span>
+          <br>
+          <span data-locale="tip2">
+            <span class="cn_lang">2.将手机靠近设备 </span>
+          <span class="en_lang">2. Place the phone close to the device.</span>
+          </span>
+          <br>
+          <span data-locale="tip3">
+            <span class="cn_lang">3.重启手机蓝牙</span>
+          <span class="en_lang">3. Restar phone Bluetooth</span>
+          </span>
         </p>
         <div class="msg-footer">
-          <div class="btn_ok btn_l" id="btn_ok">稍后重试</div>
+          <div class="btn_ok btn_l" id="btn_ok">
+            <span class="cn_lang">稍后重试</span>
+            <span class="en_lang">Tr Again</span>
+          </div>
           <div class="line"></div>
-          <div class="btn_ok btn_r" id="btn_ok">重新连接</div>
+          <div class="btn_ok btn_r" id="btn_ok">
+            <span class="cn_lang">重新连接</span>
+            <span class="en_lang">Reconnect</span>
+          </div>
         </div>
       </div>
     </div>
@@ -385,6 +468,7 @@
   console.log('开始调试');
   // 中文 zh   英文 en
   var ctLanguage = 'en'; // 语言
+  // ctLanguage = 'zh';
 
   var isIOS = !!navigator.userAgent.match(/iPhone/i);
   console.log('iOS:' + isIOS);
@@ -475,7 +559,11 @@
   function initStatus(workStatus, recordStatus, topMsgStatus) {
     if (workStatus == 0) { //未连接
       clearDataToStart();
-      this.document.getElementsByClassName("statusLeft")[0].innerText = "未连接";
+      if (ctLanguage == 'en') {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "Disconnected";
+      } else {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "未连接";
+      }
       // 显示'重新连接',隐藏'工作中'图标
       this.document.getElementsByClassName("statusTxt")[0].style.display = "block";
       this.document.getElementsByClassName("statusImg")[0].style.display = "none";
@@ -486,7 +574,11 @@
       clearDataToStart();
     } else if (workStatus == 2) { //连接失败 --> 连接超时
       clearDataToStart();
-      this.document.getElementsByClassName("statusLeft")[0].innerText = "未连接";
+      if (ctLanguage == 'en') {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "Disconnected";
+      } else {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "未连接";
+      }
       // 显示'重新连接',隐藏'工作中'图标
       this.document.getElementsByClassName("statusTxt")[0].style.display = "block";
       this.document.getElementsByClassName("statusImg")[0].style.display = "none";
@@ -496,6 +588,11 @@
       // 设置禁用状态
       disableControls();
     } else if (workStatus == 3) { //工作中，空记录
+      if (ctLanguage == 'en') {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "Working";
+      } else {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "工作中";
+      }
       // 显示'工作中'图标,隐藏'重新连接' 
       this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
       this.document.getElementsByClassName("statusImg")[0].style.display = "none";
@@ -503,7 +600,12 @@
       //TODO
     } else if (workStatus == 5) { //工作中，三条记录
       console.log('工作中')
-        // 连接中 icon 隐藏
+      if (ctLanguage == 'en') {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "Working";
+      } else {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "工作中";
+      }
+      // 连接中 icon 隐藏
       this.document.getElementsByClassName("statusImgLoading")[0].style.display = "none";
       // 显示上次清扫时间
       this.document.getElementsByClassName("workTime")[0].style.display = "block";
@@ -512,7 +614,11 @@
       this.document.getElementsByClassName("initTime")[1].style.display = "none";
     } else if (workStatus == 6) { //连接中
       clearDataToStart();
-      this.document.getElementsByClassName("statusLeft")[0].innerText = "连接中";
+      if (ctLanguage == 'en') {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "Connecting";
+      } else {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "连接中";
+      }
       // 显示'重新连接',隐藏'工作中'图标
       this.document.getElementsByClassName("statusImgLoading")[0].style.display = "block";
       this.document.getElementsByClassName("statusImg")[0].style.background =
@@ -521,7 +627,11 @@
       disableControls();
     } else if (workStatus == 7) { //待机
       clearDataToStart();
-      this.document.getElementsByClassName("statusLeft")[0].innerText = "待机";
+      if (ctLanguage == 'en') {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "Standby";
+      } else {
+        this.document.getElementsByClassName("statusLeft")[0].innerText = "待机";
+      }
       // 显示电量
       this.document.getElementsByClassName("statusMiddle")[0].style.display = "block";
       // 设置禁用状态
@@ -579,7 +689,7 @@
 
     // hideAlert() // 隐藏前提下 topMsgStatus 生效
 
-    initStatus(0, 0, 2);
+    initStatus(2, 0, 0);
     // initStatus(workStatus,recordStatus,topMsgStatus )
     // workStatus 0:未连接 1:重连 2:连接失败 3:工作中，空记录 4:待机中，充电中， 三条记录 5:工作中，三条记录 6:连接中 7:待机
     // recordStatus 0:未连接 1:重连
@@ -592,10 +702,11 @@
     console.log("index html init")
 
     // 栅格化适配
-    gridAdaptation()
-      // showError();
+    // gridAdaptation()
 
-    // hideAlert();   
+    // showError();
+
+    // hideAlert();
 
     console.log('中英文切换')
     if (ctLanguage == 'en') {

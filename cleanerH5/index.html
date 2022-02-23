@@ -418,9 +418,9 @@
           </div>
         </div>
         <div class="stateBtn">
-          <div class="stateFn">取消</div>
+          <div class="stateFn btn_l">取消</div>
           <div class="line"></div>
-          <div class="stateFn">同意</div>
+          <div class="stateFn btn_r">同意</div>
         </div>
       </div>
     </div>
@@ -684,6 +684,10 @@
     this.document.getElementsByClassName("statusLeft")[0].classList.add('textAlignCenter')
     this.document.getElementsByClassName("statusRight")[0].classList.add('textAlignCenter')
     console.log('-栅格化适配-')
+    this.document.getElementsByClassName("statementPopup")[0].style.width = "calc(50% + 6px)";
+    this.document.getElementsByClassName("statementPopup")[0].style.left = "0";
+    this.document.getElementsByClassName("statementPopup")[0].style.right = "0";
+    this.document.getElementsByClassName("statementPopup")[0].style.margin = "0 auto";
     this.document.getElementsByClassName("msg-div")[0].style.width = "calc(50% + 6px)";
     this.document.getElementsByClassName("msg-div")[0].style.left = "0";
     this.document.getElementsByClassName("msg-div")[0].style.right = "0";

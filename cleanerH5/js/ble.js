@@ -186,7 +186,7 @@ function onBluetoothDeviceFound() {
       console.log('ios：附近设备mac:', mac)
       console.log('ios：deviceIdMac:', deviceIdMac)
         // 先赋值 
-      UUID_OR_Mac = data.deviceId;
+        //   UUID_OR_Mac = data.deviceId;
       if (mac === deviceIdMac) { // 注册 匹配流程
         window.hilink.stopBluetoothDevicesDiscovery(); // 停止扫描
         UUID_OR_Mac = data.deviceId;
@@ -201,7 +201,7 @@ function onBluetoothDeviceFound() {
       $('.receiveId').html('接收值ID:' + data[0].advertisServiceUUIDs);
       $('.receive').html('接收值:' + data[0].advertisData);
 
-      UUID_OR_Mac = data[0].deviceId;
+      //   UUID_OR_Mac = data[0].deviceId;
 
       if (data[0].deviceId == deviceIdMac) { // 注册 匹配流程
         isDiscover = true;

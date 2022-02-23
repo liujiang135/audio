@@ -1411,13 +1411,13 @@
 }
 
 .stateBtn .stateFn {
-    height: 24px;
-    line-height: 24px;
+    height: 40px;
+    line-height: 40px;
     letter-spacing: 1px;
     flex: 1;
     text-align: center;
-    color: #007dff;
-    font-size: 1.6rem;
+    color: #0A59F7;
+    font-size: 1.4rem;
 }
 
 .dark .stateBtn .stateFn {

@@ -143,7 +143,7 @@ function getCurrentRegisteredDevice() {
     deviceIdMac = data.deviceId;
     //deviceIdMac = 'FA:34:56:78:79:A2' //debug test 
     console.log('currentRegisteredDeviceCallBack data:', data)
-    console.log('当前设备mac地址:', deviceIdMac)
+    console.log('本机蓝牙设备的地址:', deviceIdMac)
 
     // 开始扫描
     onBluetoothDeviceFound();
@@ -196,10 +196,6 @@ function onBluetoothDeviceFound() {
       console.log('安卓:附近设备的MAC data:', data);
       console.log('安卓:附近设备的MAC:', data[0].deviceId);
       console.log('安卓:deviceIdMac:', deviceIdMac);
-
-
-      $('.receiveId').html('接收值ID:' + data[0].advertisServiceUUIDs);
-      $('.receive').html('接收值:' + data[0].advertisData);
 
       //   UUID_OR_Mac = data[0].deviceId;
 
@@ -255,8 +251,12 @@ function notifyBle() {
         // console.log(UUID_OR_Mac,  notifyUuids[i].serviceUuid, notifyUuids[i].characteristicUuid);
         //   设置低功耗蓝牙设备是否开启指定服务的特征值的模式
         var status = window.hilink.notifyBLECharacteristicValueChange(UUID_OR_Mac, notifyUuids[i].serviceUuid, notifyUuids[i].characteristicUuid, true);
+        console.log('---------------------------------');
         console.log(notifyUuids[i].sid + " notify status" + status);
         console.log(notifyUuids[i].sid + " ；" + notifyUuids[i].characteristicUuid);
+        $('.receiveId').html('notifyUuids_sid: ' + notifyUuids[i].sid + " notify status" + status);
+        $('.receive').html('characteristicUuid: ' + notifyUuids[i].characteristicUuid);
+
         if (status === 0) {
           i++
         }

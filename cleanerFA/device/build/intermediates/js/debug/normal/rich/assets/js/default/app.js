@@ -114,7 +114,7 @@ var $app_script$ = __webpack_require__(/*! !../../../../../../../../../../Librar
 /*! exports provided: appID, appName, versionName, versionCode, minPlatformVersion, pages, deviceType, window, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"appID\":\"com.newpower.ohoscleaner2\",\"appName\":\"$string:device_DeviceAbility\",\"versionName\":\"1.0.0\",\"versionCode\":1000000,\"minPlatformVersion\":4,\"pages\":[\"pages/index/index\",\"pages/setting/setting\",\"pages/about/about\"],\"deviceType\":[\"phone\"],\"window\":{\"autoDesignWidth\":true,\"designWidth\":720}}");
+module.exports = JSON.parse("{\"appID\":\"com.newpower.ohoscleaner2\",\"appName\":\"$string:device_DeviceAbility\",\"versionName\":\"1.0.0\",\"versionCode\":1000000,\"minPlatformVersion\":4,\"pages\":[\"pages/index/index\",\"pages/setting/setting\",\"pages/about/about\"],\"deviceType\":[\"phone\",\"tablet\"],\"window\":{\"autoDesignWidth\":true,\"designWidth\":720}}");
 
 /***/ }),
 

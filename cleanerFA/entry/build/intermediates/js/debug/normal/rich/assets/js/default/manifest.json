@@ -8,7 +8,8 @@
         "pages/index/index"
     ],
     "deviceType": [
-        "phone"
+        "phone",
+        "tablet"
     ],
     "window": {
         "autoDesignWidth": true,

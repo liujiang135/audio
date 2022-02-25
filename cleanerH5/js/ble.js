@@ -13,7 +13,8 @@ var notifyUuids = [{
   switchOn: '00', //下发数据为16进制, 不要带0x
   switchOff: '01',
   serviceUuid: '15f1e600-a277-43fc-a484-dd39ef8a9100',
-  characteristicUuid: '15f1e602-a277-43fc-a484-dd39ef8a9100'
+  characteristicUuid: '15f1e602-a277-43fc-a484-dd39ef8a9100',
+  characteristicUuid2: '15f1e601-a277-43fc-a484-dd39ef8a9100'
 }];
 
 var isIOS = !!navigator.userAgent.match(/iPhone/i);
@@ -141,7 +142,6 @@ function getCurrentRegisteredDevice() {
   window.currentRegisteredDeviceCallBack = res => {
     let data = dataChange(res);
     deviceIdMac = data.deviceId;
-    //deviceIdMac = 'FA:34:56:78:79:A2' //debug test 
     console.log('currentRegisteredDeviceCallBack data:', data)
     console.log('本机蓝牙设备的地址:', deviceIdMac)
 
@@ -157,7 +157,7 @@ function onBluetoothDeviceFound() {
   window.bluetoothDeviceCallBack = res => {
     let data = dataChange(res);
     statusLeft.innerHTML = '连接中...';
-    console.log('附近设备的信息:', data);
+    
 
     // 把被扫描到的蓝牙设备的mac地址与当前要建立连接设备的mac地址做对比，
     if (isIOS) {
@@ -183,8 +183,8 @@ function onBluetoothDeviceFound() {
         return tmp2
       })(advertisData);
 
-      console.log('ios：附近设备mac:', mac)
-      console.log('ios：deviceIdMac:', deviceIdMac)
+    //   console.log('ios：附近设备mac:', mac)
+    //   console.log('ios：deviceIdMac:', deviceIdMac)
         // 先赋值 
         //   UUID_OR_Mac = data.deviceId;
       if (mac === deviceIdMac) { // 注册 匹配流程
@@ -193,13 +193,22 @@ function onBluetoothDeviceFound() {
         bleConnection(UUID_OR_Mac);
       }
     } else {
-      console.log('安卓:附近设备的MAC data:', data);
-      console.log('安卓:附近设备的MAC:', data[0].deviceId);
-      console.log('安卓:deviceIdMac:', deviceIdMac);
+
+    //   console.log('安卓:附近设备的MAC data:', data);
+    //   console.log('安卓:附近设备的MAC:', data[0].deviceId);
+    //   console.log('安卓:deviceIdMac:', deviceIdMac);
 
       //   UUID_OR_Mac = data[0].deviceId;
 
+      console.log('附近设备的信息:',  data[0].deviceId);
+            
+
+
       if (data[0].deviceId == deviceIdMac) { // 注册 匹配流程
+
+        console.log('安卓:deviceIdMac:', deviceIdMac);
+        console.log('附近设备的MAC:', data[0].deviceId);
+
         isDiscover = true;
         window.hilink.stopBluetoothDevicesDiscovery(); //停止搜寻附近的蓝牙设备
         UUID_OR_Mac = data[0].deviceId;
@@ -286,6 +295,22 @@ function writeBLECharacteristicValue(data) {
     console.log('对蓝牙设备发送数据-开', data)
   }
 }
+
+
+function readBLECharacteristicValue(){
+    console.log('---对蓝牙设备读取数据----')
+    console.log('UUID_OR_Mac:', UUID_OR_Mac)
+    console.log('serviceUuid:', notifyUuids[0].serviceUuid)
+    console.log('characteristicUuid:', notifyUuids[0].characteristicUuid2)
+    let result = window.hilink.readBLECharacteristicValue(UUID_OR_Mac, notifyUuids[0].serviceUuid, notifyUuids[0].characteristicUuid2,'readBLECharacteristicValueCallBack');
+    console.log('result:', result)
+    window.readBLECharacteristicValueCallBack = res => {
+      console.log('-----对蓝牙设备发送数据--回调：', res)
+      let data = dataChange(res);
+      console.log('对蓝牙设备读取数据-开', data)
+    }
+}
+  
 
 function doSomething() {
   console.log('do something...')

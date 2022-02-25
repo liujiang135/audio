@@ -134,7 +134,7 @@ t.read=function(e,t,o,r,n){var i,s,a=8*n-r-1,g=(1<<a)-1,l=g>>1,u=-7,c=o?n-1:0,p=
 /*! exports provided: appID, appName, versionName, versionCode, minPlatformVersion, pages, deviceType, window, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"appID\":\"com.newpower.ohoscleaner2\",\"appName\":\"$string:entry_MainAbility\",\"versionName\":\"1.0.0\",\"versionCode\":1000000,\"minPlatformVersion\":4,\"pages\":[\"pages/index/index\"],\"deviceType\":[\"phone\"],\"window\":{\"autoDesignWidth\":true,\"designWidth\":720}}");
+module.exports = JSON.parse("{\"appID\":\"com.newpower.ohoscleaner2\",\"appName\":\"$string:entry_MainAbility\",\"versionName\":\"1.0.0\",\"versionCode\":1000000,\"minPlatformVersion\":4,\"pages\":[\"pages/index/index\"],\"deviceType\":[\"phone\",\"tablet\"],\"window\":{\"autoDesignWidth\":true,\"designWidth\":720}}");
 
 /***/ }),
 

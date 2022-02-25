@@ -14,7 +14,7 @@
     "name": "com.newpower.ohoscleaner2.device.DeviceApplication",
     "mainAbility": "com.newpower.ohoscleaner2.device.DeviceAbility",
     "deviceType": [
-      "phone"
+      "phone","tablet"
     ],
     "distro": {
       "deliveryWithInstall": true,

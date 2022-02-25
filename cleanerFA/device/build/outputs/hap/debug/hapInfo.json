@@ -2,5 +2,9 @@
     {
         "hapPath": "device-entry-debug-rich-signed.hap",
         "device": "phone"
+    },
+    {
+        "hapPath": "device-entry-debug-rich-signed.hap",
+        "device": "tablet"
     }
 ]

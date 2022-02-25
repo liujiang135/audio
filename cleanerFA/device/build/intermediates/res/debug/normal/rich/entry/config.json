@@ -83,7 +83,8 @@
             }
         ],
         "deviceType": [
-            "phone"
+            "phone",
+            "tablet"
         ],
         "mainAbility": "com.newpower.ohoscleaner2.device.DeviceAbility",
         "distro": {

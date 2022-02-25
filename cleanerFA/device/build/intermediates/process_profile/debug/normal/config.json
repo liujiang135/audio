@@ -19,7 +19,8 @@
     },
     "module": {
         "deviceType": [
-            "phone"
+            "phone",
+            "tablet"
         ],
         "abilities": [
             {

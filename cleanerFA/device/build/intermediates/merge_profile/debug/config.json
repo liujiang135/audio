@@ -20,7 +20,8 @@
     "module": {
         "name": "com.newpower.ohoscleaner2.device.DeviceApplication",
         "deviceType": [
-            "phone"
+            "phone",
+            "tablet"
         ],
         "distro": {
             "deliveryWithInstall": true,

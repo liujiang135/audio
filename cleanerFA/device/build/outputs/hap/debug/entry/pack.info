@@ -11,7 +11,8 @@
             {
                 "mainAbility": "com.newpower.ohoscleaner2.device.DeviceAbility",
                 "deviceType": [
-                    "phone"
+                    "phone",
+                    "tablet"
                 ],
                 "abilities": [
                     {
@@ -49,11 +50,11 @@
             {
                 "mainAbility": "com.newpower.ohoscleaner2.MainAbility",
                 "deviceType": [
-                    "phone"
+                    "phone",
+                    "tablet"
                 ],
                 "abilities": [
                     {
-                        "visible": true,
                         "name": "com.newpower.ohoscleaner2.MainAbility",
                         "label": "$string:entry_MainAbility"
                     },
@@ -98,7 +99,8 @@
     "packages": [
         {
             "deviceType": [
-                "phone"
+                "phone",
+                "tablet"
             ],
             "moduleType": "entry",
             "deliveryWithInstall": true,

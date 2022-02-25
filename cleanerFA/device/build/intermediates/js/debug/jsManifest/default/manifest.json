@@ -10,7 +10,8 @@
         "pages/about/about"
     ],
     "deviceType": [
-        "phone"
+        "phone",
+        "tablet"
     ],
     "window": {
         "autoDesignWidth": true,

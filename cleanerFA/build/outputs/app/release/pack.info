@@ -9,13 +9,51 @@
         },
         "modules": [
             {
-                "mainAbility": "com.newpower.ohoscleaner2.MainAbility",
+                "mainAbility": "com.newpower.ohoscleaner2.device.DeviceAbility",
                 "deviceType": [
-                    "phone",
-                    "tablet"
+                    "phone"
                 ],
                 "abilities": [
                     {
+                        "visible": true,
+                        "name": "com.newpower.ohoscleaner2.device.DeviceAbility",
+                        "label": "$string:device_DeviceAbility"
+                    },
+                    {
+                        "visible": true,
+                        "name": "com.newpower.ohoscleaner2.device.service.BleServiceAbility"
+                    },
+                    {
+                        "visible": true,
+                        "name": "com.huawei.ailifeability.NetConfigAbility",
+                        "label": "NetConfigAbility"
+                    },
+                    {
+                        "visible": true,
+                        "name": "com.huawei.ailifeability.DeviceMgrAbility",
+                        "label": "DeviceMgrAbility"
+                    }
+                ],
+                "distro": {
+                    "moduleType": "feature",
+                    "installationFree": true,
+                    "deliveryWithInstall": true,
+                    "moduleName": "device"
+                },
+                "apiVersion": {
+                    "compatible": 4,
+                    "releaseType": "Release",
+                    "target": 5
+                }
+            },
+            {
+                "mainAbility": "com.newpower.ohoscleaner2.MainAbility",
+                "deviceType": [
+                    "phone"
+                ],
+                "abilities": [
+                    {
+                        "visible": true,
                         "name": "com.newpower.ohoscleaner2.MainAbility",
                         "label": "$string:entry_MainAbility"
                     },
@@ -60,12 +98,19 @@
     "packages": [
         {
             "deviceType": [
-                "phone",
-                "tablet"
+                "phone"
+            ],
+            "moduleType": "feature",
+            "deliveryWithInstall": true,
+            "name": "device-entry-release-rich"
+        },
+        {
+            "deviceType": [
+                "phone"
             ],
             "moduleType": "entry",
             "deliveryWithInstall": true,
-            "name": "entry-debug-rich-unsigned"
+            "name": "entry-release-rich"
         }
     ]
 }

@@ -1,0 +1,18 @@
+{
+    "packages": [
+        {
+            "moduleType": "feature",
+            "installationFree": true,
+            "moduleName": "device",
+            "packageName": "device-entry-release-rich",
+            "packageSize": "1420915"
+        },
+        {
+            "moduleType": "entry",
+            "installationFree": true,
+            "moduleName": "entry",
+            "packageName": "entry-release-rich",
+            "packageSize": "1149543"
+        }
+    ]
+}

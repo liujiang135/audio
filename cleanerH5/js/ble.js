@@ -7,7 +7,8 @@ window.onload = function() {
 }
 
 var deviceIdMac = ''; //注册时候的mac地址
-var UUID_OR_Mac = ''; //通过扫描设备拿到的devicesID, 安卓是mac地址, ios是UUID
+var UUID_OR_Mac = ''; //通过扫描设备拿到的devicesID, 安卓是mac地址, ios是UUID, 也就是sn
+var hilinkDevId = '';
 var isDiscover = false;
 var notifyUuids = [{
   switchOn: '00', //下发数据为16进制, 不要带0x
@@ -142,6 +143,7 @@ function getCurrentRegisteredDevice() {
   window.currentRegisteredDeviceCallBack = res => {
     let data = dataChange(res);
     deviceIdMac = data.deviceId;
+    hilinkDevId = data.hilinkDevId;
     console.log('currentRegisteredDeviceCallBack data:', data)
     console.log('本机蓝牙设备的地址:', deviceIdMac)
 
@@ -188,6 +190,7 @@ function onBluetoothDeviceFound() {
         // 先赋值 
         //   UUID_OR_Mac = data.deviceId;
       if (mac === deviceIdMac) { // 注册 匹配流程
+        isDiscover = true;
         window.hilink.stopBluetoothDevicesDiscovery(); // 停止扫描
         UUID_OR_Mac = data.deviceId;
         bleConnection(UUID_OR_Mac);
@@ -197,17 +200,17 @@ function onBluetoothDeviceFound() {
     //   console.log('安卓:附近设备的MAC data:', data);
     //   console.log('安卓:附近设备的MAC:', data[0].deviceId);
     //   console.log('安卓:deviceIdMac:', deviceIdMac);
-
       //   UUID_OR_Mac = data[0].deviceId;
-
-      console.log('附近设备的信息:',  data[0].deviceId);
+      // console.log('附近设备的信息:',  data[0].deviceId);
             
-
+      // console.log('附近设备DATA:', data[0]);
 
       if (data[0].deviceId == deviceIdMac) { // 注册 匹配流程
-
+      
         console.log('安卓:deviceIdMac:', deviceIdMac);
+        console.log('附近设备DATA:', data[0]);
         console.log('附近设备的MAC:', data[0].deviceId);
+
 
         isDiscover = true;
         window.hilink.stopBluetoothDevicesDiscovery(); //停止搜寻附近的蓝牙设备
@@ -230,11 +233,28 @@ function onBluetoothDeviceFound() {
 // 5.使用mac地址去连接蓝牙设备
 function bleConnection(mac) {
   console.log('匹配成功，开始尝试连接蓝牙设备...');
-  if (isIOS) {
-    window.hilink.createBLEConnection(mac);
-  } else {
-    window.hilink.createBleConnection(mac, 2); // 指定蓝牙连接方式
+  console.log('bleConnection hilinkDevId:', hilinkDevId);
+  console.log('bleConnection deviceIdMac:', deviceIdMac);
+  // 尝试使用新版本的API
+  window.hilink.connectBle(hilinkDevId, deviceIdMac, 'connectBleCallback');
+  window.connectBleCallback = res => {
+    let data = dataChange(res);
+
+    console.log('BLE连接结果:', data);
+
   }
+
+
+
+
+
+  // 老API
+  // if (isIOS) {
+  //   window.hilink.createBLEConnection(mac);
+   
+  // } else {
+  //   window.hilink.createBleConnection(mac, 2); // 指定蓝牙连接方式
+  // }
 
 }
 

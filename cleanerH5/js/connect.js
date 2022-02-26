@@ -8,7 +8,6 @@ window.onload = function() {
 
 		getSystemInfo();
 		
-		
 	}
 	
 	//注册30s以上，提示连接超时
@@ -163,7 +162,8 @@ function connectDevice() {
 		console.log('蓝牙设备连接结果', data.connected);
 
 		if(data.connected) { // 连接成功，去到云端注册设备。
-			registerBleDevice(mac);
+
+			registerBleDevice(mac, deviceId);
 		} else { // 连接失败，重新获取未注册的设备，进行连接。
 			getUnRegisterDeviceFun();
 		}
@@ -174,15 +174,26 @@ function connectDevice() {
     } else {
         window.hilink.createBleConnection(deviceId,2); // 指定蓝牙连接方式
     }
+
 }
 
 // 注册设备,注册成功后会在APP设备列表页显示设备
 function registerBleDevice(mac) {
-	console.log('开始注册蓝牙设备:', mac)
-	window.hilink.registerBleDevice(mac, fwv, hwv, 'registerBleDeviceCallback')
-	window.registerBleDeviceCallback = (res) => {
-		console.log('蓝牙设备注册结果:',res)
+
+	if(!isIOS) { // Android设备
+		console.log('开始注册蓝牙设备(Android):', mac)
+		window.hilink.registerBleDevice(mac, fwv, hwv, 'registerBleDeviceCallback')
+		window.registerBleDeviceCallback = (res) => {
+		console.log('蓝牙设备注册结果(Android)::',res)
+		}
+	}else{
+		console.log('开始注册蓝牙设备（iOS）:', mac)
+		window.hilink.registerBleDevice(deviceId,mac, fwv, hwv, 'registerBleDeviceCallback')
+		window.registerBleDeviceCallback = (res) => {
+		console.log('蓝牙设备注册结果(iOS):',res)
+		}
 	}
+
 }
 
 // IOS发现附近蓝牙
@@ -230,7 +241,6 @@ function getMAC(data) {
 		}
 	}
 	return [0, ''];
-
 }
 
 // IOS连接设备

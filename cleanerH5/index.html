@@ -713,15 +713,42 @@
     // recordStatus 0:未连接 1:重连
     // topMsgStatus  0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
 
+
+
+    var tmpVal = "{\"t\":01,\"v\":\"FA0103066401000101000701FB\"}";
+    $('.input1').val(tmpVal);
+
+    var data='*****'
+    $('.receive').html('收到的数据: ' + data);
+
   }
 
   function test() {
+    // var tmpVal = "{\"t\":01,\"v\":\"FA0103066401000101000701FB\"}";
+    // $('.input1').text=tmpVal;
     $('.sendBtn').click(function() {
       var inputVal = $('.input1').val();
       console.log('--------------')
       console.log('-发送输入框的值-', inputVal)
       console.log('--------------')
-      writeBLECharacteristicValue(inputVal)
+
+     
+      console.log('-发送输入框的值-', inputVal)
+      window.hilink.sendCommand (hilinkDevId,  deviceIdMac,  notifyUuids.serviceUuid, inputVal,'sendCommandCallback');
+      window.sendCommandCallback = res => {
+        let data = dataChange(res);
+        console.log('写数据给模块信息，回调:', data);
+      }
+
+      // var tmpVal = "{\'on\':0}";
+      // console.log('-发送输入框的值-', tmpVal)
+      // window.hilink.sendCommand (hilinkDevId,  deviceIdMac,  notifyUuids.serviceUuid, tmpVal,'sendCommandCallback');
+      // window.sendCommandCallback = res => {
+      //   let data = dataChange(res);
+      //   console.log('写数据给模块信息，回调:', data);
+      // }
+
+
     });
   }
 

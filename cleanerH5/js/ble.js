@@ -115,6 +115,7 @@ function getBluetoothAdapterState() {
 
 // 2.监听蓝牙设备连接状态，连接结果通过回调得知(先监听后连接)
 function onBLEConnectionStateChange() {
+  console.log('监听蓝牙设备状态变化');
   window.hilink.onBLEConnectionStateChange('bleConnectionStateCallBack');
 
   // 有设备连接后才会触发回调
@@ -211,8 +212,6 @@ function onBluetoothDeviceFound() {
         console.log('附近设备DATA:', data[0]);
         console.log('附近设备的MAC:', data[0].deviceId);
 
-
-        isDiscover = true;
         window.hilink.stopBluetoothDevicesDiscovery(); //停止搜寻附近的蓝牙设备
         UUID_OR_Mac = data[0].deviceId;
         bleConnection(UUID_OR_Mac);
@@ -232,6 +231,9 @@ function onBluetoothDeviceFound() {
 
 // 5.使用mac地址去连接蓝牙设备
 function bleConnection(mac) {
+
+  onBLEConnectionStateChange();
+
   console.log('匹配成功，开始尝试连接蓝牙设备...');
   console.log('bleConnection hilinkDevId:', hilinkDevId);
   console.log('bleConnection deviceIdMac:', deviceIdMac);
@@ -239,9 +241,40 @@ function bleConnection(mac) {
   window.hilink.connectBle(hilinkDevId, deviceIdMac, 'connectBleCallback');
   window.connectBleCallback = res => {
     let data = dataChange(res);
-
     console.log('BLE连接结果:', data);
 
+
+    console.log('bleConnectionStateCallBack:', data);
+    console.log('蓝牙设备连接结果:', data.errcode);
+
+    if (data.errcode == 0 ) {
+      statusLeft.innerHTML = '已连接';
+
+      //尝试写
+      // hilink.sendCommand (hilinkDevId,  deviceIdMac,  notifyUuids.serviceUuid, '{\'on\':1}','sendCommandCallback');
+      // window.sendCommandCallback = res => {
+      //   let data = dataChange(res);
+      //   console.log('写数据给模块信息，回调:', data);
+      // }
+
+      //尝试读 
+   
+      //dosomethings
+      window.hilink.subscribeBleEvent(hilinkDevId,  deviceIdMac,   'subscribeBleEventCallback');
+      window.subscribeBleEventCallback = res => {
+        let data = dataChange(res);
+        console.log('收到模块信息:', data);
+        $('.receive').html('收到的数据: ' + data);
+        
+      }
+
+
+    
+
+    } else {
+      isDiscover = false;
+      onBluetoothDeviceFound(); // 重新发现，匹配
+    }
   }
 
 

@@ -36,10 +36,9 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     ohosTestImplementation 'com.huawei.ohos.testkit:runner:1.0.0.100'
     implementation(group: 'com.huawei.hms', name: 'jsb-ohos-adapter', version: '5.3.0.303', ext: 'har')
-    implementation 'com.huawei.hms:jsb-ohos-adapter:1.0.0.300'
+    //implementation 'com.huawei.hms:jsb-ohos-adapter:1.0.0.300'
     implementation 'com.huawei.agconnect:agconnect-core-harmony:1.0.0.300'
 }
 decc {
     supportType = ['html', 'xml']
 }
-apply plugin: 'com.huawei.agconnect'

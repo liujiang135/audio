@@ -46,6 +46,15 @@ public class DeviceAbility extends AceAbility {
         }
         LogUtil.info(TAG, "onStart deviceId:" + deviceId);
         setPageParams("", intent.getParams());
+
+        TemplateUtil.init(this);
+        DeviceMgrAbility.register(this);
         super.onStart(intent);
+    }
+
+    @Override
+    public void onStop() {
+        DeviceMgrAbility.deregister();
+        super.onStop();
     }
 }

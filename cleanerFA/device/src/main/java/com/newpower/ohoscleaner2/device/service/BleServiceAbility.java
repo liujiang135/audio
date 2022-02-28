@@ -20,6 +20,11 @@ import java.util.Map;
 
 import com.huawei.ailife.service.kit.AiLifeServiceHelper;
 import com.huawei.ailife.service.kit.constants.ConnectResult;
+
+import com.baijia.app.cleaner.BaseDeviceDataHandler;
+import com.baijia.app.cleaner.DeviceDataCallback;
+import com.baijia.app.cleaner.StubDeviceDataHandler;
+
 import com.newpower.ohoscleaner2.device.hilink.HiLinkDataCallback;
 import com.newpower.ohoscleaner2.device.hilink.HiLinkDeviceHelper;
 import com.newpower.ohoscleaner2.device.util.LogUtil;
@@ -86,7 +91,12 @@ public class BleServiceAbility extends Ability {
         private static final int ACTION_MESSAGE_CODE_SUBSCRIBE = 1001;
         private static final int ACTION_MESSAGE_CODE_UNSUBSCRIBE = 1002;
         private static final int ACTION_MESSAGE_CODE_SEND_COMMAND = 1003;
+        private static final int ACTION_MESSAGE_CODE_DATA_CHANGED = 1004;
+        private static final int ACTION_MESSAGE_CODE_INIT_DEVICE_DATA = 1005;
         private static final int ACTION_MESSAGE_CODE_NOTIFY_DEVICE_ID = 1006;
+
+        private static final int ACTION_MESSAGE_CODE_GET_TEMPLATE = 1009;
+
         private static final String MESSAGE_KEY_SERVICE_ID = "serviceId";
         private static final String MESSAGE_KEY_CHARACTERISTIC = "param";
         private static final String STATE_SUCCESS = "success";
@@ -95,9 +105,11 @@ public class BleServiceAbility extends Ability {
         private HiLinkDeviceHelper hiLinkDeviceHelper;
 
         private int connectResult = ConnectResult.SERVICE_UNAVAILABLE;
-        private String deviceId;
+        private String deviceId = null;
 
         private IRemoteObject remoteObjectHandler = null;
+
+        private BaseDeviceDataHandler deviceDataHandler = null;
 
         private final HiLinkDataCallback hiLinkDataCallback = new HiLinkDataCallback() {
             @Override
@@ -115,6 +127,16 @@ public class BleServiceAbility extends Ability {
             super("BleServiceAbility_BleRemoteObj");
         }
 
+        private final DeviceDataCallback deviceDataCallback = new DeviceDataCallback() {
+            public void onResult(int code, String msg, Map<String, Object> map) {
+                sendData(map);
+            }
+        };
+
+        private BaseDeviceDataHandler getDeviceDataHandler() {
+            return new StubDeviceDataHandler(deviceId, deviceDataCallback);
+        }
+
         @Override
         public boolean onRemoteRequest(int code, MessageParcel data, MessageParcel reply, MessageOption option) {
             LogUtil.info(TAG, "code:" + code);
@@ -124,12 +146,28 @@ public class BleServiceAbility extends Ability {
                     remoteObjectHandler = data.readRemoteObject();
                     break;
                 }
+                case ACTION_MESSAGE_CODE_UNSUBSCRIBE: {
+                    remoteObjectHandler = null;
+                    break;
+                }
                 case ACTION_MESSAGE_CODE_SEND_COMMAND: {
                     String zsonStr = data.readString();
                     ZSONObject zsonObj = ZSONObject.stringToZSON(zsonStr);
                     hiLinkDeviceHelper.sendCommand(
                             zsonObj.getString(MESSAGE_KEY_SERVICE_ID),
                             zsonObj.getString(MESSAGE_KEY_CHARACTERISTIC));
+                    break;
+                }
+                case ACTION_MESSAGE_CODE_DATA_CHANGED: {
+                    String zsonStr = data.readString();
+                    ZSONObject zsonObj = ZSONObject.stringToZSON(zsonStr);
+                    for (Map.Entry<String, Object> entry : zsonObj.entrySet()) {
+                        deviceDataHandler.modifyDeviceProperty(entry.getKey(), entry.getValue());
+                    }
+                    break;
+                }
+                case ACTION_MESSAGE_CODE_INIT_DEVICE_DATA: {
+                    deviceDataHandler = getDeviceDataHandler();
                     break;
                 }
                 case ACTION_MESSAGE_CODE_NOTIFY_DEVICE_ID: {
@@ -148,8 +186,14 @@ public class BleServiceAbility extends Ability {
                     }
                     break;
                 }
-                case ACTION_MESSAGE_CODE_UNSUBSCRIBE: {
-                    remoteObjectHandler = null;
+                case ACTION_MESSAGE_CODE_GET_TEMPLATE: {
+                    ZSONObject template = TemplateUtil.getTemplate();
+                    Map<String, Object> dataMap = new HashMap<>();
+                    dataMap.put("template", template);
+                    Map<String, Object> zsonResult = new HashMap<>();
+                    zsonResult.put("code", SUCCESS);
+                    zsonResult.put("data", ZSONObject.toZSONString(dataMap));
+                    reply.writeString(ZSONObject.toZSONString(zsonResult));
                     break;
                 }
                 default: {

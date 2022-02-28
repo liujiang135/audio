@@ -17,7 +17,17 @@
     "protocolUserAgreement": "XXX User Agreement",
     "and": "and",
     "protocolPrivacyStatement": "About XXX Privacy Statement",
-    "rightOwned": "Rights All Rights Reserved ©2021XXX Ltd"
+    "rightOwned": "Rights All Rights Reserved ©2021XXX Ltd",
+
+
+    "more": "more",
+    "pack_up": "pack up",
+    "loading": "loading",
+    "pleaseChoose": "please choose",
+    "prompt": "warm prompt",
+    "useHiLink": "If you need to use the HiLink protocol to control your device, ensure that your connected device has been connected to the Huawei HiLink platform. For details, see:",
+    "hiLinkUrl": "https://developer.huawei.com/consumer/cn/smarthome",
+    "cancel": "cancel"
   },
   "files": {
     "logo": "common/images/logo.png",

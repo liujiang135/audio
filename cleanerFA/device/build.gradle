@@ -35,6 +35,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.har'])
     testImplementation 'junit:junit:4.13'
     ohosTestImplementation 'com.huawei.ohos.testkit:runner:1.0.0.100'
+    implementation 'com.huawei.ailifefeatureability:hilink_engine-sdk-ohos-host-devicecontrol:12.0.2.306'
 }
 decc {
     supportType = ['html', 'xml']

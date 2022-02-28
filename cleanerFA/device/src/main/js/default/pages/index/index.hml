@@ -1,15 +1,32 @@
-<element name="nav" src="../../common/navbar/navbar"></element>
-<div class="container container-bg-color">
-    <div if="{{isFullWindow}}">
-        <nav title="{{deviceName}}" show-menu="true" menu="{{menu}}" @menu-item-click="menuClick"></nav>
+<element name='control' src='../../../../../../ailife-view/control/control.hml'></element>
+<element name='dialogbox' src='../../../../../../ailife-view/dialog/dialogbox/dialogbox.hml'></element>
+<element name="customdisplay" src="../../../../../../ailife-view/customdisplay/customdisplay.hml"></element>
+
+<div class="container" style="background-color : {{ backgroundColor }};">
+    <div class="title">
+        <image class="title-back-image" src="/common/ic_back.png" onclick="backClick()"/>
+        <text class="title-text">{{ deviceName }}</text>
+        <image class="title-more-image" src="/common/ic_more.png" onclick="menuClick()"/>
     </div>
-    <image class="device-img top-margin-32"  src="{{deviceImage}}" show="{{!isFullWindow}}"></image>
-    <image class="device-img-full top-margin-56"  src="{{deviceImage}}" show="{{isFullWindow}}"></image>
-    <div class="container device-box" show="{{!isFullWindow}}">
-        <text class="device-name-text">{{deviceName}}</text>
-        <image class="logo-img" src="{{$t('files.logo')}}"></image>
+    <div class="error-location">
+        <div if="{{ showErrorMessage }}" class="error-container">
+            <image class="error-image" src="/common/ic_error.png"/>
+            <text class="error-text">{{ errorMessage }}</text>
+        </div>
     </div>
-    <image class="logo-img" src="{{$t('files.logo')}}" show="{{isFullWindow}}"></image>
+    <div class="device-info">
+        <image class="device-image" src="{{ imageSrc }}"/>
+        <div if="{{ ! showMessage }}" class="center-container">
+            <image class="device-logo" src="{{ logoSrc }}"></image>
+        </div>
+        <div if="{{ showMessage }}" class="center-container">
+            <image class="device-logo-message" src="{{ logoSrc }}"></image>
+            <div class="message">
+                <progress type="circular" class="progress"></progress>
+                <text class="message-text">{{ message }}</text>
+            </div>
+        </div>
+    </div>
     <div class="option-container option-top">
         <text class="switch-text">
             {{linkStatus}}
@@ -17,25 +34,27 @@
         <text class="offline-text-half" show="{{showOfflineReconnect}}" onclick="offlineReconnect">{{offlineText}}</text>
         <progress class="progress-half" type="circular" show="{{!showOfflineReconnect && showWaitingProgress}}"></progress>
     </div>
-    <div class="option-container option-top" onclick="switchClick" disabled="{{switchDisable}}">
-        <text class="switch-text">
-            {{switchText}}
-        </text>
-        <image src="{{switchTextImg}}" class="switch-icon"></image>
-    </div>
+    <control control-data="{{ controlData }}"></control>
+<!--    <div if="{{ showSpread }}" class="spread" onclick="spreadClick()">-->
+<!--        <text class="spread-text">{{ spreadText }}</text>-->
+<!--        <image class="spread-image" src="{{ spreadIcon }}"/>-->
+<!--    </div>-->
     <button class="view-more" onclick="viewMoreClick()" show="{{!isFullWindow}}">{{ $t('strings.view_more') }}</button>
-    <div class="occupying-item"></div>
-    <dialog id = "dialog-repair-failed" style="margin-bottom : 10px;">
-        <div class="dialog-timeout">
-            <text class="pair-dialog-title">{{$t('strings.public_connect_fail')}}</text>
-            <text class="pair-dialog-hint">{{ $t('strings.public_connect_fail_msg') }}</text>
-            <text class="pair-dialog-hint">{{ $t('strings.public_connect_fail_hint_1') }}</text>
-            <text class="pair-dialog-hint">{{ $t('strings.public_connect_fail_hint_2') }}</text>
-            <div class="bottom-button-wrapper">
-                <text class="button-connect" onclick="exit">{{ $t('strings.public_try_again_later') }}</text>
-                <text class="split-line">|</text>
-                <text class="button-connect" onclick="reConnect">{{ $t('strings.public_reconnect') }}</text>
-            </div>
+    <customdisplay custom-display-item-list="{{ customDisplayItemList }}" @icon-click="customDisplayClick()">
+    </customdisplay>
+    <dialog id="dialog" class="dialog" oncancel="dialogCancel()">
+        <dialogbox dialog-box-data="{{ dialog }}" @submit-click="dialogSubmit()"
+                   @submit-server-click="dialogSubmitServer"
+                   @cancel-click="dialogCancel()">
+        </dialogbox>
+    </dialog>
+    <dialog id="hiLinkDialog" class="hi-link-dialog">
+        <div class="dialog-container">
+            <text class="dialog-title">{{ $t('strings.prompt') }}</text>
+            <text class="font-16">{{ $t('strings.useHiLink') }}</text>
+            <text class="font-16 url-text" onclick="urlClick()">{{ $t('strings.hiLinkUrl') }}</text>
+            <button type="text" value="{{ $t('strings.cancel') }}" class="cancel-button" onclick="cancelClick()">
+            </button>
         </div>
     </dialog>
 </div>

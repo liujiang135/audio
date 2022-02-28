@@ -54,6 +54,7 @@ buildscript {
         classpath 'com.huawei.ohos:hap:3.0.3.4'
         classpath 'com.huawei.ohos:decctest:1.2.6.0'
         classpath 'com.huawei.agconnect:agcp-harmony:1.0.0.300'
+        classpath 'com.huawei.ailifefeatureability:hilink_engine-sdk-ohos-host-devicecontrol:12.0.2.306'
     }
 }
 
@@ -64,6 +65,9 @@ allprojects {
         }
         maven {
             url 'https://developer.huawei.com/repo/'
+        }
+        maven {
+            url 'https://repo.harmonyos.com/maven/public/'
         }
         jcenter()
     }

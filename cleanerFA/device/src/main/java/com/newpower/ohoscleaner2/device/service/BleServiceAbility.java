@@ -28,7 +28,7 @@ import com.baijia.app.cleaner.StubDeviceDataHandler;
 import com.newpower.ohoscleaner2.device.hilink.HiLinkDataCallback;
 import com.newpower.ohoscleaner2.device.hilink.HiLinkDeviceHelper;
 import com.newpower.ohoscleaner2.device.util.LogUtil;
-
+import com.newpower.ohoscleaner2.device.util.TemplateUtil;
 import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
 import ohos.rpc.IRemoteBroker;

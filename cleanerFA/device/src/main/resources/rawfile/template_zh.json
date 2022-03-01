@@ -281,7 +281,7 @@
       "uiType": "REVERSAL"
     },
     {
-      "name": "滤芯信息",
+      "name": "func3",
       "heightType": "low",
       "uiType": "REVERSAL",
       "span": 0.5,
@@ -327,7 +327,7 @@
     {
       "gravity": "default",
       "heightType": "low",
-      "name": "使用说明",
+      "name": "func4",
       "span": 0.5,
       "command": [
         {

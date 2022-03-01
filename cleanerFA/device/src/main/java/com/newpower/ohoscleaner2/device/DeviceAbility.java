@@ -16,7 +16,7 @@
 package com.newpower.ohoscleaner2.device;
 
 import com.newpower.ohoscleaner2.device.util.LogUtil;
-
+import com.newpower.ohoscleaner2.device.util.TemplateUtil;
 import ohos.aafwk.content.Intent;
 import ohos.ace.ability.AceAbility;
 import ohos.utils.zson.ZSONObject;
@@ -48,13 +48,6 @@ public class DeviceAbility extends AceAbility {
         setPageParams("", intent.getParams());
 
         TemplateUtil.init(this);
-        DeviceMgrAbility.register(this);
         super.onStart(intent);
-    }
-
-    @Override
-    public void onStop() {
-        DeviceMgrAbility.deregister();
-        super.onStop();
     }
 }

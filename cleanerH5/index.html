@@ -43,7 +43,8 @@
               <span class="cn_lang">请更换滤芯</span>
               <br class="cn_lang cn_lang_br">
               <span class="cn_lang">更换完成后请手动重置滤芯</span>
-              <span class="en_lang">Please replace the filter. After replacement, please reset the filter manually.</span>
+              <span class="en_lang">Please replace the filter. After replacement, please reset the filter
+                  manually.</span>
             </div>
             <div class="devTopMsg lowBatteryLv" data-loacle="devTopMsg" display:none>
               <span class="cn_lang">电量低，请充电!</span>
@@ -65,6 +66,7 @@
       <section class="test">
         <input type="text" class="input1">
         <button class="sendBtn">发送</button>
+        <button class="sendBleBtn">发送蓝牙设备命令</button>
         <div class="receiveId">接收值ID：</div>
         <div class="receive">接收值：</div>
       </section>
@@ -80,7 +82,7 @@
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">连接中</div> -->
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>  -->
         <div class="statusMiddle">
-          <div class="up" data-locale="turned_on">25%</div>
+          <div class="up batterNum" data-locale="turned_on">25%</div>
           <div class="down" data-locale="turned_on">
             <span class="cn_lang">电池电量</span>
             <span class="en_lang">Batter</span>
@@ -113,12 +115,12 @@
               <p class="infoNum workTime">
                 <span class="number">2</span>
                 <span class="unit">
-                  <span class="cn_lang">分</span>
+                    <span class="cn_lang">分</span>
                 <span class="en_lang">min</span>
                 </span>
                 <span class="number">44</span>
                 <span class="unit">
-                  <span class="cn_lang">秒</span>
+                    <span class="cn_lang">秒</span>
                 <span class="en_lang">s</span>
                 </span>
                 <!-- <span class="number">-</span>
@@ -144,12 +146,12 @@
               <p class="infoNum workTime">
                 <span class="number">6</span>
                 <span class="unit">
-                  <span class="cn_lang">分</span>
+                    <span class="cn_lang">分</span>
                 <span class="en_lang">min</span>
                 </span>
                 <span class="number">20</span>
                 <span class="unit">
-                  <span class="cn_lang">分</span>
+                    <span class="cn_lang">分</span>
                 <span class="en_lang">s</span>
                 </span>
                 <!-- <span class="number">-</span>
@@ -437,17 +439,17 @@
           <span class="cn_lang" data-locale="try_again">请尝试以下操作：</span>
           <br class="cn_lang cn_lang_br">
           <span data-locale="tip1">
-            <span class="cn_lang">1.请确认设备接通电源并处开机状态</span>
+              <span class="cn_lang">1.请确认设备接通电源并处开机状态</span>
           <span class="en_lang">1. Confrm that the batter power is normal.</span>
           </span>
           <br>
           <span data-locale="tip2">
-            <span class="cn_lang">2.将手机靠近设备 </span>
+              <span class="cn_lang">2.将手机靠近设备 </span>
           <span class="en_lang">2. Place the phone close to the device.</span>
           </span>
           <br>
           <span data-locale="tip3">
-            <span class="cn_lang">3.重启手机蓝牙</span>
+              <span class="cn_lang">3.重启手机蓝牙</span>
           <span class="en_lang">3. Restar phone Bluetooth</span>
           </span>
         </p>
@@ -718,23 +720,21 @@
     var tmpVal = "{\"t\":01,\"v\":\"FA0103066401000101000701FB\"}";
     $('.input1').val(tmpVal);
 
-    var data='*****'
+    var data = '*****'
     $('.receive').html('收到的数据: ' + data);
 
   }
 
   function test() {
-    // var tmpVal = "{\"t\":01,\"v\":\"FA0103066401000101000701FB\"}";
-    // $('.input1').text=tmpVal;
     $('.sendBtn').click(function() {
       var inputVal = $('.input1').val();
       console.log('--------------')
       console.log('-发送输入框的值-', inputVal)
       console.log('--------------')
 
-     
       console.log('-发送输入框的值-', inputVal)
-      window.hilink.sendCommand (hilinkDevId,  deviceIdMac,  notifyUuids.serviceUuid, inputVal,'sendCommandCallback');
+      window.hilink.sendCommand(hilinkDevId, deviceIdMac, notifyUuids.serviceUuid, inputVal,
+        'sendCommandCallback');
       window.sendCommandCallback = res => {
         let data = dataChange(res);
         console.log('写数据给模块信息，回调:', data);
@@ -750,15 +750,113 @@
 
 
     });
+    $('.sendBleBtn').click(function() {
+      var inputVal = $('.input1').val();
+      console.log('--------------')
+      console.log('-发送输入框的值-', inputVal)
+      console.log('--------------')
+      sendCommand(inputVal)
+    });
   }
+
+  // todo start
+  function browserInfo() {
+    /*
+     * 智能机浏览器版本信息:
+     */
+    var browser = {
+      versions: function() {
+        var u = navigator.userAgent,
+          app = navigator.appVersion,
+          // -
+          isAndroid = /(?:Android)/.test(u),
+          isFireFox = /(?:Firefox)/.test(u),
+          isChrome = /(?:Chrome|CriOS)/.test(u),
+          isTablet = /(?:iPad|PlayBook)/.test(u) || (isAndroid && !/(?:Mobile)/.test(u)) || (isFireFox && /(?:Tablet)/.test(u)),
+          isPhone = /(?:iPhone)/.test(u) && !isTablet;
+        // -
+        return { //移动终端浏览器版本信息
+          trident: u.indexOf('Trident') > -1, //IE内核
+          presto: u.indexOf('Presto') > -1, //opera内核
+          webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+          gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+          mobile: !!u.match(/AppleWebKit.*Mobile.*/) || u.indexOf('iPad') > -1, //是否为移动终端
+          ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+          android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+          iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+          iPad: u.indexOf('iPad') > -1, //是否iPad
+          webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+          isTablet: isTablet,
+          isPhone: isPhone,
+          isAndroid: isAndroid
+        };
+      }(),
+      language: (navigator.browserLanguage || navigator.language).toLowerCase()
+    }
+    console.log('-----------------机型---------------')
+    console.log("语言版本: " + browser.language);
+    console.log("是否为移动终端: " + browser.versions.mobile);
+    console.log("ios终端: " + browser.versions.ios);
+    console.log("android终端: " + browser.versions.android);
+    console.log("是否为iPhone: " + browser.versions.iPhone);
+    console.log("是否iPad: " + browser.versions.iPad);
+    console.log("是否平板: " + browser.versions.isTablet);
+    console.log(navigator.userAgent);
+    console.log('-----------------机型---------------')
+
+    if (browser.versions.isAndroid || browser.versions.isPhone) {
+      console.log("---手机---");
+    } else if (browser.versions.isTablet) {
+      console.log("---平板---");
+    }
+
+    // 折叠屏 ||  pad竖屏时  --> 栅格化适配
+    if (browser.versions.iPad) {
+      // let isScreenSpreaded = window.hilink.isScreenSpreaded(); //判断折叠屏手机屏幕是否展开 true:展开， false:未展开
+      gridAdaptation() // 栅格化适配
+    }
+    // ipad 横屏
+  }
+
+  function phoneInfo() {
+    var os = function() {
+      var ua = navigator.userAgent,
+        isWindowsPhone = /(?:Windows Phone)/.test(ua),
+        isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+        isAndroid = /(?:Android)/.test(ua),
+        isFireFox = /(?:Firefox)/.test(ua),
+        isChrome = /(?:Chrome|CriOS)/.test(ua),
+        isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/
+          .test(ua)),
+        isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+        isPc = !isPhone && !isAndroid && !isSymbian;
+      return {
+        isTablet: isTablet,
+        isPhone: isPhone,
+        isAndroid: isAndroid,
+        isPc: isPc
+      };
+    }();
+    if (os.isAndroid || os.isPhone) {
+      console.log("---手机---");
+    } else if (os.isTablet) {
+      console.log("---平板---");
+    } else if (os.isPc) {
+      console.log("---电脑---");
+    }
+  }
+  // todo end
 
   $(function() {
 
     console.log("index html init")
 
     test()
-      // 栅格化适配
-      // gridAdaptation()
+
+    // 浏览器信息 栅格化适配
+    console.log('---浏览器信息---')
+    browserInfo()
+      // phoneInfo()
 
     // showError();
 

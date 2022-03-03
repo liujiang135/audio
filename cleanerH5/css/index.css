@@ -1469,6 +1469,11 @@
     margin-bottom: 10px;
 }
 
+.sendBleBtn {
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
 .receive,
 .receiveId {
     color: #fff;

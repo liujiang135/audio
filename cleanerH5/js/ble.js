@@ -1,9 +1,64 @@
 window.onload = function() {
+  // testBle()
   if (window.hilink) {
     onBluetoothAdapterStateChange(); // 监听蓝牙模块开启/关闭 触发
     onBLEConnectionStateChange(); // 监听低功耗蓝牙设备连接状态的改变
     getBluetoothAdapterState(); // 蓝牙模块状态是否打开
   }
+}
+
+function testBle() {
+  let obj = { "t": 01, "v": "FA010306640100010100070111" };
+  // FA 01 03 06 640100010100 07 01 FB
+  analyseBleInfo(obj.v) // 解析蓝牙数据
+  pushCommand(obj.v) // app下发命令
+}
+
+// 解析蓝牙数据
+function analyseBleInfo(str) {
+  console.log('-解析蓝牙数据--:', str)
+  let commandStr = str.substr(4, 2); //命令码
+  let dataStr = str.substr(8, 12); // 数据区
+  console.log('-命令码--:', commandStr, '  -数据区--:', dataStr)
+  if (commandStr == '03') { //设备状态
+    let BatterNum = parseInt(dataStr.substr(0, 2), 16); // 电量
+    $('.batterNum').html(BatterNum + '%');
+    // let BatterNum = parseInt(dataStr.substr(2, 2), 16); // 吸力档位/开关机
+    // $('.batterNum').html(BatterNum + '%');
+    // let BatterNum = parseInt(dataStr.substr(3, 2), 16); // 滤网堵塞告警状态
+    // $('.batterNum').html(BatterNum + '%');
+    // let BatterNum = parseInt(dataStr.substr(4, 2), 16); // LED灯开关状态
+    // $('.batterNum').html(BatterNum + '%');
+  }
+  if (commandStr == '04') { //清除滤网告警
+  }
+
+  if (commandStr == '05') { //档位切换
+  }
+
+  if (commandStr == '06') { //开关机命令
+  }
+}
+
+// app下发命令
+function pushCommand() {
+  // 档位切换
+  let str = 'FA 01 03 06 640100010100 07 01 FB'
+  let commandStr = ""; // 命令码
+  let dataStr = ""; // 数据区
+  //清除滤网告警
+  // if (commandStr == '04') { 
+  commandStr = '04'
+  dataStr = '010000000000'
+    // }
+    //档位切换
+    // if (commandStr == '05') {   }
+    //开关机命令
+    // if (commandStr == '06') {   }
+
+  let pushCommandStr = 'FA01 ' + commandStr + ' 06 ' + dataStr + ' 0701FB'
+    // let pushCommandStr = 'FA01' + commandStr + '06' + dataStr + '0701FB'
+  console.log(pushCommandStr)
 }
 
 var deviceIdMac = ''; //注册时候的mac地址
@@ -160,7 +215,7 @@ function onBluetoothDeviceFound() {
   window.bluetoothDeviceCallBack = res => {
     let data = dataChange(res);
     statusLeft.innerHTML = '连接中...';
-    
+
 
     // 把被扫描到的蓝牙设备的mac地址与当前要建立连接设备的mac地址做对比，
     if (isIOS) {
@@ -186,10 +241,8 @@ function onBluetoothDeviceFound() {
         return tmp2
       })(advertisData);
 
-    //   console.log('ios：附近设备mac:', mac)
-    //   console.log('ios：deviceIdMac:', deviceIdMac)
-        // 先赋值 
-        //   UUID_OR_Mac = data.deviceId;
+      //   console.log('ios：附近设备mac:', mac)
+      //   console.log('ios：deviceIdMac:', deviceIdMac)
       if (mac === deviceIdMac) { // 注册 匹配流程
         isDiscover = true;
         window.hilink.stopBluetoothDevicesDiscovery(); // 停止扫描
@@ -198,16 +251,16 @@ function onBluetoothDeviceFound() {
       }
     } else {
 
-    //   console.log('安卓:附近设备的MAC data:', data);
-    //   console.log('安卓:附近设备的MAC:', data[0].deviceId);
-    //   console.log('安卓:deviceIdMac:', deviceIdMac);
+      //   console.log('安卓:附近设备的MAC data:', data);
+      //   console.log('安卓:附近设备的MAC:', data[0].deviceId);
+      //   console.log('安卓:deviceIdMac:', deviceIdMac);
       //   UUID_OR_Mac = data[0].deviceId;
       // console.log('附近设备的信息:',  data[0].deviceId);
-            
+
       // console.log('附近设备DATA:', data[0]);
 
       if (data[0].deviceId == deviceIdMac) { // 注册 匹配流程
-      
+
         console.log('安卓:deviceIdMac:', deviceIdMac);
         console.log('附近设备DATA:', data[0]);
         console.log('附近设备的MAC:', data[0].deviceId);
@@ -247,7 +300,7 @@ function bleConnection(mac) {
     console.log('bleConnectionStateCallBack:', data);
     console.log('蓝牙设备连接结果:', data.errcode);
 
-    if (data.errcode == 0 ) {
+    if (data.errcode == 0) {
       statusLeft.innerHTML = '已连接';
 
       //尝试写
@@ -258,18 +311,18 @@ function bleConnection(mac) {
       // }
 
       //尝试读 
-   
+
       //dosomethings
-      window.hilink.subscribeBleEvent(hilinkDevId,  deviceIdMac,   'subscribeBleEventCallback');
+      window.hilink.subscribeBleEvent(hilinkDevId, deviceIdMac, 'subscribeBleEventCallback');
       window.subscribeBleEventCallback = res => {
         let data = dataChange(res);
         console.log('收到模块信息:', data);
         $('.receive').html('收到的数据: ' + data);
-        
+
       }
 
 
-    
+
 
     } else {
       isDiscover = false;
@@ -284,7 +337,7 @@ function bleConnection(mac) {
   // 老API
   // if (isIOS) {
   //   window.hilink.createBLEConnection(mac);
-   
+
   // } else {
   //   window.hilink.createBleConnection(mac, 2); // 指定蓝牙连接方式
   // }
@@ -350,20 +403,20 @@ function writeBLECharacteristicValue(data) {
 }
 
 
-function readBLECharacteristicValue(){
-    console.log('---对蓝牙设备读取数据----')
-    console.log('UUID_OR_Mac:', UUID_OR_Mac)
-    console.log('serviceUuid:', notifyUuids[0].serviceUuid)
-    console.log('characteristicUuid:', notifyUuids[0].characteristicUuid2)
-    let result = window.hilink.readBLECharacteristicValue(UUID_OR_Mac, notifyUuids[0].serviceUuid, notifyUuids[0].characteristicUuid2,'readBLECharacteristicValueCallBack');
-    console.log('result:', result)
-    window.readBLECharacteristicValueCallBack = res => {
-      console.log('-----对蓝牙设备发送数据--回调：', res)
-      let data = dataChange(res);
-      console.log('对蓝牙设备读取数据-开', data)
-    }
+function readBLECharacteristicValue() {
+  console.log('---对蓝牙设备读取数据----')
+  console.log('UUID_OR_Mac:', UUID_OR_Mac)
+  console.log('serviceUuid:', notifyUuids[0].serviceUuid)
+  console.log('characteristicUuid:', notifyUuids[0].characteristicUuid2)
+  let result = window.hilink.readBLECharacteristicValue(UUID_OR_Mac, notifyUuids[0].serviceUuid, notifyUuids[0].characteristicUuid2, 'readBLECharacteristicValueCallBack');
+  console.log('result:', result)
+  window.readBLECharacteristicValueCallBack = res => {
+    console.log('-----对蓝牙设备发送数据--回调：', res)
+    let data = dataChange(res);
+    console.log('对蓝牙设备读取数据-开', data)
+  }
 }
-  
+
 
 function doSomething() {
   console.log('do something...')

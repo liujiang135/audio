@@ -6,6 +6,9 @@ import customDisplayView from '../../../../../../ailife-view/customdisplay/custo
 import prompt from '@system.prompt';
 import app from '@system.app';
 
+import HiLinkDevice from '../../../share/js/hilink-device.js';
+import app from '@system.app';
+
 const ABILITY_TYPE = 0;
 const ABILITY_TYPE_INTERNAL = 1;
 const ACTION_MESSAGE_CODE_INIT_DEVICE_DATA = 1005;

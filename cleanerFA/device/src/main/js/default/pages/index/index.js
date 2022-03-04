@@ -75,8 +75,8 @@ export default {
         this.switchTextImg = this.device.off;
         this.optionDisabled();
 
-        utils.setActionParam('com.newpower.ohoscleaner2',
-            'com.newpower.ohoscleaner2.device.service.BleServiceAbility', ABILITY_TYPE)
+//        utils.setActionParam('com.newpower.ohoscleaner2',
+//            'com.newpower.ohoscleaner2.device.service.BleServiceAbility', ABILITY_TYPE)
     },
     async onShow() {
         console.info("full page onShow");

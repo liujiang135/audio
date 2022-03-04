@@ -48,6 +48,9 @@ buildscript {
         maven {
             url 'https://developer.huawei.com/repo/'
         }
+        maven {
+            url 'https://repo.harmonyos.com/maven/public/'
+        }
         jcenter()
     }
     dependencies {

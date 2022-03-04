@@ -5,9 +5,9 @@ import dialogManager from '../../../../../../ailife-view/dialog/dialogManager.js
 import customDisplayView from '../../../../../../ailife-view/customdisplay/customdisplay.js';
 import prompt from '@system.prompt';
 import app from '@system.app';
-
+import router from '@system.router';
 import HiLinkDevice from '../../../share/js/hilink-device.js';
-import app from '@system.app';
+
 
 const ABILITY_TYPE = 0;
 const ABILITY_TYPE_INTERNAL = 1;

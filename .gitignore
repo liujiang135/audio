@@ -37,4 +37,4 @@ cleanerFA/device/build
 cleanerFA/entry/build/
 cleanerFA/device/.preview
 cleanerFA/entry/.preview
-
+cleanerFA/.idea/*

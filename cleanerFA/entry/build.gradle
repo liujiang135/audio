@@ -11,7 +11,7 @@ ohos {
             keyAlias = 'newpower2022'
             keyPassword '00000020AA435B1135D47815D07CF7FD57EAE1881EAB72514C39CC7D17F6CD3DC83FD9B926BB32CB65196EFE1E9FB803'
             signAlg = 'SHA256withECDSA'
-            profile file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/newpower20220223Debug.p7b')
+            profile file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/newpower20220307Debug.p7b')
 //            profile file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/zhaotabletDebug.p7b')
 
             certpath file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/newpower2022.cer')

@@ -9172,6 +9172,7 @@ var _default = {
           break;
 
         case _hilinkDevice["default"].DATA_TYPE_BLE_CHARACTERISTIC_CHANGED:
+          this.deviceName = JSON.stringify(result.data);
           break;
 
         case _hilinkDevice["default"].DATA_TYPE_BLE_CONNECTION_STATE_CHANGED:

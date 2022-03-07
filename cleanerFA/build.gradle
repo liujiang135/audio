@@ -5,14 +5,17 @@ apply plugin: 'com.huawei.ohos.app'
 ohos {
     signingConfigs {
         debug {
-            storeFile file('/Users/joe/Documents/appspace/hms_keystore/test.p12')
-            storePassword '00000018D8237856B240F5FD577C72C5CD68BC06DA2B1E9784DC11A7821E80F5B25BDC66C21E30D9'
-            keyAlias = 'test.p12'
-            keyPassword '00000018E4446D9F1652D62485D64363D1A2EE8033F1758822E3BF84F95A85FA9B8DDC8E52E3D793'
+            storeFile file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/newpower2022.p12')
+            storePassword '000000204BD6AB5EBFFFBDEA8F1F43E7E7C13911A29FE03266F019D307735D9F58D020FD8976C55BED765E5531296CFB'
+            keyAlias = 'newpower2022'
+            keyPassword '00000020AA435B1135D47815D07CF7FD57EAE1881EAB72514C39CC7D17F6CD3DC83FD9B926BB32CB65196EFE1E9FB803'
             signAlg = 'SHA256withECDSA'
-            profile file('/Users/joe/Documents/appspace/hms_keystore/test.debugDebug.p7b')
-            certpath file('/Users/joe/Documents/appspace/hms_keystore/test.debug.cer')
+            profile file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/newpower20220307Debug.p7b')
+            //profile file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/newpower2022Debug.p7b')
+//            profile file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/zhaotabletDebug.p7b')
+            certpath file('/Users/joe/Documents/01.projects/ohosconnect/ohoscodes/cleanerFA/keystore/newpower2022.cer')
         }
+
 
         /* debug{
              storeFile file('/Users/joe/Documents/appspace/hms_keystore/newpower.p12')

@@ -290,6 +290,9 @@ export default {
                     this.$element('dialog-repair-failed').show();
                     break;
                 case HiLinkDevice.DATA_TYPE_BLE_CHARACTERISTIC_CHANGED:
+
+                    this.deviceName = JSON.stringify(result.data);
+                    
                     break;
                 case HiLinkDevice.DATA_TYPE_BLE_CONNECTION_STATE_CHANGED:
                     if (result.data.result == '0') {

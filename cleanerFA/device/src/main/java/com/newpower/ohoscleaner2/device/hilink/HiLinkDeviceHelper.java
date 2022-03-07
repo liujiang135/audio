@@ -106,28 +106,28 @@ public class HiLinkDeviceHelper implements DataCallback<String> {
      * 获取设备信息
      */
     public void getHiLinkDevice() {
-        LogUtil.info(TAG, "getHiLinkDevice deviceId: " + deviceId);
+        LogUtil.info(TAG, "XXX getHiLinkDevice deviceId: " + deviceId);
         Objects.requireNonNull(deviceManager).getHiLinkDevice(ApiParameter.Source.FROM_CLOUD, deviceId,
                 new DataCallback<HiLinkDevice>() {
                     @Override
                     public void onSuccess(HiLinkDevice hiLinkDevice) {
-                        LogUtil.info(TAG, "getHiLinkDevice onSuccess = " + ZSONObject.toZSONString(hiLinkDevice));
+                        LogUtil.info(TAG, "XXX getHiLinkDevice onSuccess = " + ZSONObject.toZSONString(hiLinkDevice));
                         Objects.requireNonNull(hiLinkDataCallback).onSuccess(DataType.GET_DEVICE,
                                 ZSONObject.toZSONString(hiLinkDevice));
                         mHiLinkDevice = hiLinkDevice;
-                        LogUtil.info(TAG, "getHiLinkDevice start connect BLE Device");
+                        LogUtil.info(TAG, "XXX getHiLinkDevice start connect BLE Device");
                         mHiLinkDevice.connectBleDevice(new DataCallback<String>() {
                             @Override
                             public void onSuccess(String sessionId) {
                                 hiLinkDataCallback.onSuccess(DATA_TYPE_BLE_CONNECT, "connect");
-                                LogUtil.info(TAG, "getHiLinkDevice connectBleDevice onSuccess = " + sessionId);
+                                LogUtil.info(TAG, "XXX getHiLinkDevice connectBleDevice onSuccess = " + sessionId);
                                 bleSessionId = sessionId;
                                 subscribeDeviceEvent(sessionId);
                             }
 
                             @Override
                             public void onFailure(int errorCode, String message) {
-                                LogUtil.info(TAG, "connectBleDevice fail , code = "
+                                LogUtil.info(TAG, "XXX getHiLinkDevice connectBleDevice fail , code = "
                                         + errorCode + ", message = " + message);
                                 hiLinkDataCallback.onSuccess(DATA_TYPE_BLE_UNCONNECT, "unConnect");
                             }

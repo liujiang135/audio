@@ -139,18 +139,21 @@ public class BleServiceAbility extends Ability {
 
         @Override
         public boolean onRemoteRequest(int code, MessageParcel data, MessageParcel reply, MessageOption option) {
-            LogUtil.info(TAG, "code:" + code);
+            LogUtil.info(TAG, "XXX onRemoteRequest code:" + code);
             switch (code) {
-                case ACTION_MESSAGE_CODE_SUBSCRIBE: {
+                case ACTION_MESSAGE_CODE_SUBSCRIBE: { //ACTION_MESSAGE_CODE_SUBSCRIBE = 1001
+                    LogUtil.info(TAG, "XXX onRemoteRequest ACTION_MESSAGE_CODE_SUBSCRIBE:" + code);
                     connectAiLifeService();
                     remoteObjectHandler = data.readRemoteObject();
                     break;
                 }
-                case ACTION_MESSAGE_CODE_UNSUBSCRIBE: {
+                case ACTION_MESSAGE_CODE_UNSUBSCRIBE: { //1002
+                    LogUtil.info(TAG, "XXX onRemoteRequest ACTION_MESSAGE_CODE_UNSUBSCRIBE:" + code);
                     remoteObjectHandler = null;
                     break;
                 }
-                case ACTION_MESSAGE_CODE_SEND_COMMAND: {
+                case ACTION_MESSAGE_CODE_SEND_COMMAND: { //1003
+                    LogUtil.info(TAG, "XXX onRemoteRequest ACTION_MESSAGE_CODE_SEND_COMMAND:" + code);
                     String zsonStr = data.readString();
                     ZSONObject zsonObj = ZSONObject.stringToZSON(zsonStr);
                     hiLinkDeviceHelper.sendCommand(
@@ -158,7 +161,8 @@ public class BleServiceAbility extends Ability {
                             zsonObj.getString(MESSAGE_KEY_CHARACTERISTIC));
                     break;
                 }
-                case ACTION_MESSAGE_CODE_DATA_CHANGED: {
+                case ACTION_MESSAGE_CODE_DATA_CHANGED: { //1004
+                    LogUtil.info(TAG, "XXX onRemoteRequest ACTION_MESSAGE_CODE_DATA_CHANGED:" + code);
                     String zsonStr = data.readString();
                     ZSONObject zsonObj = ZSONObject.stringToZSON(zsonStr);
                     for (Map.Entry<String, Object> entry : zsonObj.entrySet()) {
@@ -166,13 +170,15 @@ public class BleServiceAbility extends Ability {
                     }
                     break;
                 }
-                case ACTION_MESSAGE_CODE_INIT_DEVICE_DATA: {
+                case ACTION_MESSAGE_CODE_INIT_DEVICE_DATA: { //1005
+                    LogUtil.info(TAG, "XXX onRemoteRequest ACTION_MESSAGE_CODE_INIT_DEVICE_DATA:" + code);
                     deviceDataHandler = getDeviceDataHandler();
                     break;
                 }
-                case ACTION_MESSAGE_CODE_NOTIFY_DEVICE_ID: {
+                case ACTION_MESSAGE_CODE_NOTIFY_DEVICE_ID: { //1006
+                    LogUtil.info(TAG, "XXX onRemoteRequest ACTION_MESSAGE_CODE_NOTIFY_DEVICE_ID:" + code);
                     this.deviceId = data.readString();
-                    LogUtil.info(TAG, "ACTION_MESSAGE_CODE_NOTIFY_DEVICE_ID deviceId:" + deviceId);
+                    LogUtil.info(TAG, "XXX ACTION_MESSAGE_CODE_NOTIFY_DEVICE_ID deviceId:" + deviceId);
                     MessageParcel dataMsg = MessageParcel.obtain();
                     Map<String, Object> results = new HashMap<>();
                     results.put("code", SUCCESS);
@@ -186,7 +192,8 @@ public class BleServiceAbility extends Ability {
                     }
                     break;
                 }
-                case ACTION_MESSAGE_CODE_GET_TEMPLATE: {
+                case ACTION_MESSAGE_CODE_GET_TEMPLATE: { //1009
+                    LogUtil.info(TAG, "XXX onRemoteRequest ACTION_MESSAGE_CODE_GET_TEMPLATE:" + code);
                     ZSONObject template = TemplateUtil.getTemplate();
                     Map<String, Object> dataMap = new HashMap<>();
                     dataMap.put("template", template);
@@ -250,11 +257,12 @@ public class BleServiceAbility extends Ability {
          * 连接 hilink 服务，并订阅设备事件，获取设备信息
          */
         private void connectAiLifeService() {
-            LogUtil.info(TAG, "ready to connect AiLifeServiceHelper, check helper = " + hiLinkDeviceHelper);
+            LogUtil.info(TAG, "XXX ready to connect AiLifeServiceHelper, check helper = " + hiLinkDeviceHelper);
+            LogUtil.info(TAG, "XXX ready to connect AiLifeServiceHelper, connectResult = " + connectResult);
             if (hiLinkDeviceHelper == null) {
-                LogUtil.info(TAG, "AiLifeServiceHelper.connect start deviceId = " + deviceId);
+                LogUtil.info(TAG, "XXX AiLifeServiceHelper.connect start, hiLinkDeviceHelper is null ,  deviceId = " + deviceId);
                 connectResult = AiLifeServiceHelper.connect(getContext());
-                LogUtil.info(TAG, "AiLifeServiceHelper.connect result = " + connectResult + ", deviceId = " + deviceId);
+                LogUtil.info(TAG, "XXX AiLifeServiceHelper.connect result = " + connectResult + ", deviceId = " + deviceId);
                 if (connectResult < ConnectResult.SERVICE_OK) {
                     sendData(formatData(STATE_FAIL, HiLinkDeviceHelper.DataType.AI_LIFE_SERVICE_CONNECT,
                             String.valueOf(connectResult)));
@@ -264,10 +272,13 @@ public class BleServiceAbility extends Ability {
                     hiLinkDeviceHelper.getHiLinkDevice();
                 }
             } else {
-                if (connectResult < ConnectResult.SERVICE_OK) {
+                LogUtil.info(TAG, "XXX AiLifeServiceHelper.connect start,  deviceId = " + deviceId);
+                if (connectResult < ConnectResult.SERVICE_OK) { //SERVICE_OK =0
                     sendData(formatData(STATE_FAIL, HiLinkDeviceHelper.DataType.AI_LIFE_SERVICE_CONNECT,
                             String.valueOf(connectResult)));
                 } else {
+                    hiLinkDeviceHelper = new HiLinkDeviceHelper(deviceId);
+                    hiLinkDeviceHelper.setHiLinkDataCallback(hiLinkDataCallback);
                     hiLinkDeviceHelper.getHiLinkDevice();
                 }
             }

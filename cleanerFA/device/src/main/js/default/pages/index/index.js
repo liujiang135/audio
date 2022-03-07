@@ -75,16 +75,26 @@ export default {
         this.switchTextImg = this.device.off;
         this.optionDisabled();
 
-//        utils.setActionParam('com.newpower.ohoscleaner2',
-//            'com.newpower.ohoscleaner2.device.service.BleServiceAbility', ABILITY_TYPE)
+        utils.setActionParam('com.newpower.ohoscleaner2',
+            'com.newpower.ohoscleaner2.device.service.BleServiceAbility', ABILITY_TYPE)
     },
+
     async onShow() {
         console.info("full page onShow");
         console.info("img = " + this.switchTextImg);
+
+
+
+        await this.addObserved();
+
+
         setTimeout(() => {
             this.notifyDeviceId();
         }, 500);
 
+    },
+
+    async addObserved(){
         observed.addObserver('showMessage', (key, value) => {
             this.showMessage = value.show;
             if (value.show == true) {
@@ -111,6 +121,7 @@ export default {
         await this.requestTemplate();
         observed.subscribeAbility();
     },
+
     async requestTemplate() {
         let action = utils.makeAction(ACTION_MESSAGE_CODE_GET_TEMPLATE, {});
 
@@ -118,6 +129,7 @@ export default {
         console.info('cleanerFA-js ' + JSON.stringify(action));
 
         let result = await FeatureAbility.callAbility(action);
+
         let resultJson = JSON.parse(result);
         if (resultJson.code == 0) {
             let template = JSON.parse(resultJson.data);

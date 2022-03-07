@@ -786,7 +786,7 @@
 
 
 
-    var tmpVal = "{\"t\":01,\"v\":\"FA0103066401000101000701FB\"}";
+    var tmpVal = "{\"t\":1,\"v\":\"FA0103066401000101000701FB\"}";
     $('.input1').val(tmpVal);
 
     var data = '*****'
@@ -820,7 +820,7 @@
       console.log('--------------')
 
       console.log('-发送输入框的值-', inputVal)
-      window.hilink.sendCommand(hilinkDevId, deviceIdMac, notifyUuids.serviceUuid, inputVal,
+      window.hilink.sendCommand(hilinkDevId, deviceIdMac, 'test', inputVal,
         'sendCommandCallback');
       window.sendCommandCallback = res => {
         let data = dataChange(res);

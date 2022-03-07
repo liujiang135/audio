@@ -30,6 +30,7 @@ var getParams = function (code) {
 }
 
 var HiLinkDevice = {
+  DATA_TYPE_BLE_SEND_DATA: 9,
   DATA_TYPE_BLE_CONNECT: 10,
   DATA_TYPE_BLE_CHARACTERISTIC_CHANGED: 11,
   DATA_TYPE_BLE_CONNECTION_STATE_CHANGED: 12,
@@ -59,6 +60,8 @@ var HiLinkDevice = {
   },
   getDataTypeDes: function (type) {
     switch (type) {
+      case this.DATA_TYPE_BLE_SEND_DATA:
+        return 'DATA_TYPE_BLE_SEND_DATA';
       case this.DATA_TYPE_BLE_CONNECT:
         return 'DATA_TYPE_BLE_CONNECT';
       case this.DATA_TYPE_BLE_CHARACTERISTIC_CHANGED:

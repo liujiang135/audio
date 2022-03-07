@@ -1,0 +1,71 @@
+{
+    "summary": {
+        "app": {
+            "bundleName": "com.newpower.ohoscleaner2",
+            "version": {
+                "code": 1000000,
+                "name": "1.0.0"
+            }
+        },
+        "modules": [
+            {
+                "mainAbility": "com.newpower.ohoscleaner2.MainAbility",
+                "deviceType": [
+                    "phone",
+                    "tablet"
+                ],
+                "abilities": [
+                    {
+                        "name": "com.newpower.ohoscleaner2.MainAbility",
+                        "label": "$string:entry_MainAbility"
+                    },
+                    {
+                        "visible": false,
+                        "name": "com.huawei.hms.jsb.adapter.har.stub.FgStubAbility",
+                        "label": "stub ability"
+                    },
+                    {
+                        "visible": false,
+                        "name": "com.huawei.hms.jsb.adapter.har.stub.BridgeStubAbility",
+                        "label": "stub ability"
+                    },
+                    {
+                        "visible": false,
+                        "name": "com.huawei.hms.jsb.adapter.har.stub.KitUpdateAbility",
+                        "label": "stub ability"
+                    },
+                    {
+                        "visible": false,
+                        "name": "com.huawei.hms.jsb.adapter.har.stub.JsbKitUpdateStubAbility",
+                        "label": "stub ability"
+                    },
+                    {
+                        "name": "com.huawei.agconnect.core.ServiceDiscovery"
+                    }
+                ],
+                "distro": {
+                    "moduleType": "entry",
+                    "installationFree": true,
+                    "deliveryWithInstall": true,
+                    "moduleName": "entry"
+                },
+                "apiVersion": {
+                    "compatible": 4,
+                    "releaseType": "Release",
+                    "target": 5
+                }
+            }
+        ]
+    },
+    "packages": [
+        {
+            "deviceType": [
+                "phone",
+                "tablet"
+            ],
+            "moduleType": "entry",
+            "deliveryWithInstall": true,
+            "name": "entry-debug-rich-unsigned"
+        }
+    ]
+}

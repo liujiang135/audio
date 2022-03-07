@@ -128,6 +128,25 @@
     margin-top: 12px;
 }
 
+.device-box{
+    height: 372px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.device-name-text{
+    font-size: 12px;
+    opacity: 0.9;
+    width: 100%;
+}
+
+.offline-text-half {
+    text-align: right;
+    font-size: 18px;
+    color: #0a59f7;
+    width: 50%;
+}
+
 .error-text {
     font-size: 16px;
     margin-left: 16px;

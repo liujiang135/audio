@@ -15,9 +15,10 @@
         </div>
     </div>
     <div class="device-info">
-        <image class="device-image" src="{{ imageSrc }}"/>
-        <div if="{{ ! showMessage }}" class="center-container">
+        <image class="device-image" src="{{ imageSrc }}" onclick="sendTestMessage"/>
+        <div if="{{ ! showMessage }}" class="center-container device-box">
             <image class="device-logo" src="{{ logoSrc }}"></image>
+            <text class="device-name-text">{{deviceName}}</text>
         </div>
         <div if="{{ showMessage }}" class="center-container">
             <image class="device-logo-message" src="{{ logoSrc }}"></image>

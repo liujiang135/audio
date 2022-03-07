@@ -22,6 +22,7 @@ const DURATION_TIME = 10000;
 const PROMPT_DURATION_TIME = 3000;
 
 export default {
+
     data: {
         showProgress: true,
         isFullWindow : false,
@@ -364,4 +365,16 @@ export default {
     exit : function (){
         this.$element('dialog-repair-failed').close();
     },
+
+    sendTestMessage: function () {
+      HiLinkDevice.sendCommand('test', {
+        't': 1,'v':'FA0103066401000101000701FB'
+      });
+    },
 };
+
+
+
+
+
+

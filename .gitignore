@@ -35,4 +35,6 @@ cleaner/app/build/
 cleaner/app/release/
 cleanerFA/device/build
 cleanerFA/entry/build/
+cleanerFA/device/.preview
+cleanerFA/entry/.preview
 

@@ -184,12 +184,14 @@
   // 栅格化适配
   function gridAdaptation() {
     console.log('-栅格化适配-')
-      // this.document.getElementsByClassName("msg")[0].style.width = "calc(100% - ((100% - 12px*9)/4 + 4*12))";
     this.document.getElementsByClassName("msg")[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
     this.document.getElementsByClassName("msg-div")[0].style.width = "calc(50% + 6px)";
     this.document.getElementsByClassName("msg-div")[0].style.left = "0";
     this.document.getElementsByClassName("msg-div")[0].style.right = "0";
-    this.document.getElementsByClassName("msg-div")[0].style.margin = "0 auto";
+    this.document.getElementsByClassName("msg-div")[0].style.top = "0";
+    this.document.getElementsByClassName("msg-div")[0].style.bottom = "0";
+    this.document.getElementsByClassName("msg-div")[0].style.height = "fit-content";
+    this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
   }
 
 
@@ -206,7 +208,7 @@
 
     console.log("intro html init")
 
-    showError();
+    // showError();
     //  hideError();
 
 
@@ -333,7 +335,7 @@
               // 字体颜色
               value: {
                 fontSize: 36,
-                fontWeight: 'bolder',
+                // fontWeight: 'bolder',
                 //color: 'rgba(0,0,0,0.9)'
                 // color: 'rgba(255,255,255,0.86)'
                 color: eChartsLabelColor1

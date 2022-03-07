@@ -470,6 +470,53 @@
 
     <div class="backgroundColor"></div>
     <div class="addHeight"></div>
+
+    <div class="chuxuanx"></div>
+    <div class="xuanxiang">
+      <div class="guanbix">关闭</div>
+      <ul>
+        <li>语言：
+          <input type="radio" value="zh" name="lang">中文
+          <input type="radio" value="en" name="lang">英文
+        </li>
+
+        <li>主题色：
+          <input type="radio" value="anhei" name="yanse">暗黑
+          <input type="radio" value="baitian" name="yanse">白天
+        </li>
+
+        <li>模式：
+          <input type="radio" value="0" name="moshi">未连接
+          <input type="radio" value="2" name="moshi">连接超时
+          <input type="radio" value="5" name="moshi">工作中
+          <input type="radio" value="6" name="moshi">连接中
+          <input type="radio" value="7" name="moshi">待机
+          <!-- <input type="radio" value="1" name="moshi">重连 -->
+        </li>
+
+        <li>告警：
+          <input type="radio" value="0" name="gaojing1">请更换滤芯
+          <input type="radio" value="1" name="gaojing1">电量低，请充电
+          <input type="radio" value="2" name="gaojing1">请清理尘杯及滤芯！
+          <input type="radio" value="3" name="gaojing1">隐藏警告
+        </li>
+
+        <li>
+          <input type="radio" value="1" name="shange1">栅格化
+          <input type="radio" value="2" name="shange1">正常
+        </li>
+
+
+        <li>
+          <button class="queding">确定</button>
+        </li>
+        <li>
+          <button class="yininput">隐藏发送命令输入框</button>
+          <button class="xianinput">显示发送命令输入框</button>
+        </li>
+      </ul>
+
+    </div>
   </div>
 </body>
 
@@ -512,14 +559,14 @@
     });
   }
 
-  function getDarkMode() {
+  function getDarkMode(dark) {
     console.log("getDarkMode")
     var isIOS = !!navigator.userAgent.match(/iPhone/i);
 
     // if(window.hilink && !isIOS){
     if (true) {
       // var dark = window.hilink.getDarkMode();
-      var dark = 2;
+      // var dark = 2;
       if (dark == 2) { //暗黑模式
         app.style.background = 'black';
         app.classList.add("dark");
@@ -568,11 +615,12 @@
     this.document.getElementsByClassName("devRecord")[0].classList.add('disable');
   }
 
-  let workStatus = 0; // 0 连接失败，1 连接超时，2 连接中，连接正常[3 工作中，4 待机]
+  let workStatus = 0; //
   let recordStatus = 0 //0 没几率 ，1 三条记录
 
   // 设置状态
   function initStatus(workStatus, recordStatus, topMsgStatus) {
+    console.log('模式', workStatus)
     if (workStatus == 0) { //未连接
       clearDataToStart();
       if (ctLanguage == 'en') {
@@ -598,11 +646,11 @@
       // 显示'重新连接',隐藏'工作中'图标
       this.document.getElementsByClassName("statusTxt")[0].style.display = "block";
       this.document.getElementsByClassName("statusImg")[0].style.display = "none";
+      // 设置禁用状态
+      disableControls();
       // 显示连接超时弹窗
       this.document.getElementsByClassName("shelter")[0].style.display = "block";
       this.document.getElementsByClassName("msg-div")[0].style.display = "block";
-      // 设置禁用状态
-      disableControls();
     } else if (workStatus == 3) { //工作中，空记录
       if (ctLanguage == 'en') {
         this.document.getElementsByClassName("statusLeft")[0].innerText = "Working";
@@ -616,6 +664,7 @@
       //TODO
     } else if (workStatus == 5) { //工作中，三条记录
       console.log('工作中')
+      clearDataToStart();
       if (ctLanguage == 'en') {
         this.document.getElementsByClassName("statusLeft")[0].innerText = "Working";
       } else {
@@ -623,6 +672,12 @@
       }
       // 连接中 icon 隐藏
       this.document.getElementsByClassName("statusImgLoading")[0].style.display = "none";
+      // 显示电量
+      this.document.getElementsByClassName("statusMiddle")[0].style.display = "block";
+      // 显示工作icon
+      this.document.getElementsByClassName("statusImg")[0].style.display = "block";
+      // 重新连接 隐藏
+      this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
       // 显示上次清扫时间
       this.document.getElementsByClassName("workTime")[0].style.display = "block";
       this.document.getElementsByClassName("initTime")[0].style.display = "none";
@@ -639,6 +694,8 @@
       this.document.getElementsByClassName("statusImgLoading")[0].style.display = "block";
       this.document.getElementsByClassName("statusImg")[0].style.background =
         "url('../img/loading/loading48.png') no-repeat";
+      // 重新连接 隐藏
+      this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
       // 设置禁用状态
       disableControls();
     } else if (workStatus == 7) { //待机
@@ -650,6 +707,10 @@
       }
       // 显示电量
       this.document.getElementsByClassName("statusMiddle")[0].style.display = "block";
+      // 显示工作icon
+      this.document.getElementsByClassName("statusImg")[0].style.display = "block";
+      // 重新连接 隐藏
+      this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
       // 设置禁用状态
       this.document.getElementsByClassName("devInfo")[0].classList.add('disable');
       this.document.getElementsByClassName("spinner")[0].classList.add('disable');
@@ -686,14 +747,22 @@
     this.document.getElementsByClassName("statusLeft")[0].classList.add('textAlignCenter')
     this.document.getElementsByClassName("statusRight")[0].classList.add('textAlignCenter')
     console.log('-栅格化适配-')
+      // 隐私政策
     this.document.getElementsByClassName("statementPopup")[0].style.width = "calc(50% + 6px)";
     this.document.getElementsByClassName("statementPopup")[0].style.left = "0";
     this.document.getElementsByClassName("statementPopup")[0].style.right = "0";
-    this.document.getElementsByClassName("statementPopup")[0].style.margin = "0 auto";
+    this.document.getElementsByClassName("statementPopup")[0].style.top = "0";
+    this.document.getElementsByClassName("statementPopup")[0].style.bottom = "0";
+    this.document.getElementsByClassName("statementPopup")[0].style.height = "fit-content";
+    this.document.getElementsByClassName("statementPopup")[0].style.margin = "auto";
+    // 超时弹窗
     this.document.getElementsByClassName("msg-div")[0].style.width = "calc(50% + 6px)";
     this.document.getElementsByClassName("msg-div")[0].style.left = "0";
     this.document.getElementsByClassName("msg-div")[0].style.right = "0";
-    this.document.getElementsByClassName("msg-div")[0].style.margin = "0 auto";
+    this.document.getElementsByClassName("msg-div")[0].style.top = "0";
+    this.document.getElementsByClassName("msg-div")[0].style.bottom = "0";
+    this.document.getElementsByClassName("msg-div")[0].style.height = "fit-content";
+    this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
   }
 
   // dp换算
@@ -709,9 +778,9 @@
 
     hideAlert() // 隐藏前提下 topMsgStatus 生效
 
-    // initStatus(0, 0, 2);
+    initStatus(0, 0, 2);
     // initStatus(workStatus,recordStatus,topMsgStatus )
-    // workStatus 0:未连接 1:重连 2:连接失败 3:工作中，空记录 4:待机中，充电中， 三条记录 5:工作中，三条记录 6:连接中 7:待机
+    // workStatus 0:未连接 2:连接失败 连接超时 5:工作中，三条记录 6:连接中 7:待机
     // recordStatus 0:未连接 1:重连
     // topMsgStatus  0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
 
@@ -726,6 +795,24 @@
   }
 
   function test() {
+
+    // 显示 截图框
+    document.getElementsByClassName("chuxuanx")[0].addEventListener('click', function(event) {
+        document.getElementsByClassName("xuanxiang")[0].style.display = "block";
+      })
+      // 显示 输入框
+    document.getElementsByClassName("xianinput")[0].addEventListener('click', function(event) {
+        document.getElementsByClassName("test")[0].style.display = "block";
+      })
+      // 隐藏输入框
+    document.getElementsByClassName("yininput")[0].addEventListener('click', function(event) {
+        document.getElementsByClassName("test")[0].style.display = "none";
+      })
+      // 关闭 截图框
+    document.getElementsByClassName("guanbix")[0].addEventListener('click', function(event) {
+      document.getElementsByClassName("xuanxiang")[0].style.display = "none";
+    })
+
     $('.sendBtn').click(function() {
       var inputVal = $('.input1').val();
       console.log('--------------')
@@ -772,7 +859,8 @@
           isAndroid = /(?:Android)/.test(u),
           isFireFox = /(?:Firefox)/.test(u),
           isChrome = /(?:Chrome|CriOS)/.test(u),
-          isTablet = /(?:iPad|PlayBook)/.test(u) || (isAndroid && !/(?:Mobile)/.test(u)) || (isFireFox && /(?:Tablet)/.test(u)),
+          isTablet = /(?:iPad|PlayBook)/.test(u) || (isAndroid && !/(?:Mobile)/.test(u)) || (isFireFox &&
+            /(?:Tablet)/.test(u)),
           isPhone = /(?:iPhone)/.test(u) && !isTablet;
         // -
         return { //移动终端浏览器版本信息
@@ -818,33 +906,52 @@
     // ipad 横屏
   }
 
-  function phoneInfo() {
-    var os = function() {
-      var ua = navigator.userAgent,
-        isWindowsPhone = /(?:Windows Phone)/.test(ua),
-        isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
-        isAndroid = /(?:Android)/.test(ua),
-        isFireFox = /(?:Firefox)/.test(ua),
-        isChrome = /(?:Chrome|CriOS)/.test(ua),
-        isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/
-          .test(ua)),
-        isPhone = /(?:iPhone)/.test(ua) && !isTablet,
-        isPc = !isPhone && !isAndroid && !isSymbian;
-      return {
-        isTablet: isTablet,
-        isPhone: isPhone,
-        isAndroid: isAndroid,
-        isPc: isPc
-      };
-    }();
-    if (os.isAndroid || os.isPhone) {
-      console.log("---手机---");
-    } else if (os.isTablet) {
-      console.log("---平板---");
-    } else if (os.isPc) {
-      console.log("---电脑---");
+
+  // 弹框截图 模式选择
+  document.getElementsByClassName("queding")[0].addEventListener('click', function(event) {
+    let lang11 = $("input[name='lang']:checked").val();
+    console.log('lang11--', lang11)
+    ctLanguage = lang11
+    if (ctLanguage == 'en') {
+      $('.cn_lang').hide();
+      $('.en_lang').show();
     }
-  }
+    if (ctLanguage == 'zh') {
+      $('.cn_lang').show();
+      $('.en_lang').hide();
+    }
+
+    let zhuti11 = $("input[name='yanse']:checked").val();
+    if (zhuti11 == 'anhei') {
+      getDarkMode(2);
+    } else {
+      getDarkMode(1);
+    }
+
+    let moshi11 = $("input[name='moshi']:checked").val();
+    console.log(moshi11)
+    if (moshi11 === '0' || moshi11) {
+      hideAlert();
+      initStatus(moshi11, 0, 2);
+    }
+
+    let gaojing11 = $("input[name='gaojing1']:checked").val();
+    if (gaojing11 === '0' || gaojing11 === '1' || gaojing11 === '2') {
+      document.getElementsByClassName("devTopWrap")[0].style.display = "flex";
+      initStatus(5, 0, gaojing11);
+    }
+    if (gaojing11 == 3) {
+      hideAlert();
+    }
+
+    let shange1 = $("input[name='shange1']:checked").val();
+    if (shange1 == 1) {
+      gridAdaptation(); // 栅格化适配
+    }
+
+    document.getElementsByClassName("xuanxiang")[0].style.display = "none";
+  })
+
   // todo end
 
   $(function() {
@@ -855,8 +962,8 @@
 
     // 浏览器信息 栅格化适配
     console.log('---浏览器信息---')
-    browserInfo()
-      // phoneInfo()
+      // browserInfo()
+      // gridAdaptation() // 栅格化适配
 
     // showError();
 

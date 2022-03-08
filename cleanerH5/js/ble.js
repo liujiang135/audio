@@ -8,13 +8,13 @@ window.onload = function() {
 }
 
 function testBle() {
-  let obj = { "t": 01, "v": "FA010306640100010100070111" };
+  let obj = { "t": 01, "v": "FA010304640101010701FB" };
   // FA 01 03 06 640100010100 07 01 FB
   analyseBleInfo(obj.v) // 解析蓝牙数据
-  pushCommand(obj.v) // app下发命令
+    // pushCommand(obj.v) // app下发命令
 }
 
-// 解析蓝牙数据
+// 解析蓝牙数据 FA010304640101010701FB
 function analyseBleInfo(str) {
   console.log('-解析蓝牙数据--:', str)
   let commandStr = str.substr(4, 2); //命令码
@@ -22,13 +22,16 @@ function analyseBleInfo(str) {
   console.log('-命令码--:', commandStr, '  -数据区--:', dataStr)
   if (commandStr == '03') { //设备状态
     let BatterNum = parseInt(dataStr.substr(0, 2), 16); // 电量
+    console.log('电量', BatterNum)
     $('.batterNum').html(BatterNum + '%');
-    // let BatterNum = parseInt(dataStr.substr(2, 2), 16); // 吸力档位/开关机
-    // $('.batterNum').html(BatterNum + '%');
-    // let BatterNum = parseInt(dataStr.substr(3, 2), 16); // 滤网堵塞告警状态
-    // $('.batterNum').html(BatterNum + '%');
-    // let BatterNum = parseInt(dataStr.substr(4, 2), 16); // LED灯开关状态
-    // $('.batterNum').html(BatterNum + '%');
+    let storageCode = window.hilink.setStorageSync('batterNum', BatterNum)
+    console.log('本地存储电量--0：成功', storageCode)
+      // let BatterNum = parseInt(dataStr.substr(2, 2), 16); // 吸力档位/开关机
+      // $('.batterNum').html(BatterNum + '%');
+      // let BatterNum = parseInt(dataStr.substr(3, 2), 16); // 滤网堵塞告警状态
+      // $('.batterNum').html(BatterNum + '%');
+      // let BatterNum = parseInt(dataStr.substr(4, 2), 16); // LED灯开关状态
+      // $('.batterNum').html(BatterNum + '%');
   }
   if (commandStr == '04') { //清除滤网告警
   }
@@ -76,52 +79,52 @@ var notifyUuids = [{
 var isIOS = !!navigator.userAgent.match(/iPhone/i);
 
 // 滑动开关-----控制设备
-var fnSlider = document.getElementsByClassName("fnSlider")[0];
+// var fnSlider = document.getElementsByClassName("fnSlider")[0];
 var sliderBtn = document.getElementsByClassName("sliderBtn")[0];
 var statusLeft = document.getElementsByClassName("statusLeft")[0];
-var fnName = document.getElementsByClassName("fnName")[0];
-var fnSubtitle = document.getElementsByClassName("fnSubtitle")[0];
-var val = false;
+// var fnName = document.getElementsByClassName("fnName")[0];
+// var fnSubtitle = document.getElementsByClassName("fnSubtitle")[0];
+// var val = false;
 
-fnSlider.addEventListener('click', function(event) {
-  if (statusLeft.innerHTML == '已连接') {
-    if (window.hilink) {
-      if (val) {
-        sliderBtn.style.right = 18 + 'px';
-        fnSlider.style.background = 'rgba(0,0,0,0.1)';
-        fnName.style.color = 'rgba(0,0,0,0.9)';
-        fnSubtitle.style.display = 'none';
-        // writeBLECharacteristicValue(notifyUuids[0].switchOn);
-        val = false;
-      } else {
-        sliderBtn.style.right = 2 + 'px';
-        fnSlider.style.background = '#007DFF';
-        fnName.style.color = '#007dff';
-        fnSubtitle.style.display = 'block';
-        // writeBLECharacteristicValue(notifyUuids[0].switchOff);
-        val = true;
-      }
-    } else {
-      if (val) {
-        sliderBtn.style.right = 18 + 'px';
-        fnSlider.style.background = 'rgba(0,0,0,0.1)';
-        fnName.style.color = 'rgba(0,0,0,0.9)';
-        fnSubtitle.style.display = 'none';
-        val = false;
-      } else {
-        sliderBtn.style.right = 2 + 'px';
-        fnSlider.style.background = '#007DFF';
-        fnName.style.color = '#007dff';
-        fnSubtitle.style.display = 'block';
-        val = true;
-      }
-    }
-  } else {
-    console.log('蓝牙未连接');
-  }
+// fnSlider.addEventListener('click', function(event) {
+//   if (statusLeft.innerHTML == '已连接') {
+//     if (window.hilink) {
+//       if (val) {
+//         sliderBtn.style.right = 18 + 'px';
+//         fnSlider.style.background = 'rgba(0,0,0,0.1)';
+//         fnName.style.color = 'rgba(0,0,0,0.9)';
+//         fnSubtitle.style.display = 'none';
+//         // writeBLECharacteristicValue(notifyUuids[0].switchOn);
+//         val = false;
+//       } else {
+//         sliderBtn.style.right = 2 + 'px';
+//         fnSlider.style.background = '#007DFF';
+//         fnName.style.color = '#007dff';
+//         fnSubtitle.style.display = 'block';
+//         // writeBLECharacteristicValue(notifyUuids[0].switchOff);
+//         val = true;
+//       }
+//     } else {
+//       if (val) {
+//         sliderBtn.style.right = 18 + 'px';
+//         fnSlider.style.background = 'rgba(0,0,0,0.1)';
+//         fnName.style.color = 'rgba(0,0,0,0.9)';
+//         fnSubtitle.style.display = 'none';
+//         val = false;
+//       } else {
+//         sliderBtn.style.right = 2 + 'px';
+//         fnSlider.style.background = '#007DFF';
+//         fnName.style.color = '#007dff';
+//         fnSubtitle.style.display = 'block';
+//         val = true;
+//       }
+//     }
+//   } else {
+//     console.log('蓝牙未连接');
+//   }
 
-  event.stopPropagation();
-})
+//   event.stopPropagation();
+// })
 
 
 // 接口返回数据格式的转换
@@ -303,6 +306,10 @@ function bleConnection(mac) {
     if (data.errcode == 0) {
       statusLeft.innerHTML = '已连接';
 
+      // 进入待机状态
+      hideAlert();
+      initStatus(7, 0, 2);
+
       //尝试写
       // hilink.sendCommand (hilinkDevId,  deviceIdMac,  notifyUuids.serviceUuid, '{\'on\':1}','sendCommandCallback');
       // window.sendCommandCallback = res => {
@@ -317,13 +324,11 @@ function bleConnection(mac) {
       window.subscribeBleEventCallback = res => {
         let data = dataChange(res);
         console.log('收到模块信息:', data);
-        $('.receive').html('收到的数据: ' + data);
-
+        if (data.content) {
+          $('.receive').html('收到的数据: ' + data.content.data.v);
+          analyseBleInfo(data.content.data.v)
+        }
       }
-
-
-
-
     } else {
       isDiscover = false;
       onBluetoothDeviceFound(); // 重新发现，匹配

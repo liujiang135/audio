@@ -63,11 +63,9 @@
         <div class="logo"></div>
       </section>
 
-      <section class="test">
+      <section class="test" style="display: none;">
         <input type="text" class="input1">
         <button class="sendBtn">发送</button>
-        <button class="sendBleBtn">发送蓝牙设备命令</button>
-        <div class="receiveId">接收值ID：</div>
         <div class="receive">接收值：</div>
       </section>
 
@@ -82,7 +80,7 @@
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">连接中</div> -->
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>  -->
         <div class="statusMiddle">
-          <div class="up batterNum" data-locale="turned_on">25%</div>
+          <div class="up batterNum" data-locale="turned_on">0%</div>
           <div class="down" data-locale="turned_on">
             <span class="cn_lang">电池电量</span>
             <span class="en_lang">Batter</span>
@@ -183,17 +181,17 @@
                 <span class="cn_lang">模式</span>
                 <span class="en_lang">Mode</span>
               </p>
-              <!-- <p class="fnStatus">节能模式</p> -->
+              <p class="fnStatus modeTip">节能模式</p>
             </div>
             <div class="fnBox">
               <div class="fnImg fnImgItem3"></div>
             </div>
             <ul class="spinnerWrap appear">
-              <li class="spinnerList checkedBg checkedText">
+              <li class="spinnerList checkedBg checkedText" id="eco">
                 <span class="cn_lang">节能模式</span>
                 <span class="en_lang">ECO Mode</span>
               </li>
-              <li class="spinnerList">
+              <li class="spinnerList" id="turbo">
                 <span class="cn_lang">强劲模式</span>
                 <span class="en_lang">Turbo Mode</span>
               </li>
@@ -212,7 +210,7 @@
                 <span class="cn_lang">LED照明</span>
                 <span class="en_lang">LED Lighting</span>
               </p>
-              <!-- <p class="fnStatus">已开启</p> -->
+              <p class="fnStatus ledTip">已开启</p>
             </div>
             <div class="fnBox">
               <div class="fnImg fnImgItem2"></div>
@@ -472,7 +470,7 @@
     <div class="addHeight"></div>
 
     <div class="chuxuanx"></div>
-    <div class="xuanxiang">
+    <div class="xuanxiang" style="display: none;">
       <div class="guanbix">关闭</div>
       <ul>
         <li>语言：
@@ -578,6 +576,61 @@
       }
     }
   }
+  // 开始工作按钮可以点击
+  function statusImgClick() {
+    $('.statusImg').click(function() {
+      console.log('开始工作--切换至工作中')
+        // 待机状态时，点击开始工作--切换至工作中
+      if (window.hilink.getStorageSync('initStatus') == 7) {
+        hideAlert();
+        initStatus(5, 0, 2);
+      }
+    })
+  }
+
+  // 发送数据
+  function sendCommand(inputVal) {
+    console.log(inputVal)
+    window.hilink.sendCommand(hilinkDevId, deviceIdMac, 'test', inputVal,
+      'sendCommandCallback');
+    window.sendCommandCallback = res => {
+      let data = dataChange(res);
+      console.log('写数据给模块信息，回调:', data);
+    }
+  }
+
+  // 节能模式
+  $('#eco').click(function() {
+      console.log(1)
+      $("#turbo").removeClass('checkedBg');
+      $("#turbo").removeClass('checkedText');
+      $("#eco").addClass('checkedBg');
+      $("#eco").addClass('checkedText');
+      // 吸力档位
+      let batterNum = (window.hilink.getStorageSync('batterNum')).toString(16)
+      let code = "FA010304" + batterNum + "32010701FB"
+      let obj = {
+        "t": 01,
+        "v": code
+      }
+      sendCommand(JSON.stringify(obj))
+    })
+    // 强劲模式
+  $('#turbo').click(function() {
+    console.log(2)
+    $("#eco").removeClass('checkedBg');
+    $("#eco").removeClass('checkedText');
+    $("#turbo").addClass('checkedBg');
+    $("#turbo").addClass('checkedText');
+    // 吸力档位
+    let batterNum = (window.hilink.getStorageSync('batterNum')).toString(16)
+    let code = "FA010304" + batterNum + "6401010701FB"
+    let obj = {
+      "t": 01,
+      "v": code
+    }
+    sendCommand(JSON.stringify(obj))
+  })
 
   // 移出高亮显示状态
   function removeDisableStatus() {
@@ -676,6 +729,13 @@
       this.document.getElementsByClassName("statusMiddle")[0].style.display = "block";
       // 显示工作icon
       this.document.getElementsByClassName("statusImg")[0].style.display = "block";
+      // this.document.getElementsByClassName("statusImg")[0].style.background = "url('../img/light/ic_quxiao.png') no-repeat";
+      this.document.getElementsByClassName("statusImg")[0].style.background = "url('http://www.dadaiot.com/cleanerH5/img/light/ic_quxiao.png') no-repeat";
+      this.document.getElementsByClassName("statusImg")[0].style.backgroundSize = "cover";
+
+      // 显示节能模式、灯光已开启
+      $('.fnStatus').show();
+
       // 重新连接 隐藏
       this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
       // 显示上次清扫时间
@@ -683,6 +743,15 @@
       this.document.getElementsByClassName("initTime")[0].style.display = "none";
       this.document.getElementsByClassName("workTime")[1].style.display = "block";
       this.document.getElementsByClassName("initTime")[1].style.display = "none";
+      window.hilink.setStorageSync('initStatus', 5)
+        // 开关
+      let batterNum = (window.hilink.getStorageSync('batterNum')).toString(16)
+      let code = "FA010304" + batterNum + "1101010701FB"
+      let obj = {
+        "t": 01,
+        "v": code
+      }
+      sendCommand(JSON.stringify(obj))
     } else if (workStatus == 6) { //连接中
       clearDataToStart();
       if (ctLanguage == 'en') {
@@ -715,6 +784,10 @@
       this.document.getElementsByClassName("devInfo")[0].classList.add('disable');
       this.document.getElementsByClassName("spinner")[0].classList.add('disable');
       this.document.getElementsByClassName("ledCard")[0].classList.add('disable');
+
+      window.hilink.setStorageSync('initStatus', 7)
+        // 开始工作按钮可以点击
+      statusImgClick();
     }
 
     if (recordStatus == 0) { //未连接
@@ -786,7 +859,7 @@
 
 
 
-    var tmpVal = "{\"t\":1,\"v\":\"FA0103066401000101000701FB\"}";
+    var tmpVal = "{\"t\":1,\"v\":\"FA010304640101010701FB\"}";
     $('.input1').val(tmpVal);
 
     var data = '*****'
@@ -817,31 +890,6 @@
       var inputVal = $('.input1').val();
       console.log('--------------')
       console.log('-发送输入框的值-', inputVal)
-      console.log('--------------')
-
-      console.log('-发送输入框的值-', inputVal)
-      window.hilink.sendCommand(hilinkDevId, deviceIdMac, 'test', inputVal,
-        'sendCommandCallback');
-      window.sendCommandCallback = res => {
-        let data = dataChange(res);
-        console.log('写数据给模块信息，回调:', data);
-      }
-
-      // var tmpVal = "{\'on\':0}";
-      // console.log('-发送输入框的值-', tmpVal)
-      // window.hilink.sendCommand (hilinkDevId,  deviceIdMac,  notifyUuids.serviceUuid, tmpVal,'sendCommandCallback');
-      // window.sendCommandCallback = res => {
-      //   let data = dataChange(res);
-      //   console.log('写数据给模块信息，回调:', data);
-      // }
-
-
-    });
-    $('.sendBleBtn').click(function() {
-      var inputVal = $('.input1').val();
-      console.log('--------------')
-      console.log('-发送输入框的值-', inputVal)
-      console.log('--------------')
       sendCommand(inputVal)
     });
   }

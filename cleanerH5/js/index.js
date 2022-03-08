@@ -18,67 +18,71 @@ var barLeft = document.getElementsByClassName("barLeft")[0];
 
 var statement = document.getElementsByClassName("statement")[0];
 
+// var statusImg = document.getElementsByClassName("statusImg")[0];
+
+// var statusImg1 = document.getElementsByClassName("statusImg")[1];
+
 
 
 // app接收数据的处理
 function dataChange(res) {
-    let data = undefined;
-    let dataStr = res;
-    dataStr = dataStr.replace(/"{/g, '{');
-    dataStr = dataStr.replace(/}"/g, '}');
-    dataStr = dataStr.replace(/\\|\n|\r|\t|\f|\t/g, '');
-    data = JSON.parse(dataStr);
-    return data;
+  let data = undefined;
+  let dataStr = res;
+  dataStr = dataStr.replace(/"{/g, '{');
+  dataStr = dataStr.replace(/}"/g, '}');
+  dataStr = dataStr.replace(/\\|\n|\r|\t|\f|\t/g, '');
+  data = JSON.parse(dataStr);
+  return data;
 }
 
 // 获取手机状态栏高度
-function getStatusBarHeight(){
+function getStatusBarHeight() {
 
-    console.log("index getStatusBarHeight" )
+  console.log("index getStatusBarHeight")
 
-    if(window.hilink){
-        hilink.getStatusBarHeight('BarHeightRes');
-    }
-    window.BarHeightRes = (res) => {
-        let data = dataChange(res).statusBarHeight;
-        console.log('手机状态栏高度:',data);
-        setStatusBarHeight(data);
-    }
+  if (window.hilink) {
+    hilink.getStatusBarHeight('BarHeightRes');
+  }
+  window.BarHeightRes = (res) => {
+    let data = dataChange(res).statusBarHeight;
+    console.log('手机状态栏高度:', data);
+    setStatusBarHeight(data);
+  }
 }
 
 // 设定状态栏高度
-function setStatusBarHeight(num){
-    iphoneStatus.style.height = num + 'px';
-    devTop.style.height = (84 + num) + 'px';
+function setStatusBarHeight(num) {
+  iphoneStatus.style.height = num + 'px';
+  devTop.style.height = (84 + num) + 'px';
 }
 
 // 隐藏原生标题栏
-if(window.hilink){
-    try{
-        hilink.setTitleVisible(false);   // ble设备
-    } catch {
-        hilink.setTitleVisible(false,"resultCallback")  // wlan设备
+if (window.hilink) {
+  try {
+    hilink.setTitleVisible(false); // ble设备
+  } catch {
+    hilink.setTitleVisible(false, "resultCallback") // wlan设备
 
-        window.resultCallback = (res) => {
-            console.log('res:',res);
-        }
-    }   
+    window.resultCallback = (res) => {
+      console.log('res:', res);
+    }
+  }
 }
 
 // 列表弹窗
-spinner.addEventListener('click',function(event){
-    let val = spinnerWrap.style.display;
-    if(val === 'block'){
-        spinnerWrap.style.display = 'none';
-    }else{
-        spinnerWrap.style.display = 'block';
-    }
-    event.stopImmediatePropagation();
+spinner.addEventListener('click', function(event) {
+  let val = spinnerWrap.style.display;
+  if (val === 'block') {
+    spinnerWrap.style.display = 'none';
+  } else {
+    spinnerWrap.style.display = 'block';
+  }
+  event.stopImmediatePropagation();
 })
 
-spinnerWrap.addEventListener('click',function(event){
-    spinnerWrap.style.display = 'none';
-    event.stopPropagation(); // 阻止事件冒泡
+spinnerWrap.addEventListener('click', function(event) {
+  spinnerWrap.style.display = 'none';
+  event.stopPropagation(); // 阻止事件冒泡
 })
 
 // singleList.addEventListener('click',function(event){
@@ -87,44 +91,44 @@ spinnerWrap.addEventListener('click',function(event){
 //     event.stopPropagation();
 // })
 
-fnbtnLeft.addEventListener('click',function(event){
-    backgroundColor.style.display = 'none';
-    modeList.style.display = 'none';
-    event.stopPropagation();
+fnbtnLeft.addEventListener('click', function(event) {
+  backgroundColor.style.display = 'none';
+  modeList.style.display = 'none';
+  event.stopPropagation();
 })
 
-fnbtnRight.addEventListener('click',function(event){
-    backgroundColor.style.display = 'none';
-    modeList.style.display = 'none';
-    event.stopPropagation();
+fnbtnRight.addEventListener('click', function(event) {
+  backgroundColor.style.display = 'none';
+  modeList.style.display = 'none';
+  event.stopPropagation();
 })
 
-app.addEventListener('click',function(event){
-    spinnerWrap.style.display = 'none';
-    event.stopPropagation();
+app.addEventListener('click', function(event) {
+  spinnerWrap.style.display = 'none';
+  event.stopPropagation();
 })
 
 // 退出当前设备页，返回APP设备列表页
-barLeft.addEventListener('click',function(event){
-    if(window.hilink){
-        hilink.finishDeviceActivity();
-    }
-    event.stopPropagation();
+barLeft.addEventListener('click', function(event) {
+  if (window.hilink) {
+    hilink.finishDeviceActivity();
+  }
+  event.stopPropagation();
 })
 
 // 暗黑模式适配处理
-function getDarkMode(){
-    if(window.hilink){
-        var dark = hilink.getDarkMode();
+function getDarkMode() {
+  if (window.hilink) {
+    var dark = hilink.getDarkMode();
 
-        if(dark == 2){//暗黑模式
-            app.style.background = 'black';
-            app.classList.add("dark");
-        } else {
-            app.classList.remove("dark")
-            app.style.background = '#F1F3F5';
-        }
+    if (dark == 2) { //暗黑模式
+      app.style.background = 'black';
+      app.classList.add("dark");
+    } else {
+      app.classList.remove("dark")
+      app.style.background = '#F1F3F5';
     }
+  }
 }
 getDarkMode();
 
@@ -136,35 +140,35 @@ var statementPopup = document.getElementsByClassName("statementPopup")[0];
 var deviceId = undefined;
 var isAgree = localStorage.getItem("devId");
 
-if(window.hilink){
-    window.hilink.getDevInfoAll('0', '', 'getDevInfoAllResult');
-    window.getDevInfoAllResult = (res) => {
-        deviceId = dataChange(res).devId;
-        console.log('设备devId:',deviceId);
+if (window.hilink) {
+  window.hilink.getDevInfoAll('0', '', 'getDevInfoAllResult');
+  window.getDevInfoAllResult = (res) => {
+    deviceId = dataChange(res).devId;
+    console.log('设备devId:', deviceId);
 
-        if(deviceId === isAgree){
-            statementPopup.style.display = 'none';
-            backgroundColor.style.display = 'none';
-        }else {
-            backgroundColor.style.display = 'block';
-            statementPopup.style.display = 'block';
-        }
+    if (deviceId === isAgree) {
+      statementPopup.style.display = 'none';
+      backgroundColor.style.display = 'none';
+    } else {
+      backgroundColor.style.display = 'block';
+      statementPopup.style.display = 'block';
     }
+  }
 }
 
-stateRight.addEventListener('click',function(event){
-    localStorage.setItem("devId", deviceId);
-    statementPopup.style.display = 'none';
-    backgroundColor.style.display = 'none';
-    event.stopPropagation();
+stateRight.addEventListener('click', function(event) {
+  localStorage.setItem("devId", deviceId);
+  statementPopup.style.display = 'none';
+  backgroundColor.style.display = 'none';
+  event.stopPropagation();
 })
 
 
-stateLeft.addEventListener('click',function(event){
-    if(window.hilink){
-        hilink.finishDeviceActivity();
-    }
-    event.stopPropagation();
+stateLeft.addEventListener('click', function(event) {
+  if (window.hilink) {
+    hilink.finishDeviceActivity();
+  }
+  event.stopPropagation();
 })
 
 
@@ -172,32 +176,30 @@ stateLeft.addEventListener('click',function(event){
 // var statement = document.getElementsByClassName("statement")[0];
 
 // statement.addEventListener('click',function(event){
-    
+
 //     window.location.href="privacy.html";
 //     event.stopPropagation();
 // })
 
 
 //展示或者隐藏错误
-function hideError () {
-	$(".shelter").hide()
-	$(".msg-div").hide()
+function hideError() {
+  $(".shelter").hide()
+  $(".msg-div").hide()
 }
 
-function showError () {
-    console.log('showError');
-	$(".shelter").show()
-	$(".msg-div").show()
+function showError() {
+  console.log('showError');
+  $(".shelter").show()
+  $(".msg-div").show()
 }
 
 //展示或者隐藏错误
-function hideAlert () {
-	$(".devTopWrap").hide()
+function hideAlert() {
+  $(".devTopWrap").hide()
 }
 
-function showAlert () {
-    console.log('showAlert');
-    $(".devTopWrap").show()
+function showAlert() {
+  console.log('showAlert');
+  $(".devTopWrap").show()
 }
-
-

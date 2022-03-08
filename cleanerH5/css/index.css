@@ -521,6 +521,7 @@
 
 .fnList .fnItem .fnWrap .fnStatus {
     font-size: 1.2rem;
+    display: none;
     color: rgba(0, 0, 0, 0.6);
 }
 

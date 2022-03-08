@@ -81,7 +81,7 @@
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>  -->
         <div class="statusMiddle">
           <div class="up batterNum" data-locale="turned_on">0%</div>
-          <div class="down" data-locale="turned_on">
+          <div class="down batterStatus" data-locale="turned_on">
             <span class="cn_lang">电池电量</span>
             <span class="en_lang">Batter</span>
           </div>
@@ -576,21 +576,24 @@
       }
     }
   }
-  // 开始工作按钮可以点击
-  function statusImgClick() {
-    $('.statusImg').click(function() {
-      console.log('开始工作--切换至工作中')
-        // 待机状态时，点击开始工作--切换至工作中
-      if (window.hilink.getStorageSync('initStatus') == 7) {
-        hideAlert();
-        initStatus(5, 0, 2);
-      }
-    })
-  }
 
-  // 发送数据
-  function sendCommand(inputVal) {
-    console.log(inputVal)
+  $('.instructions').click(function() {
+    console.log('-使用说明--')
+    window.open('http://www.dadaiot.com/cleanerH5/intro.html')
+  })
+
+  $('.lvInfo').click(function() {
+      console.log('-滤芯信息--')
+      window.open('http://www.dadaiot.com/cleanerH5/lvxin.html')
+    })
+    // 发送数据
+  function sendCommand(code) {
+    let obj = {
+      "t": 01,
+      "v": code
+    }
+    let inputVal = JSON.stringify(obj)
+    console.log('--发送数据--:', inputVal)
     window.hilink.sendCommand(hilinkDevId, deviceIdMac, 'test', inputVal,
       'sendCommandCallback');
     window.sendCommandCallback = res => {
@@ -599,37 +602,40 @@
     }
   }
 
-  // 节能模式
-  $('#eco').click(function() {
-      console.log(1)
-      $("#turbo").removeClass('checkedBg');
-      $("#turbo").removeClass('checkedText');
-      $("#eco").addClass('checkedBg');
-      $("#eco").addClass('checkedText');
-      // 吸力档位
-      let batterNum = (window.hilink.getStorageSync('batterNum')).toString(16)
-      let code = "FA010304" + batterNum + "32010701FB"
-      let obj = {
-        "t": 01,
-        "v": code
+  // 开始工作按钮可以点击
+  $('.statusImg').click(function() {
+      console.log('开始工作--切换至工作中')
+        // 待机状态时，点击开始工作--切换至工作中
+      if (window.hilink.getStorageSync('initCode') == 7) {
+        console.log('-发-开机')
+        sendCommand("FA01060401000000000CFB")
       }
-      sendCommand(JSON.stringify(obj))
+      if (window.hilink.getStorageSync('initCode') == 5) {
+        console.log('-发-关机')
+        sendCommand("FA01060400000000000BFB")
+      }
+    })
+    // 节能模式
+  $('#eco').click(function() {
+      console.log('-发-节能模式')
+      sendCommand("FA01050400000000000AFB")
     })
     // 强劲模式
   $('#turbo').click(function() {
-    console.log(2)
-    $("#eco").removeClass('checkedBg');
-    $("#eco").removeClass('checkedText');
-    $("#turbo").addClass('checkedBg');
-    $("#turbo").addClass('checkedText');
-    // 吸力档位
-    let batterNum = (window.hilink.getStorageSync('batterNum')).toString(16)
-    let code = "FA010304" + batterNum + "6401010701FB"
-    let obj = {
-      "t": 01,
-      "v": code
+    console.log('-发-强劲模式')
+    sendCommand("FA01050401000000000BFB")
+  })
+
+  // LED开关
+  $('.ledCard').click(function() {
+    console.log('LED开关')
+    if (window.hilink.getStorageSync('ledCode') == 1) {
+      console.log('-发-关灯')
+      sendCommand("FA01080400000000000DFB")
+    } else {
+      console.log('-发-开灯')
+      sendCommand("FA01080401000000000EFB")
     }
-    sendCommand(JSON.stringify(obj))
   })
 
   // 移出高亮显示状态
@@ -730,7 +736,8 @@
       // 显示工作icon
       this.document.getElementsByClassName("statusImg")[0].style.display = "block";
       // this.document.getElementsByClassName("statusImg")[0].style.background = "url('../img/light/ic_quxiao.png') no-repeat";
-      this.document.getElementsByClassName("statusImg")[0].style.background = "url('http://www.dadaiot.com/cleanerH5/img/light/ic_quxiao.png') no-repeat";
+      this.document.getElementsByClassName("statusImg")[0].style.background =
+        "url('http://www.dadaiot.com/cleanerH5/img/light/ic_quxiao.png') no-repeat";
       this.document.getElementsByClassName("statusImg")[0].style.backgroundSize = "cover";
 
       // 显示节能模式、灯光已开启
@@ -743,15 +750,7 @@
       this.document.getElementsByClassName("initTime")[0].style.display = "none";
       this.document.getElementsByClassName("workTime")[1].style.display = "block";
       this.document.getElementsByClassName("initTime")[1].style.display = "none";
-      window.hilink.setStorageSync('initStatus', 5)
-        // 开关
-      let batterNum = (window.hilink.getStorageSync('batterNum')).toString(16)
-      let code = "FA010304" + batterNum + "1101010701FB"
-      let obj = {
-        "t": 01,
-        "v": code
-      }
-      sendCommand(JSON.stringify(obj))
+      window.hilink.setStorageSync('initCode', 5)
     } else if (workStatus == 6) { //连接中
       clearDataToStart();
       if (ctLanguage == 'en') {
@@ -778,6 +777,10 @@
       this.document.getElementsByClassName("statusMiddle")[0].style.display = "block";
       // 显示工作icon
       this.document.getElementsByClassName("statusImg")[0].style.display = "block";
+      this.document.getElementsByClassName("statusImg")[0].style.background =
+        "url('http://www.dadaiot.com/cleanerH5/img/light/ic_kaishi.png') no-repeat";
+      this.document.getElementsByClassName("statusImg")[0].style.backgroundSize = "cover";
+
       // 重新连接 隐藏
       this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
       // 设置禁用状态
@@ -785,9 +788,9 @@
       this.document.getElementsByClassName("spinner")[0].classList.add('disable');
       this.document.getElementsByClassName("ledCard")[0].classList.add('disable');
 
-      window.hilink.setStorageSync('initStatus', 7)
+      window.hilink.setStorageSync('initCode', 7)
         // 开始工作按钮可以点击
-      statusImgClick();
+        // statusImgClick();
     }
 
     if (recordStatus == 0) { //未连接

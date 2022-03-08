@@ -109,6 +109,11 @@
     $(".devMore").show()
   }
 
+  $('.barLeft').click(function() {
+    console.log('-返回上一页--')
+    window.history.go(-1);
+  })
+
   function loadProperties(lang) {
     console.log("loadProperties:" + lang)
       //这个方法有个跨域问题，需要解决. 
@@ -213,7 +218,7 @@
 
 
     //设置暗黑模式
-    getDarkMode();
+    // getDarkMode();
 
     // 执行dp换算
     initDp();

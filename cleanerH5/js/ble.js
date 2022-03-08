@@ -23,45 +23,63 @@ function analyseBleInfo(str) {
   if (commandStr == '03') { //设备状态
     let BatterNum = parseInt(dataStr.substr(0, 2), 16); // 电量
     console.log('电量', BatterNum)
-    $('.batterNum').html(BatterNum + '%');
-    let storageCode = window.hilink.setStorageSync('batterNum', BatterNum)
-    console.log('本地存储电量--0：成功', storageCode)
-      // let BatterNum = parseInt(dataStr.substr(2, 2), 16); // 吸力档位/开关机
-      // $('.batterNum').html(BatterNum + '%');
-      // let BatterNum = parseInt(dataStr.substr(3, 2), 16); // 滤网堵塞告警状态
-      // $('.batterNum').html(BatterNum + '%');
-      // let BatterNum = parseInt(dataStr.substr(4, 2), 16); // LED灯开关状态
-      // $('.batterNum').html(BatterNum + '%');
-  }
-  if (commandStr == '04') { //清除滤网告警
-  }
+    if (BatterNum >= 128) {
+      console.log('充电中')
+        // 充电中
+      $('.batterStatus')[0].innerText = '充电中'
+      $('.batterNum').html((BatterNum - 128) + '%');
+    } else {
+      console.log('电池电量')
+      $('.batterStatus')[0].innerText = '电池电量'
+      $('.batterNum').html(BatterNum + '%');
+    }
 
-  if (commandStr == '05') { //档位切换
+    if (dataStr.substr(2, 1) == 1) {
+      // 开机
+      hideAlert();
+      initStatus(5, 0, 2);
+    } else {
+      // 待机
+      hideAlert();
+      initStatus(7, 0, 2);
+    }
+
+    if (dataStr.substr(3, 1) == 1) {
+      // 高档 强劲模式
+      $("#eco").removeClass('checkedBg');
+      $("#eco").removeClass('checkedText');
+      $("#turbo").addClass('checkedBg');
+      $("#turbo").addClass('checkedText');
+    } else {
+      //低档 节能
+      $("#turbo").removeClass('checkedBg');
+      $("#turbo").removeClass('checkedText');
+      $("#eco").addClass('checkedBg');
+      $("#eco").addClass('checkedText');
+    }
+
+    if (dataStr.substr(4, 2) === '01') {
+      // 滤网堵塞告警状态 堵塞
+      document.getElementsByClassName("devTopWrap")[0].style.display = "flex";
+      initStatus(5, 0, 2);
+    } else {
+      // 滤网堵塞告警状态 未堵塞
+    }
+
+    if (dataStr.substr(6, 2) === '01') {
+      // LED灯开关状态    开灯
+      $('.ledTip').show();
+      this.document.getElementsByClassName("fnImgItem2")[0].style.background = "url('http://www.dadaiot.com/cleanerH5/img/light/ic_led_on.png') no-repeat";
+      this.document.getElementsByClassName("fnImgItem2")[0].style.backgroundSize = "cover";
+      window.hilink.setStorageSync('ledCode', 1)
+    } else {
+      // LED灯开关状态    关灯
+      $('.ledTip').hide();
+      this.document.getElementsByClassName("fnImgItem2")[0].style.background = "url('http://www.dadaiot.com/cleanerH5/img/light/ic_led_off.png') no-repeat";
+      this.document.getElementsByClassName("fnImgItem2")[0].style.backgroundSize = "cover";
+      window.hilink.setStorageSync('ledCode', 0)
+    }
   }
-
-  if (commandStr == '06') { //开关机命令
-  }
-}
-
-// app下发命令
-function pushCommand() {
-  // 档位切换
-  let str = 'FA 01 03 06 640100010100 07 01 FB'
-  let commandStr = ""; // 命令码
-  let dataStr = ""; // 数据区
-  //清除滤网告警
-  // if (commandStr == '04') { 
-  commandStr = '04'
-  dataStr = '010000000000'
-    // }
-    //档位切换
-    // if (commandStr == '05') {   }
-    //开关机命令
-    // if (commandStr == '06') {   }
-
-  let pushCommandStr = 'FA01 ' + commandStr + ' 06 ' + dataStr + ' 0701FB'
-    // let pushCommandStr = 'FA01' + commandStr + '06' + dataStr + '0701FB'
-  console.log(pushCommandStr)
 }
 
 var deviceIdMac = ''; //注册时候的mac地址

@@ -99,7 +99,7 @@
 </body>
 
 <script src="./js/jquery.min.js"></script>
-<script src="./js/jquery.i18n.properties.js"></script>
+<!-- <script src="./js/jquery.i18n.properties.js"></script> -->
 <script src="./js/vconsole.min.js"></script>
 
 <script>
@@ -107,8 +107,7 @@
   console.log('开始调试');
 
   // 中文 zh   英文 en
-  var ctLanguage = 'en'; // 语言
-  ctLanguage = 'zh'
+  var ctLanguage = 'zh'; // 语言
 
   var isIOS = !!navigator.userAgent.match(/iPhone/i);
   console.log('iOS:' + isIOS);
@@ -126,18 +125,10 @@
 
   function loadProperties(lang) {
     console.log("loadProperties:" + lang)
-      //这个方法有个跨域问题，需要解决. 
-    $.i18n.properties({
-      name: 'strings', //资源文件名称 ， 命名格式： 文件名_国家代号.properties
-      path: 'lang/', //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
-      mode: 'map', //用 Map 的方式使用资源文件中的值
-      language: lang, //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
-      callback: function() {
-        $("[data-locale]").each(function() {
-          $(this).html($.i18n.prop($(this).data("locale")));
-        });
-      }
-    });
+    if (lang == 'en') {
+      $('.cn_lang').hide();
+      $('.en_lang').show();
+    }
   }
 
   function getDarkMode() {
@@ -146,8 +137,9 @@
 
     // if(window.hilink && !isIOS){
     if (true) {
-      //    var dark = window.hilink.getDarkMode();
-      var dark = 2;
+      var dark = window.hilink.getDarkMode();
+      console.log("dark", dark)
+        // var dark = 2;
       if (dark == 2) { //暗黑模式
         app.style.background = 'black';
         app.classList.add("dark");
@@ -173,17 +165,10 @@
   }
 
   $(function() {
-
     console.log("intro html init")
 
-    console.log('中英文切换')
-    if (ctLanguage == 'en') {
-      $('.cn_lang').hide();
-      $('.en_lang').show();
-    }
-
     //设置暗黑模式
-    // getDarkMode();
+    getDarkMode();
 
     // 执行dp换算
     initDp();

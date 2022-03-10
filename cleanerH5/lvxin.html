@@ -95,8 +95,7 @@
   var gaugeColor = '#00000008'; //进度条底色
 
   // 中文 zh   英文 en
-  var ctLanguage = 'en'; // 语言
-  ctLanguage = 'zh'; // 语言
+  var ctLanguage = 'zh'; // 语言
 
   console.log('开始调试');
 
@@ -116,28 +115,27 @@
 
   function loadProperties(lang) {
     console.log("loadProperties:" + lang)
-      //这个方法有个跨域问题，需要解决. 
-    $.i18n.properties({
-      name: 'strings', //资源文件名称 ， 命名格式： 文件名_国家代号.properties
-      path: 'lang/', //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
-      mode: 'map', //用 Map 的方式使用资源文件中的值
-      language: lang, //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
-      callback: function() {
-        $("[data-locale]").each(function() {
-          $(this).html($.i18n.prop($(this).data("locale")));
-        });
-      }
-    });
+    if (lang == 'en') {
+      $('.cn_lang').hide();
+      $('.en_lang').show();
+    }
+    ctLanguage = lang
+      //设置暗黑模式
+    getDarkMode();
+  }
+
+  function finishDeviceActivity() {
+    showError();
   }
 
   function getDarkMode() {
     console.log("getDarkMode")
     var isIOS = !!navigator.userAgent.match(/iPhone/i);
-
     // if(window.hilink && !isIOS){
     if (true) {
-      //    var dark = window.hilink.getDarkMode();
-      var dark = 2;
+      var dark = window.hilink.getDarkMode();
+      // var dark = 2;
+      console.log("dark", dark)
       if (dark == 2) { //暗黑模式
         app.style.background = 'black';
         app.classList.add("dark");
@@ -199,51 +197,43 @@
     this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
   }
 
+  $('.btn_l').click(function() {
+    hideError();
+  })
+  $('.btn_r').click(function() {
+    // showError();
+  })
 
   $(function() {
 
-    console.log('中英文切换')
-    if (ctLanguage == 'en') {
-      $('.cn_lang').hide();
-      $('.en_lang').show();
-    }
-
     // 栅格化适配
-    gridAdaptation();
+    // gridAdaptation();
 
     console.log("intro html init")
 
-    // showError();
-    //  hideError();
-
-
-    //设置暗黑模式
-    // getDarkMode();
-
     // 执行dp换算
     initDp();
-    setEcharts();
 
-    /* 设置语言
-		if (window.hilink) {
-			let language = window.hilink.getAppLanguageSync()
-			console.log(language)
-			if (language == "zh-CN") {
-				loadProperties("zh")
-			} else if (language == "en-UK") {
-				loadProperties("en")
-			} else if (language.indexOf("zh") > -1) {
-				loadProperties("zh")
-			} else if (language.indexOf("en") > -1) {
-				loadProperties("en")
-			} else {
-				loadProperties("en")
-			} 
-        }else {
-			loadProperties("zh")
-		} */
+    // setEcharts(); // PC test
 
-
+    // 设置语言
+    if (window.hilink) {
+      let language = window.hilink.getAppLanguageSync()
+      console.log(language)
+      if (language == "zh-CN") {
+        loadProperties("zh")
+      } else if (language == "en-UK") {
+        loadProperties("en")
+      } else if (language.indexOf("zh") > -1) {
+        loadProperties("zh")
+      } else if (language.indexOf("en") > -1) {
+        loadProperties("en")
+      } else {
+        loadProperties("en")
+      }
+    } else {
+      loadProperties("zh")
+    }
 
   })
 

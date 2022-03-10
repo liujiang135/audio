@@ -111,6 +111,13 @@ app.addEventListener('click', function(event) {
 // 退出当前设备页，返回APP设备列表页
 barLeft.addEventListener('click', function(event) {
   if (window.hilink) {
+    console.log('-hilinkDevId-', hilinkDevId)
+    console.log('-deviceIdMac-', deviceIdMac)
+    window.hilink.disconnectBle(hilinkDevId, deviceIdMac, 'disconnectBleCallback');
+    window.disconnectBleCallback = res => {
+      let data = dataChange(res);
+      console.log('BLE断开连接:', data);
+    }
     hilink.finishDeviceActivity();
   }
   event.stopPropagation();
@@ -118,9 +125,10 @@ barLeft.addEventListener('click', function(event) {
 
 // 暗黑模式适配处理
 function getDarkMode() {
+  console.log('getDarkMode')
   if (window.hilink) {
     var dark = hilink.getDarkMode();
-
+    console.log('dark--', dark)
     if (dark == 2) { //暗黑模式
       app.style.background = 'black';
       app.classList.add("dark");
@@ -200,6 +208,26 @@ function hideAlert() {
 }
 
 function showAlert() {
-  console.log('showAlert');
-  $(".devTopWrap").show()
+  document.getElementsByClassName("devTopWrap")[0].style.display = "flex";
+}
+
+// 告警提示  0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
+function showErrorTip(topMsgStatus) {
+  showAlert();
+  if (topMsgStatus == 0) { //请更换滤芯
+    $('.replaceLv').show();
+    $('.lowBatteryLv').hide();
+    $('.clearLv').hide();
+    $('.devTopRight').show();
+  } else if (topMsgStatus == 1) { //电量低，请充电
+    $('.replaceLv').hide();
+    $('.lowBatteryLv').show();
+    $('.clearLv').hide();
+    $('.devTopRight').hide();
+  } else if (topMsgStatus == 2) { //请清理尘杯及滤芯
+    $('.replaceLv').hide();
+    $('.lowBatteryLv').hide();
+    $('.clearLv').show();
+    $('.devTopRight').hide();
+  }
 }

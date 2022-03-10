@@ -1,5 +1,5 @@
 window.onload = function() {
-  // testBle()
+  console.log('window.onload-ble.js');
   if (window.hilink) {
     onBluetoothAdapterStateChange(); // 监听蓝牙模块开启/关闭 触发
     onBLEConnectionStateChange(); // 监听低功耗蓝牙设备连接状态的改变
@@ -7,18 +7,12 @@ window.onload = function() {
   }
 }
 
-function testBle() {
-  let obj = { "t": 01, "v": "FA010304640101010701FB" };
-  // FA 01 03 06 640100010100 07 01 FB
-  analyseBleInfo(obj.v) // 解析蓝牙数据
-    // pushCommand(obj.v) // app下发命令
-}
-
 // 解析蓝牙数据 FA010304640101010701FB
 function analyseBleInfo(str) {
   console.log('-解析蓝牙数据--:', str)
   let commandStr = str.substr(4, 2); //命令码
-  let dataStr = str.substr(8, 12); // 数据区
+  let dataStr = str.substr(8, 8); // 数据区
+  let errorFlag = false;
   console.log('-命令码--:', commandStr, '  -数据区--:', dataStr)
   if (commandStr == '03') { //设备状态
     let BatterNum = parseInt(dataStr.substr(0, 2), 16); // 电量
@@ -32,16 +26,18 @@ function analyseBleInfo(str) {
       console.log('电池电量')
       $('.batterStatus')[0].innerText = '电池电量'
       $('.batterNum').html(BatterNum + '%');
+      if (BatterNum <= 5) {
+        showErrorTip(1) // 0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
+        errorFlag = true;
+      }
     }
 
     if (dataStr.substr(2, 1) == 1) {
       // 开机
-      hideAlert();
-      initStatus(5, 0, 2);
+      initStatus(5, 0);
     } else {
       // 待机
-      hideAlert();
-      initStatus(7, 0, 2);
+      initStatus(7, 0);
     }
 
     if (dataStr.substr(3, 1) == 1) {
@@ -60,8 +56,8 @@ function analyseBleInfo(str) {
 
     if (dataStr.substr(4, 2) === '01') {
       // 滤网堵塞告警状态 堵塞
-      document.getElementsByClassName("devTopWrap")[0].style.display = "flex";
-      initStatus(5, 0, 2);
+      showErrorTip(2) // 0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
+      errorFlag = true;
     } else {
       // 滤网堵塞告警状态 未堵塞
     }
@@ -79,6 +75,9 @@ function analyseBleInfo(str) {
       this.document.getElementsByClassName("fnImgItem2")[0].style.backgroundSize = "cover";
       window.hilink.setStorageSync('ledCode', 0)
     }
+  }
+  if (!errorFlag) {
+    hideAlert();
   }
 }
 
@@ -317,16 +316,13 @@ function bleConnection(mac) {
     let data = dataChange(res);
     console.log('BLE连接结果:', data);
 
-
     console.log('bleConnectionStateCallBack:', data);
     console.log('蓝牙设备连接结果:', data.errcode);
 
     if (data.errcode == 0) {
       statusLeft.innerHTML = '已连接';
-
       // 进入待机状态
-      hideAlert();
-      initStatus(7, 0, 2);
+      initStatus(7, 0);
 
       //尝试写
       // hilink.sendCommand (hilinkDevId,  deviceIdMac,  notifyUuids.serviceUuid, '{\'on\':1}','sendCommandCallback');

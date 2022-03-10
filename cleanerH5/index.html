@@ -520,13 +520,13 @@
 
 
 <script src="./js/jquery.min.js"></script>
-<script src="./js/jquery.i18n.properties.js"></script>
+<!-- <script src="./js/jquery.i18n.properties.js"></script> -->
 <script src="./js/vconsole.min.js"></script>
 <script src='./js/ble.js'></script>
 <script src='./js/index.js'></script>
 <script>
   var vConsole = new VConsole();
-  console.log('开始调试');
+  console.log('开始调试-index.html');
   // 中文 zh   英文 en
   var ctLanguage = 'en'; // 语言
   ctLanguage = 'zh';
@@ -543,18 +543,26 @@
   // 中英文切换
   function loadProperties(lang) {
     console.log("loadProperties:" + lang)
-      //这个方法有个跨域问题，需要解决. 
-    $.i18n.properties({
-      name: 'strings', //资源文件名称 ， 命名格式： 文件名_国家代号.properties
-      path: 'lang/', //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
-      mode: 'map', //用 Map 的方式使用资源文件中的值
-      language: lang, //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
-      callback: function() {
-        $("[data-locale]").each(function() {
-          $(this).html($.i18n.prop($(this).data("locale")));
-        });
-      }
-    });
+
+    console.log('中英文切换')
+      // ctLanguage = 'en'
+    if (ctLanguage == 'en') {
+      $('.cn_lang').hide();
+      $('.en_lang').show();
+    }
+
+    //这个方法有个跨域问题，需要解决. 
+    // $.i18n.properties({
+    //   name: 'strings', //资源文件名称 ， 命名格式： 文件名_国家代号.properties
+    //   path: 'lang/', //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
+    //   mode: 'map', //用 Map 的方式使用资源文件中的值
+    //   language: lang, //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
+    //   callback: function() {
+    //     $("[data-locale]").each(function() {
+    //       $(this).html($.i18n.prop($(this).data("locale")));
+    //     });
+    //   }
+    // });
   }
 
   function getDarkMode(dark) {
@@ -579,12 +587,18 @@
 
   $('.instructions').click(function() {
     console.log('-使用说明--')
-    window.open('http://www.dadaiot.com/cleanerH5/intro.html')
+    let t = (new Date()).getTime()
+    console.log('t--', t)
+    window.open('http://www.dadaiot.com/cleanerH5/intro.html?t=' + t)
+      // window.open('http://192.168.0.105/intro.html?t=' + t)
   })
 
-  $('.lvInfo').click(function() {
+  $('.lvInfo,.replaceLv,.devTopRight').click(function() {
       console.log('-滤芯信息--')
-      window.open('http://www.dadaiot.com/cleanerH5/lvxin.html')
+      let t = (new Date()).getTime()
+      console.log('t--', t)
+      window.open('http://www.dadaiot.com/cleanerH5/lvxin.html?t=' + t)
+        // window.open('http://192.168.0.105/lvxin.html?t=' + t)
     })
     // 发送数据
   function sendCommand(code) {
@@ -678,7 +692,7 @@
   let recordStatus = 0 //0 没几率 ，1 三条记录
 
   // 设置状态
-  function initStatus(workStatus, recordStatus, topMsgStatus) {
+  function initStatus(workStatus, recordStatus) {
     console.log('模式', workStatus)
     if (workStatus == 0) { //未连接
       clearDataToStart();
@@ -798,24 +812,6 @@
     } else if (recordStatus == 1) { //重连
       //TODO
     }
-
-    if (topMsgStatus == 0) { //请更换滤芯
-      //TODO
-      this.document.getElementsByClassName("replaceLv")[0].style.display = "block";
-      this.document.getElementsByClassName("lowBatteryLv")[0].style.display = "none";
-      this.document.getElementsByClassName("clearLv")[0].style.display = "none";
-    } else if (topMsgStatus == 1) { //电量低，请充电
-      //TODO
-      this.document.getElementsByClassName("replaceLv")[0].style.display = "none";
-      this.document.getElementsByClassName("lowBatteryLv")[0].style.display = "block";
-      this.document.getElementsByClassName("clearLv")[0].style.display = "none";
-    } else if (topMsgStatus == 2) { //请清理尘杯及滤芯
-      //TODO
-      this.document.getElementsByClassName("replaceLv")[0].style.display = "none";
-      this.document.getElementsByClassName("lowBatteryLv")[0].style.display = "none";
-      this.document.getElementsByClassName("clearLv")[0].style.display = "block";
-    }
-
   }
 
   // 栅格化适配
@@ -854,12 +850,14 @@
 
     hideAlert() // 隐藏前提下 topMsgStatus 生效
 
-    initStatus(0, 0, 2);
-    // initStatus(workStatus,recordStatus,topMsgStatus )
+    initStatus(0, 0);
+    // initStatus(workStatus,recordStatus )
     // workStatus 0:未连接 2:连接失败 连接超时 5:工作中，三条记录 6:连接中 7:待机
     // recordStatus 0:未连接 1:重连
-    // topMsgStatus  0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
 
+
+    // showErrorTip(2)
+    // 告警提示   topMsgStatus  0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
 
 
     var tmpVal = "{\"t\":1,\"v\":\"FA010304640101010701FB\"}";
@@ -982,14 +980,12 @@
     let moshi11 = $("input[name='moshi']:checked").val();
     console.log(moshi11)
     if (moshi11 === '0' || moshi11) {
-      hideAlert();
-      initStatus(moshi11, 0, 2);
+      initStatus(moshi11, 0);
     }
 
     let gaojing11 = $("input[name='gaojing1']:checked").val();
     if (gaojing11 === '0' || gaojing11 === '1' || gaojing11 === '2') {
-      document.getElementsByClassName("devTopWrap")[0].style.display = "flex";
-      initStatus(5, 0, gaojing11);
+      showErrorTip(gaojing11)
     }
     if (gaojing11 == 3) {
       hideAlert();
@@ -1016,25 +1012,12 @@
       // browserInfo()
       // gridAdaptation() // 栅格化适配
 
-    // showError();
-
-    // hideAlert();
-
-    console.log('中英文切换')
-    if (ctLanguage == 'en') {
-      $('.cn_lang').hide();
-      $('.en_lang').show();
-    }
-
-
-    //设置暗黑模式
-    getDarkMode();
-
     // 执行dp换算
     initDp();
 
     // 设置语言
-    /*if (window.hilink) {
+    console.log('-设置语言-', window.hilink.getAppLanguageSync())
+      /*if (window.hilink) {
 			let language = window.hilink.getAppLanguageSync()
 			console.log(language)
 			if (language == "zh-CN") {

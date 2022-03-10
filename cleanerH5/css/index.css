@@ -151,7 +151,7 @@
 }
 
 .devImg .devTop .devTopWrap {
-    display: flex;
+    display: none;
     flex-direction: row;
     align-items: center;
     width: 100%;
@@ -499,7 +499,7 @@
 }
 
 .fnList .fnItem .fnWrap {
-    width: 48%;
+    width: 62%;
     position: absolute;
     left: 16px;
     top: 50%;
@@ -513,6 +513,10 @@
     white-space: nowrap;
     text-overflow: ellipsis; */
     color: rgba(0, 0, 0, 0.9);
+}
+
+.fnList .fnItem .fnWrap .fnName .en_lang {
+    font-size: 1.4rem;
 }
 
 .dark .fnList .fnItem .fnWrap .fnName {

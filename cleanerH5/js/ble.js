@@ -234,8 +234,8 @@ function onBluetoothDeviceFound() {
   window.hilink.onBluetoothDeviceFound('bluetoothDeviceCallBack');
   window.bluetoothDeviceCallBack = res => {
     let data = dataChange(res);
-    statusLeft.innerHTML = '连接中...';
-
+    // statusLeft.innerHTML = '连接中...';
+    initStatus(6, 0) // 连接中
 
     // 把被扫描到的蓝牙设备的mac地址与当前要建立连接设备的mac地址做对比，
     if (isIOS) {

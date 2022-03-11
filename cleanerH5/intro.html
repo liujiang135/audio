@@ -120,7 +120,8 @@
 
   $('.barLeft').click(function() {
     console.log('-返回上一页--')
-    window.history.go(-1);
+      // window.history.go(-1);
+    window.hilink.overrideBackPressed()
   })
 
   function loadProperties(lang) {

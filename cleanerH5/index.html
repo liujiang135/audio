@@ -531,6 +531,8 @@
   var ctLanguage = 'en'; // 语言
   ctLanguage = 'zh';
 
+  // $('.devName').html('动态标题测试...')
+
   var isIOS = !!navigator.userAgent.match(/iPhone/i);
   console.log('iOS:' + isIOS);
 
@@ -589,7 +591,16 @@
     console.log('-使用说明--')
     let t = (new Date()).getTime()
     console.log('t--', t)
-    window.open('http://www.dadaiot.com/cleanerH5/intro.html?t=' + t)
+      // window.open('http://www.dadaiot.com/cleanerH5/intro.html?t=' + t)
+    window.open('./intro.html?t=' + t)
+      // window.hilink.jumpTo(
+      //   'http://www.dadaiot.com/cleanerH5/intro.html?t=' + t,
+      //   "jumpToCallback"
+      // );
+      // window.jumpToCallback = res => {
+      //     let data = dataChange(res);
+      //     console.log('跳转指定页面:', data);
+      //   }
       // window.open('http://192.168.0.105/intro.html?t=' + t)
   })
 
@@ -597,7 +608,16 @@
       console.log('-滤芯信息--')
       let t = (new Date()).getTime()
       console.log('t--', t)
-      window.open('http://www.dadaiot.com/cleanerH5/lvxin.html?t=' + t)
+        // window.open('http://www.dadaiot.com/cleanerH5/lvxin.html?t=' + t)
+      window.open('./lvxin.html?t=' + t)
+        // window.hilink.jumpTo(
+        //   'http://www.dadaiot.com/cleanerH5/lvxin.html?t=' + t,
+        //   "jumpToCallback"
+        // );
+        // window.jumpToCallback = res => {
+        //     let data = dataChange(res);
+        //     console.log('跳转指定页面:', data);
+        //   }
         // window.open('http://192.168.0.105/lvxin.html?t=' + t)
     })
     // 发送数据
@@ -850,7 +870,7 @@
 
     hideAlert() // 隐藏前提下 topMsgStatus 生效
 
-    initStatus(0, 0);
+    initStatus(6, 0);
     // initStatus(workStatus,recordStatus )
     // workStatus 0:未连接 2:连接失败 连接超时 5:工作中，三条记录 6:连接中 7:待机
     // recordStatus 0:未连接 1:重连
@@ -1009,7 +1029,7 @@
 
     // 浏览器信息 栅格化适配
     console.log('---浏览器信息---')
-      // browserInfo()
+    browserInfo()
       // gridAdaptation() // 栅格化适配
 
     // 执行dp换算

@@ -51,12 +51,14 @@ function analyseBleInfo(str) {
       $("#eco").removeClass('checkedText');
       $("#turbo").addClass('checkedBg');
       $("#turbo").addClass('checkedText');
+      $(".modeTip").html('强劲模式');
     } else {
       //低档 节能
       $("#turbo").removeClass('checkedBg');
       $("#turbo").removeClass('checkedText');
       $("#eco").addClass('checkedBg');
       $("#eco").addClass('checkedText');
+      $(".modeTip").html('节能模式');
     }
 
     if (dataStr.substr(4, 2) === '01') {
@@ -225,6 +227,9 @@ function getCurrentRegisteredDevice() {
     let data = dataChange(res);
     deviceIdMac = data.deviceId;
     hilinkDevId = data.hilinkDevId;
+    window.hilink.setStorageSync('deviceIdMac', deviceIdMac)
+    window.hilink.setStorageSync('hilinkDevId', hilinkDevId)
+    console.log('-存-deviceIdMac-hilinkDevId-', deviceIdMac, hilinkDevId)
     console.log('currentRegisteredDeviceCallBack data:', data)
     console.log('本机蓝牙设备的地址:', deviceIdMac)
 

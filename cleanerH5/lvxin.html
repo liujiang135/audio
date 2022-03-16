@@ -121,6 +121,17 @@
   var eChartsLabelColor1 = '#000000e6';
   var eChartsLabelColor2 = '#00000099';
   var gaugeColor = '#00000008'; //进度条底色
+  var batterVal = 45;
+
+  var deviceIdMac = ''; //注册时候的mac地址
+  var hilinkDevId = '';
+  var notifyUuids = [{
+    switchOn: '00', //下发数据为16进制, 不要带0x
+    switchOff: '01',
+    serviceUuid: '15f1e600-a277-43fc-a484-dd39ef8a9100',
+    characteristicUuid: '15f1e602-a277-43fc-a484-dd39ef8a9100',
+    characteristicUuid2: '15f1e601-a277-43fc-a484-dd39ef8a9100'
+  }];
 
   // 中文 zh   英文 en
   var ctLanguage = 'zh'; // 语言
@@ -229,9 +240,39 @@
     hideError();
   })
   $('.btn_r').click(function() {
-    // showError();
+    console.log('-发-重置滤芯-')
+    sendCommand("FA010404000000000009FB")
   })
 
+  // 发送数据
+  function sendCommand(code) {
+    let obj = {
+      "t": 01,
+      "v": code
+    }
+    deviceIdMac = window.hilink.getStorageSync('deviceIdMac')
+    hilinkDevId = window.hilink.getStorageSync('hilinkDevId')
+    let inputVal = JSON.stringify(obj)
+    console.log('--发送数据--:', hilinkDevId, deviceIdMac, inputVal)
+    window.hilink.sendCommand(hilinkDevId, deviceIdMac, 'test', inputVal,
+      'sendCommandCallbacklvx');
+    window.sendCommandCallbacklvx = res => {
+      let data = dataChange(res);
+      console.log('写数据给模块信息，回调:', data);
+    }
+  }
+
+  // 接口返回数据格式的转换
+  function dataChange(res) {
+    let data = undefined;
+    let dataStr = res;
+    dataStr = dataStr.replace(/"{/g, '{');
+    dataStr = dataStr.replace(/}"/g, '}');
+    dataStr = dataStr.replace(/\\|\n|\r|\t|\f|\t/g, '');
+    data = JSON.parse(dataStr);
+
+    return data;
+  }
 
   function test() {
 
@@ -307,6 +348,9 @@
 
     // setEcharts(); // PC test
 
+    // 获取滤芯寿命
+    // batterVal = window.hilink.getStorageSync('batterVal')
+
     // 设置语言
     if (window.hilink) {
       let language = window.hilink.getAppLanguageSync()
@@ -333,6 +377,10 @@
   var option;
 
   function setEcharts() {
+    // 角度换算    
+    // 210度~-30度    共 240度
+    // 0    ~  100      100     ~2.4
+    // 210 - (bili * 2.4)
     option = {
       tooltip: {
         formatter: '{a} <br/>{b} : {c}%'
@@ -444,7 +492,7 @@
           },
 
           data: [{
-            value: 50 // 仪表盘显示值
+            value: batterVal // 仪表盘显示值
           }]
         },
         // 渐变仪表盘 滤芯寿命进度条
@@ -452,7 +500,7 @@
           type: 'gauge',
           name: 'Pressure',
           startAngle: 210,
-          endAngle: 90,
+          endAngle: (210 - (batterVal * 2.4)),
           center: ['50%', '65%'],
           radius: '120px',
           min: 0,

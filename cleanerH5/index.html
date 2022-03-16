@@ -638,26 +638,28 @@
 
   // 开始工作按钮可以点击
   $('.statusImg').click(function() {
-      console.log('开始工作--切换至工作中')
-        // 待机状态时，点击开始工作--切换至工作中
-      if (window.hilink.getStorageSync('initCode') == 7) {
-        console.log('-发-开机')
-        sendCommand("FA01060401000000000CFB")
-      }
-      if (window.hilink.getStorageSync('initCode') == 5) {
-        console.log('-发-关机')
-        sendCommand("FA01060400000000000BFB")
-      }
-    })
-    // 节能模式
+    console.log('开始工作--切换至工作中')
+      // 待机状态时，点击开始工作--切换至工作中
+    if (window.hilink.getStorageSync('initCode') == 7) {
+      console.log('-发-开机')
+      sendCommand("FA01060401000000000CFB")
+    }
+    if (window.hilink.getStorageSync('initCode') == 5) {
+      console.log('-发-关机')
+      sendCommand("FA01060400000000000BFB")
+    }
+  })
   $('#eco').click(function() {
-      console.log('-发-节能模式')
-      sendCommand("FA01050400000000000AFB")
-    })
-    // 强劲模式
+    console.log('-发-节能模式')
+    sendCommand("FA01050400000000000AFB")
+  })
   $('#turbo').click(function() {
     console.log('-发-强劲模式')
     sendCommand("FA01050401000000000BFB")
+  })
+  $('.statusTxt').click(function() {
+    console.log('-重新连接-');
+    connectBleInit()
   })
 
   // LED开关

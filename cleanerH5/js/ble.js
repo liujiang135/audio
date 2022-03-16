@@ -1,5 +1,10 @@
 window.onload = function() {
   console.log('window.onload-ble.js');
+  connectBleInit();
+}
+
+function connectBleInit() {
+  console.log('ble-init')
   if (window.hilink) {
     onBluetoothAdapterStateChange(); // 监听蓝牙模块开启/关闭 触发
     onBLEConnectionStateChange(); // 监听低功耗蓝牙设备连接状态的改变

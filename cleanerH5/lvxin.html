@@ -79,6 +79,34 @@
     </div>
     <!-- 氛围灯迁移过来的 end -->
 
+
+    <div class="chuxuanx"></div>
+    <!-- <div class="xuanxiang"> -->
+    <div class="xuanxiang" style="display: none;">
+      <!-- <div class="guanbix">关闭</div> -->
+      <ul>
+        <li>语言：
+          <input type="radio" value="zh" name="lang">中文
+          <input type="radio" value="en" name="lang">英文
+        </li>
+
+        <li>主题色：
+          <input type="radio" value="anhei" name="yanse">暗黑
+          <input type="radio" value="baitian" name="yanse">白天
+        </li>
+
+        <li>
+          <input type="radio" value="1" name="shange1">栅格化
+          <input type="radio" value="2" name="shange1">正常
+        </li>
+
+        <li>
+          <button class="queding">确定</button>
+        </li>
+      </ul>
+
+    </div>
+
 </body>
 
 
@@ -204,7 +232,70 @@
     // showError();
   })
 
+
+  function test() {
+
+    // 显示 截图框
+    document.getElementsByClassName("chuxuanx")[0].addEventListener('click', function(event) {
+        console.log(123)
+        document.getElementsByClassName("xuanxiang")[0].style.display = "block";
+      })
+      // 关闭 截图框
+      // document.getElementsByClassName("guanbix")[0].addEventListener('click', function(event) {
+      //   document.getElementsByClassName("xuanxiang")[0].style.display = "none";
+      // })
+
+
+    // 弹框截图 模式选择
+    document.getElementsByClassName("queding")[0].addEventListener('click', function(event) {
+      let lang11 = $("input[name='lang']:checked").val();
+      console.log('lang11--', lang11)
+      ctLanguage = lang11
+      if (ctLanguage == 'en') {
+        $('.cn_lang').hide();
+        $('.en_lang').show();
+      }
+      if (ctLanguage == 'zh') {
+        $('.cn_lang').show();
+        $('.en_lang').hide();
+      }
+
+      let zhuti11 = $("input[name='yanse']:checked").val();
+      if (zhuti11 == 'anhei') {
+        // getDarkMode(2);
+      } else {
+        // getDarkMode(1);
+      }
+
+      let moshi11 = $("input[name='moshi']:checked").val();
+      console.log(moshi11)
+      if (moshi11 === '0' || moshi11) {
+        initStatus(moshi11, 0);
+      }
+
+      let gaojing11 = $("input[name='gaojing1']:checked").val();
+      if (gaojing11 === '0' || gaojing11 === '1' || gaojing11 === '2') {
+        showErrorTip(gaojing11)
+      }
+      if (gaojing11 == 3) {
+        hideAlert();
+      }
+
+      let shange1 = $("input[name='shange1']:checked").val();
+      if (shange1 == 1) {
+        gridAdaptation(); // 栅格化适配
+      }
+
+      document.getElementsByClassName("xuanxiang")[0].style.display = "none";
+    })
+
+
+  }
+
+
   $(function() {
+
+    test();
 
     // 栅格化适配
     // gridAdaptation();

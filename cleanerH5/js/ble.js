@@ -1,10 +1,24 @@
 window.onload = function() {
-  console.log('window.onload-ble.js');
-  connectBleInit();
+  console.log('----------window.onload-ble.js-----------');
+  // analyseBleInfo('FA010A0701623320150019F006FB'); // 清扫历史
+  // analyseBleInfo('FA010316031111110019001900190701FB'); // 工作中
+  // analyseBleInfo('FA010304031111110701FB'); // 工作中
+  if (window.hilink) {
+    console.log('-先发-查询历史-')
+    sendCommandToBle('FA010A0400000000')
+  }
+  // connectBleInit();
 }
 
+// 上次清扫记录
+let lastcleanmin = 0;
+let lastcleansecond = 0;
+// 累积清扫记录
+let allcleanmin = 0;
+let allcleansecond = 0;
+
 function connectBleInit() {
-  console.log('ble-init')
+  console.log('connectBleInit')
   if (window.hilink) {
     onBluetoothAdapterStateChange(); // 监听蓝牙模块开启/关闭 触发
     onBLEConnectionStateChange(); // 监听低功耗蓝牙设备连接状态的改变
@@ -12,11 +26,89 @@ function connectBleInit() {
   }
 }
 
+// 发送数据
+function sendCommandToBle(code) {
+  // code = 'FA01090462330bdca0'
+  let sendCode = '';
+  // 计算校验位 start
+  let b0 = code.substr(2, 2);
+  let b1 = code.substr(4, 2);
+  let b2 = code.substr(6, 2);
+  let b3 = code.substr(8, 2);
+  let b4 = code.substr(10, 2);
+  let b5 = code.substr(12, 2);
+  let b6 = code.substr(14, 2);
+  console.log('16进制code-', b0, b1, b2, b3, b4, b5, b6)
+
+  let bx0 = parseInt(b0, 16);
+  let bx1 = parseInt(b1, 16);
+  let bx2 = parseInt(b2, 16);
+  let bx3 = parseInt(b3, 16);
+  let bx4 = parseInt(b4, 16);
+  let bx5 = parseInt(b5, 16);
+  let bx6 = parseInt(b6, 16);
+  console.log('10进制code-', bx0, bx1, bx2, bx3, bx4, bx5, bx6)
+  let sum0 = bx0 + bx1 + bx2 + bx3 + bx4 + bx5 + bx6;
+  console.log('10进制code和-', sum0)
+  let sum = '0x' + sum0.toString(16);
+  console.log('16进制code和-', sum)
+  let gao = (sum & 0xF0).toString(16);
+  let di = (sum & 0x0F).toString(16);
+  console.log('高位：', gao, '低位：', di);
+  let lg = gao.toString().length;
+  let ld = di.toString().length;
+  if (lg == 1) {
+    sendCode = code + '0' + gao
+  } else {
+    sendCode = code + gao
+  }
+  if (ld == 1) {
+    sendCode = sendCode + '0' + di + 'FB'
+  } else {
+    sendCode = sendCode + di + 'FB'
+  }
+  // 计算校验位 end   组装数据ok 
+  let obj = {
+    "t": 01,
+    "v": (sendCode.toUpperCase())
+  }
+  deviceIdMac = window.hilink.getStorageSync('deviceIdMac')
+  hilinkDevId = window.hilink.getStorageSync('hilinkDevId')
+  let inputVal = JSON.stringify(obj)
+  console.log('-new-发送数据--:', hilinkDevId, deviceIdMac, inputVal)
+  window.hilink.sendCommand(hilinkDevId, deviceIdMac, 'test', inputVal,
+    'sendCommandCallbacklvx');
+  window.sendCommandCallbacklvx = res => {
+    let data = dataChange(res);
+    console.log('-new-写数据给模块信息，回调:', data);
+    if (data.errcode == -1) {
+      console.log('---蓝牙配对，链接--')
+      connectBleInit();
+    } else {
+      console.log('----二级页面返回----')
+        // 进入待机状态
+      initStatus(7, 0);
+      //dosomethings 订阅蓝牙事件
+      window.hilink.subscribeBleEvent(hilinkDevId, deviceIdMac, 'subscribeBleEventCallback');
+      window.subscribeBleEventCallback = res => {
+        let data = dataChange(res);
+        console.log('收到模块信息:', data);
+        if (data.content) {
+          $('.receive').html('收到的数据: ' + data.content.data.v);
+          analyseBleInfo(data.content.data.v)
+        }
+      }
+    }
+  }
+}
+
 // 解析蓝牙数据 FA010304640101010701FB
 function analyseBleInfo(str) {
   console.log('-解析蓝牙数据--:', str)
   let commandStr = str.substr(4, 2); //命令码
-  let dataStr = str.substr(8, 8); // 数据区
+  let datalength = parseInt(str.substr(6, 2), 16);
+  console.log('数据长度:', datalength)
+  let dataStr = str.substr(8, datalength * 2); // 数据区
   let errorFlag = false;
   console.log('-命令码--:', commandStr, '  -数据区--:', dataStr)
   if (commandStr == '03') { //设备状态
@@ -81,6 +173,67 @@ function analyseBleInfo(str) {
       this.document.getElementsByClassName("fnImgItem2")[0].style.background = "url('http://www.dadaiot.com/cleanerH5/img/light/ic_led_off.png') no-repeat";
       this.document.getElementsByClassName("fnImgItem2")[0].style.backgroundSize = "cover";
       window.hilink.setStorageSync('ledCode', 0)
+    }
+
+    // 上次清扫时长
+    let lastworktime16 = dataStr.substr(8, 4)
+    let lastworktime10 = parseInt(lastworktime16, 16)
+    let lastworktime = formatSecToDate(lastworktime10)
+    lastcleanmin = formatSecToDateMin(lastworktime10)
+    lastcleansecond = formatSecToDateSec(lastworktime10)
+      // console.log('上次清扫时间戳16:', lastworktime16)
+      // console.log('上次清扫时间戳10:', lastworktime10)
+    console.log('上次清扫时间:', lastworktime)
+      // console.log('上次清扫时间分:', lastcleanmin)
+      // console.log('上次清扫时间秒:', lastcleansecond)
+      // 上次清扫记录
+    $('.lastcleanmin').html(lastcleanmin)
+    $('.lastcleansecond').html(lastcleansecond)
+
+    // 累计使用时长
+    let allworktime16 = dataStr.substr(12, 8)
+    let allworktime10 = parseInt(allworktime16, 16)
+    let allworktime = formatSecToDate(allworktime10)
+      // let allcleanmin = formatSecToDateMin(allworktime10)
+    allcleanmin = formatSecToDateMin(allworktime10)
+      // let allcleansecond = formatSecToDateSec(allworktime10)
+    allcleansecond = formatSecToDateSec(allworktime10)
+      // console.log('累计清扫时间戳16:', allworktime16)
+      // console.log('累计清扫时间戳10:', allworktime10)
+    console.log('累计清扫时间:', allworktime)
+      // console.log('累计清扫时间分:', allcleanmin)
+      // console.log('累计清扫时间秒:', allcleansecond)
+
+    // 累积清扫记录
+    $('.allcleanmin').html(allcleanmin)
+    $('.allcleansecond').html(allcleansecond)
+
+  }
+
+  if (commandStr == '0A') { //上报历史记录1
+    // FA010A0701623320150019F006FB
+    let historyNum = parseInt(str.substr(8, 2), 16);
+    console.log('历史记录条数：', historyNum)
+    if (historyNum > 0) {
+      let time16 = str.substr(10, 8)
+      let time10 = parseInt(time16, 16)
+      let theTime = formatTime(time10, 'Y/M/D h:m')
+        // console.log('清扫时间戳16:', time16)
+        // console.log('清扫时间戳10:', time10)
+      console.log('清扫时间:', theTime)
+
+      let clearTime16 = str.substr(18, 4)
+      let clearTime10 = parseInt(clearTime16, 16)
+      let workTime = formatSecToDate(clearTime10)
+        // console.log('清扫时长16:', clearTime16)
+        // console.log('清扫时长10:', clearTime10)
+      console.log('清扫时长:', workTime)
+
+      // 显示清扫记录为空
+      this.document.getElementsByClassName("recordList")[0].style.display = "block";
+      this.document.getElementsByClassName("recordEmptyList")[0].style.display = "none";
+      $('.historyworkDate').html(theTime)
+      $('.historyworkTime').html(workTime)
     }
   }
   if (!errorFlag) {
@@ -331,7 +484,13 @@ function bleConnection(mac) {
 
     if (data.errcode == 0) {
       statusLeft.innerHTML = '已连接';
-      // 进入待机状态
+
+      let second = (parseInt((new Date()).getTime() / 1000)).toString(16); // 6232ecb0
+      console.log('-发-发送时间-', second)
+      sendCommand('FA010904' + second)
+      console.log('-发-查询历史-')
+      sendCommand('FA010A0400000000')
+        // 进入待机状态
       initStatus(7, 0);
 
       //尝试写
@@ -343,7 +502,7 @@ function bleConnection(mac) {
 
       //尝试读 
 
-      //dosomethings
+      //dosomethings 订阅蓝牙事件
       window.hilink.subscribeBleEvent(hilinkDevId, deviceIdMac, 'subscribeBleEventCallback');
       window.subscribeBleEventCallback = res => {
         let data = dataChange(res);
@@ -446,6 +605,60 @@ function readBLECharacteristicValue() {
   }
 }
 
+function formatNumber(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+/**
+ * 时间戳转化为年 月 日 时 分 秒
+ * @param {*} number 传入时间戳
+ * @param {*} format 返回格式，支持自定义，但参数必须与formateArr里保持一致
+ * @returns
+ */
+function formatTime(number, format) {
+  let formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
+  let returnArr = [];
+  let date = new Date(number * 1000);
+  if (typeof(number) == 'object') {
+    date = new Date();
+  }
+  returnArr.push(date.getFullYear());
+  returnArr.push(formatNumber(date.getMonth() + 1));
+  returnArr.push(formatNumber(date.getDate()));
+  returnArr.push(formatNumber(date.getHours()));
+  returnArr.push(formatNumber(date.getMinutes()));
+  returnArr.push(formatNumber(date.getSeconds()));
+  for (var i in returnArr) {
+    format = format.replace(formateArr[i], returnArr[i]);
+  }
+  return format;
+}
+// 秒数转化为分秒
+function formatSecToDate(sec) {
+  if (!sec) {
+    return '-'
+  }
+  var min = Math.floor(sec % 3600); //分钟
+  return Math.floor(sec / 60) + "分" + sec % 60 + "秒";
+  // return Math.floor(sec / 3600) + "时" + Math.floor(min / 60) + "分" + sec % 60 + "秒";
+}
+// 秒数转化时间的分
+function formatSecToDateMin(sec) {
+  if (!sec) {
+    return '-'
+  }
+  var min = Math.floor(sec % 3600); //分钟
+  return Math.floor(sec / 60);
+  // return Math.floor(sec / 3600) + "时" + Math.floor(min / 60) + "分" + sec % 60 + "秒";
+}
+// 秒数转化时间的秒
+function formatSecToDateSec(sec) {
+  if (!sec) {
+    return '-'
+  }
+  var min = Math.floor(sec % 3600); //分钟
+  return sec % 60;
+}
 
 function doSomething() {
   console.log('do something...')

@@ -111,12 +111,12 @@
           <li class="infoItem">
             <div class="infoWrap">
               <p class="infoNum workTime">
-                <span class="number">2</span>
+                <span class="number lastcleanmin">-</span>
                 <span class="unit">
                     <span class="cn_lang">分</span>
                 <span class="en_lang">min</span>
                 </span>
-                <span class="number">44</span>
+                <span class="number lastcleansecond">-</span>
                 <span class="unit">
                     <span class="cn_lang">秒</span>
                 <span class="en_lang">s</span>
@@ -142,12 +142,12 @@
           <li class="infoItem">
             <div class="infoWrap">
               <p class="infoNum workTime">
-                <span class="number">6</span>
+                <span class="number allcleanmin">-</span>
                 <span class="unit">
                     <span class="cn_lang">分</span>
                 <span class="en_lang">min</span>
                 </span>
-                <span class="number">20</span>
+                <span class="number allcleansecond">-</span>
                 <span class="unit">
                     <span class="cn_lang">分</span>
                 <span class="en_lang">s</span>
@@ -316,14 +316,14 @@
                   <span class="cn_lang">清扫时长</span>
                   <span class="en_lang">Cleaning time</span>
                 </p>
-                <p class="down">2021/11/12 14:26</p>
+                <p class="down historyworkDate">2021/11/12 14:26</p>
               </div>
               <div class="recordRight">
-                <span class="cn_lang">2分48秒</span>
-                <span class="en_lang">2min48s</span>
+                <span class="cn_lang historyworkTime">2分48秒</span>
+                <span class="en_lang historyworkTime">2min48s</span>
               </div>
             </li>
-            <div class="line"></div>
+            <!-- <div class="line"></div>
             <li class="recordItem">
               <div class="recordLeft">
                 <p class="circle">35</p>
@@ -357,7 +357,7 @@
                 <span class="cn_lang">2分48秒</span>
                 <span class="en_lang">2min48s</span>
               </div>
-            </li>
+            </li> -->
           </ul>
         </div>
       </section>
@@ -622,9 +622,50 @@
     })
     // 发送数据
   function sendCommand(code) {
+    // code = 'FA01060400000000 000BFB'
+    // code = 'FA01090462330bdca0'
+    let sendCode = '';
+    // 计算校验位 start
+    let b0 = code.substr(2, 2);
+    let b1 = code.substr(4, 2);
+    let b2 = code.substr(6, 2);
+    let b3 = code.substr(8, 2);
+    let b4 = code.substr(10, 2);
+    let b5 = code.substr(12, 2);
+    let b6 = code.substr(14, 2);
+    console.log('16进制code-', b0, b1, b2, b3, b4, b5, b6)
+
+    let bx0 = parseInt(b0, 16);
+    let bx1 = parseInt(b1, 16);
+    let bx2 = parseInt(b2, 16);
+    let bx3 = parseInt(b3, 16);
+    let bx4 = parseInt(b4, 16);
+    let bx5 = parseInt(b5, 16);
+    let bx6 = parseInt(b6, 16);
+    console.log('10进制code-', bx0, bx1, bx2, bx3, bx4, bx5, bx6)
+    let sum0 = bx0 + bx1 + bx2 + bx3 + bx4 + bx5 + bx6;
+    console.log('10进制code和-', sum0)
+    let sum = '0x' + sum0.toString(16);
+    console.log('16进制code和-', sum)
+    let gao = (sum & 0xF0).toString(16);
+    let di = (sum & 0x0F).toString(16);
+    console.log('高位：', gao, '低位：', di);
+    let lg = gao.toString().length;
+    let ld = di.toString().length;
+    if (lg == 1) {
+      sendCode = code + '0' + gao
+    } else {
+      sendCode = code + gao
+    }
+    if (ld == 1) {
+      sendCode = sendCode + '0' + di + 'FB'
+    } else {
+      sendCode = sendCode + di + 'FB'
+    }
+    // 计算校验位 end   组装数据ok 
     let obj = {
       "t": 01,
-      "v": code
+      "v": (sendCode.toUpperCase())
     }
     let inputVal = JSON.stringify(obj)
     console.log('--发送数据--:', inputVal)
@@ -642,20 +683,20 @@
       // 待机状态时，点击开始工作--切换至工作中
     if (window.hilink.getStorageSync('initCode') == 7) {
       console.log('-发-开机')
-      sendCommand("FA01060401000000000CFB")
+      sendCommand("FA01060401000000")
     }
     if (window.hilink.getStorageSync('initCode') == 5) {
       console.log('-发-关机')
-      sendCommand("FA01060400000000000BFB")
+      sendCommand("FA01060400000000")
     }
   })
   $('#eco').click(function() {
     console.log('-发-节能模式')
-    sendCommand("FA01050400000000000AFB")
+    sendCommand("FA01050400000000")
   })
   $('#turbo').click(function() {
     console.log('-发-强劲模式')
-    sendCommand("FA01050401000000000BFB")
+    sendCommand("FA01050401000000")
   })
   $('.statusTxt').click(function() {
     console.log('-重新连接-');
@@ -667,10 +708,10 @@
     console.log('LED开关')
     if (window.hilink.getStorageSync('ledCode') == 1) {
       console.log('-发-关灯')
-      sendCommand("FA01080400000000000DFB")
+      sendCommand("FA01080400000000")
     } else {
       console.log('-发-开灯')
-      sendCommand("FA01080401000000000EFB")
+      sendCommand("FA01080401000000")
     }
   })
 
@@ -786,6 +827,14 @@
       this.document.getElementsByClassName("initTime")[0].style.display = "none";
       this.document.getElementsByClassName("workTime")[1].style.display = "block";
       this.document.getElementsByClassName("initTime")[1].style.display = "none";
+
+      // 上次清扫记录
+      $('.lastcleanmin').html(lastcleanmin)
+      $('.lastcleansecond').html(lastcleansecond)
+        // 累积清扫记录
+      $('.allcleanmin').html(allcleanmin)
+      $('.allcleansecond').html(allcleansecond)
+
       window.hilink.setStorageSync('initCode', 5)
     } else if (workStatus == 6) { //连接中
       clearDataToStart();

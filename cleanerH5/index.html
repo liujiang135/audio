@@ -181,7 +181,10 @@
                 <span class="cn_lang">模式</span>
                 <span class="en_lang">Mode</span>
               </p>
-              <p class="fnStatus modeTip">节能模式</p>
+              <p class="fnStatus modeTip">
+                <span class="cn_lang">节能模式</span>
+                <span class="en_lang">ECO Mode</span>
+              </p>
             </div>
             <div class="fnBox">
               <div class="fnImg fnImgItem3"></div>
@@ -210,7 +213,10 @@
                 <span class="cn_lang">LED照明</span>
                 <span class="en_lang">LED Lighting</span>
               </p>
-              <p class="fnStatus ledTip">已开启</p>
+              <p class="fnStatus ledTip">
+                <span class="cn_lang">已开启</span>
+                <span class="en_lang">Activated</span>
+              </p>
             </div>
             <div class="fnBox">
               <div class="fnImg fnImgItem2"></div>
@@ -843,6 +849,7 @@
       } else {
         this.document.getElementsByClassName("statusLeft")[0].innerText = "连接中";
       }
+      // this.document.getElementsByClassName("statusLeft")[0].innerText = "Connecting";
       // 显示'重新连接',隐藏'工作中'图标
       this.document.getElementsByClassName("statusImgLoading")[0].style.display = "block";
       this.document.getElementsByClassName("statusImg")[0].style.background =

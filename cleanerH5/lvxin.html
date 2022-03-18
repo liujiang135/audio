@@ -83,7 +83,7 @@
     <div class="chuxuanx"></div>
     <!-- <div class="xuanxiang"> -->
     <div class="xuanxiang" style="display: none;">
-      <!-- <div class="guanbix">关闭</div> -->
+      <div class="guanbix">关闭</div>
       <ul>
         <li>语言：
           <input type="radio" value="zh" name="lang">中文
@@ -282,9 +282,9 @@
         document.getElementsByClassName("xuanxiang")[0].style.display = "block";
       })
       // 关闭 截图框
-      // document.getElementsByClassName("guanbix")[0].addEventListener('click', function(event) {
-      //   document.getElementsByClassName("xuanxiang")[0].style.display = "none";
-      // })
+    document.getElementsByClassName("guanbix")[0].addEventListener('click', function(event) {
+      document.getElementsByClassName("xuanxiang")[0].style.display = "none";
+    })
 
 
     // 弹框截图 模式选择
@@ -295,6 +295,8 @@
       if (ctLanguage == 'en') {
         $('.cn_lang').hide();
         $('.en_lang').show();
+        batterVal = 50;
+        setEcharts(); // PC test
       }
       if (ctLanguage == 'zh') {
         $('.cn_lang').show();
@@ -303,9 +305,15 @@
 
       let zhuti11 = $("input[name='yanse']:checked").val();
       if (zhuti11 == 'anhei') {
-        // getDarkMode(2);
-      } else {
-        // getDarkMode(1);
+        batterVal = 50;
+        app.style.background = 'black';
+        app.classList.add("dark");
+        document.body.classList.add("dark")
+        eChartsLabelColor1 = '#ffffffdb';
+        eChartsLabelColor2 = '#ffffff99';
+        gaugeColor = '#ffffff1a'; //进度条底色
+        console.log('暗黑模式')
+        setEcharts()
       }
 
       let moshi11 = $("input[name='moshi']:checked").val();

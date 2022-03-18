@@ -1,8 +1,9 @@
 window.onload = function() {
   console.log('----------window.onload-ble.js-----------');
-  // analyseBleInfo('FA010A0701623320150019F006FB'); // 清扫历史
-  // analyseBleInfo('FA010316031111110019001900190701FB'); // 工作中
-  // analyseBleInfo('FA010304031111110701FB'); // 工作中
+  // analyseBleInfo('FA010A0701623320150019F006FB'); // 清扫历史1
+  // analyseBleInfo('FA010A0702623320150019623320150019F006FB'); // 清扫历史2
+  // analyseBleInfo('FA010A1F050102038700120102036D000C0102035B000D0102034900190102032800106001FB'); // 清扫历史5
+  // analyseBleInfo('FA010316031111110019000011190701FB'); // 工作中
   if (window.hilink) {
     console.log('-先发-查询历史-')
     sendCommandToBle('FA010A0400000000')
@@ -108,7 +109,8 @@ function analyseBleInfo(str) {
   let commandStr = str.substr(4, 2); //命令码
   let datalength = parseInt(str.substr(6, 2), 16);
   console.log('数据长度:', datalength)
-  let dataStr = str.substr(8, datalength * 2); // 数据区
+    // let dataStr = str.substr(8, datalength * 2); // 数据区
+  let dataStr = str.slice(8, -6); // 数据区
   let errorFlag = false;
   console.log('-命令码--:', commandStr, '  -数据区--:', dataStr)
   if (commandStr == '03') { //设备状态
@@ -214,26 +216,53 @@ function analyseBleInfo(str) {
     // FA010A0701623320150019F006FB
     let historyNum = parseInt(str.substr(8, 2), 16);
     console.log('历史记录条数：', historyNum)
+      // let historyNum2 = (str.slice(10, -6)).length / 12;
+      // console.log('历史记录条数2：', historyNum2)
     if (historyNum > 0) {
-      let time16 = str.substr(10, 8)
-      let time10 = parseInt(time16, 16)
-      let theTime = formatTime(time10, 'Y/M/D h:m')
-        // console.log('清扫时间戳16:', time16)
-        // console.log('清扫时间戳10:', time10)
-      console.log('清扫时间:', theTime)
+      $('.recordList').html('');
+      let html = '';
+      for (var i = 0; i < historyNum; i++) {
+        console.log('i:', i)
+        let time16 = str.substr((i * 12 + 10), 8) // (historyNum * 12 - 2)
+        let time10 = parseInt(time16, 16)
+        let theTime = formatTime(time10, 'Y/M/D h:m')
+          // console.log('清扫时间戳16:', time16)
+          // console.log('清扫时间戳10:', time10)
+        console.log('历史清扫时间:', theTime)
 
-      let clearTime16 = str.substr(18, 4)
-      let clearTime10 = parseInt(clearTime16, 16)
-      let workTime = formatSecToDate(clearTime10)
-        // console.log('清扫时长16:', clearTime16)
-        // console.log('清扫时长10:', clearTime10)
-      console.log('清扫时长:', workTime)
+        let clearTime16 = str.substr((i * 12 + 18), 4) // (historyNum * 12 + 6)
+        let clearTime10 = parseInt(clearTime16, 16)
+        let workTime = formatSecToDate(clearTime10)
+          // console.log('清扫时长16:', clearTime16)
+          // console.log('清扫时长10:', clearTime10)
+        console.log('历史清扫时长:', workTime)
 
-      // 显示清扫记录为空
-      this.document.getElementsByClassName("recordList")[0].style.display = "block";
+        html +=
+          '<li class="recordItem">' +
+          '<div class="recordLeft">' +
+          '<p class="circle">' + (historyNum - i) + '</p>' +
+          '</div>' +
+          '<div class="recordMiddle">' +
+          '<p class="up">' +
+          '<span class="cn_lang">清扫时长</span>' +
+          '<span class="en_lang">Cleaning time</span>' +
+          '</p>' +
+          '<p class="down historyworkDate">' + theTime + '</p>' +
+          '</div>' +
+          '<div class="recordRight">' +
+          '<span class="cn_lang historyworkTime">' + workTime + '</span>' +
+          '<span class="en_lang historyworkTime">2min48s</span>' +
+          '</div>' +
+          '</li>';
+        if (i < historyNum - 1) {
+          html += '<div class="linebox"><div class="line"></div></div>'
+        }
+      }
+      // console.log('all--html:', html)
+      // 显示清扫记录
+      this.document.getElementsByClassName("recordList")[0].style.display = "flex";
       this.document.getElementsByClassName("recordEmptyList")[0].style.display = "none";
-      $('.historyworkDate').html(theTime)
-      $('.historyworkTime').html(workTime)
+      $('.recordList').append(html)
     }
   }
   if (!errorFlag) {

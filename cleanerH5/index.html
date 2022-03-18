@@ -149,7 +149,7 @@
                 </span>
                 <span class="number allcleansecond">-</span>
                 <span class="unit">
-                    <span class="cn_lang">分</span>
+                    <span class="cn_lang">秒</span>
                 <span class="en_lang">s</span>
                 </span>
                 <!-- <span class="number">-</span>
@@ -313,7 +313,7 @@
             </div>
           </div>
           <ul class="recordList">
-            <li class="recordItem">
+            <!-- <li class="recordItem">
               <div class="recordLeft">
                 <p class="circle">34</p>
               </div>
@@ -329,41 +329,9 @@
                 <span class="en_lang historyworkTime">2min48s</span>
               </div>
             </li>
-            <!-- <div class="line"></div>
-            <li class="recordItem">
-              <div class="recordLeft">
-                <p class="circle">35</p>
-              </div>
-              <div class="recordMiddle">
-                <p class="up">
-                  <span class="cn_lang">清扫时长</span>
-                  <span class="en_lang">Cleaning time</span>
-                </p>
-                <p class="down">2021/11/12 14:26</p>
-              </div>
-              <div class="recordRight">
-                <span class="cn_lang">2分48秒</span>
-                <span class="en_lang">2min48s</span>
-              </div>
-
-            </li>
-            <div class="line"></div>
-            <li class="recordItem">
-              <div class="recordLeft">
-                <p class="circle">36</p>
-              </div>
-              <div class="recordMiddle">
-                <p class="up">
-                  <span class="cn_lang">清扫时长</span>
-                  <span class="en_lang">Cleaning time</span>
-                </p>
-                <p class="down">2021/11/12 14:26</p>
-              </div>
-              <div class="recordRight">
-                <span class="cn_lang">2分48秒</span>
-                <span class="en_lang">2min48s</span>
-              </div>
-            </li> -->
+            <div class="linebox">
+              <div class="line"></div>
+            </div> -->
           </ul>
         </div>
       </section>
@@ -639,7 +607,7 @@
     let b4 = code.substr(10, 2);
     let b5 = code.substr(12, 2);
     let b6 = code.substr(14, 2);
-    console.log('16进制code-', b0, b1, b2, b3, b4, b5, b6)
+    // console.log('16进制code-', b0, b1, b2, b3, b4, b5, b6)
 
     let bx0 = parseInt(b0, 16);
     let bx1 = parseInt(b1, 16);
@@ -648,14 +616,14 @@
     let bx4 = parseInt(b4, 16);
     let bx5 = parseInt(b5, 16);
     let bx6 = parseInt(b6, 16);
-    console.log('10进制code-', bx0, bx1, bx2, bx3, bx4, bx5, bx6)
+    // console.log('10进制code-', bx0, bx1, bx2, bx3, bx4, bx5, bx6)
     let sum0 = bx0 + bx1 + bx2 + bx3 + bx4 + bx5 + bx6;
-    console.log('10进制code和-', sum0)
+    // console.log('10进制code和-', sum0)
     let sum = '0x' + sum0.toString(16);
-    console.log('16进制code和-', sum)
+    // console.log('16进制code和-', sum)
     let gao = (sum & 0xF0).toString(16);
     let di = (sum & 0x0F).toString(16);
-    console.log('高位：', gao, '低位：', di);
+    // console.log('高位：', gao, '低位：', di);
     let lg = gao.toString().length;
     let ld = di.toString().length;
     if (lg == 1) {
@@ -734,17 +702,17 @@
   // 初始化未连接之前的状态
   function clearDataToStart() {
     // 隐藏电池电量
-    this.document.getElementsByClassName("statusMiddle")[0].style.display = "none";
+    $('.statusMiddle').hide();
     // 隐藏上次清扫时间
-    this.document.getElementsByClassName("workTime")[0].style.display = "none";
-    this.document.getElementsByClassName("initTime")[0].style.display = "block";
-    this.document.getElementsByClassName("workTime")[1].style.display = "none";
-    this.document.getElementsByClassName("initTime")[1].style.display = "block";
+    $('.workTime').hide();
+    $('.initTime').show();
+
     // 3次清扫记录为空
-    this.document.getElementsByClassName("recordList")[0].style.display = "none";
-    this.document.getElementsByClassName("recordEmptyList")[0].style.display = "flex";
+    // this.document.getElementsByClassName("recordList")[0].style.display = "none";
+    // this.document.getElementsByClassName("recordEmptyList")[0].style.display = "flex";
+
     // 连接中 icon 隐藏
-    this.document.getElementsByClassName("statusImgLoading")[0].style.display = "none";
+    $('.statusImgLoading').hide();
     // 移除禁用状态。全部控件可用
     removeDisableStatus()
   }
@@ -828,18 +796,21 @@
 
       // 重新连接 隐藏
       this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
-      // 显示上次清扫时间
-      this.document.getElementsByClassName("workTime")[0].style.display = "block";
-      this.document.getElementsByClassName("initTime")[0].style.display = "none";
-      this.document.getElementsByClassName("workTime")[1].style.display = "block";
-      this.document.getElementsByClassName("initTime")[1].style.display = "none";
 
-      // 上次清扫记录
-      $('.lastcleanmin').html(lastcleanmin)
-      $('.lastcleansecond').html(lastcleansecond)
+
+      if (lastcleanmin > 0 || lastcleansecond > 0) {
+        // 显示上次清扫时间
+        $('.workTime').show(); // 显示时间
+        $('.initTime').hide(); // 隐藏--
+
+        // 上次清扫记录
+        $('.lastcleanmin').html(lastcleanmin)
+        $('.lastcleansecond').html(lastcleansecond)
+
         // 累积清扫记录
-      $('.allcleanmin').html(allcleanmin)
-      $('.allcleansecond').html(allcleansecond)
+        $('.allcleanmin').html(allcleanmin)
+        $('.allcleansecond').html(allcleansecond)
+      }
 
       window.hilink.setStorageSync('initCode', 5)
     } else if (workStatus == 6) { //连接中
@@ -880,6 +851,19 @@
       this.document.getElementsByClassName("spinner")[0].classList.add('disable');
       this.document.getElementsByClassName("ledCard")[0].classList.add('disable');
 
+      if (lastcleanmin > 0 || lastcleansecond > 0) {
+        // 显示上次清扫时间
+        $('.workTime').show(); // 显示时间
+        $('.initTime').hide(); // --隐藏
+
+        // 上次清扫记录
+        $('.lastcleanmin').html(lastcleanmin)
+        $('.lastcleansecond').html(lastcleansecond)
+
+        // 累积清扫记录
+        $('.allcleanmin').html(allcleanmin)
+        $('.allcleansecond').html(allcleansecond)
+      }
       window.hilink.setStorageSync('initCode', 7)
         // 开始工作按钮可以点击
         // statusImgClick();

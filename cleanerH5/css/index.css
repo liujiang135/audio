@@ -648,7 +648,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    display: none;
+    /* display: none; */
+    display: flex;
 }
 
 .devRecord .devRecordWrap .recordEmptyImg {
@@ -673,7 +674,8 @@
 }
 
 .devRecord .devRecordWrap .recordList {
-    display: flex;
+    /* display: flex; */
+    display: none;
     margin-top: 12px;
     margin-bottom: 8px;
     height: auto;
@@ -690,10 +692,10 @@
 }
 
 .devRecord .devRecordWrap .recordList .line {
-    display: inline-flex;
-    align-self: end;
-    align-items: flex-end;
-    align-content: flex-end;
+    /* display: inline-flex; */
+    /* align-self: end; */
+    /* align-items: flex-end; */
+    /* align-content: flex-end; */
     width: calc(100% - 72px);
     height: 1px;
     background: rgba(0, 0, 0, 0.1);
@@ -1543,4 +1545,11 @@
     /* color: #fff; */
     z-index: 1002;
     font-size: 14px;
+}
+
+.linebox {
+    height: 1px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }

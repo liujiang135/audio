@@ -12,7 +12,7 @@ window.onload = function() {
     //dosomethings 订阅蓝牙事件
     // deviceIdMac = window.hilink.getStorageSync('deviceIdMac')
     // hilinkDevId = window.hilink.getStorageSync('hilinkDevId')
-    // subscribeBleEventFun(hilinkDevId,deviceIdMac)
+    // subscribeBleEventFun(hilinkDevId, deviceIdMac)
   }
   // connectBleInit();
 }

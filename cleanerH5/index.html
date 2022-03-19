@@ -443,7 +443,7 @@
     <div class="backgroundColor"></div>
     <div class="addHeight"></div>
 
-    <div class="chuxuanx"></div>
+    <div class="chuxuanx" style="display: none;"></div>
     <div class="xuanxiang" style="display: none;">
       <div class="guanbix">关闭</div>
       <ul>
@@ -685,6 +685,15 @@
     } else {
       console.log('-发-开灯')
       sendCommand("FA01080401000000")
+    }
+  })
+
+  $(".devMore").click(function() {
+    console.log('设置')
+    window.hilink.jumpTo('com.huawei.smarthome.deviceSettingActivity', 'jumpToCallback')
+    window.jumpToCallback = res => {
+      let data = dataChange(res);
+      console.log('设置res:', data);
     }
   })
 

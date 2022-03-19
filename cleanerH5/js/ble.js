@@ -5,8 +5,14 @@ window.onload = function() {
   // analyseBleInfo('FA010A1F050102038700120102036D000C0102035B000D0102034900190102032800106001FB'); // 清扫历史5
   // analyseBleInfo('FA010316031111110019000011190701FB'); // 工作中
   if (window.hilink) {
+    setH5Title();
     console.log('-先发-查询历史-')
     sendCommandToBle('FA010A0400000000')
+
+    //dosomethings 订阅蓝牙事件
+    // deviceIdMac = window.hilink.getStorageSync('deviceIdMac')
+    // hilinkDevId = window.hilink.getStorageSync('hilinkDevId')
+    // subscribeBleEventFun(hilinkDevId,deviceIdMac)
   }
   // connectBleInit();
 }
@@ -27,7 +33,7 @@ function connectBleInit() {
   }
 }
 
-// 发送数据
+// 下发数据
 function sendCommandToBle(code) {
   // code = 'FA01090462330bdca0'
   let sendCode = '';
@@ -39,7 +45,7 @@ function sendCommandToBle(code) {
   let b4 = code.substr(10, 2);
   let b5 = code.substr(12, 2);
   let b6 = code.substr(14, 2);
-  console.log('16进制code-', b0, b1, b2, b3, b4, b5, b6)
+  // console.log('16进制code-', b0, b1, b2, b3, b4, b5, b6)
 
   let bx0 = parseInt(b0, 16);
   let bx1 = parseInt(b1, 16);
@@ -48,14 +54,14 @@ function sendCommandToBle(code) {
   let bx4 = parseInt(b4, 16);
   let bx5 = parseInt(b5, 16);
   let bx6 = parseInt(b6, 16);
-  console.log('10进制code-', bx0, bx1, bx2, bx3, bx4, bx5, bx6)
+  // console.log('10进制code-', bx0, bx1, bx2, bx3, bx4, bx5, bx6)
   let sum0 = bx0 + bx1 + bx2 + bx3 + bx4 + bx5 + bx6;
-  console.log('10进制code和-', sum0)
+  // console.log('10进制code和-', sum0)
   let sum = '0x' + sum0.toString(16);
-  console.log('16进制code和-', sum)
+  // console.log('16进制code和-', sum)
   let gao = (sum & 0xF0).toString(16);
   let di = (sum & 0x0F).toString(16);
-  console.log('高位：', gao, '低位：', di);
+  // console.log('高位：', gao, '低位：', di);
   let lg = gao.toString().length;
   let ld = di.toString().length;
   if (lg == 1) {
@@ -76,12 +82,12 @@ function sendCommandToBle(code) {
   deviceIdMac = window.hilink.getStorageSync('deviceIdMac')
   hilinkDevId = window.hilink.getStorageSync('hilinkDevId')
   let inputVal = JSON.stringify(obj)
-  console.log('-new-发送数据--:', hilinkDevId, deviceIdMac, inputVal)
+  console.log('-new-下发数据--:', hilinkDevId, deviceIdMac, inputVal)
   window.hilink.sendCommand(hilinkDevId, deviceIdMac, 'test', inputVal,
     'sendCommandCallbacklvx');
   window.sendCommandCallbacklvx = res => {
     let data = dataChange(res);
-    console.log('-new-写数据给模块信息，回调:', data);
+    console.log('-发命令回调:', data);
     if (data.errcode == -1) {
       console.log('---蓝牙配对，链接--')
       connectBleInit();
@@ -90,22 +96,14 @@ function sendCommandToBle(code) {
         // 进入待机状态
       initStatus(7, 0);
       //dosomethings 订阅蓝牙事件
-      window.hilink.subscribeBleEvent(hilinkDevId, deviceIdMac, 'subscribeBleEventCallback');
-      window.subscribeBleEventCallback = res => {
-        let data = dataChange(res);
-        console.log('收到模块信息:', data);
-        if (data.content) {
-          $('.receive').html('收到的数据: ' + data.content.data.v);
-          analyseBleInfo(data.content.data.v)
-        }
-      }
+      subscribeBleEventFun(hilinkDevId, deviceIdMac)
     }
   }
 }
 
 // 解析蓝牙数据 FA010304640101010701FB
 function analyseBleInfo(str) {
-  console.log('-解析蓝牙数据--:', str)
+  console.log('-解析上报数据--:', str)
   let commandStr = str.substr(4, 2); //命令码
   let datalength = parseInt(str.substr(6, 2), 16);
   console.log('数据长度:', datalength)
@@ -122,7 +120,7 @@ function analyseBleInfo(str) {
       $('.batterStatus')[0].innerText = '充电中'
       $('.batterNum').html((BatterNum - 128) + '%');
     } else {
-      console.log('电池电量')
+      // console.log('电池电量')
       $('.batterStatus')[0].innerText = '电池电量'
       $('.batterNum').html(BatterNum + '%');
       if (BatterNum <= 5) {
@@ -141,6 +139,7 @@ function analyseBleInfo(str) {
 
     if (dataStr.substr(3, 1) == 1) {
       // 高档 强劲模式
+      console.log('强劲模式')
       $("#eco").removeClass('checkedBg');
       $("#eco").removeClass('checkedText');
       $("#turbo").addClass('checkedBg');
@@ -148,6 +147,7 @@ function analyseBleInfo(str) {
       $(".modeTip").html('强劲模式');
     } else {
       //低档 节能
+      console.log('节能模式')
       $("#turbo").removeClass('checkedBg');
       $("#turbo").removeClass('checkedText');
       $("#eco").addClass('checkedBg');
@@ -157,6 +157,7 @@ function analyseBleInfo(str) {
 
     if (dataStr.substr(4, 2) === '01') {
       // 滤网堵塞告警状态 堵塞
+      console.log('滤网堵塞')
       showErrorTip(2) // 0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
       errorFlag = true;
     } else {
@@ -165,12 +166,14 @@ function analyseBleInfo(str) {
 
     if (dataStr.substr(6, 2) === '01') {
       // LED灯开关状态    开灯
+      console.log('灯光-开')
       $('.ledTip').show();
       this.document.getElementsByClassName("fnImgItem2")[0].style.background = "url('http://www.dadaiot.com/cleanerH5/img/light/ic_led_on.png') no-repeat";
       this.document.getElementsByClassName("fnImgItem2")[0].style.backgroundSize = "cover";
       window.hilink.setStorageSync('ledCode', 1)
     } else {
       // LED灯开关状态    关灯
+      console.log('灯光-关')
       $('.ledTip').hide();
       this.document.getElementsByClassName("fnImgItem2")[0].style.background = "url('http://www.dadaiot.com/cleanerH5/img/light/ic_led_off.png') no-repeat";
       this.document.getElementsByClassName("fnImgItem2")[0].style.backgroundSize = "cover";
@@ -515,7 +518,7 @@ function bleConnection(mac) {
       statusLeft.innerHTML = '已连接';
 
       let second = (parseInt((new Date()).getTime() / 1000)).toString(16); // 6232ecb0
-      console.log('-发-发送时间-', second)
+      console.log('-发-下发时间-', second)
       sendCommand('FA010904' + second)
       console.log('-发-查询历史-')
       sendCommand('FA010A0400000000')
@@ -532,15 +535,7 @@ function bleConnection(mac) {
       //尝试读 
 
       //dosomethings 订阅蓝牙事件
-      window.hilink.subscribeBleEvent(hilinkDevId, deviceIdMac, 'subscribeBleEventCallback');
-      window.subscribeBleEventCallback = res => {
-        let data = dataChange(res);
-        console.log('收到模块信息:', data);
-        if (data.content) {
-          $('.receive').html('收到的数据: ' + data.content.data.v);
-          analyseBleInfo(data.content.data.v)
-        }
-      }
+      subscribeBleEventFun(hilinkDevId, deviceIdMac)
     } else {
       isDiscover = false;
       onBluetoothDeviceFound(); // 重新发现，匹配
@@ -586,8 +581,8 @@ function notifyBle() {
         console.log('---------------------------------');
         console.log(notifyUuids[i].sid + " notify status" + status);
         console.log(notifyUuids[i].sid + " ；" + notifyUuids[i].characteristicUuid);
-        $('.receiveId').html('notifyUuids_sid: ' + notifyUuids[i].sid + " notify status" + status);
-        $('.receive').html('characteristicUuid: ' + notifyUuids[i].characteristicUuid);
+        // $('.receiveId').html('notifyUuids_sid: ' + notifyUuids[i].sid + " notify status" + status);
+        // $('.receive').html('characteristicUuid: ' + notifyUuids[i].characteristicUuid);
 
         if (status === 0) {
           i++
@@ -691,4 +686,33 @@ function formatSecToDateSec(sec) {
 
 function doSomething() {
   console.log('do something...')
+}
+
+//dosomethings 订阅蓝牙事件
+function subscribeBleEventFun(hilinkDevId, deviceIdMac) {
+  window.hilink.subscribeBleEvent(hilinkDevId, deviceIdMac, 'subscribeBleEventCallback');
+  window.subscribeBleEventCallback = res => {
+    let data = dataChange(res);
+    console.log('收到上报信息:', data);
+    if (data.content) {
+      analyseBleInfo(data.content.data.v)
+    }
+  }
+}
+
+function setH5Title() {
+  let cs2DevName = window.hilink.getStorageSync('cs2DevName');
+  console.log('-get缓存设备名：', cs2DevName)
+  if (cs2DevName && cs2DevName != 'undefined') {
+    $('.devName').html(cs2DevName)
+  }
+  window.hilink.getCurrentRegisteredDevice('getCurrentRegisteredDeviceCallbackl')
+  window.getCurrentRegisteredDeviceCallbackl = res => {
+    let data = dataChange(res);
+    // console.log('-获取已注册设备:', data);
+    let devName = data.hilinkDeviceEntity.devName;
+    console.log('-云端设备名：', devName)
+    $('.devName').html(devName)
+    window.hilink.setStorageSync('cs2DevName', devName)
+  }
 }

@@ -63,11 +63,11 @@
         <div class="logo"></div>
       </section>
 
-      <section class="test" style="display: none;">
+      <!-- <section class="test" style="display: none;">
         <input type="text" class="input1">
         <button class="sendBtn">发送</button>
         <div class="receive">接收值：</div>
-      </section>
+      </section> -->
 
       <!-- 设备状态栏-->
       <section class="devStatus">
@@ -505,7 +505,6 @@
   var ctLanguage = 'en'; // 语言
   ctLanguage = 'zh';
 
-  // $('.devName').html('动态标题测试...')
 
   var isIOS = !!navigator.userAgent.match(/iPhone/i);
   console.log('iOS:' + isIOS);
@@ -642,7 +641,7 @@
       "v": (sendCode.toUpperCase())
     }
     let inputVal = JSON.stringify(obj)
-    console.log('--发送数据--:', inputVal)
+    console.log('--下发数据--:', inputVal)
     window.hilink.sendCommand(hilinkDevId, deviceIdMac, 'test', inputVal,
       'sendCommandCallback');
     window.sendCommandCallback = res => {
@@ -906,7 +905,8 @@
       hilink.getSystemInfoSync("getSystemInfoSync")
       window.getSystemInfoSync = (res) => {
         console.log("系统信息")
-        console.log(res)
+        let data = dataChange(res);
+        console.log(data)
       }
     }
 
@@ -921,12 +921,11 @@
     // showErrorTip(2)
     // 告警提示   topMsgStatus  0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
 
+    // var tmpVal = "{\"t\":1,\"v\":\"FA010304640101010701FB\"}";
+    // $('.input1').val(tmpVal);
 
-    var tmpVal = "{\"t\":1,\"v\":\"FA010304640101010701FB\"}";
-    $('.input1').val(tmpVal);
-
-    var data = '*****'
-    $('.receive').html('收到的数据: ' + JSON.stringify(data));
+    // var data = '*****'
+    // $('.receive').html('收到的数据: ' + JSON.stringify(data));
 
   }
 
@@ -937,24 +936,24 @@
         document.getElementsByClassName("xuanxiang")[0].style.display = "block";
       })
       // 显示 输入框
-    document.getElementsByClassName("xianinput")[0].addEventListener('click', function(event) {
-        document.getElementsByClassName("test")[0].style.display = "block";
-      })
+      // document.getElementsByClassName("xianinput")[0].addEventListener('click', function(event) {
+      //     document.getElementsByClassName("test")[0].style.display = "block";
+      //   })
       // 隐藏输入框
-    document.getElementsByClassName("yininput")[0].addEventListener('click', function(event) {
-        document.getElementsByClassName("test")[0].style.display = "none";
-      })
+      // document.getElementsByClassName("yininput")[0].addEventListener('click', function(event) {
+      //     document.getElementsByClassName("test")[0].style.display = "none";
+      //   })
       // 关闭 截图框
     document.getElementsByClassName("guanbix")[0].addEventListener('click', function(event) {
       document.getElementsByClassName("xuanxiang")[0].style.display = "none";
     })
 
-    $('.sendBtn').click(function() {
-      var inputVal = $('.input1').val();
-      console.log('--------------')
-      console.log('-发送输入框的值-', inputVal)
-      sendCommand(inputVal)
-    });
+    // $('.sendBtn').click(function() {
+    //   var inputVal = $('.input1').val();
+    //   console.log('--------------')
+    //   console.log('-发送输入框的值-', inputVal)
+    //   sendCommand(inputVal)
+    // });
   }
 
   // todo start
@@ -1070,9 +1069,8 @@
     test()
 
     // 浏览器信息 栅格化适配
-    console.log('---浏览器信息---')
-    browserInfo()
-      // gridAdaptation() // 栅格化适配
+    // browserInfo() // ---浏览器信息---
+    // gridAdaptation() // 栅格化适配
 
     // 执行dp换算
     initDp();

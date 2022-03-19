@@ -244,7 +244,7 @@
     sendCommand("FA010404000000000009FB")
   })
 
-  // 发送数据
+  // 下发数据
   function sendCommand(code) {
     let obj = {
       "t": 01,
@@ -253,12 +253,13 @@
     deviceIdMac = window.hilink.getStorageSync('deviceIdMac')
     hilinkDevId = window.hilink.getStorageSync('hilinkDevId')
     let inputVal = JSON.stringify(obj)
-    console.log('--发送数据--:', hilinkDevId, deviceIdMac, inputVal)
+    console.log('--下发数据--:', hilinkDevId, deviceIdMac, inputVal)
     window.hilink.sendCommand(hilinkDevId, deviceIdMac, 'test', inputVal,
       'sendCommandCallbacklvx');
     window.sendCommandCallbacklvx = res => {
       let data = dataChange(res);
-      console.log('写数据给模块信息，回调:', data);
+      console.log('-下发命令回调:', data);
+      hideError();
     }
   }
 

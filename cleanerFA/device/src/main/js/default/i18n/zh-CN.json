@@ -19,7 +19,13 @@
     "protocolPrivacyStatement": "关于XXX隐私声明",
     "rightOwned": "权利所有©2021XXX有限公司保留一切权益",
 
+    "deviceInfo": "设备信息",
+    "deleteDevice": "删除设备",
 
+    "connection-timeout": "连接超时",
+    "timeout-hint-1": "1. 确认电池电量正常",
+    "timeout-hint-2": "2. 将手机靠近设备",
+    "timeout-hint-3": "3. 重启手机蓝牙",
 
     "more": "展开更多",
     "pack_up": "收起",
@@ -28,7 +34,28 @@
     "prompt": "温馨提示",
     "useHiLink": "如果您需要使用HiLink协议控制您的设备，需要确保您的连接设备已经接入到华为HiLink平台，详情参考:",
     "hiLinkUrl": "https://developer.huawei.com/consumer/cn/smarthome",
-    "cancel": "取消"
+    "cancel": "取消",
+
+    "linked": "已连接",
+    "unlinked": "未连接",
+    "linking": "连接中",
+    "offlineText": "重新连接",
+
+
+    "battery_charging": "充电中",
+    "battery_remaining": "电池电量",
+    "duration_last": "上次清扫时长",
+    "duration_total": "累计使用时长",
+    "unit_minute": "分",
+    "unit_second": "秒",
+    "title_func1": "模式",
+    "title_func2": "LED照明",
+    "title_func3": "滤芯信息",
+    "title_func4": "使用说明",
+    "state_led_on": "已开启",
+    "state_led_off": "已关闭",
+    "mode_working_high": "强劲模式",
+    "mode_working_low": "节能模式"
   },
   "files": {
     "logo": "common/images/logo.png",

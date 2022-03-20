@@ -21,7 +21,7 @@
 
 .title-text {
     margin-left: 16px;
-    font-size: 24px;
+    font-size: 20px;
     opacity: 0.9;
     height: 56px;
     justify-content: center;
@@ -105,9 +105,11 @@
 }
 
 .error-location {
-    position: absolute;
+    flex-direction: column;
+    align-items: center;
+/*    position: absolute;*/
     height: 48px;
-    margin-top: 56px;
+/*    margin-top: 56px;*/
 }
 
 .error-container {
@@ -138,13 +140,6 @@
     font-size: 12px;
     opacity: 0.9;
     width: 100%;
-}
-
-.offline-text-half {
-    text-align: right;
-    font-size: 18px;
-    color: #0a59f7;
-    width: 50%;
 }
 
 .error-text {
@@ -229,3 +224,261 @@
     width: 48px;
     height: 48px;
 }
+
+.record {
+    width: 100%;
+    height: 96px;
+    border-radius: 16px;
+    margin: 4px;
+    margin-bottom: 12px;
+    background-color:#FFFFFF;
+}
+
+.record-title {
+    width: 100%;
+    height: 48px;
+
+}
+
+.record-empty {
+    width: 100%;
+    height: 200px;
+}
+
+.dialog-box {
+    flex-direction: column;
+    border-radius: 24px;
+}
+
+.dialog-title-1 {
+    font-size: 20px;
+    opacity: 0.9;
+    font-weight: 400;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    margin-left: 24px;
+}
+
+.dialog-container {
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.font-65ST {
+    font-family: HWtext-65ST,HWtext;
+    font-weight: normal;
+    allow-scale: false;
+}
+
+.font-55ST {
+    font-family: HWtext-55ST,HWtext;
+    font-weight: normal;
+    allow-scale: false;
+}
+
+.control-container {
+    flex-direction: row;
+    width: 100%;
+    height: 56px;
+    padding-bottom: 16px;
+    margin-top: 8px;
+    margin-left: 16px;
+    margin-right: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-control-text {
+    width: 50%;
+    height: 40px;
+    text-align: center;
+    font-size: 16px;
+    color: #0A59F7;
+    position: absolute;
+    left: 0px;
+}
+
+.center-control-text {
+    height: 40px;
+    font-size: 16px;
+    color: #0A59F7;
+}
+
+.right-control-text {
+    width: 50%;
+    height: 40px;
+    text-align: center;
+    font-size: 16px;
+    color: #0A59F7;
+    position: absolute;
+    right: 0px;
+}
+
+/*.divider {*/
+/*    height: 24px;*/
+/*    border-color: #000000;*/
+/*    opacity: 0.2;*/
+/*    border-width: 0.5px;*/
+/*}*/
+
+
+
+/*.container {*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+/*.gauge-region {*/
+/*    height: 400px;*/
+/*    width: 400px;*/
+/*}*/
+/*.data-gauge {*/
+/*    colors: #83f115, #fd3636;*/
+/*    weights: 4, 2;*/
+/*}*/
+
+/*.min-progress {*/
+/*    width: 300px;*/
+/*    height: 300px;*/
+/*}*/
+
+
+
+.display {
+    width: 100%;
+    height: 96px;
+    border-radius: 16px;
+    margin: 4px;
+}
+
+.divide-container {
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+}
+
+.divider {
+    height: 42px;
+    border-color: #000000;
+    opacity: 0.2;
+    border-width: 0.3px;
+}
+
+.divide-item {
+    flex: 1;
+}
+
+.item-container {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.text-item-upleft-text {
+    opacity: 0.9;
+}
+
+.text-item-upright-text {
+    margin-left: 2px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.text-item-down-text {
+    margin-top: 2px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.text-item-null-text {
+
+}
+
+.multifunction-bar {
+    margin: 4px;
+    height: 88px;
+    flex-direction: row;
+    border-radius: 16px;
+    width: 100%;
+}
+
+.item-one {
+    margin-left: 16px;
+    position: absolute;
+}
+
+.item-two {
+    width: 100%;
+}
+
+.one-command {
+    position: absolute;
+    right: 0px;
+    margin-right: 4px;
+}
+
+.two-command {
+    flex-direction: row;
+    position: absolute;
+    right: 0px;
+    margin-right: 8px;
+}
+
+.big-icon {
+    width: 72px;
+    height: 72px;
+    margin-top: 8px;
+}
+
+.reverse-container {
+    flex-direction: row;
+    display: flex;
+}
+
+.low-reverse-bar {
+    flex-direction: row;
+    border-radius: 16px;
+    margin: 4px;
+    height: 64px;
+}
+
+.low-left-item {
+    margin-left: 16px;
+    margin-right: 16px;
+    height: 100%;
+    left: 0px;
+}
+
+.low-icon {
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    margin-top: 16px;
+    padding: 4px;
+    position: absolute;
+}
+
+/* DEBUG */
+.ui-log {
+    width: 100%;
+    height: 200px;
+    border: 0.5px solid darkblue;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    padding: 6px;
+    background-color: #efefef;
+    columns: 1;
+}
+
+.log-item {
+    width: 100%;
+    height: 18px;
+    line-height: 18px;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+.log-text{
+    font-size: 12px;
+}
+

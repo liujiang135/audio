@@ -31,11 +31,14 @@ public class DeviceAbility extends AceAbility {
     private static final String DEVICE_ID = "deviceId";
     private static final int HALF_MODAL = 1;
 
+    //TODO
+    public static String deviceId = null;
+
     @Override
     public void onStart(Intent intent) {
         intent.setParam("window_modal", HALF_MODAL);
         LogUtil.info(TAG, "onStart params:" + ZSONObject.toZSONString(intent.getParams()));
-        String deviceId = intent.getStringParam(DEVICE_ID);
+        /*String*/ deviceId = intent.getStringParam(DEVICE_ID);
         if (deviceId == null) {
             String startParams = intent.getStringParam("__startParams");
             ZSONObject zsonObj = ZSONObject.stringToZSON(startParams);

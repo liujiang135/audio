@@ -1,15 +1,17 @@
 <element name='control' src='../../../../../../ailife-view/control/control.hml'></element>
 <element name='dialogbox' src='../../../../../../ailife-view/dialog/dialogbox/dialogbox.hml'></element>
-<element name="customdisplay" src="../../../../../../ailife-view/customdisplay/customdisplay.hml"></element>
+<!--<element name="customdisplay" src="../../../../../../ailife-view/customdisplay/customdisplay.hml"></element>-->
+<!--<element name="nav" src="../../common/navbar/navbar"></element>-->
+<!--<element name="multi" src="../../common/multifunction/multifunction"></element>-->
 
 <div class="container" style="background-color : {{ backgroundColor }};">
-    <div class="title">
+    <div class="title" show="{{ isFullWindow }}">
         <image class="title-back-image" src="/common/ic_back.png" onclick="backClick()"/>
         <text class="title-text">{{ deviceName }}</text>
         <image class="title-more-image" src="/common/ic_more.png" onclick="menuClick()"/>
     </div>
-    <div class="error-location">
-        <div if="{{ showErrorMessage }}" class="error-container">
+    <div class="error-location" show="{{ showErrorMessage }}">
+        <div class="error-container">
             <image class="error-image" src="/common/ic_error.png"/>
             <text class="error-text">{{ errorMessage }}</text>
         </div>
@@ -18,7 +20,7 @@
         <image class="device-image" src="{{ imageSrc }}" onclick="sendTestMessage"/>
         <div if="{{ ! showMessage }}" class="center-container device-box">
             <image class="device-logo" src="{{ logoSrc }}"></image>
-            <text class="device-name-text">{{deviceName}}</text>
+            <!--<text class="device-name-text">{{deviceName}}</text>-->
         </div>
         <div if="{{ showMessage }}" class="center-container">
             <image class="device-logo-message" src="{{ logoSrc }}"></image>
@@ -28,21 +30,147 @@
             </div>
         </div>
     </div>
-    <div class="option-container option-top">
-        <text class="switch-text">
-            {{linkStatus}}
-        </text>
-        <text class="offline-text-half" show="{{showOfflineReconnect}}" onclick="offlineReconnect">{{offlineText}}</text>
-        <progress class="progress-half" type="circular" show="{{!showOfflineReconnect && showWaitingProgress}}"></progress>
+    <div class="option-container option-top" if="{{ !isLinked }}">
+        <text class="switch-text">{{ linkStatus }}</text>
+        <text class="offline-text-half" show="{{ showOfflineReconnect }}" onclick="offlineReconnect">{{$t('strings.offlineText')}}</text>
+        <!-- <text class="offline-text-half" show="true" onclick="offlineReconnect">Reconnect</text>-->
+        <progress class="progress-half" type="circular" show="{{ !showOfflineReconnect && showWaitingProgress }}"></progress>
+        <!-- <progress class="progress-half" type="circular" show="true"></progress>-->
     </div>
+    <div class="multifunction-bar" style="opacity:1;background-color:{{ backgroundColorBlock }};" else>
+        <div class="item-one">
+            <div class="item-container" style="align-items:flex-start;">
+                <div class="item-up-container" style="justify-content:flex-start;align-items:center;">
+                    <text class="text-item-upleft-text" style="color:{{ value_color }};font-size:18px;">{{ workingState }}</text>
+                </div>
+            </div>
+        </div>
+        <div class="item-two">
+            <div class="item-container" style="align-items:center;">
+                <div class="item-up-container" style="justify-content:center;align-items:center;">
+                    <text class="text-item-upleft-text" style="color:{{ value_color }};font-size:{{ value_size }};">{{ batteryRemainingValue }}</text>
+                    <text class="text-item-upright-text" style="color:{{ unit_color }};">%</text>
+                </div>
+                <text class="text-item-down-text" style="color:{{ text_color }};">{{ batteryTitle }}</text>
+            </div>
+        </div>
+        <div class="one-command">
+            <image onclick="commandClick" class="big-icon" src="{{ commandIcon }}"/>
+        </div>
+    </div>
+    <div class="display" style="opacity:1; background-color: {{ backgroundColorBlock }};">
+        <div class="divide-container">
+            <div class="divide-item">
+                <div class="item-container" style="align-items:center">
+                    <div class="item-up-container" style="justify-content:center;align-items:center;">
+                        <block if="false">
+                            <text class="text-item-null-text" style="color:{{ unit_color }};font-size:24px;">--</text>
+                        </block>
+                        <block else>
+                            <text class="text-item-upleft-text" style="color:{{ value_color }};font-size:{{ value_size }};">{{ last_min }}</text>
+                            <text class="text-item-upright-text" style="color : {{ unit_color }};">{{ $t('strings.unit_minute') }}</text>
+                            <text class="text-item-upleft-text" style="color:{{ value_color }};font-size:{{ value_size }};">{{ last_sec }}</text>
+                            <text class="text-item-upright-text" style="color : {{ unit_color }};">{{ $t('strings.unit_second') }}</text>
+                        </block>
+                    </div>
+                    <text class="text-item-down-text" style="color:{{ text_color }};">{{ $t('strings.duration_last') }}</text>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="divide-item">
+                <div class="item-container" style="align-items:center">
+                    <div class="item-up-container" style="justify-content:center;align-items:center;">
+                        <block if="false">
+                            <text class="text-item-null-text" style="color:{{ unit_color }};font-size:24px;">--</text>
+                        </block>
+                        <block else>
+                            <text class="text-item-upleft-text" style="color:{{ value_color }};font-size:{{ value_size }};">{{ total_min }}</text>
+                            <text class="text-item-upright-text" style="color:{{ unit_color }};">{{ $t('strings.unit_minute') }}</text>
+                            <text class="text-item-upleft-text" style="color:{{ value_color }};font-size: {{ value_size }};">{{ total_sec }}</text>
+                            <text class="text-item-upright-text" style="color: {{ unit_color }};">{{ $t('strings.unit_second') }}</text>
+                        </block>
+                    </div>
+                    <text class="text-item-down-text" style="color: {{ text_color }};">{{ $t('strings.duration_total') }}</text>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="reverse-container" onclick="func1Click()">
+            <div class="low-reverse-bar" style="backgroundColor:{{ backgroundColorBlock }};opacity:1;">
+                <div class="low-left-item">
+                    <div class="item-container" style="align-items:flex-start;">
+                        <div class="item-up-container" style="justify-content:flex-start;align-items:center;">
+                            <text class="text-item-upleft-text" style="color:{{ value_color }};font-size:18px;">{{ title_func1 }}</text>
+                        </div>
+                        <text class="text-item-down-text" style="color:{{ text_color }};">{{ title_mode_working }}</text>
+                    </div>
+                </div>
+                <image src="{{ icon_func1 }}" class="low-icon"/>
+            </div>
+        </div>
+        <div class="reverse-container" onclick="func2Click()">
+            <div class="low-reverse-bar" style="backgroundColor:{{ backgroundColorBlock }};opacity:1;">
+                <div class="low-left-item">
+                    <div class="item-container" style="align-items:flex-start;">
+                        <div class="item-up-container" style="justify-content:flex-start;align-items:center;">
+                            <text class="text-item-upleft-text" style="color:{{ value_color }};font-size:18px;">{{ title_func2 }}</text>
+                        </div>
+                        <text class="text-item-down-text" style="color:{{ text_color }};">{{ title_state_led }}</text>
+                    </div>
+                </div>
+                <image src="{{ icon_func2 }}" class="low-icon"/>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="reverse-container" onclick="func3Click()">
+            <div class="low-reverse-bar" style="backgroundColor:{{ backgroundColorBlock }};opacity:1;">
+                <div class="low-left-item">
+                    <div class="item-container" style="align-items:flex-start;">
+                        <div class="item-up-container" style="justify-content:flex-start;align-items:center;">
+                            <text class="text-item-upleft-text" style="color:{{ value_color }};font-size:18px;">{{ title_func3 }}</text>
+                        </div>
+                    </div>
+                </div>
+                <image src="{{ icon_func3 }}" class="low-icon"/>
+            </div>
+        </div>
+        <div class="reverse-container" onclick="func4Click()">
+            <div class="low-reverse-bar" style="backgroundColor:{{ backgroundColorBlock }};opacity:1;">
+                <div class="low-left-item">
+                    <div class="item-container" style="align-items:flex-start;">
+                        <div class="item-up-container" style="justify-content:flex-start;align-items:center;">
+                            <text class="text-item-upleft-text" style="color:{{ value_color }};font-size:18px;">{{ title_func4 }}</text>
+                        </div>
+                    </div>
+                </div>
+                <image src="{{ icon_func4 }}" class="low-icon"/>
+            </div>
+        </div>
+    </div>
+
     <control control-data="{{ controlData }}"></control>
+
 <!--    <div if="{{ showSpread }}" class="spread" onclick="spreadClick()">-->
 <!--        <text class="spread-text">{{ spreadText }}</text>-->
 <!--        <image class="spread-image" src="{{ spreadIcon }}"/>-->
 <!--    </div>-->
-    <button class="view-more" onclick="viewMoreClick()" show="{{!isFullWindow}}">{{ $t('strings.view_more') }}</button>
-    <customdisplay custom-display-item-list="{{ customDisplayItemList }}" @icon-click="customDisplayClick()">
-    </customdisplay>
+    <button class="view-more" onclick="viewMoreClick()" show="{{ !isFullWindow }}">{{ $t('strings.view_more') }}</button>
+<!--    <customdisplay custom-display-item-list="{{ customDisplayItemList }}" @icon-click="customDisplayClick()">-->
+<!--    </customdisplay>-->
+<!--    <div class="record" if="{{ isFullWindow }}">-->
+<!--        <text class="record-title">近三次清扫记录</text>-->
+<!--        <image src="{{ recordEmptyImg }}" class="record-empty"></image>-->
+<!--    </div>-->
+
+    <div show="{{ isFullWindow }}" style="height:8px"></div>
+    <list class="ui-log">
+        <list-item for="{{ uiLog }}" class="log-item">
+            <text class="log-text">{{ $item }}</text>
+        </list-item>
+    </list>
+
     <dialog id="dialog" class="dialog" oncancel="dialogCancel()">
         <dialogbox dialog-box-data="{{ dialog }}" @submit-click="dialogSubmit()"
                    @submit-server-click="dialogSubmitServer"
@@ -56,6 +184,47 @@
             <text class="font-16 url-text" onclick="urlClick()">{{ $t('strings.hiLinkUrl') }}</text>
             <button type="text" value="{{ $t('strings.cancel') }}" class="cancel-button" onclick="cancelClick()">
             </button>
+        </div>
+    </dialog>
+<!--    <dialog id="timeout" class="hi-link-dialog">-->
+<!--        <div class="dialog-container">-->
+<!--            <text class="dialog-title">{{ $t('strings.connection-timeout') }}</text>-->
+<!--            <text class="font-16">{{ $t('strings.timeout-hint-1') }}</text>-->
+<!--            <text class="font-16">{{ $t('strings.timeout-hint-2') }}</text>-->
+<!--            <text class="font-16">{{ $t('strings.timeout-hint-3') }}</text>-->
+<!--            <button type="text" value="稍后再试" class="cancel-button" style="width:50%" onclick="cancelClick()"></button>-->
+<!--            <button type="text" value="重新连接" class="cancel-button" style="width:50%" onclick="cancelClick()">-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </dialog>-->
+    <dialog id="timeout">
+        <div class="dialog-box" style="background-color : #ffffff;">
+            <div>
+                <text class="dialog-title-1 font-65ST">{{ $t('strings.connection-timeout') }}</text>
+            </div>
+            <div class="dialog-container">
+                <text class="font-16">{{ $t('strings.timeout-hint-1') }}</text>
+                <text class="font-16">{{ $t('strings.timeout-hint-2') }}</text>
+                <text class="font-16">{{ $t('strings.timeout-hint-3') }}</text>
+            </div>
+            <div class="control-container">
+                <text class="left-control-text font-65ST" onclick="leftClick()">Try Later</text>
+                <div class="divider"></div>
+                <text class="right-control-text font-65ST" onclick="rightClick()">Reconnect</text>
+            </div>
+        </div>
+    </dialog>
+    <dialog id = "dialog-repair-failed" style="margin-bottom : 10px;">
+        <div class="dialog-timeout">
+            <text class="pair-dialog-title">{{$t('strings.public_connect_fail')}}</text>
+            <text class="pair-dialog-hint">{{ $t('strings.public_connect_fail_msg') }}</text>
+            <text class="pair-dialog-hint">{{ $t('strings.public_connect_fail_hint_1') }}</text>
+            <text class="pair-dialog-hint">{{ $t('strings.public_connect_fail_hint_2') }}</text>
+            <div class="bottom-button-wrapper">
+                <text class="button-connect" onclick="exit">{{ $t('strings.public_try_again_later') }}</text>
+                <text class="split-line">|</text>
+                <text class="button-connect" onclick="reConnect">{{ $t('strings.public_reconnect') }}</text>
+            </div>
         </div>
     </dialog>
 </div>

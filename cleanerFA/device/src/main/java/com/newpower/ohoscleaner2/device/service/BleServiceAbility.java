@@ -15,22 +15,22 @@
 
 package com.newpower.ohoscleaner2.device.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.huawei.ailife.service.kit.AiLifeServiceHelper;
-import com.huawei.ailife.service.kit.constants.ConnectResult;
-
 import com.baijia.app.cleaner.BaseDeviceDataHandler;
 import com.baijia.app.cleaner.DeviceDataCallback;
 import com.baijia.app.cleaner.StubDeviceDataHandler;
-
+import com.huawei.ailife.service.internal.utils.Log;
+import com.huawei.ailife.service.kit.AiLifeServiceHelper;
+import com.huawei.ailife.service.kit.constants.ConnectResult;
+import com.newpower.ohoscleaner2.device.DeviceAbility;
 import com.newpower.ohoscleaner2.device.hilink.HiLinkDataCallback;
 import com.newpower.ohoscleaner2.device.hilink.HiLinkDeviceHelper;
 import com.newpower.ohoscleaner2.device.util.LogUtil;
 import com.newpower.ohoscleaner2.device.util.TemplateUtil;
 import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
+import ohos.agp.window.dialog.ToastDialog;
+import ohos.eventhandler.EventHandler;
+import ohos.eventhandler.EventRunner;
 import ohos.rpc.IRemoteBroker;
 import ohos.rpc.IRemoteObject;
 import ohos.rpc.MessageOption;
@@ -38,6 +38,15 @@ import ohos.rpc.MessageParcel;
 import ohos.rpc.RemoteException;
 import ohos.rpc.RemoteObject;
 import ohos.utils.zson.ZSONObject;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import static com.newpower.ohoscleaner2.device.hilink.HiLinkDeviceHelper.DATA_TYPE_BLE_CHARACTERISTIC_CHANGED;
+import static com.newpower.ohoscleaner2.device.hilink.HiLinkDeviceHelper.DataType.AI_LIFE_SERVICE_CONNECT;
 
 /**
  * ble服务PA
@@ -48,7 +57,8 @@ public class BleServiceAbility extends Ability {
 
     @Override
     public void onStart(Intent intent) {
-        LogUtil.error(TAG, "BleServiceAbility::onStart");
+        LogUtil.init(getContext());
+        LogUtil.info(TAG, "BleServiceAbility::onStart");
         AiLifeServiceHelper.initApplication(getAbilityPackage());
         super.onStart(intent);
     }
@@ -88,6 +98,7 @@ public class BleServiceAbility extends Ability {
      */
     class BleRemoteObj extends RemoteObject implements IRemoteBroker {
         private static final int SUCCESS = 0;
+
         private static final int ACTION_MESSAGE_CODE_SUBSCRIBE = 1001;
         private static final int ACTION_MESSAGE_CODE_UNSUBSCRIBE = 1002;
         private static final int ACTION_MESSAGE_CODE_SEND_COMMAND = 1003;
@@ -96,6 +107,22 @@ public class BleServiceAbility extends Ability {
         private static final int ACTION_MESSAGE_CODE_NOTIFY_DEVICE_ID = 1006;
 
         private static final int ACTION_MESSAGE_CODE_GET_TEMPLATE = 1009;
+
+        private static final int ACTION_MESSAGE_INIT = 1000;
+        private static final int ACTION_MESSAGE_DATA_SUBSCRIBE = 2001;
+        private static final int ACTION_MESSAGE_DATA_UNSUBSCRIBE = 2002;
+        private static final int ACTION_MESSAGE_BLE_CONNECT = 3001;
+        private static final int ACTION_MESSAGE_BLE_DISCONNECT = 3002;
+        private static final int ACTION_MESSAGE_BLE_COMMAND = 3003;
+
+        private static final int MESSAGE_DATA_TYPE_BLE_CONNECT = 10;
+        private static final int MESSAGE_DATA_TYPE_BLE_CHARACTERISTIC_CHANGED = 11;
+        private static final int MESSAGE_DATA_TYPE_BLE_CONNECTION_STATE_CHANGED = 12;
+        private static final int MESSAGE_DATA_TYPE_BLE_UNCONNECT = 13;
+
+        private static final String STATE_OK = "ok";
+
+        private static final String MESSAGE_SERVICE_ID = "fa";
 
         private static final String MESSAGE_KEY_SERVICE_ID = "serviceId";
         private static final String MESSAGE_KEY_CHARACTERISTIC = "param";
@@ -108,13 +135,22 @@ public class BleServiceAbility extends Ability {
         private String deviceId = null;
 
         private IRemoteObject remoteObjectHandler = null;
+        private IRemoteObject remoteObject = null;
 
         private BaseDeviceDataHandler deviceDataHandler = null;
 
         private final HiLinkDataCallback hiLinkDataCallback = new HiLinkDataCallback() {
             @Override
             public void onSuccess(int dataType, String result) {
-                sendData(formatData(STATE_SUCCESS, dataType, result));
+                LogUtil.ui("接收: " + result);
+
+                if (DATA_TYPE_BLE_CHARACTERISTIC_CHANGED == dataType) {
+                    BleProtocolUtil.onBleUpMessage(fetchMsgContent(result), (data) -> {
+                        sendPacket(formatData(STATE_OK, DATA_TYPE_BLE_CHARACTERISTIC_CHANGED, data));
+                    });
+                } else {
+                    sendPacket(formatData(STATE_OK, dataType, result));
+                }
             }
 
             @Override
@@ -122,6 +158,16 @@ public class BleServiceAbility extends Ability {
                 sendData(formatData(STATE_FAIL, dataType, result));
             }
         };
+
+        public String fetchMsgContent(String rawMsg) {
+            ZSONObject zsonObj = ZSONObject.stringToZSON(rawMsg);
+            String type = zsonObj.getString("type");
+            if (!"CharacteristicChanged".equals(type)) {
+                return "";
+            }
+            ZSONObject data = zsonObj.getZSONObject("content").getZSONObject("data");
+            return data.getString("v");
+        }
 
         BleRemoteObj() {
             super("BleServiceAbility_BleRemoteObj");
@@ -141,8 +187,47 @@ public class BleServiceAbility extends Ability {
         public boolean onRemoteRequest(int code, MessageParcel data, MessageParcel reply, MessageOption option) {
             LogUtil.info(TAG, "XXX onRemoteRequest code:" + code);
             switch (code) {
-                case ACTION_MESSAGE_CODE_SUBSCRIBE: { //ACTION_MESSAGE_CODE_SUBSCRIBE = 1001
-                    LogUtil.info(TAG, "XXX onRemoteRequest ACTION_MESSAGE_CODE_SUBSCRIBE:" + code);
+                case ACTION_MESSAGE_INIT: {
+                    // DEBUG {
+                        LogUtil.setLogger((msg)->{sendPacket(formatData(STATE_OK, 50, msg));});
+                        deviceDataHandler = getDeviceDataHandler();
+                        //onConnect();
+                    // } DEBUG
+                    //doConnectAiLifeService();
+                    break;
+                }
+                case ACTION_MESSAGE_DATA_SUBSCRIBE: {
+                    remoteObject = data.readRemoteObject();
+                    onConnect();
+                    //connectAiLifeService();
+                    //doConnectAiLifeService();
+                    break;
+                }
+                case ACTION_MESSAGE_DATA_UNSUBSCRIBE: {
+                    remoteObject = null;
+                    onDisconnect();
+                    break;
+                }
+                case ACTION_MESSAGE_BLE_CONNECT: {
+                    onConnect();
+                    break;
+                }
+                case ACTION_MESSAGE_BLE_DISCONNECT: {
+                    onDisconnect();
+                    break;
+                }
+                case ACTION_MESSAGE_BLE_COMMAND: {
+                    ZSONObject zsonObj = ZSONObject.stringToZSON(data.readString());
+                    String cmd = zsonObj.getString("cmd");
+                    String value = zsonObj.getString("value");
+                    BleProtocolUtil.onBleDownMessage(cmd + ":" + value, (result) -> {
+                        sendCommand(String.valueOf(result.get(BleProtocolUtil.RESULT_KEY)));
+                    });
+                    break;
+                }
+
+                case ACTION_MESSAGE_CODE_SUBSCRIBE: {
+                    LogUtil.toast("OLD HiLink SUBSCRIBE");
                     connectAiLifeService();
                     remoteObjectHandler = data.readRemoteObject();
                     break;
@@ -216,6 +301,61 @@ public class BleServiceAbility extends Ability {
             return this;
         }
 
+        private void sendPacket(Map<String, Object> packet) {
+            MessageParcel data = MessageParcel.obtain();
+            MessageParcel reply = MessageParcel.obtain();
+            MessageOption option = new MessageOption();
+            data.writeString(ZSONObject.toZSONString(packet));
+
+            if (remoteObject != null) {
+                try {
+                    remoteObject.sendRequest(0, data, reply, option);
+                } catch (RemoteException e) {
+                    LogUtil.error(TAG, "failed to send data to js");
+                }
+            }
+
+            reply.reclaim();
+            data.reclaim();
+        }
+
+        /**
+         * 向 FA 发送数据
+         *
+         * @param dataMap 数据源
+         */
+        private void sendData0(Map<String, String> dataMap) {
+            MessageParcel data = MessageParcel.obtain();
+            MessageParcel reply = MessageParcel.obtain();
+            MessageOption option = new MessageOption();
+            data.writeString(ZSONObject.toZSONString(dataMap));
+            if (remoteObject != null) {
+                try {
+                    remoteObject.sendRequest(0, data, reply, option);
+                } catch (RemoteException e) {
+                    LogUtil.error(TAG, "failed to send data to js");
+                }
+            }
+            reply.reclaim();
+            data.reclaim();
+        }
+
+        private void sendData1(Map<String, Object> dataMap) {
+            MessageParcel data = MessageParcel.obtain();
+            MessageParcel reply = MessageParcel.obtain();
+            MessageOption option = new MessageOption();
+            data.writeString(ZSONObject.toZSONString(dataMap));
+            if (remoteObject != null) {
+                try {
+                    remoteObject.sendRequest(0, data, reply, option);
+                } catch (RemoteException e) {
+                    LogUtil.error(TAG, "failed to send data to js");
+                }
+            }
+            reply.reclaim();
+            data.reclaim();
+        }
+
         /**
          * 向 FA 发送数据
          *
@@ -237,6 +377,30 @@ public class BleServiceAbility extends Ability {
             data.reclaim();
         }
 
+        private void sendData(String zsonStr) {
+            MessageParcel data = MessageParcel.obtain();
+            MessageParcel reply = MessageParcel.obtain();
+            MessageOption option = new MessageOption();
+            data.writeString(zsonStr);
+            if (remoteObjectHandler != null) {
+                try {
+                    remoteObjectHandler.sendRequest(0, data, reply, option);
+                } catch (RemoteException e) {
+                    LogUtil.error(TAG, "failed to send data to js");
+                }
+            }
+            reply.reclaim();
+            data.reclaim();
+        }
+
+        private void sendCommand(String cmdMsg) {
+            String msg = new StringBuffer("{\"t\":1,\"v\":\"").append(cmdMsg).append("\"}").toString();
+            // DEBUG 将要发送的指令 {
+                LogUtil.ui("发送: " + msg);
+            // } DEBUG
+            hiLinkDeviceHelper.sendCommand(MESSAGE_SERVICE_ID, msg);
+        }
+
         /**
          * 格式化数据源
          *
@@ -253,9 +417,19 @@ public class BleServiceAbility extends Ability {
             return dataMap;
         }
 
+        public Map<String, Object> formatData(String state, int dataType, Map<String, Object> result) {
+            final Map<String, Object> dataMap = new HashMap<>();
+            dataMap.put("state", state);
+            dataMap.put("type", dataType);
+            dataMap.put("result", result);
+            return dataMap;
+        }
+
+
         /**
          * 连接 hilink 服务，并订阅设备事件，获取设备信息
          */
+        @Deprecated
         private void connectAiLifeService() {
             LogUtil.info(TAG, "XXX ready to connect AiLifeServiceHelper, check helper = " + hiLinkDeviceHelper);
             LogUtil.info(TAG, "XXX ready to connect AiLifeServiceHelper, connectResult = " + connectResult);
@@ -282,6 +456,45 @@ public class BleServiceAbility extends Ability {
                     hiLinkDeviceHelper.getHiLinkDevice();
                 }
             }
+        }
+
+        private void doConnectAiLifeService() {
+            // DEBUG {
+                //LogUtil.ui("[FA] 智慧生活连接中");
+            // } DEBUG
+            connectResult = AiLifeServiceHelper.connect(getContext());
+
+            // DEBUG {
+                //LogUtil.ui("connectResult = " + connectResult);
+                LogUtil.ui("[FA] 智慧生活连接结果 = " + connectResult);
+            // } DEBUG
+
+            if (ConnectResult.SERVICE_OK > connectResult) {
+                // DEBUG {
+                LogUtil.toast("[FA] 智慧生活连接失败");
+                // } DEBUG
+                sendPacket(formatData(STATE_FAIL, AI_LIFE_SERVICE_CONNECT, String.valueOf(connectResult)));
+                return;
+            }
+
+            // DEBUG {
+                LogUtil.toast("[FA] 智慧生活连接成功");
+            // } DEBUG
+        }
+
+        public void onConnect() {
+            LogUtil.ui(DeviceAbility.deviceId);
+
+            if (ConnectResult.SERVICE_OK > connectResult) {
+                doConnectAiLifeService();
+            }
+
+            if (null == hiLinkDeviceHelper) {
+                hiLinkDeviceHelper = new HiLinkDeviceHelper(DeviceAbility.deviceId);
+                hiLinkDeviceHelper.setHiLinkDataCallback(hiLinkDataCallback);
+            }
+
+            Objects.requireNonNull(hiLinkDeviceHelper).getHiLinkDevice();
         }
 
         public void onDisconnect() {

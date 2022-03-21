@@ -80,7 +80,7 @@
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">连接中</div> -->
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>  -->
         <div class="statusMiddle">
-          <div class="up batterNum" data-locale="turned_on">0%</div>
+          <div class="up batterNum" data-locale="turned_on">30%</div>
           <div class="down batterStatus" data-locale="turned_on">
             <span class="cn_lang">电池电量</span>
             <span class="en_lang">Batter</span>
@@ -426,12 +426,12 @@
           </span>
         </p>
         <div class="msg-footer">
-          <div class="btn_ok btn_l" id="btn_ok">
+          <div class="btn_ok btn_l cancleConnectFail" id="btn_ok">
             <span class="cn_lang">稍后重试</span>
             <span class="en_lang">Tr Again</span>
           </div>
           <div class="line"></div>
-          <div class="btn_ok btn_r" id="btn_ok">
+          <div class="btn_ok btn_r connectFailBtn" id="btn_ok">
             <span class="cn_lang">重新连接</span>
             <span class="en_lang">Reconnect</span>
           </div>
@@ -444,6 +444,7 @@
     <div class="addHeight"></div>
 
     <div class="chuxuanx" style="display: none;"></div>
+    <!-- <div class="chuxuanx"></div> -->
     <div class="xuanxiang" style="display: none;">
       <div class="guanbix">关闭</div>
       <ul>
@@ -697,6 +698,17 @@
     }
   })
 
+  $(".cancleConnectFail").click(function() {
+    console.log('稍后重试')
+    $('.shelter').hide();
+    $('.msg-div').hide();
+  })
+
+  $(".connectFailBtn").click(function() {
+    console.log('重新连接')
+    connectBleInit();
+  })
+
   // 移出高亮显示状态
   function removeDisableStatus() {
     // 设置禁用状态
@@ -820,7 +832,9 @@
         $('.allcleansecond').html(allcleansecond)
       }
 
-      window.hilink.setStorageSync('initCode', 5)
+      if (recordStatus != 1) {
+        window.hilink.setStorageSync('initCode', 5)
+      }
     } else if (workStatus == 6) { //连接中
       clearDataToStart();
       if (ctLanguage == 'en') {
@@ -872,9 +886,11 @@
         $('.allcleanmin').html(allcleanmin)
         $('.allcleansecond').html(allcleansecond)
       }
-      window.hilink.setStorageSync('initCode', 7)
-        // 开始工作按钮可以点击
-        // statusImgClick();
+      if (recordStatus != 1) {
+        window.hilink.setStorageSync('initCode', 7)
+      }
+      // 开始工作按钮可以点击
+      // statusImgClick();
     }
 
     if (recordStatus == 0) { //未连接
@@ -1050,7 +1066,7 @@
     let moshi11 = $("input[name='moshi']:checked").val();
     console.log(moshi11)
     if (moshi11 === '0' || moshi11) {
-      initStatus(moshi11, 0);
+      initStatus(moshi11, 1);
     }
 
     let gaojing11 = $("input[name='gaojing1']:checked").val();

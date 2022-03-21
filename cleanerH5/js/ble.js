@@ -2,6 +2,7 @@ window.onload = function() {
   console.log('----------window.onload-ble.js-----------');
   // analyseBleInfo('FA010A0701623320150019F006FB'); // 清扫历史1
   // analyseBleInfo('FA010A0702623320150019623320150019F006FB'); // 清扫历史2
+  // analyseBleInfo('FA010A0703623320150019623320150019623320150019F006FB'); // 清扫历史3
   // analyseBleInfo('FA010A1F050102038700120102036D000C0102035B000D0102034900190102032800106001FB'); // 清扫历史5
   // analyseBleInfo('FA010316031111110019000011190701FB'); // 工作中
   if (window.hilink) {
@@ -224,7 +225,7 @@ function analyseBleInfo(str) {
     if (historyNum > 0) {
       $('.recordList').html('');
       let html = '';
-      for (var i = 0; i < historyNum; i++) {
+      for (let i = 0; i < historyNum; i++) {
         console.log('i:', i)
         let time16 = str.substr((i * 12 + 10), 8) // (historyNum * 12 - 2)
         let time10 = parseInt(time16, 16)
@@ -240,10 +241,15 @@ function analyseBleInfo(str) {
           // console.log('清扫时长10:', clearTime10)
         console.log('历史清扫时长:', workTime)
 
+        let ciShu = historyNum;
+        if (historyNum > 3) {
+          ciShu = 3
+        }
+
         html +=
           '<li class="recordItem">' +
           '<div class="recordLeft">' +
-          '<p class="circle">' + (historyNum - i) + '</p>' +
+          '<p class="circle">' + (ciShu - i) + '</p>' +
           '</div>' +
           '<div class="recordMiddle">' +
           '<p class="up">' +
@@ -259,6 +265,9 @@ function analyseBleInfo(str) {
           '</li>';
         if (i < historyNum - 1) {
           html += '<div class="linebox"><div class="line"></div></div>'
+        }
+        if (i >= 2) {
+          break
         }
       }
       // console.log('all--html:', html)

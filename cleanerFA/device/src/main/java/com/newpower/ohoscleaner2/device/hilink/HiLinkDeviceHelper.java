@@ -45,8 +45,8 @@ public class HiLinkDeviceHelper implements DataCallback<String> {
     private static int DATA_TYPE_BLE_UNCONNECT = 13;
 
     private static String bleSessionId;
-    private static int DATA_TYPE_BLE_CHARACTERISTIC_CHANGED = 11;
-    private static int DATA_TYPE_BLE_CONNECTION_STATE_CHANGED = 12;
+    public static final int DATA_TYPE_BLE_CHARACTERISTIC_CHANGED = 11;
+    public static final int DATA_TYPE_BLE_CONNECTION_STATE_CHANGED = 12;
 
     private static final String TAG = "HiLinkDeviceHelper";
     private HiLinkDevice mHiLinkDevice;
@@ -111,7 +111,11 @@ public class HiLinkDeviceHelper implements DataCallback<String> {
                 new DataCallback<HiLinkDevice>() {
                     @Override
                     public void onSuccess(HiLinkDevice hiLinkDevice) {
-                        LogUtil.info(TAG, "XXX getHiLinkDevice onSuccess = " + ZSONObject.toZSONString(hiLinkDevice));
+                        // DEBUG {
+                            LogUtil.ui("获取设备信息成功");
+                        // } DEBUG
+
+                        LogUtil.info(TAG, "getHiLinkDevice onSuccess = " + ZSONObject.toZSONString(hiLinkDevice));
                         Objects.requireNonNull(hiLinkDataCallback).onSuccess(DataType.GET_DEVICE,
                                 ZSONObject.toZSONString(hiLinkDevice));
                         mHiLinkDevice = hiLinkDevice;
@@ -119,6 +123,10 @@ public class HiLinkDeviceHelper implements DataCallback<String> {
                         mHiLinkDevice.connectBleDevice(new DataCallback<String>() {
                             @Override
                             public void onSuccess(String sessionId) {
+                                // DEBUG {
+                                    LogUtil.ui("蓝牙设备连接成功");
+                                // } DEBUG
+
                                 hiLinkDataCallback.onSuccess(DATA_TYPE_BLE_CONNECT, "connect");
                                 LogUtil.info(TAG, "XXX getHiLinkDevice connectBleDevice onSuccess = " + sessionId);
                                 bleSessionId = sessionId;
@@ -127,7 +135,11 @@ public class HiLinkDeviceHelper implements DataCallback<String> {
 
                             @Override
                             public void onFailure(int errorCode, String message) {
-                                LogUtil.info(TAG, "XXX getHiLinkDevice connectBleDevice fail , code = "
+                                // DEBUG {
+                                    LogUtil.ui("蓝牙设备连接失败");
+                                // } DEBUG
+
+                                LogUtil.info(TAG, "connectBleDevice fail , code = "
                                         + errorCode + ", message = " + message);
                                 hiLinkDataCallback.onSuccess(DATA_TYPE_BLE_UNCONNECT, "unConnect");
                             }
@@ -136,6 +148,10 @@ public class HiLinkDeviceHelper implements DataCallback<String> {
 
                     @Override
                     public void onFailure(int errorCode, String msg) {
+                        // DEBUG {
+                            LogUtil.ui("获取设备信息失败");
+                        // } DEBUG
+
                         LogUtil.info(TAG, "getHiLinkDevice onFailure: i = " + errorCode + ", s = " + msg);
                         Objects.requireNonNull(hiLinkDataCallback).onFail(DataType.GET_DEVICE, errorCode, msg);
                     }

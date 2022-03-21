@@ -1,26 +1,27 @@
 #app {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     background: #F1F3F5;
     overflow: auto;
     position: relative;
 }
+
 .dark {
     width: 100%;
 }
 
-.disable{
+.disable {
     pointer-events: none;
     opacity: 0.4;
 }
 
 #app::-webkit-scrollbar {
-    width:0px;
-    height:0px;
+    width: 0px;
+    height: 0px;
 }
 
 #app .addHeight {
-    height:28px;
+    height: 28px;
 }
 
 #app .appMargin {
@@ -28,100 +29,101 @@
     position: relative;
 }
 
-
-
 .backgroundColor {
     display: none;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     position: fixed;
     z-index: 99;
     left: 0;
-    top:0;
-    background-color: rgba(255,255,255,0.2);
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.2);
     box-sizing: border-box;
 }
 
-.dark .backgroundColor{
-    background-color: rgba(0,0,0,0.2);
+.dark .backgroundColor {
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
+
 /* ------------标题栏 ------------------*/
+
 .header {
-    width:100%;
+    width: 100%;
     position: fixed;
     display: flex;
     flex-direction: column;
-    background: #F1F3F5; 
-    z-index:10;
+    background: #F1F3F5;
+    z-index: 10;
 }
 
 .dark .header {
-    background: black; 
+    background: black;
 }
 
 .headerWrap {
-    margin:0 12px;
+    margin: 0 12px;
     padding: 0 12px;
 }
 
 .header .iphoneStatus {
     width: 100%;
-    height:24px;
+    height: 24px;
 }
 
 .header .devTitle {
-    width:100%;
-    height:56px;
+    width: 100%;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .header .devTitle .devName {
-    flex:1;
+    flex: 1;
     margin-left: 0 16px;
-    height:36px;
+    height: 36px;
     line-height: 36px;
     color: rgba(0, 0, 0, 0.9);
     font-size: 20px;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
 }
 
 .dark .header .devTitle .devName {
-    color:rgba(255, 255, 255, 0.86);
+    color: rgba(255, 255, 255, 0.86);
 }
 
 .header .barLeft {
-    width:36px;
-    height:36px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
 }
 
 .barLeft .goApp {
-    width:24px;
+    width: 24px;
     height: 24px;
     background: url('../img/light/ic_back.png') no-repeat;
     background-size: cover;
 }
+
 .dark .barLeft .goApp {
-    background: url('../img/dark/ic_back.png')  no-repeat ;
+    background: url('../img/dark/ic_back.png') no-repeat;
     background-size: cover;
 }
 
 .header .barRight {
-    width:36px;
-    height:36px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
 .barRight .devMore {
-    width:24px;
+    width: 24px;
     height: 24px;
     background: url('../img/light/ic_more.png') no-repeat;
     background-size: cover;
@@ -134,47 +136,52 @@
 
 
 /* 连接失败弹窗 -----------------------*/
-.appMargin .msg-div{
-	/* position: fixed; */
-	width: calc(100%-24px);
-	z-index: 10;
-	display: flex;
+
+.appMargin .msg-div {
+    /* position: fixed; */
+    width: calc(100%-24px);
+    z-index: 10;
+    display: flex;
     flex-direction: column;
-    margin-top: 80px; 
-}
-.msg-main{
-	padding: 0px 12px;
-}
-.msg-title{
-	padding: 16px 0;
-	font-size: 16px;
-	line-height: 20px;
-	color: #000000;
-	opacity: 0.9;
-}
-.dark .msg-title{
-	color: #FFFFFF;
-	opacity: 0.9;
-}
-.msg-content{
-	font-size: 14px;
-	line-height: 22px;
-	color: rgba(0, 0, 0, 0.6);
-	opacity: 0.9;
-}
-.dark .msg-content{
-	color: rgba(255, 255, 255, 0.9);
-	opacity: 0.86;
+    margin-top: 80px;
 }
 
-.msg-content .msg-sub-content{
-	font-size: 12px;
-	line-height: 28px;
+.msg-main {
+    padding: 0px 12px;
 }
 
+.msg-title {
+    padding: 16px 0;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    opacity: 0.9;
+}
 
-.msg-img{
-	width: 100%;
+.dark .msg-title {
+    color: #FFFFFF;
+    opacity: 0.9;
+}
+
+.msg-content {
+    font-size: 14px;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.6);
+    opacity: 0.9;
+}
+
+.dark .msg-content {
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.86;
+}
+
+.msg-content .msg-sub-content {
+    font-size: 12px;
+    line-height: 28px;
+}
+
+.msg-img {
+    width: 100%;
     height: 108px;
     align-self: center;
     display: flex;
@@ -182,21 +189,56 @@
     align-items: center;
     justify-content: center;
 }
-.msg-img img{
+
+.msg-img img {
     width: 90px;
     height: 90px;
 }
 
 
+/* 截图框 */
 
+.chuxuanx {
+    /* background: red; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    z-index: 1002;
+}
 
+.guanbix {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    /* color: #fff; */
+    z-index: 1002;
+    font-size: 14px;
+}
 
+.xuanxiang {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20rpx;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: #fff;
+    width: 80%;
+    height: fit-content;
+    font-size: 16px;
+    z-index: 1000;
+    display: none;
+    border: 1px solid red;
+}
 
+.xuanxiang ul li {
+    padding: 20px;
+}
 
-
-
-
-
-
-
-
+.xuanxiang .queding {
+    padding: 10px 20px;
+}

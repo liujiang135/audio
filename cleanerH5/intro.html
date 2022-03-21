@@ -96,6 +96,28 @@
       </div>
     </div>
 
+    <!-- <div class="chuxuanx" style="display: none;"></div> -->
+    <div class="chuxuanx"></div>
+    <div class="xuanxiang" style="display: none;">
+      <div class="guanbix">关闭</div>
+      <ul>
+        <li>语言：
+          <input type="radio" value="zh" name="lang">中文
+          <input type="radio" value="en" name="lang">英文
+        </li>
+        <li>主题色：
+          <input type="radio" value="anhei" name="yanse">暗黑
+          <input type="radio" value="baitian" name="yanse">白天
+        </li>
+        <li>
+          <input type="radio" value="1" name="shange1">栅格化
+          <input type="radio" value="2" name="shange1">正常
+        </li>
+        <li>
+          <button class="queding">确定</button>
+        </li>
+      </ul>
+    </div>
 </body>
 
 <script src="./js/jquery.min.js"></script>
@@ -165,8 +187,54 @@
     }
   }
 
+  function test() {
+
+    // 显示 截图框
+    document.getElementsByClassName("chuxuanx")[0].addEventListener('click', function(event) {
+        console.log(123)
+        document.getElementsByClassName("xuanxiang")[0].style.display = "block";
+      })
+      // 关闭 截图框
+    document.getElementsByClassName("guanbix")[0].addEventListener('click', function(event) {
+      document.getElementsByClassName("xuanxiang")[0].style.display = "none";
+    })
+
+    // 弹框截图 模式选择
+    document.getElementsByClassName("queding")[0].addEventListener('click', function(event) {
+      let lang11 = $("input[name='lang']:checked").val();
+      console.log('lang11--', lang11)
+      ctLanguage = lang11
+      if (ctLanguage == 'en') {
+        $('.cn_lang').hide();
+        $('.en_lang').show();
+      }
+      if (ctLanguage == 'zh') {
+        $('.cn_lang').show();
+        $('.en_lang').hide();
+      }
+
+      let zhuti11 = $("input[name='yanse']:checked").val();
+      if (zhuti11 == 'anhei') {
+        app.style.background = 'black';
+        app.classList.add("dark");
+        document.body.classList.add("dark")
+        console.log('暗黑模式')
+      }
+
+      let shange1 = $("input[name='shange1']:checked").val();
+      if (shange1 == 1) {
+        console.log('栅格化适配');
+        $('.appMargin')[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
+        $('.appMargin')[0].style.margin = "0 auto";
+      }
+      document.getElementsByClassName("xuanxiang")[0].style.display = "none";
+    })
+  }
+
   $(function() {
     console.log("intro html init")
+
+    test() // 截图框
 
     //设置暗黑模式
     getDarkMode();

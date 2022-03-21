@@ -145,13 +145,13 @@
     flex-direction: column;
     align-items: center;
     align-content: center;
-    margin-top: 70px;
+    margin-top: 80px;
 }
 
 .appMargin .mainWrap .main {
     position: relative;
     z-index: 8;
-    width: 100%;
+    width: 252px;
     height: 188px;
     display: flex;
     align-self: center;
@@ -162,7 +162,7 @@
 
 .appMargin .mainWrap .title {
     position: relative;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 20px;
     color: #000000;
     opacity: 0.9;
@@ -382,3 +382,15 @@
 .xuanxiang .queding {
     padding: 10px 20px;
 }
+
+
+/* debug */
+
+
+/* .appMargin .mainWrap .main {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.devTitle {
+    background: rgba(0, 0, 0, 0.3);
+} */

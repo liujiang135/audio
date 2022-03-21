@@ -80,8 +80,8 @@
     <!-- 氛围灯迁移过来的 end -->
 
 
-    <div class="chuxuanx" style="display: none;"></div>
-    <!-- <div class="chuxuanx"></div> -->
+    <!-- <div class="chuxuanx" style="display: none;"></div> -->
+    <div class="chuxuanx"></div>
     <div class="xuanxiang" style="display: none;">
       <div class="guanbix">关闭</div>
       <ul>
@@ -96,8 +96,9 @@
         </li>
 
         <li>
-          <input type="radio" value="1" name="shange1">栅格化
-          <input type="radio" value="2" name="shange1">正常
+          <input type="radio" value="1" name="shange1">折叠屏
+          <input type="radio" value="2" name="shange1">平板竖屏
+          <input type="radio" value="3" name="shange1">正常
         </li>
 
         <li>
@@ -224,7 +225,7 @@
 
 
   // 栅格化适配
-  function gridAdaptation() {
+  function gridAdaptation(num) {
     console.log('-栅格化适配-')
     this.document.getElementsByClassName("msg")[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
     this.document.getElementsByClassName("msg-div")[0].style.width = "calc(50% + 6px)";
@@ -234,6 +235,17 @@
     this.document.getElementsByClassName("msg-div")[0].style.bottom = "0";
     this.document.getElementsByClassName("msg-div")[0].style.height = "fit-content";
     this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
+
+    if (num == 1) { // 1 折叠屏
+
+    } else if (num == 2) { // 平板竖屏
+      // console.log('平板竖屏 适配');
+      // $('.appMargin')[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
+      // $('.appMargin')[0].style.margin = "0 auto";
+    } else {
+
+    }
+
   }
 
   $('.btn_l').click(function() {
@@ -290,6 +302,7 @@
 
     // 弹框截图 模式选择
     document.getElementsByClassName("queding")[0].addEventListener('click', function(event) {
+      setEcharts(); // PC test
       let lang11 = $("input[name='lang']:checked").val();
       console.log('lang11--', lang11)
       ctLanguage = lang11
@@ -332,9 +345,7 @@
       }
 
       let shange1 = $("input[name='shange1']:checked").val();
-      if (shange1 == 1) {
-        gridAdaptation(); // 栅格化适配
-      }
+      gridAdaptation(shange1); // 栅格化适配
 
       document.getElementsByClassName("xuanxiang")[0].style.display = "none";
     })
@@ -352,10 +363,11 @@
 
     console.log("intro html init")
 
+    // $('.queding').click();
+
     // 执行dp换算
     initDp();
 
-    // setEcharts(); // PC test
 
     // 获取滤芯寿命
     // batterVal = window.hilink.getStorageSync('batterVal')

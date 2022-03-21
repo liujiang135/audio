@@ -443,8 +443,8 @@
     <div class="backgroundColor"></div>
     <div class="addHeight"></div>
 
-    <div class="chuxuanx" style="display: none;"></div>
-    <!-- <div class="chuxuanx"></div> -->
+    <!-- <div class="chuxuanx" style="display: none;"></div> -->
+    <div class="chuxuanx"></div>
     <div class="xuanxiang" style="display: none;">
       <div class="guanbix">关闭</div>
       <ul>
@@ -672,10 +672,6 @@
     console.log('-发-强劲模式')
     sendCommand("FA01050401000000")
   })
-  $('.statusTxt').click(function() {
-    console.log('-重新连接-');
-    connectBleInit()
-  })
 
   // LED开关
   $('.ledCard').click(function() {
@@ -704,7 +700,7 @@
     $('.msg-div').hide();
   })
 
-  $(".connectFailBtn").click(function() {
+  $(".connectFailBtn,.statusTxt").click(function() {
     console.log('重新连接')
     connectBleInit();
   })
@@ -761,6 +757,9 @@
       // 显示'重新连接',隐藏'工作中'图标
       this.document.getElementsByClassName("statusTxt")[0].style.display = "block";
       this.document.getElementsByClassName("statusImg")[0].style.display = "none";
+      // 关闭超时连接弹框
+      $('.shelter').hide();
+      $('.msg-div').hide();
       // 设置禁用状态
       disableControls();
     } else if (workStatus == 1) { //重连
@@ -787,6 +786,9 @@
       } else {
         this.document.getElementsByClassName("statusLeft")[0].innerText = "工作中";
       }
+      // 关闭超时连接弹框
+      $('.shelter').hide();
+      $('.msg-div').hide();
       // 显示'工作中'图标,隐藏'重新连接' 
       this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
       this.document.getElementsByClassName("statusImg")[0].style.display = "none";
@@ -817,7 +819,9 @@
       // 重新连接 隐藏
       this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
 
-
+      // 关闭超时连接弹框
+      $('.shelter').hide();
+      $('.msg-div').hide();
       if (lastcleanmin > 0 || lastcleansecond > 0) {
         // 显示上次清扫时间
         $('.workTime').show(); // 显示时间
@@ -837,6 +841,9 @@
       }
     } else if (workStatus == 6) { //连接中
       clearDataToStart();
+      // 关闭超时连接弹框
+      $('.shelter').hide();
+      $('.msg-div').hide();
       if (ctLanguage == 'en') {
         this.document.getElementsByClassName("statusLeft")[0].innerText = "Connecting";
       } else {
@@ -872,7 +879,9 @@
       this.document.getElementsByClassName("devInfo")[0].classList.add('disable');
       this.document.getElementsByClassName("spinner")[0].classList.add('disable');
       this.document.getElementsByClassName("ledCard")[0].classList.add('disable');
-
+      // 关闭超时连接弹框
+      $('.shelter').hide();
+      $('.msg-div').hide();
       if (lastcleanmin > 0 || lastcleansecond > 0) {
         // 显示上次清扫时间
         $('.workTime').show(); // 显示时间
@@ -1066,6 +1075,12 @@
     let moshi11 = $("input[name='moshi']:checked").val();
     console.log(moshi11)
     if (moshi11 === '0' || moshi11) {
+      if (moshi11 == 5) {
+        lastcleanmin = '06'
+        lastcleansecond = '36'
+        allcleanmin = '36'
+        allcleansecond = 20
+      }
       initStatus(moshi11, 1);
     }
 

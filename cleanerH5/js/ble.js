@@ -6,6 +6,7 @@ window.onload = function() {
   // analyseBleInfo('FA010A1F050102038700120102036D000C0102035B000D0102034900190102032800106001FB'); // 清扫历史5
   // analyseBleInfo('FA010316031111110019000011190701FB'); // 工作中
   if (window.hilink) {
+    window.hilink.removeStorageSync('disconnectTimeStart') // 清空断连时间缓存
     setH5Title();
     console.log('-先发-查询历史-')
     sendCommandToBle('FA010A0400000000')
@@ -28,6 +29,7 @@ let allcleansecond = 0;
 function connectBleInit() {
   console.log('connectBleInit')
   if (window.hilink) {
+    returnConnectTime(); // 重连计时
     onBluetoothAdapterStateChange(); // 监听蓝牙模块开启/关闭 触发
     onBLEConnectionStateChange(); // 监听低功耗蓝牙设备连接状态的改变
     getBluetoothAdapterState(); // 蓝牙模块状态是否打开
@@ -438,7 +440,6 @@ function onBluetoothDeviceFound() {
   window.hilink.onBluetoothDeviceFound('bluetoothDeviceCallBack');
   window.bluetoothDeviceCallBack = res => {
     let data = dataChange(res);
-    // statusLeft.innerHTML = '连接中...';
     initStatus(6, 0) // 连接中
 
     // 把被扫描到的蓝牙设备的mac地址与当前要建立连接设备的mac地址做对比，
@@ -494,9 +495,11 @@ function onBluetoothDeviceFound() {
         bleConnection(UUID_OR_Mac);
       }
     }
+    disConnectTimeAll(); // 计算断开时长，超出时长超时警告
   }
 
   if (isDiscover) {
+    console.log('---停止搜寻附近的蓝牙设备---')
     window.hilink.stopBluetoothDevicesDiscovery(); //停止搜寻附近的蓝牙设备
   } else {
     // 注意:当短时间重复多次搜寻附近蓝牙设备时，安卓手机概率不执行搜寻操作。
@@ -706,6 +709,11 @@ function subscribeBleEventFun(hilinkDevId, deviceIdMac) {
     if (data.content) {
       analyseBleInfo(data.content.data.v)
     }
+    // {"newStatus":2,"oldStatus":0,"type":"ConnectionStateChange","mac":"40:24:B2:F6:8D:4C"}
+    if (data.newStatus === 0) {
+      console.log('--蓝牙断开--')
+      connectBleInit();
+    }
   }
 }
 
@@ -723,5 +731,26 @@ function setH5Title() {
     console.log('-云端设备名：', devName)
     $('.devName').html(devName)
     window.hilink.setStorageSync('cs2DevName', devName)
+  }
+}
+
+function returnConnectTime() {
+  let disconnectTimeStart = (new Date()).getTime().toString()
+  console.log('---重连计时--', disconnectTimeStart)
+  window.hilink.setStorageSync('disconnectTimeStart', disconnectTimeStart)
+}
+
+function disConnectTimeAll() {
+  let disconnectTimeStart = window.hilink.getStorageSync('disconnectTimeStart')
+  let cTime = (new Date()).getTime();
+  let allTime = parseInt((cTime - disconnectTimeStart) / 1000);
+  console.log('--old时-：', disconnectTimeStart)
+  console.log('--new时-：', cTime)
+  console.log('--时差--：', allTime)
+  if (allTime > 60) {
+    console.log('--主动-停止搜寻附近的蓝牙设备---')
+    window.hilink.stopBluetoothDevicesDiscovery(); //停止搜寻附近的蓝牙设备
+    // 超时警告
+    initStatus(2, 0);
   }
 }

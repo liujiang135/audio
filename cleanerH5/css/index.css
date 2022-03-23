@@ -1532,7 +1532,7 @@
     /* background: red; */
     position: fixed;
     top: 0;
-    right: 0;
+    right: 80px;
     width: 60px;
     height: 60px;
     z-index: 1002;

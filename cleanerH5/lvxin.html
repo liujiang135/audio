@@ -100,6 +100,9 @@
           <input type="radio" value="2" name="shange1">平板竖屏
           <input type="radio" value="3" name="shange1">正常
         </li>
+        <li>
+          <input type="radio" value="1" name="didian">低寿命
+        </li>
 
         <li>
           <button class="queding">确定</button>
@@ -174,7 +177,8 @@
     // if(window.hilink && !isIOS){
     if (true) {
       var dark = window.hilink.getDarkMode();
-      // var dark = 2;
+      batterVal = window.hilink.getStorageSync('lvXinLife')
+        // var dark = 2;
       console.log("dark", dark)
       if (dark == 2) { //暗黑模式
         app.style.background = 'black';
@@ -347,12 +351,52 @@
       let shange1 = $("input[name='shange1']:checked").val();
       gridAdaptation(shange1); // 栅格化适配
 
+      let didian = $("input[name='didian']:checked").val();
+      if (didian == 1) {
+        batterVal = 10
+        setEcharts();
+      }
+
       document.getElementsByClassName("xuanxiang")[0].style.display = "none";
     })
 
 
   }
 
+  //dosomethings 订阅蓝牙事件
+  function subscribeBleEventFun(hilinkDevId, deviceIdMac) {
+    window.hilink.subscribeBleEvent(hilinkDevId, deviceIdMac, 'subscribeBleEventCallback');
+    window.subscribeBleEventCallback = res => {
+      let data = dataChange(res);
+      console.log('收到上报信息:', data);
+      if (data.content) {
+        analyseBleInfo(data.content.data.v)
+      }
+      // {"newStatus":2,"oldStatus":0,"type":"ConnectionStateChange","mac":"40:24:B2:F6:8D:4C"}
+      // if (data.newStatus === 0) {
+      //   console.log('--蓝牙断开--')
+      //   connectBleInit();
+      // }
+    }
+  }
+
+  // 解析蓝牙数据 FA010304640101010701FB
+  function analyseBleInfo(str) {
+    console.log('-解析上报数据--:', str)
+    let commandStr = str.substr(4, 2); //命令码
+    let datalength = parseInt(str.substr(6, 2), 16);
+    console.log('数据长度:', datalength)
+      // let dataStr = str.substr(8, datalength * 2); // 数据区
+    let dataStr = str.slice(8, -6); // 数据区
+    errorArr = [];
+    jishiErrorFlag = false; // 报警轮播
+    console.log('-命令码--:', commandStr, '  -数据区--:', dataStr)
+    if (commandStr == '03') { //设备状态
+      batterVal = parseInt(dataStr.substr(20, 2), 16); // 滤芯寿命
+      console.log('滤芯寿命', batterVal)
+      setEcharts()
+    }
+  }
 
   $(function() {
 
@@ -370,7 +414,7 @@
 
 
     // 获取滤芯寿命
-    // batterVal = window.hilink.getStorageSync('batterVal')
+    // batterVal = window.hilink.getStorageSync('lvXinLife')
 
     // 设置语言
     if (window.hilink) {
@@ -391,6 +435,10 @@
       loadProperties("zh")
     }
 
+
+    //dosomethings 订阅蓝牙事件
+    subscribeBleEventFun()
+
   })
 
   var chartDom = document.getElementById('echarts_warp');
@@ -402,6 +450,12 @@
     // 210度~-30度    共 240度
     // 0    ~  100      100     ~2.4
     // 210 - (bili * 2.4)
+    let batterValStart = '#254FF7' // batterVal  蓝 开 254FF7    86C1FF
+    let batterValEnd = '#86C1FF'
+    if (batterVal <= 10) { // batterVal  黄 开 F57442    E84026
+      batterValStart = '#F57442'
+      batterValEnd = '#E84026'
+    }
     option = {
       tooltip: {
         formatter: '{a} <br/>{b} : {c}%'
@@ -517,6 +571,8 @@
           }]
         },
         // 渐变仪表盘 滤芯寿命进度条
+        // batterVal  黄 开 F57442    E84026
+        // batterVal  蓝 开 254FF7    86C1FF
         {
           type: 'gauge',
           name: 'Pressure',
@@ -541,10 +597,10 @@
               color: [
                 [1, new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
                   offset: 0.1,
-                  color: "#86C1FF"
+                  color: batterValEnd
                 }, {
                   offset: 1,
-                  color: "#254FF7"
+                  color: batterValStart
                 }])]
               ]
             }

@@ -149,6 +149,7 @@ var deviceId = undefined;
 var isAgree = localStorage.getItem("devId");
 
 if (window.hilink) {
+  console.log('--隐私声明--')
   window.hilink.getDevInfoAll('0', '', 'getDevInfoAllResult');
   window.getDevInfoAllResult = (res) => {
     deviceId = dataChange(res).devId;

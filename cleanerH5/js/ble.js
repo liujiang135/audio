@@ -1,10 +1,14 @@
 window.onload = function() {
+  // disConnectTimeAll(); // 定时器
   console.log('----------window.onload-ble.js-----------');
   // analyseBleInfo('FA010A0701623320150019F006FB'); // 清扫历史1
   // analyseBleInfo('FA010A0702623320150019623320150019F006FB'); // 清扫历史2
   // analyseBleInfo('FA010A0703623320150019623320150019623320150019F006FB'); // 清扫历史3
   // analyseBleInfo('FA010A1F050102038700120102036D000C0102035B000D0102034900190102032800106001FB'); // 清扫历史5
-  // analyseBleInfo('FA010316031111110019000011190701FB'); // 工作中
+  // analyseBleInfo('FA010316031101110019000011190a0701FB'); // 工作中  3个报警
+  // analyseBleInfo('FA010316021111110019000011190a0701FB'); // 工作中  2个报警 没电，更换
+  // analyseBleInfo('FA01031602111111001900001119120701FB'); // 工作中  1个报警 没电
+  // analyseBleInfo('FA01031664111111001900001119120701FB'); // 工作中  无报警
   if (window.hilink) {
     window.hilink.removeStorageSync('disconnectTimeStart') // 清空断连时间缓存
     setH5Title();
@@ -25,6 +29,11 @@ let lastcleansecond = 0;
 // 累积清扫记录
 let allcleanmin = 0;
 let allcleansecond = 0;
+// 定时器开关
+let jishiFlag = false; // 重连定时器开关
+let disconnectTimeStart = ""; // 重连计时
+let jishiErrorFlag = false; // 报警轮播
+let errorArr = []; // 报警arr
 
 function connectBleInit() {
   console.log('connectBleInit')
@@ -112,7 +121,8 @@ function analyseBleInfo(str) {
   console.log('数据长度:', datalength)
     // let dataStr = str.substr(8, datalength * 2); // 数据区
   let dataStr = str.slice(8, -6); // 数据区
-  let errorFlag = false;
+  errorArr = [];
+  jishiErrorFlag = false; // 报警轮播
   console.log('-命令码--:', commandStr, '  -数据区--:', dataStr)
   if (commandStr == '03') { //设备状态
     let BatterNum = parseInt(dataStr.substr(0, 2), 16); // 电量
@@ -127,8 +137,7 @@ function analyseBleInfo(str) {
       $('.batterStatus')[0].innerText = '电池电量'
       $('.batterNum').html(BatterNum + '%');
       if (BatterNum <= 5) {
-        showErrorTip(1) // 0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
-        errorFlag = true;
+        errorArr.push(1)
       }
     }
 
@@ -161,8 +170,7 @@ function analyseBleInfo(str) {
     if (dataStr.substr(4, 2) === '01') {
       // 滤网堵塞告警状态 堵塞
       console.log('滤网堵塞')
-      showErrorTip(2) // 0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
-      errorFlag = true;
+      errorArr.push(2)
     } else {
       // 滤网堵塞告警状态 未堵塞
     }
@@ -216,6 +224,14 @@ function analyseBleInfo(str) {
     $('.allcleanmin').html(allcleanmin)
     $('.allcleansecond').html(allcleansecond)
 
+    let lvXinLife = parseInt(dataStr.substr(20, 2), 16); // 滤芯寿命
+    console.log('滤芯寿命', lvXinLife)
+    window.hilink.setStorageSync('lvXinLife', lvXinLife)
+    if (lvXinLife <= 10) {
+      console.log('更换滤芯告警')
+        // 更换滤芯告警
+      errorArr.push(0)
+    }
   }
 
   if (commandStr == '0A') { //上报历史记录1
@@ -279,7 +295,14 @@ function analyseBleInfo(str) {
       $('.recordList').append(html)
     }
   }
-  if (!errorFlag) {
+  console.log('--报错- --- -', errorArr);
+  if (errorArr.length == 1) {
+    showErrorTip(errorArr[0]) // 0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
+    jishiErrorFlag = false;
+  } else if (errorArr.length == 2 || errorArr.length == 3) {
+    repeatShowErrorTip();
+  } else {
+    jishiErrorFlag = false;
     hideAlert();
   }
 }
@@ -528,6 +551,7 @@ function bleConnection(mac) {
 
     if (data.errcode == 0) {
       statusLeft.innerHTML = '已连接';
+      jishiFlag = false;
 
       let second = (parseInt((new Date()).getTime() / 1000)).toString(16); // 6232ecb0
       console.log('-发-下发时间-', second)
@@ -741,16 +765,77 @@ function returnConnectTime() {
 }
 
 function disConnectTimeAll() {
-  let disconnectTimeStart = window.hilink.getStorageSync('disconnectTimeStart')
-  let cTime = (new Date()).getTime();
-  let allTime = parseInt((cTime - disconnectTimeStart) / 1000);
-  console.log('--old时-：', disconnectTimeStart)
-  console.log('--new时-：', cTime)
-  console.log('--时差--：', allTime)
-  if (allTime > 60) {
-    console.log('--主动-停止搜寻附近的蓝牙设备---')
-    window.hilink.stopBluetoothDevicesDiscovery(); //停止搜寻附近的蓝牙设备
-    // 超时警告
-    initStatus(2, 0);
-  }
+  var that = this;
+  // disconnectTimeStart = (new Date()).getTime().toString()
+  disconnectTimeStart = window.hilink.getStorageSync('disconnectTimeStart')
+  jishiFlag = true;
+  letUsGo();
+}
+
+// 出发 显示实时记录 和 计算距离 、价钱
+function letUsGo() {
+  var that = this;
+  setTimeout(function() {
+    if (jishiFlag) { // 没有停止时
+      var oldBeginTime = disconnectTimeStart;
+      let cTime = (new Date()).getTime();
+      let allTime = parseInt((cTime - oldBeginTime) / 1000);
+      console.log('--old时-：', oldBeginTime)
+      console.log('--new时-：', cTime)
+      console.log('--时差--：', allTime)
+      if (allTime > 20) {
+        console.log('--主动-停止搜寻附近的蓝牙设备---')
+        window.hilink.stopBluetoothDevicesDiscovery(); //停止搜寻附近的蓝牙设备
+        jishiFlag = false;
+        // 超时警告
+        initStatus(2, 0);
+      }
+      letUsGo();
+    }
+  }, 1000);
+}
+
+
+// 轮播展示报错信息
+function repeatShowErrorTip() {
+  jishiErrorFlag = true;
+  shoEtipBegin();
+}
+
+// 2秒轮播一次
+function shoEtipBegin() {
+  let t2 = setTimeout(function() {
+    if (jishiErrorFlag) { // 没有停止时
+      let ceTime = parseInt((new Date()).getTime() / 1000);
+      // console.log('%4', ceTime % 4)
+      // console.log('%6', ceTime % 6)
+      if (errorArr.length == 3) {
+        let cnums3 = ceTime % 6;
+        let enumss = 0;
+        if (cnums3 == 0 || cnums3 == 1) {
+          enumss = 0
+        }
+        if (cnums3 == 2 || cnums3 == 3) {
+          enumss = 1
+        }
+        if (cnums3 == 4 || cnums3 == 5) {
+          enumss = 2
+        }
+        showErrorTip(errorArr[enumss]) // 0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
+      }
+      if (errorArr.length == 2) {
+        let cnums2 = ceTime % 4;
+        let cnumss = 0;
+        if (cnums2 == 0 || cnums2 == 1) {
+          cnumss = 0
+        }
+        if (cnums2 == 2 || cnums2 == 3) {
+          cnumss = 1
+        }
+        showErrorTip(errorArr[cnumss]) // 0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
+      }
+      clearTimeout(t2)
+      shoEtipBegin();
+    }
+  }, 1000);
 }

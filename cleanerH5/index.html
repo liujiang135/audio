@@ -471,6 +471,7 @@
           <input type="radio" value="0" name="gaojing1">请更换滤芯
           <input type="radio" value="1" name="gaojing1">电量低，请充电
           <input type="radio" value="2" name="gaojing1">请清理尘杯及滤芯！
+          <input type="radio" value="4" name="gaojing1">多条警告！
           <input type="radio" value="3" name="gaojing1">隐藏警告
         </li>
 
@@ -1089,7 +1090,12 @@
       showErrorTip(gaojing11)
     }
     if (gaojing11 == 3) {
+      errorArr = []
       hideAlert();
+    }
+    if (gaojing11 == 4) {
+      errorArr = [0, 1, 2]
+      repeatShowErrorTip();
     }
 
     let shange1 = $("input[name='shange1']:checked").val();

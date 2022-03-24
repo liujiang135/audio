@@ -118,7 +118,7 @@ barLeft.addEventListener('click', function(event) {
       let data = dataChange(res);
       console.log('BLE断开连接:', data);
     }
-    hilink.finishDeviceActivity();
+    window.hilink.finishDeviceActivity();
   }
   event.stopPropagation();
 })
@@ -175,7 +175,7 @@ stateRight.addEventListener('click', function(event) {
 
 stateLeft.addEventListener('click', function(event) {
   if (window.hilink) {
-    hilink.finishDeviceActivity();
+    window.hilink.finishDeviceActivity();
   }
   event.stopPropagation();
 })

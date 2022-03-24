@@ -484,10 +484,6 @@
         <li>
           <button class="queding">确定</button>
         </li>
-        <li>
-          <button class="yininput">隐藏发送命令输入框</button>
-          <button class="xianinput">显示发送命令输入框</button>
-        </li>
       </ul>
 
     </div>
@@ -520,26 +516,12 @@
   // 中英文切换
   function loadProperties(lang) {
     console.log("loadProperties:" + lang)
-
-    console.log('中英文切换')
       // ctLanguage = 'en'
+    ctLanguage = lang;
     if (ctLanguage == 'en') {
       $('.cn_lang').hide();
       $('.en_lang').show();
     }
-
-    //这个方法有个跨域问题，需要解决. 
-    // $.i18n.properties({
-    //   name: 'strings', //资源文件名称 ， 命名格式： 文件名_国家代号.properties
-    //   path: 'lang/', //资源文件路径，注意这里路径是你属性文件的所在文件夹,可以自定义。
-    //   mode: 'map', //用 Map 的方式使用资源文件中的值
-    //   language: lang, //这就是国家代号 name+language刚好组成属性文件名：strings+zh -> strings_zh.properties
-    //   callback: function() {
-    //     $("[data-locale]").each(function() {
-    //       $(this).html($.i18n.prop($(this).data("locale")));
-    //     });
-    //   }
-    // });
   }
 
   function getDarkMode(dark) {
@@ -933,64 +915,6 @@
     this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
   }
 
-  // dp换算
-  function initDp() {
-    console.log("initDp")
-    if (window.hilink) {
-      hilink.getSystemInfoSync("getSystemInfoSync")
-      window.getSystemInfoSync = (res) => {
-        console.log("系统信息")
-        let data = dataChange(res);
-        console.log(data)
-      }
-    }
-
-    hideAlert() // 隐藏前提下 topMsgStatus 生效
-
-    initStatus(6, 0);
-    // initStatus(workStatus,recordStatus )
-    // workStatus 0:未连接 2:连接失败 连接超时 5:工作中，三条记录 6:连接中 7:待机
-    // recordStatus 0:未连接 1:重连
-
-
-    // showErrorTip(2)
-    // 告警提示   topMsgStatus  0:请更换滤芯  1:电量低，请充电!  2:请清理尘杯及滤芯!
-
-    // var tmpVal = "{\"t\":1,\"v\":\"FA010304640101010701FB\"}";
-    // $('.input1').val(tmpVal);
-
-    // var data = '*****'
-    // $('.receive').html('收到的数据: ' + JSON.stringify(data));
-
-  }
-
-  function test() {
-
-    // 显示 截图框
-    document.getElementsByClassName("chuxuanx")[0].addEventListener('click', function(event) {
-        document.getElementsByClassName("xuanxiang")[0].style.display = "block";
-      })
-      // 显示 输入框
-      // document.getElementsByClassName("xianinput")[0].addEventListener('click', function(event) {
-      //     document.getElementsByClassName("test")[0].style.display = "block";
-      //   })
-      // 隐藏输入框
-      // document.getElementsByClassName("yininput")[0].addEventListener('click', function(event) {
-      //     document.getElementsByClassName("test")[0].style.display = "none";
-      //   })
-      // 关闭 截图框
-    document.getElementsByClassName("guanbix")[0].addEventListener('click', function(event) {
-      document.getElementsByClassName("xuanxiang")[0].style.display = "none";
-    })
-
-    // $('.sendBtn').click(function() {
-    //   var inputVal = $('.input1').val();
-    //   console.log('--------------')
-    //   console.log('-发送输入框的值-', inputVal)
-    //   sendCommand(inputVal)
-    // });
-  }
-
   // todo start
   function browserInfo() {
     /*
@@ -1108,6 +1032,54 @@
 
   // todo end
 
+  function initDp() {
+    console.log("initDp dp换算")
+    if (window.hilink) {
+      hilink.getSystemInfoSync("getSystemInfoSync")
+      window.getSystemInfoSync = (res) => {
+        console.log("系统信息")
+        let data = dataChange(res);
+        console.log(data)
+      }
+
+      // 启用重写安卓物理返回键
+      window.hilink.overrideBackPressed(true, "resultCallback");
+      //web页面中需实现该函数，用来获取执行结果
+      window.resultCallback = (res) => {
+        var result = res; // 请求的返回结果
+        console.log('物理返回 goback 请求的返回结果', result)
+      }
+    }
+    // hideAlert() // 隐藏前提下 topMsgStatus 生效
+  }
+
+  // web页面中需实现该函数，用来实现自定义的返回
+  function goBack() {
+    console.log('物理返回 goback')
+    if (window.hilink) {
+      console.log('-hilinkDevId-', hilinkDevId)
+      console.log('-deviceIdMac-', deviceIdMac)
+      window.hilink.disconnectBle(hilinkDevId, deviceIdMac, 'disconnectBleCallback');
+      window.disconnectBleCallback = res => {
+        let data = dataChange(res);
+        console.log('BLE断开连接:', data);
+      }
+      window.hilink.finishDeviceActivity();
+    }
+    event.stopPropagation();
+  }
+
+  function test() {
+    // 显示 截图框
+    document.getElementsByClassName("chuxuanx")[0].addEventListener('click', function(event) {
+        document.getElementsByClassName("xuanxiang")[0].style.display = "block";
+      })
+      // 关闭 截图框
+    document.getElementsByClassName("guanbix")[0].addEventListener('click', function(event) {
+      document.getElementsByClassName("xuanxiang")[0].style.display = "none";
+    })
+  }
+
   $(function() {
 
     console.log("index html init")
@@ -1118,32 +1090,17 @@
     // browserInfo() // ---浏览器信息---
     // gridAdaptation() // 栅格化适配
 
+
     // 执行dp换算
     initDp();
 
-    // 设置语言
-    console.log('-设置语言-', window.hilink.getAppLanguageSync())
-      /*if (window.hilink) {
-			let language = window.hilink.getAppLanguageSync()
-			console.log(language)
-			if (language == "zh-CN") {
-				loadProperties("zh")
-			} else if (language == "en-UK") {
-				loadProperties("en")
-			} else if (language.indexOf("zh") > -1) {
-				loadProperties("zh")
-			} else if (language.indexOf("en") > -1) {
-				loadProperties("en")
-			} else {
-				loadProperties("en")
-			} 
-        }else {
-			loadProperties("zh")
-		} */
+    initStatus(6, 0);
+    // initStatus(workStatus,recordStatus )
+    // workStatus 0:未连接 2:连接失败 连接超时 5:工作中，三条记录 6:连接中 7:待机
+    // recordStatus 0:未连接 1:重连
 
-    // loadProperties("en")
     // 中英文切换
-    loadProperties(ctLanguage)
+    // loadProperties("en")
   })
 </script>
 

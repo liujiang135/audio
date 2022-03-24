@@ -10,6 +10,7 @@ window.onload = function() {
   // analyseBleInfo('FA01031602111111001900001119120701FB'); // 工作中  1个报警 没电
   // analyseBleInfo('FA01031664111111001900001119120701FB'); // 工作中  无报警
   if (window.hilink) {
+    setLanguage(); //设置语言
     window.hilink.removeStorageSync('disconnectTimeStart') // 清空断连时间缓存
     setH5Title();
     console.log('-先发-查询历史-')
@@ -20,7 +21,6 @@ window.onload = function() {
     // hilinkDevId = window.hilink.getStorageSync('hilinkDevId')
     // subscribeBleEventFun(hilinkDevId, deviceIdMac)
   }
-  // connectBleInit();
 }
 
 // 上次清扫记录
@@ -736,6 +736,7 @@ function subscribeBleEventFun(hilinkDevId, deviceIdMac) {
     // {"newStatus":2,"oldStatus":0,"type":"ConnectionStateChange","mac":"40:24:B2:F6:8D:4C"}
     if (data.newStatus === 0) {
       console.log('--蓝牙断开--')
+      errorArr = [];
       connectBleInit();
     }
   }
@@ -780,11 +781,12 @@ function letUsGo() {
       var oldBeginTime = disconnectTimeStart;
       let cTime = (new Date()).getTime();
       let allTime = parseInt((cTime - oldBeginTime) / 1000);
-      console.log('--old时-：', oldBeginTime)
-      console.log('--new时-：', cTime)
-      console.log('--时差--：', allTime)
+      // console.log('--old时-：', oldBeginTime)
+      // console.log('--new时-：', cTime)
+      console.log('--连接计时--：', allTime)
       if (allTime > 20) {
         console.log('--主动-停止搜寻附近的蓝牙设备---')
+          // isDiscover = true;
         window.hilink.stopBluetoothDevicesDiscovery(); //停止搜寻附近的蓝牙设备
         jishiFlag = false;
         // 超时警告
@@ -838,4 +840,21 @@ function shoEtipBegin() {
       shoEtipBegin();
     }
   }, 1000);
+}
+
+// 设置语言
+function setLanguage() {
+  let language = window.hilink.getAppLanguageSync()
+  console.log('-设置语言-', language)
+  if (language == "zh-CN") {
+    loadProperties("zh")
+  } else if (language == "en-UK") {
+    loadProperties("en")
+  } else if (language.indexOf("zh") > -1) {
+    loadProperties("zh")
+  } else if (language.indexOf("en") > -1) {
+    loadProperties("en")
+  } else {
+    loadProperties("zh")
+  }
 }

@@ -101,7 +101,8 @@
           <input type="radio" value="3" name="shange1">正常
         </li>
         <li>
-          <input type="radio" value="1" name="didian">低寿命
+          <input type="radio" value="2" name="didian">50%寿命
+          <input type="radio" value="1" name="didian">10%寿命
         </li>
 
         <li>
@@ -230,25 +231,27 @@
 
   // 栅格化适配
   function gridAdaptation(num) {
-    console.log('-栅格化适配-')
-    this.document.getElementsByClassName("msg")[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
-    this.document.getElementsByClassName("msg-div")[0].style.width = "calc(50% + 6px)";
-    this.document.getElementsByClassName("msg-div")[0].style.left = "0";
-    this.document.getElementsByClassName("msg-div")[0].style.right = "0";
-    this.document.getElementsByClassName("msg-div")[0].style.top = "0";
-    this.document.getElementsByClassName("msg-div")[0].style.bottom = "0";
-    this.document.getElementsByClassName("msg-div")[0].style.height = "fit-content";
-    this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
-
-    if (num == 1) { // 1 折叠屏
-
-    } else if (num == 2) { // 平板竖屏
-      // console.log('平板竖屏 适配');
-      // $('.appMargin')[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
-      // $('.appMargin')[0].style.margin = "0 auto";
-    } else {
-
+    if (num == 1 || num == 2) {
+      console.log('-栅格化适配-')
+      this.document.getElementsByClassName("msg")[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
+      this.document.getElementsByClassName("msg-div")[0].style.width = "calc(50% + 6px)";
+      this.document.getElementsByClassName("msg-div")[0].style.left = "0";
+      this.document.getElementsByClassName("msg-div")[0].style.right = "0";
+      this.document.getElementsByClassName("msg-div")[0].style.top = "0";
+      this.document.getElementsByClassName("msg-div")[0].style.bottom = "0";
+      this.document.getElementsByClassName("msg-div")[0].style.height = "fit-content";
+      this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
     }
+
+    // if (num == 1) { // 1 折叠屏
+
+    // } else if (num == 2) { // 平板竖屏
+    //   // console.log('平板竖屏 适配');
+    //   // $('.appMargin')[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
+    //   // $('.appMargin')[0].style.margin = "0 auto";
+    // } else {
+
+    // }
 
   }
 
@@ -356,6 +359,10 @@
         batterVal = 10
         setEcharts();
       }
+      if (didian == 2) {
+        batterVal = 50
+        setEcharts();
+      }
 
       document.getElementsByClassName("xuanxiang")[0].style.display = "none";
     })
@@ -396,6 +403,11 @@
       console.log('滤芯寿命', batterVal)
       setEcharts()
     }
+  }
+
+  function goBack() {
+    console.log('物理返回 goback')
+    window.history.go(-1);
   }
 
   $(function() {

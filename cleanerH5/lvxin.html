@@ -161,51 +161,9 @@
     window.history.go(-1);
   })
 
-  // function loadProperties(lang) {
-  //   console.log("loadProperties:" + lang)
-  //   if (lang == 'en') {
-  //     $('.cn_lang').hide();
-  //     $('.en_lang').show();
-  //   }
-  //   ctLanguage = lang
-  //     //设置暗黑模式
-  //   getDarkMode();
-  // }
-
   function finishDeviceActivity() {
     showError();
   }
-
-  // function getDarkMode() {
-  //   console.log("getDarkMode")
-  //   var isIOS = !!navigator.userAgent.match(/iPhone/i);
-  //   // if(window.hilink && !isIOS){
-  //   if (true) {
-  //     var dark = window.hilink.getDarkMode();
-  //     batterVal = window.hilink.getStorageSync('lvXinLife')
-  //       // var dark = 2;
-  //     console.log("dark", dark)
-  //     if (dark == 2) { //暗黑模式
-  //       app.style.background = 'black';
-  //       app.classList.add("dark");
-  //       document.body.classList.add("dark")
-  //       eChartsLabelColor1 = '#ffffffdb';
-  //       eChartsLabelColor2 = '#ffffff99';
-  //       gaugeColor = '#ffffff1a'; //进度条底色
-  //       console.log('暗黑模式')
-  //       setEcharts()
-  //     } else {
-  //       app.style.background = '#F1F3F5';
-  //       app.classList.remove("dark")
-  //       document.body.classList.remove("dark")
-  //       eChartsLabelColor1 = '#000000e6';
-  //       eChartsLabelColor2 = '#00000099';
-  //       gaugeColor = '#00000008'; //进度条底色
-  //       console.log('白天模式')
-  //       setEcharts()
-  //     }
-  //   }
-  // }
 
   // dp换算
   function initDp() {
@@ -218,7 +176,6 @@
       }
     }
   }
-
 
   //展示或者隐藏错误
   function hideError() {
@@ -318,7 +275,6 @@
   }
 
   function test() {
-
     // 显示 截图框
     document.getElementsByClassName("chuxuanx")[0].addEventListener('click', function(event) {
         console.log(123)
@@ -328,7 +284,6 @@
     document.getElementsByClassName("guanbix")[0].addEventListener('click', function(event) {
       document.getElementsByClassName("xuanxiang")[0].style.display = "none";
     })
-
 
     // 弹框截图 模式选择
     document.getElementsByClassName("queding")[0].addEventListener('click', function(event) {
@@ -390,7 +345,6 @@
       document.getElementsByClassName("xuanxiang")[0].style.display = "none";
     })
 
-
   }
 
   //dosomethings 订阅蓝牙事件
@@ -417,6 +371,7 @@
     jishiErrorFlag = false; // 报警轮播
     console.log('-命令码--:', commandStr, '  -数据区--:', dataStr)
     if (commandStr == '03') { //设备状态
+      sessionStorage.setItem('bleInfoStr', str)
       batterVal = parseInt(dataStr.substr(20, 2), 16); // 滤芯寿命
       console.log('滤芯寿命', batterVal)
       setEcharts()
@@ -465,31 +420,9 @@
       gaugeColor = '#00000008'; //进度条底色
       console.log('白天模式')
     }
+    // 获取滤芯寿命
     batterVal = window.hilink.getStorageSync('lvXinLife')
     setEcharts()
-
-    // 获取滤芯寿命
-    // batterVal = window.hilink.getStorageSync('lvXinLife')
-
-    // 设置语言
-    // if (window.hilink) {
-    //   let language = window.hilink.getAppLanguageSync()
-    //   console.log(language)
-    //   if (language == "zh-CN") {
-    //     loadProperties("zh")
-    //   } else if (language == "en-UK") {
-    //     loadProperties("en")
-    //   } else if (language.indexOf("zh") > -1) {
-    //     loadProperties("zh")
-    //   } else if (language.indexOf("en") > -1) {
-    //     loadProperties("en")
-    //   } else {
-    //     loadProperties("en")
-    //   }
-    // } else {
-    //   loadProperties("zh")
-    // }
-
 
     //dosomethings 订阅蓝牙事件
     subscribeBleEventFun()

@@ -147,35 +147,6 @@
     window.hilink.overrideBackPressed()
   })
 
-  // function loadProperties(lang) {
-  //   console.log("loadProperties:" + lang)
-  //   if (lang == 'en') {
-  //     $('.cn_lang').hide();
-  //     $('.en_lang').show();
-  //   }
-  // }
-
-  // function getDarkMode() {
-  //   console.log("getDarkMode")
-  //   var isIOS = !!navigator.userAgent.match(/iPhone/i);
-
-  //   // if(window.hilink && !isIOS){
-  //   if (true) {
-  //     var dark = window.hilink.getDarkMode();
-  //     console.log("dark", dark)
-  //       // var dark = 2;
-  //     if (dark == 2) { //暗黑模式
-  //       app.style.background = 'black';
-  //       app.classList.add("dark");
-  //       document.body.classList.add("dark")
-  //     } else {
-  //       app.style.background = '#F1F3F5';
-  //       app.classList.remove("dark")
-  //       document.body.classList.remove("dark")
-  //     }
-  //   }
-  // }
-
   // dp换算
   function initDp() {
     console.log("initDp")
@@ -258,30 +229,8 @@
       document.body.classList.remove("dark")
     }
 
-    //设置暗黑模式
-    // getDarkMode();
-
     // 执行dp换算
     initDp();
-
-    // 设置语言
-    // if (window.hilink) {
-    //   let language = window.hilink.getAppLanguageSync()
-    //   console.log(language)
-    //   if (language == "zh-CN") {
-    //     loadProperties("zh")
-    //   } else if (language == "en-UK") {
-    //     loadProperties("en")
-    //   } else if (language.indexOf("zh") > -1) {
-    //     loadProperties("zh")
-    //   } else if (language.indexOf("en") > -1) {
-    //     loadProperties("en")
-    //   } else {
-    //     loadProperties("en")
-    //   }
-    // } else {
-    //   loadProperties("zh")
-    // }
 
   })
 </script>

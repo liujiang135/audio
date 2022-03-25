@@ -570,39 +570,17 @@
     console.log('-使用说明--')
     let t = (new Date()).getTime()
     console.log('t--', t)
-      // window.open('http://www.dadaiot.com/cleanerH5/intro.html?t=' + t)
     window.open('./intro.html?t=' + t)
-      // window.hilink.jumpTo(
-      //   'http://www.dadaiot.com/cleanerH5/intro.html?t=' + t,
-      //   "jumpToCallback"
-      // );
-      // window.jumpToCallback = res => {
-      //     let data = dataChange(res);
-      //     console.log('跳转指定页面:', data);
-      //   }
-      // window.open('http://192.168.0.105/intro.html?t=' + t)
   })
 
   $('.lvInfo,.replaceLv,.devTopRight').click(function() {
       console.log('-滤芯信息--')
       let t = (new Date()).getTime()
       console.log('t--', t)
-        // window.open('http://www.dadaiot.com/cleanerH5/lvxin.html?t=' + t)
       window.open('./lvxin.html?t=' + t)
-        // window.hilink.jumpTo(
-        //   'http://www.dadaiot.com/cleanerH5/lvxin.html?t=' + t,
-        //   "jumpToCallback"
-        // );
-        // window.jumpToCallback = res => {
-        //     let data = dataChange(res);
-        //     console.log('跳转指定页面:', data);
-        //   }
-        // window.open('http://192.168.0.105/lvxin.html?t=' + t)
     })
     // 发送数据
   function sendCommand(code) {
-    // code = 'FA01060400000000 000BFB'
-    // code = 'FA01090462330bdca0'
     let sendCode = '';
     // 计算校验位 start
     let b0 = code.substr(2, 2);
@@ -660,11 +638,11 @@
   $('.statusImg').click(function() {
     console.log('开始工作--切换至工作中')
       // 待机状态时，点击开始工作--切换至工作中
-    if (window.hilink.getStorageSync('initCode') == 7) {
+    if (sessionStorage.getItem('initCode') == 7) {
       console.log('-发-开机')
       sendCommand("FA01060401000000")
     }
-    if (window.hilink.getStorageSync('initCode') == 5) {
+    if (sessionStorage.getItem('initCode') == 5) {
       console.log('-发-关机')
       sendCommand("FA01060400000000")
     }
@@ -727,10 +705,6 @@
     // 隐藏上次清扫时间
     $('.workTime').hide();
     $('.initTime').show();
-
-    // 3次清扫记录为空
-    // this.document.getElementsByClassName("recordList")[0].style.display = "none";
-    // this.document.getElementsByClassName("recordEmptyList")[0].style.display = "flex";
 
     // 连接中 icon 隐藏
     $('.statusImgLoading').hide();
@@ -842,7 +816,7 @@
       }
 
       if (recordStatus != 1) {
-        window.hilink.setStorageSync('initCode', 5)
+        sessionStorage.setItem('initCode', 5)
       }
     } else if (workStatus == 6) { //连接中
       clearDataToStart();
@@ -901,7 +875,7 @@
         $('.allcleansecond').html(allcleansecond)
       }
       if (recordStatus != 1) {
-        window.hilink.setStorageSync('initCode', 7)
+        sessionStorage.setItem('initCode', 7)
       }
       // 开始工作按钮可以点击
       // statusImgClick();
@@ -1123,11 +1097,16 @@
     // browserInfo() // ---浏览器信息---
     // gridAdaptation() // 栅格化适配
 
-
     // 执行dp换算
     initDp();
 
-    initStatus(6, 0);
+    var initCode = sessionStorage.getItem('initCode')
+    if (initCode) {
+      // 进入待机状态
+      initStatus(initCode, 0);
+    } else {
+      initStatus(6, 0);
+    }
     // initStatus(workStatus,recordStatus )
     // workStatus 0:未连接 2:连接失败 连接超时 5:工作中，三条记录 6:连接中 7:待机
     // recordStatus 0:未连接 1:重连

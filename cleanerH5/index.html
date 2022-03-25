@@ -378,23 +378,42 @@
     <!-- 隐私协议弹窗 -->
     <div class="statementPopup">
       <div class="statementWrap">
-        <div class="statementTitle">隐私声明</div>
+        <div class="statementTitle">
+          <span class="cn_lang">隐私声明</span>
+          <span class="en_lang">Privacy statement</span>
+        </div>
         <div class="statementContent">
           <div class="statementBox">
-            <p class="">XXXXX公司向您提供XXXX产品的XXXXX服务，请您务必认真阅读本声明，在确认充分了解并同意后使用我们的产品和服务。如果您不同意声明的内容， 您应当立即停止使用。
+            <p class="">
+              <span class="cn_lang">北京众清科技有限公司向您提供蜻蜓智能随手吸产品的蓝牙连接服务，请您务必认真阅读本声明，在确认充分了解并同意后使用我们的产品和服务。如果您不同意声明的内容， 您应当立即停止使用。</span>
+              <span class="en_lang">Beijing Zhongqing Technology Co., Ltd. provides you with bluetooth connection service of Dragonfly Intelligent Suction product. Please be sure to read this statement carefully and use our products and services after confirming your full understanding and consent. If you do not agree with the content of the statement, you should stop using it immediately.</span>
             </p>
             <div class="stateRules">
-              <p>在我们向您提供产品和服务的过程中，我们需要收集您的以下信息：</p>
-              <p>1.为了实现测量声音分贝功能，我们会调用您的麦克风进行声音的采集。</p>
-              <p>2.为了实现睡眠报告功能，我们会收集您使用本产品所产生的睡眠数据，包括：睡眠时间、睡眠效率、睡眠时长。</p>
+              <p>
+                <span class="cn_lang">在我们向您提供产品和服务的过程中，我们需要收集您的以下信息：</span>
+                <span class="en_lang">In the process of providing our products and services to you, we need to collect the following information from you:</span>
+              </p>
+              <p>
+                <span class="cn_lang">1.为了实现使用记录统计功能，我们会会收集您使用本产品的数据，包括：使用时间，使用时长。</span>
+                <span class="en_lang">1. In order to realize the statistical function of usage record, we will collect the data of your use of this product, including: usage time and usage duration.</span>
+              </p>
             </div>
-            <p>点击“同意”，即代表您已充分了解并同意上述内容。</p>
+            <p>
+              <span class="cn_lang">点击“同意”，即代表您已充分了解并同意上述内容。</span>
+              <span class="en_lang">Clicking "Agree" means that you have fully understood and agreed to the above content</span>
+            </p>
           </div>
         </div>
         <div class="stateBtn">
-          <div class="stateFn btn_l">取消</div>
+          <div class="stateFn btn_l">
+            <span class="cn_lang">取消</span>
+            <span class="en_lang">Cancel</span>
+          </div>
           <div class="line"></div>
-          <div class="stateFn btn_r">同意</div>
+          <div class="stateFn btn_r">
+            <span class="cn_lang">同意</span>
+            <span class="en_lang">Agree</span>
+          </div>
         </div>
       </div>
     </div>
@@ -479,6 +498,9 @@
           <input type="radio" value="1" name="shange1">栅格化
           <input type="radio" value="2" name="shange1">正常
         </li>
+        <li>
+          <input type="radio" value="1" name="yinsisss">隐私声明
+        </li>
 
 
         <li>
@@ -516,8 +538,8 @@
   // 中英文切换
   function loadProperties(lang) {
     console.log("loadProperties:" + lang)
-      // ctLanguage = 'en'
     ctLanguage = lang;
+    sessionStorage.setItem('ctLanguage', ctLanguage);
     if (ctLanguage == 'en') {
       $('.cn_lang').hide();
       $('.en_lang').show();
@@ -1027,6 +1049,12 @@
       gridAdaptation(); // 栅格化适配
     }
 
+    let yinsisss = $("input[name='yinsisss']:checked").val();
+    if (yinsisss == 1) {
+      backgroundColor.style.display = 'block';
+      statementPopup.style.display = 'block';
+    }
+
     document.getElementsByClassName("xuanxiang")[0].style.display = "none";
   })
 
@@ -1069,6 +1097,11 @@
     event.stopPropagation();
   }
 
+  $(".devName").click(function() {
+    console.log('显示 截图框')
+    $('.xuanxiang').show();
+  })
+
   function test() {
     // 显示 截图框
     document.getElementsByClassName("chuxuanx")[0].addEventListener('click', function(event) {
@@ -1099,8 +1132,6 @@
     // workStatus 0:未连接 2:连接失败 连接超时 5:工作中，三条记录 6:连接中 7:待机
     // recordStatus 0:未连接 1:重连
 
-    // 中英文切换
-    // loadProperties("en")
   })
 </script>
 

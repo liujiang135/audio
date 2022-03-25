@@ -129,12 +129,18 @@ function analyseBleInfo(str) {
     console.log('电量', BatterNum)
     if (BatterNum >= 128) {
       console.log('充电中')
-        // 充电中
-      $('.batterStatus')[0].innerText = '充电中'
+      if (ctLanguage == 'en') {
+        $('.batterStatus')[0].innerText = 'Being charged'
+      } else {
+        $('.batterStatus')[0].innerText = '充电中'
+      }
       $('.batterNum').html((BatterNum - 128) + '%');
     } else {
-      // console.log('电池电量')
-      $('.batterStatus')[0].innerText = '电池电量'
+      if (ctLanguage == 'en') {
+        $('.batterStatus')[0].innerText = 'Batter'
+      } else {
+        $('.batterStatus')[0].innerText = '电池电量'
+      }
       $('.batterNum').html(BatterNum + '%');
       if (BatterNum <= 5) {
         errorArr.push(1)
@@ -156,7 +162,11 @@ function analyseBleInfo(str) {
       $("#eco").removeClass('checkedText');
       $("#turbo").addClass('checkedBg');
       $("#turbo").addClass('checkedText');
-      $(".modeTip").html('强劲模式');
+      if (ctLanguage == 'en') {
+        $(".modeTip").html('Turbo Mode');
+      } else {
+        $(".modeTip").html('强劲模式');
+      }
     } else {
       //低档 节能
       console.log('节能模式')
@@ -164,7 +174,11 @@ function analyseBleInfo(str) {
       $("#turbo").removeClass('checkedText');
       $("#eco").addClass('checkedBg');
       $("#eco").addClass('checkedText');
-      $(".modeTip").html('节能模式');
+      if (ctLanguage == 'en') {
+        $(".modeTip").html('ECO Mode');
+      } else {
+        $(".modeTip").html('节能模式');
+      }
     }
 
     if (dataStr.substr(4, 2) === '01') {
@@ -264,6 +278,11 @@ function analyseBleInfo(str) {
           ciShu = 3
         }
 
+        let qingsaoTxt = '清扫时长';
+        if (ctLanguage == 'en') {
+          qingsaoTxt = 'Cleaning time';
+        }
+
         html +=
           '<li class="recordItem">' +
           '<div class="recordLeft">' +
@@ -271,7 +290,7 @@ function analyseBleInfo(str) {
           '</div>' +
           '<div class="recordMiddle">' +
           '<p class="up">' +
-          '<span class="cn_lang">清扫时长</span>' +
+          '<span class="cn_lang">' + qingsaoTxt + '</span>' +
           '<span class="en_lang">Cleaning time</span>' +
           '</p>' +
           '<p class="down historyworkDate">' + theTime + '</p>' +

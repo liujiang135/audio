@@ -127,6 +127,10 @@
   var eChartsLabelColor2 = '#00000099';
   var gaugeColor = '#00000008'; //进度条底色
   var batterVal = 45;
+  let radiusEcharts = '120px'; // 半径
+  let echartsWidth = '252'; // 宽
+  let echartsHeight = '188'; // 高
+  let isDark = 1; // 1 白天模式   2夜间模式
 
   var deviceIdMac = ''; //注册时候的mac地址
   var hilinkDevId = '';
@@ -157,51 +161,51 @@
     window.history.go(-1);
   })
 
-  function loadProperties(lang) {
-    console.log("loadProperties:" + lang)
-    if (lang == 'en') {
-      $('.cn_lang').hide();
-      $('.en_lang').show();
-    }
-    ctLanguage = lang
-      //设置暗黑模式
-    getDarkMode();
-  }
+  // function loadProperties(lang) {
+  //   console.log("loadProperties:" + lang)
+  //   if (lang == 'en') {
+  //     $('.cn_lang').hide();
+  //     $('.en_lang').show();
+  //   }
+  //   ctLanguage = lang
+  //     //设置暗黑模式
+  //   getDarkMode();
+  // }
 
   function finishDeviceActivity() {
     showError();
   }
 
-  function getDarkMode() {
-    console.log("getDarkMode")
-    var isIOS = !!navigator.userAgent.match(/iPhone/i);
-    // if(window.hilink && !isIOS){
-    if (true) {
-      var dark = window.hilink.getDarkMode();
-      batterVal = window.hilink.getStorageSync('lvXinLife')
-        // var dark = 2;
-      console.log("dark", dark)
-      if (dark == 2) { //暗黑模式
-        app.style.background = 'black';
-        app.classList.add("dark");
-        document.body.classList.add("dark")
-        eChartsLabelColor1 = '#ffffffdb';
-        eChartsLabelColor2 = '#ffffff99';
-        gaugeColor = '#ffffff1a'; //进度条底色
-        console.log('暗黑模式')
-        setEcharts()
-      } else {
-        app.style.background = '#F1F3F5';
-        app.classList.remove("dark")
-        document.body.classList.remove("dark")
-        eChartsLabelColor1 = '#000000e6';
-        eChartsLabelColor2 = '#00000099';
-        gaugeColor = '#00000008'; //进度条底色
-        console.log('白天模式')
-        setEcharts()
-      }
-    }
-  }
+  // function getDarkMode() {
+  //   console.log("getDarkMode")
+  //   var isIOS = !!navigator.userAgent.match(/iPhone/i);
+  //   // if(window.hilink && !isIOS){
+  //   if (true) {
+  //     var dark = window.hilink.getDarkMode();
+  //     batterVal = window.hilink.getStorageSync('lvXinLife')
+  //       // var dark = 2;
+  //     console.log("dark", dark)
+  //     if (dark == 2) { //暗黑模式
+  //       app.style.background = 'black';
+  //       app.classList.add("dark");
+  //       document.body.classList.add("dark")
+  //       eChartsLabelColor1 = '#ffffffdb';
+  //       eChartsLabelColor2 = '#ffffff99';
+  //       gaugeColor = '#ffffff1a'; //进度条底色
+  //       console.log('暗黑模式')
+  //       setEcharts()
+  //     } else {
+  //       app.style.background = '#F1F3F5';
+  //       app.classList.remove("dark")
+  //       document.body.classList.remove("dark")
+  //       eChartsLabelColor1 = '#000000e6';
+  //       eChartsLabelColor2 = '#00000099';
+  //       gaugeColor = '#00000008'; //进度条底色
+  //       console.log('白天模式')
+  //       setEcharts()
+  //     }
+  //   }
+  // }
 
   // dp换算
   function initDp() {
@@ -243,16 +247,35 @@
       this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
     }
 
-    // if (num == 1) { // 1 折叠屏
-
-    // } else if (num == 2) { // 平板竖屏
-    //   // console.log('平板竖屏 适配');
-    //   // $('.appMargin')[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
-    //   // $('.appMargin')[0].style.margin = "0 auto";
-    // } else {
-
-    // }
-
+    if (num == 1) { // 1 折叠屏
+      $('.main')[0].style.width = "305px";
+      $('.main')[0].style.height = "227px";
+      echartsWidth = '305'; // 宽
+      echartsHeight = '227'; // 高
+      // $('.main')[0].style.width = "265px";
+      // $('.main')[0].style.height = "198px";
+      // echartsWidth = '265'; // 宽
+      // echartsHeight = '200'; // 高
+      radiusEcharts = '132px'
+    } else if (num == 2) { // 平板竖屏
+      $('.main')[0].style.width = "512px";
+      $('.main')[0].style.height = "382px";
+      echartsWidth = '512'; // 宽
+      echartsHeight = '382'; // 高
+      // $('.main')[0].style.width = "448px";
+      // $('.main')[0].style.height = "334px";
+      // echartsWidth = '448'; // 宽
+      // echartsHeight = '334'; // 高
+      radiusEcharts = '224px'
+    } else {
+      $('.main')[0].style.width = "252px";
+      $('.main')[0].style.height = "188px";
+      echartsWidth = '252'; // 宽
+      echartsHeight = '188'; // 高
+      radiusEcharts = '120px' // 252 - 188
+    }
+    setEcharts();
+    myChart.resize();
   }
 
   $('.btn_l').click(function() {
@@ -379,11 +402,6 @@
       if (data.content) {
         analyseBleInfo(data.content.data.v)
       }
-      // {"newStatus":2,"oldStatus":0,"type":"ConnectionStateChange","mac":"40:24:B2:F6:8D:4C"}
-      // if (data.newStatus === 0) {
-      //   console.log('--蓝牙断开--')
-      //   connectBleInit();
-      // }
     }
   }
 
@@ -424,28 +442,53 @@
     // 执行dp换算
     initDp();
 
+    ctLanguage = sessionStorage.getItem('ctLanguage')
+    isDark = sessionStorage.getItem('isDark')
+    if (ctLanguage == 'en') {
+      $('.cn_lang').hide();
+      $('.en_lang').show();
+    }
+    if (isDark == 2) {
+      app.style.background = 'black';
+      app.classList.add("dark");
+      document.body.classList.add("dark")
+      eChartsLabelColor1 = '#ffffffdb';
+      eChartsLabelColor2 = '#ffffff99';
+      gaugeColor = '#ffffff1a'; //进度条底色
+      console.log('暗黑模式')
+    } else {
+      app.style.background = '#F1F3F5';
+      app.classList.remove("dark")
+      document.body.classList.remove("dark")
+      eChartsLabelColor1 = '#000000e6';
+      eChartsLabelColor2 = '#00000099';
+      gaugeColor = '#00000008'; //进度条底色
+      console.log('白天模式')
+    }
+    batterVal = window.hilink.getStorageSync('lvXinLife')
+    setEcharts()
 
     // 获取滤芯寿命
     // batterVal = window.hilink.getStorageSync('lvXinLife')
 
     // 设置语言
-    if (window.hilink) {
-      let language = window.hilink.getAppLanguageSync()
-      console.log(language)
-      if (language == "zh-CN") {
-        loadProperties("zh")
-      } else if (language == "en-UK") {
-        loadProperties("en")
-      } else if (language.indexOf("zh") > -1) {
-        loadProperties("zh")
-      } else if (language.indexOf("en") > -1) {
-        loadProperties("en")
-      } else {
-        loadProperties("en")
-      }
-    } else {
-      loadProperties("zh")
-    }
+    // if (window.hilink) {
+    //   let language = window.hilink.getAppLanguageSync()
+    //   console.log(language)
+    //   if (language == "zh-CN") {
+    //     loadProperties("zh")
+    //   } else if (language == "en-UK") {
+    //     loadProperties("en")
+    //   } else if (language.indexOf("zh") > -1) {
+    //     loadProperties("zh")
+    //   } else if (language.indexOf("en") > -1) {
+    //     loadProperties("en")
+    //   } else {
+    //     loadProperties("en")
+    //   }
+    // } else {
+    //   loadProperties("zh")
+    // }
 
 
     //dosomethings 订阅蓝牙事件
@@ -472,6 +515,10 @@
       tooltip: {
         formatter: '{a} <br/>{b} : {c}%'
       },
+      grid: {
+        width: echartsWidth,
+        height: echartsHeight,
+      },
       series: [
         // 底部 仪表盘
         {
@@ -480,7 +527,7 @@
           startAngle: 210,
           endAngle: -30,
           center: ['50%', '65%'],
-          radius: '120px',
+          radius: radiusEcharts, // 半径
           min: 0,
           max: 100,
           itemStyle: { // 进度条颜色  254ff700 为无色，将显示出底渐变色
@@ -591,7 +638,7 @@
           startAngle: 210,
           endAngle: (210 - (batterVal * 2.4)),
           center: ['50%', '65%'],
-          radius: '120px',
+          radius: radiusEcharts,
           min: 0,
           max: 100,
           itemStyle: { // 进度条颜色  254ff700 为无色，将显示出底渐变色

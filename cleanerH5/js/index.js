@@ -132,9 +132,11 @@ function getDarkMode() {
     if (dark == 2) { //暗黑模式
       app.style.background = 'black';
       app.classList.add("dark");
+      sessionStorage.setItem('isDark', 2);
     } else {
       app.classList.remove("dark")
       app.style.background = '#F1F3F5';
+      sessionStorage.setItem('isDark', 1);
     }
   }
 }

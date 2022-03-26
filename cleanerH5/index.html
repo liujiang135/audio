@@ -520,7 +520,7 @@
 <script src='./js/index.js'></script>
 <script>
   var vConsole = new VConsole();
-  console.log('开始调试-index.html');
+  console.log('-index.html-');
   // 中文 zh   英文 en
   var ctLanguage = 'en'; // 语言
   ctLanguage = 'zh';
@@ -568,9 +568,7 @@
 
   $('.instructions').click(function() {
     console.log('-使用说明--')
-    let t = (new Date()).getTime()
-    console.log('t--', t)
-    window.open('./intro.html?t=' + t)
+    window.open('./intro.html')
       // disconnectBleFun();
   })
 
@@ -981,16 +979,9 @@
 
   // todo end
 
-  function initDp() {
-    console.log("initDp dp换算")
+  function initBack() {
+    console.log("启用重写安卓物理返回键 ")
     if (window.hilink) {
-      hilink.getSystemInfoSync("getSystemInfoSync")
-      window.getSystemInfoSync = (res) => {
-        console.log("系统信息")
-        let data = dataChange(res);
-        console.log(data)
-      }
-
       // 启用重写安卓物理返回键
       window.hilink.overrideBackPressed(true, "resultCallback");
       //web页面中需实现该函数，用来获取执行结果
@@ -999,7 +990,6 @@
         console.log('物理返回 goback 请求的返回结果', result)
       }
     }
-    // hideAlert() // 隐藏前提下 topMsgStatus 生效
   }
 
   // web页面中需实现该函数，用来实现自定义的返回
@@ -1035,12 +1025,12 @@
 
   // desc 获取手机信息，包含系统和屏幕
   function getPhoneInfo() {
-    console.log('------获取手机信息---包括系统和屏幕-------------')
+    console.log('---------------  手机信息  ---------------')
     let type = 'android';
     let version = '10.0.0';
-    let language;
     let isPad = false;
     let isDarkMode = false;
+    let isLandscape = false; // false 竖屏    true 横屏
     let DPR = window.devicePixelRatio; // 设备物理像素和设备独立像素(dips)的比例
     let isScreenSpreaded;
     try {
@@ -1056,55 +1046,43 @@
         reg = /harmony [\d._]+/gi;
         type = 'harmony';
       }
-      language = (navigator.browserLanguage || navigator.language).toLowerCase();
       matchInfo = ua.match(reg);
       version = String(matchInfo).replace(/[^0-9|_.]/gi, '').replace(/_/gi, '.');
-      isScreenSpreaded = (window.hilink && window.hilink.isScreenSpreaded && window.hilink.isScreenSpreaded()) || false, // 折叠屏展开
+      if (window.hilink) {
+        let screenWidth = window.hilink.screenWidth
+        let screenHeight = window.hilink.screenHeight
+        if (screenWidth > screenHeight) {
+          isLandscape = true;
+        }
+      }
+      isScreenSpreaded = (window.hilink && window.hilink.screenWidth && window.hilink.isScreenSpreaded()) || false, // 折叠屏展开
         isPad = /(?:ipad|playbook)/.test(ua) || (['android', 'harmony'].indexOf(type) !== -1 && !/(?:mobile)/.test(ua)); // 平板
     } catch (err) {
       console.log('通过 navigator.userAgent 获取系统类型和版本报错,使用默认配置android 和 10');
     }
-    console.log(`获取type为${type + version}, ${(isPad ? '平板' : '手机') + ',' + (isScreenSpreaded ? '折叠屏' : '非折叠屏')}`);
-    console.log("isPad: " + isPad);
-    console.log("isScreenSpreaded: " + isScreenSpreaded);
-    console.log("isDarkMode: " + isDarkMode);
-    console.log("language: " + language);
-    console.log("DPR: " + DPR);
-    // console.log(navigator.userAgent);
-
-    // 折叠屏 展开 ||  pad竖屏时  --> 栅格化适配
-    if (isScreenSpreaded || isPad) {
-      // let isScreenSpreaded = window.hilink.isScreenSpreaded(); //判断折叠屏手机屏幕是否展开 true:展开， false:未展开
-      // console.log("---平板---");
-      // gridAdaptation() // 栅格化适配
+    console.log(`获取type为${type + version}, ${(isPad ? '平板' : '手机') + ',' + (isScreenSpreaded ? '折叠屏' : '非折叠屏') + ',' + (isLandscape ? '横屏' : '竖屏')}`);
+    // console.log("isPad: " + isPad);
+    // console.log("isScreenSpreaded: " + isScreenSpreaded);
+    // console.log("isDarkMode: " + isDarkMode);
+    // console.log("DPR: " + DPR);
+    if (isScreenSpreaded) {
+      console.log('折叠屏')
+      sessionStorage.setItem('phoneType', 'isScreenSpreaded')
+      gridAdaptation();
     }
-
-    // let browserWidth = document.documentElement.clientWidth;
-    // 根据屏幕宽度做适配
-    // 以UI设计稿宽度为360为例，36=360/10，设置完成后，控件开发样式尺寸为设计稿尺寸/10 单位为rem
-    // document.documentElement.setAttribute('style', `font-size:${ isScreenSpreaded ? 10 : (browserWidth / 36)}px`);
-    // commit('commitAppData', {
-    //   'type:', type,
-    //   'version:', version,
-    //   'isPad:', isPad,
-    //   'isDarkMode:', isDarkMode,
-    //   'DPR:', DPR,
-    //   'isScreenSpreaded:', isScreenSpreaded
-    // });
-    console.log('-------获取手机信息---------- END  -----------')
+    if (isPad && !isLandscape) {
+      console.log('pad竖屏')
+      sessionStorage.setItem('phoneType', 'isPadVertical')
+      gridAdaptation();
+    }
+    console.log('---------------  手机信息  ---------------')
   }
 
   $(function() {
+    console.log("-- $ init --")
 
-    console.log("index html init")
-
-    test()
-
-    // desc 获取手机信息，包含系统和屏幕
+    // 获取手机信息，包含系统和屏幕
     getPhoneInfo();
-
-    // 执行dp换算
-    initDp();
 
     var initCode = sessionStorage.getItem('initCode')
     if (initCode) {
@@ -1117,6 +1095,10 @@
     // workStatus 0:未连接 2:连接失败 连接超时 5:工作中，三条记录 6:连接中 7:待机
     // recordStatus 0:未连接 1:重连
 
+    // 启用重写安卓物理返回键
+    initBack();
+
+    test()
   })
 </script>
 

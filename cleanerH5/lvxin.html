@@ -165,18 +165,6 @@
     showError();
   }
 
-  // dp换算
-  function initDp() {
-    console.log("initDp")
-    if (window.hilink) {
-      hilink.getSystemInfoSync("getSystemInfoSync")
-      window.getSystemInfoSync = (res) => {
-        console.log("系统信息")
-        console.log(res)
-      }
-    }
-  }
-
   //展示或者隐藏错误
   function hideError() {
     $(".shelter").hide()
@@ -209,20 +197,12 @@
       $('.main')[0].style.height = "227px";
       echartsWidth = '305'; // 宽
       echartsHeight = '227'; // 高
-      // $('.main')[0].style.width = "265px";
-      // $('.main')[0].style.height = "198px";
-      // echartsWidth = '265'; // 宽
-      // echartsHeight = '200'; // 高
       radiusEcharts = '132px'
     } else if (num == 2) { // 平板竖屏
       $('.main')[0].style.width = "512px";
       $('.main')[0].style.height = "382px";
       echartsWidth = '512'; // 宽
       echartsHeight = '382'; // 高
-      // $('.main')[0].style.width = "448px";
-      // $('.main')[0].style.height = "334px";
-      // echartsWidth = '448'; // 宽
-      // echartsHeight = '334'; // 高
       radiusEcharts = '224px'
     } else {
       $('.main')[0].style.width = "252px";
@@ -390,18 +370,8 @@
   })
 
   $(function() {
+    console.log("------滤芯信息页-----")
 
-    test();
-
-    // 栅格化适配
-    // gridAdaptation();
-
-    console.log("intro html init")
-
-    // $('.queding').click();
-
-    // 执行dp换算
-    initDp();
 
     ctLanguage = sessionStorage.getItem('ctLanguage')
     isDark = sessionStorage.getItem('isDark')
@@ -428,11 +398,23 @@
     }
     // 获取滤芯寿命
     batterVal = window.hilink.getStorageSync('lvXinLife')
-    setEcharts()
+
+    // 机型 isPadVertical pad竖屏    isScreenSpreaded   折叠屏
+    let phoneType = sessionStorage.getItem('phoneType')
+    if (phoneType == 'isPadVertical') {
+      console.log('pad竖屏')
+      gridAdaptation(2, 2)
+    } else if (phoneType == 'isScreenSpreaded') {
+      console.log('折叠屏')
+      gridAdaptation(1, 2)
+    } else {
+      setEcharts()
+    }
 
     //dosomethings 订阅蓝牙事件
     subscribeBleEventFun()
 
+    test();
   })
 
   var chartDom = document.getElementById('echarts_warp');

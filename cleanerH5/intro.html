@@ -147,18 +147,6 @@
     window.hilink.overrideBackPressed()
   })
 
-  // dp换算
-  function initDp() {
-    console.log("initDp")
-    if (window.hilink) {
-      hilink.getSystemInfoSync("getSystemInfoSync")
-      window.getSystemInfoSync = (res) => {
-        console.log("系统信息")
-        console.log(res)
-      }
-    }
-  }
-
   function test() {
 
     // 显示 截图框
@@ -217,7 +205,12 @@
   $(function() {
     console.log("intro html init")
 
-    test() // 截图框
+    let phoneType = sessionStorage.getItem('phoneType')
+    if (phoneType == 'isPadVertical' || phoneType == 'isScreenSpreaded') {
+      console.log('栅格化适配');
+      $('.appMargin')[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
+      $('.appMargin')[0].style.margin = "0 auto";
+    }
 
     ctLanguage = sessionStorage.getItem('ctLanguage')
     if (ctLanguage == 'en') {
@@ -235,9 +228,7 @@
       document.body.classList.remove("dark")
     }
 
-    // 执行dp换算
-    initDp();
-
+    test() // 截图框
   })
 </script>
 

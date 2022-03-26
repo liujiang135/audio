@@ -111,13 +111,9 @@ app.addEventListener('click', function(event) {
 // 退出当前设备页，返回APP设备列表页
 barLeft.addEventListener('click', function(event) {
   if (window.hilink) {
-    console.log('-hilinkDevId-', hilinkDevId)
-    console.log('-deviceIdMac-', deviceIdMac)
-    window.hilink.disconnectBle(hilinkDevId, deviceIdMac, 'disconnectBleCallback');
-    window.disconnectBleCallback = res => {
-      let data = dataChange(res);
-      console.log('BLE断开连接:', data);
-    }
+    unSubscribeBleEventFun(hilinkDevId, deviceIdMac)
+    disconnectBleFun();
+    // window.hilink.closeBLEConnection(hilinkDevId)
     window.hilink.finishDeviceActivity();
   }
   event.stopPropagation();

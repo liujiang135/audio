@@ -80,8 +80,8 @@
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">连接中</div> -->
         <!-- <div class="statusLeft" data-locale="statusLeft_unconnect">未连接</div>  -->
         <div class="statusMiddle">
-          <div class="up batterNum" data-locale="turned_on">30%</div>
-          <div class="down batterStatus" data-locale="turned_on">
+          <div class="up batterNum disable" data-locale="turned_on">100%</div>
+          <div class="down batterStatus disable" data-locale="turned_on">
             <span class="cn_lang">电池电量</span>
             <span class="en_lang">Batter</span>
           </div>
@@ -571,6 +571,7 @@
     let t = (new Date()).getTime()
     console.log('t--', t)
     window.open('./intro.html?t=' + t)
+      // disconnectBleFun();
   })
 
   $('.lvInfo,.replaceLv,.devTopRight').click(function() {
@@ -685,6 +686,7 @@
 
   $(".connectFailBtn,.statusTxt").click(function() {
     console.log('重新连接')
+    isDiscover = false;
     connectBleInit();
   })
 
@@ -724,7 +726,7 @@
   let recordStatus = 0 //0 没几率 ，1 三条记录
 
   // 设置状态
-  function initStatus(workStatus, recordStatus) {
+  function initStatus(workStatus, recordStatus, batterFlag) {
     console.log('模式', workStatus)
     if (workStatus == 0) { //未连接
       clearDataToStart();
@@ -794,6 +796,9 @@
 
       // 显示节能模式、灯光已开启
       $('.fnStatus').show();
+      if (batterFlag == 1) {
+        removeBatterFun();
+      }
 
       // 重新连接 隐藏
       this.document.getElementsByClassName("statusTxt")[0].style.display = "none";
@@ -846,6 +851,9 @@
       }
       // 显示电量
       this.document.getElementsByClassName("statusMiddle")[0].style.display = "block";
+      if (batterFlag == 1) {
+        removeBatterFun();
+      }
       // 显示工作icon
       this.document.getElementsByClassName("statusImg")[0].style.display = "block";
       this.document.getElementsByClassName("statusImg")[0].style.background =
@@ -910,67 +918,6 @@
     this.document.getElementsByClassName("msg-div")[0].style.height = "fit-content";
     this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
   }
-
-  // todo start
-  function browserInfo() {
-    /*
-     * 智能机浏览器版本信息:
-     */
-    var browser = {
-      versions: function() {
-        var u = navigator.userAgent,
-          app = navigator.appVersion,
-          // -
-          isAndroid = /(?:Android)/.test(u),
-          isFireFox = /(?:Firefox)/.test(u),
-          isChrome = /(?:Chrome|CriOS)/.test(u),
-          isTablet = /(?:iPad|PlayBook)/.test(u) || (isAndroid && !/(?:Mobile)/.test(u)) || (isFireFox &&
-            /(?:Tablet)/.test(u)),
-          isPhone = /(?:iPhone)/.test(u) && !isTablet;
-        // -
-        return { //移动终端浏览器版本信息
-          trident: u.indexOf('Trident') > -1, //IE内核
-          presto: u.indexOf('Presto') > -1, //opera内核
-          webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-          gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-          mobile: !!u.match(/AppleWebKit.*Mobile.*/) || u.indexOf('iPad') > -1, //是否为移动终端
-          ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-          android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-          iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
-          iPad: u.indexOf('iPad') > -1, //是否iPad
-          webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
-          isTablet: isTablet,
-          isPhone: isPhone,
-          isAndroid: isAndroid
-        };
-      }(),
-      language: (navigator.browserLanguage || navigator.language).toLowerCase()
-    }
-    console.log('-----------------机型---------------')
-    console.log("语言版本: " + browser.language);
-    console.log("是否为移动终端: " + browser.versions.mobile);
-    console.log("ios终端: " + browser.versions.ios);
-    console.log("android终端: " + browser.versions.android);
-    console.log("是否为iPhone: " + browser.versions.iPhone);
-    console.log("是否iPad: " + browser.versions.iPad);
-    console.log("是否平板: " + browser.versions.isTablet);
-    console.log(navigator.userAgent);
-    console.log('-----------------机型---------------')
-
-    if (browser.versions.isAndroid || browser.versions.isPhone) {
-      console.log("---手机---");
-    } else if (browser.versions.isTablet) {
-      console.log("---平板---");
-    }
-
-    // 折叠屏 ||  pad竖屏时  --> 栅格化适配
-    if (browser.versions.iPad) {
-      // let isScreenSpreaded = window.hilink.isScreenSpreaded(); //判断折叠屏手机屏幕是否展开 true:展开， false:未展开
-      gridAdaptation() // 栅格化适配
-    }
-    // ipad 横屏
-  }
-
 
   // 弹框截图 模式选择
   document.getElementsByClassName("queding")[0].addEventListener('click', function(event) {
@@ -1059,16 +1006,10 @@
   function goBack() {
     console.log('物理返回 goback')
     if (window.hilink) {
-      console.log('-hilinkDevId-', hilinkDevId)
-      console.log('-deviceIdMac-', deviceIdMac)
-      window.hilink.disconnectBle(hilinkDevId, deviceIdMac, 'disconnectBleCallback');
-      window.disconnectBleCallback = res => {
-        let data = dataChange(res);
-        console.log('BLE断开连接:', data);
-      }
+      unSubscribeBleEventFun(hilinkDevId, deviceIdMac)
+      disconnectBleFun();
       window.hilink.finishDeviceActivity();
     }
-    event.stopPropagation();
   }
 
   $(".devName").click(function() {
@@ -1087,15 +1028,80 @@
     })
   }
 
+  function removeBatterFun() {
+    $('.batterNum')[0].classList.remove('disable');
+    $('.batterStatus')[0].classList.remove('disable');
+  }
+
+  // desc 获取手机信息，包含系统和屏幕
+  function getPhoneInfo() {
+    console.log('------获取手机信息---包括系统和屏幕-------------')
+    let type = 'android';
+    let version = '10.0.0';
+    let language;
+    let isPad = false;
+    let isDarkMode = false;
+    let DPR = window.devicePixelRatio; // 设备物理像素和设备独立像素(dips)的比例
+    let isScreenSpreaded;
+    try {
+      let ua = navigator.userAgent.toLowerCase();
+      let reg, matchInfo;
+      if (ua.indexOf('like mac os x') > 0) {
+        reg = /os [\d._]+/gi;
+        type = 'ios';
+      } else if (ua.indexOf('android') > 0) {
+        reg = /android [\d._]+/gi;
+        type = 'android';
+      } else if (ua.indexOf('harmony') > 0) {
+        reg = /harmony [\d._]+/gi;
+        type = 'harmony';
+      }
+      language = (navigator.browserLanguage || navigator.language).toLowerCase();
+      matchInfo = ua.match(reg);
+      version = String(matchInfo).replace(/[^0-9|_.]/gi, '').replace(/_/gi, '.');
+      isScreenSpreaded = (window.hilink && window.hilink.isScreenSpreaded && window.hilink.isScreenSpreaded()) || false, // 折叠屏展开
+        isPad = /(?:ipad|playbook)/.test(ua) || (['android', 'harmony'].indexOf(type) !== -1 && !/(?:mobile)/.test(ua)); // 平板
+    } catch (err) {
+      console.log('通过 navigator.userAgent 获取系统类型和版本报错,使用默认配置android 和 10');
+    }
+    console.log(`获取type为${type + version}, ${(isPad ? '平板' : '手机') + ',' + (isScreenSpreaded ? '折叠屏' : '非折叠屏')}`);
+    console.log("isPad: " + isPad);
+    console.log("isScreenSpreaded: " + isScreenSpreaded);
+    console.log("isDarkMode: " + isDarkMode);
+    console.log("language: " + language);
+    console.log("DPR: " + DPR);
+    // console.log(navigator.userAgent);
+
+    // 折叠屏 展开 ||  pad竖屏时  --> 栅格化适配
+    if (isScreenSpreaded || isPad) {
+      // let isScreenSpreaded = window.hilink.isScreenSpreaded(); //判断折叠屏手机屏幕是否展开 true:展开， false:未展开
+      // console.log("---平板---");
+      // gridAdaptation() // 栅格化适配
+    }
+
+    // let browserWidth = document.documentElement.clientWidth;
+    // 根据屏幕宽度做适配
+    // 以UI设计稿宽度为360为例，36=360/10，设置完成后，控件开发样式尺寸为设计稿尺寸/10 单位为rem
+    // document.documentElement.setAttribute('style', `font-size:${ isScreenSpreaded ? 10 : (browserWidth / 36)}px`);
+    // commit('commitAppData', {
+    //   'type:', type,
+    //   'version:', version,
+    //   'isPad:', isPad,
+    //   'isDarkMode:', isDarkMode,
+    //   'DPR:', DPR,
+    //   'isScreenSpreaded:', isScreenSpreaded
+    // });
+    console.log('-------获取手机信息---------- END  -----------')
+  }
+
   $(function() {
 
     console.log("index html init")
 
     test()
 
-    // 浏览器信息 栅格化适配
-    // browserInfo() // ---浏览器信息---
-    // gridAdaptation() // 栅格化适配
+    // desc 获取手机信息，包含系统和屏幕
+    getPhoneInfo();
 
     // 执行dp换算
     initDp();

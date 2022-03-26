@@ -11,8 +11,7 @@ window.onload = function() {
   // analyseBleInfo('FA01031664111111001900001119120701FB'); // 工作中  无报警
   if (window.hilink) {
     setLanguage(); //设置语言
-    window.hilink.removeStorageSync('disconnectTimeStart') // 清空断连时间缓存
-    setH5Title();
+    sessionStorage.removeItem('disconnectTimeStart');
 
     var initCode = sessionStorage.getItem('initCode')
     if (initCode) {
@@ -51,80 +50,13 @@ let errorArr = []; // 报警arr
 function connectBleInit() {
   console.log('connectBleInit')
   if (window.hilink) {
-    returnConnectTime(); // 重连计时
-    onBluetoothAdapterStateChange(); // 监听蓝牙模块开启/关闭 触发
-    onBLEConnectionStateChange(); // 监听低功耗蓝牙设备连接状态的改变
-    getBluetoothAdapterState(); // 蓝牙模块状态是否打开
+    disconnectBleFun(2);
+    // returnConnectTime(); // 重连计时
+    // onBluetoothAdapterStateChange(); // 监听蓝牙模块开启/关闭 触发
+    // onBLEConnectionStateChange(); // 监听低功耗蓝牙设备连接状态的改变
+    // getBluetoothAdapterState(); // 蓝牙模块状态是否打开
   }
 }
-
-// 下发数据
-// function sendCommandToBle(code) {
-//   // code = 'FA01090462330bdca0'
-//   let sendCode = '';
-//   // 计算校验位 start
-//   let b0 = code.substr(2, 2);
-//   let b1 = code.substr(4, 2);
-//   let b2 = code.substr(6, 2);
-//   let b3 = code.substr(8, 2);
-//   let b4 = code.substr(10, 2);
-//   let b5 = code.substr(12, 2);
-//   let b6 = code.substr(14, 2);
-//   // console.log('16进制code-', b0, b1, b2, b3, b4, b5, b6)
-
-//   let bx0 = parseInt(b0, 16);
-//   let bx1 = parseInt(b1, 16);
-//   let bx2 = parseInt(b2, 16);
-//   let bx3 = parseInt(b3, 16);
-//   let bx4 = parseInt(b4, 16);
-//   let bx5 = parseInt(b5, 16);
-//   let bx6 = parseInt(b6, 16);
-//   // console.log('10进制code-', bx0, bx1, bx2, bx3, bx4, bx5, bx6)
-//   let sum0 = bx0 + bx1 + bx2 + bx3 + bx4 + bx5 + bx6;
-//   // console.log('10进制code和-', sum0)
-//   let sum = '0x' + sum0.toString(16);
-//   // console.log('16进制code和-', sum)
-//   let gao = (sum & 0xF0).toString(16);
-//   let di = (sum & 0x0F).toString(16);
-//   // console.log('高位：', gao, '低位：', di);
-//   let lg = gao.toString().length;
-//   let ld = di.toString().length;
-//   if (lg == 1) {
-//     sendCode = code + '0' + gao
-//   } else {
-//     sendCode = code + gao
-//   }
-//   if (ld == 1) {
-//     sendCode = sendCode + '0' + di + 'FB'
-//   } else {
-//     sendCode = sendCode + di + 'FB'
-//   }
-//   // 计算校验位 end   组装数据ok 
-//   let obj = {
-//     "t": 01,
-//     "v": (sendCode.toUpperCase())
-//   }
-//   deviceIdMac = window.hilink.getStorageSync('deviceIdMac')
-//   hilinkDevId = window.hilink.getStorageSync('hilinkDevId')
-//   let inputVal = JSON.stringify(obj)
-//   console.log('-new-下发数据--:', hilinkDevId, deviceIdMac, inputVal)
-//   window.hilink.sendCommand(hilinkDevId, deviceIdMac, 'test', inputVal,
-//     'sendCommandCallbacklvx');
-//   window.sendCommandCallbacklvx = res => {
-//     let data = dataChange(res);
-//     console.log('-发命令回调:', data);
-//     if (data.errcode == -1) {
-//       console.log('---蓝牙配对，链接--')
-//       connectBleInit();
-//     } else {
-//       console.log('----二级页面返回----')
-//         // 进入待机状态
-//       initStatus(7, 0);
-//       //dosomethings 订阅蓝牙事件
-//       subscribeBleEventFun(hilinkDevId, deviceIdMac)
-//     }
-//   }
-// }
 
 // 解析蓝牙数据 FA010304640101010701FB
 function analyseBleInfo(str) {
@@ -196,10 +128,10 @@ function analyseBleInfo(str) {
 
     if (dataStr.substr(2, 1) == 1) {
       // 开机
-      initStatus(5, 0);
+      initStatus(5, 0, 1);
     } else {
       // 待机
-      initStatus(7, 0);
+      initStatus(7, 0, 1);
     }
 
     if (dataStr.substr(3, 1) == 1) {
@@ -767,6 +699,15 @@ function subscribeBleEventFun(hilinkDevId, deviceIdMac) {
     }
   }
 }
+// 取消蓝牙订阅
+function unSubscribeBleEventFun(hilinkDevId, deviceIdMac) {
+  console.log('-hilinkDevId-', hilinkDevId)
+  console.log('-deviceIdMac-', deviceIdMac)
+  window.hilink.unSubscribeBleEvent(hilinkDevId, deviceIdMac, 'unSubscribeBleEventCallback');
+  window.unSubscribeBleEventCallback = res => {
+    console.log('取消蓝牙订阅:', res);
+  }
+}
 
 function setH5Title() {
   let cs2DevName = window.hilink.getStorageSync('cs2DevName');
@@ -782,6 +723,26 @@ function setH5Title() {
     console.log('-云端设备名：', devName)
     $('.devName').html(devName)
     window.hilink.setStorageSync('cs2DevName', devName)
+  }
+}
+
+// 断开蓝牙
+function disconnectBleFun(num) {
+  console.log('先断开蓝牙')
+  deviceIdMac = window.hilink.getStorageSync('deviceIdMac')
+  hilinkDevId = window.hilink.getStorageSync('hilinkDevId')
+  console.log('-hilinkDevId-', hilinkDevId)
+  console.log('-deviceIdMac-', deviceIdMac)
+  window.hilink.disconnectBle(hilinkDevId, deviceIdMac, 'disconnectBleCallback');
+  window.disconnectBleCallback = res => {
+    let data = dataChange(res);
+    console.log('BLE断开连接:', data);
+    if (num == 2) {
+      returnConnectTime(); // 重连计时
+      onBluetoothAdapterStateChange(); // 监听蓝牙模块开启/关闭 触发
+      onBLEConnectionStateChange(); // 监听低功耗蓝牙设备连接状态的改变
+      getBluetoothAdapterState(); // 蓝牙模块状态是否打开
+    }
   }
 }
 
@@ -807,13 +768,14 @@ function letUsGo() {
       var oldBeginTime = disconnectTimeStart;
       let cTime = (new Date()).getTime();
       let allTime = parseInt((cTime - oldBeginTime) / 1000);
-      console.log('--old时-：', oldBeginTime)
-      console.log('--new时-：', cTime)
+      // console.log('--old时-：', oldBeginTime)
+      // console.log('--new时-：', cTime)
+      // console.log('--连接计时--：', allTime, ':', cTime, '-', oldBeginTime)
       console.log('--连接计时--：', allTime)
       if (allTime > 20) {
         console.log('--主动-停止搜寻附近的蓝牙设备---')
           // isDiscover = true;
-          // window.hilink.stopBluetoothDevicesDiscovery(); //停止搜寻附近的蓝牙设备
+        window.hilink.stopBluetoothDevicesDiscovery(); //停止搜寻附近的蓝牙设备
         jishiFlag = false;
         // 超时警告
         initStatus(2, 0);

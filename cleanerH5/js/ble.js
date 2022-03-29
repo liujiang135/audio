@@ -11,6 +11,7 @@ window.onload = function() {
   // analyseBleInfo('FA01031664111111001900001119120701FB'); // 工作中  无报警
   if (window.hilink) {
     setLanguage(); //设置语言
+    setH5Title();
     sessionStorage.removeItem('disconnectTimeStart');
 
     var initCode = sessionStorage.getItem('initCode')
@@ -710,10 +711,13 @@ function unSubscribeBleEventFun(hilinkDevId, deviceIdMac) {
 }
 
 function setH5Title() {
-  let cs2DevName = window.hilink.getStorageSync('cs2DevName');
-  console.log('-get缓存设备名：', cs2DevName)
-  if (cs2DevName && cs2DevName != 'undefined') {
-    $('.devName').html(cs2DevName)
+  console.log('设置名称')
+  if (window.hilink && window.hilink.getStorageSync('cs2DevName')) {
+    let cs2DevName = window.hilink.getStorageSync('cs2DevName');
+    console.log('-get缓存设备名：', cs2DevName)
+    if (cs2DevName && cs2DevName != 'undefined') {
+      $('.devName').html(cs2DevName)
+    }
   }
   window.hilink.getCurrentRegisteredDevice('getCurrentRegisteredDeviceCallbackl')
   window.getCurrentRegisteredDeviceCallbackl = res => {

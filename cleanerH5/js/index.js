@@ -139,44 +139,44 @@ function getDarkMode() {
 getDarkMode();
 
 // 隐私声明弹窗处理
-var stateLeft = document.getElementsByClassName("stateFn")[0];
-var stateRight = document.getElementsByClassName("stateFn")[1];
-var statementPopup = document.getElementsByClassName("statementPopup")[0];
+// var stateLeft = document.getElementsByClassName("stateFn")[0];
+// var stateRight = document.getElementsByClassName("stateFn")[1];
+// var statementPopup = document.getElementsByClassName("statementPopup")[0];
 
-var deviceId = undefined;
-var isAgree = localStorage.getItem("devId");
+// var deviceId = undefined;
+// var isAgree = localStorage.getItem("devId");
 
-if (window.hilink) {
-  console.log('--隐私声明--')
-  window.hilink.getDevInfoAll('0', '', 'getDevInfoAllResult');
-  window.getDevInfoAllResult = (res) => {
-    deviceId = dataChange(res).devId;
-    console.log('设备devId:', deviceId);
+// if (window.hilink) {
+//   console.log('--隐私声明--')
+//   window.hilink.getDevInfoAll('0', '', 'getDevInfoAllResult');
+//   window.getDevInfoAllResult = (res) => {
+//     deviceId = dataChange(res).devId;
+//     console.log('设备devId:', deviceId);
 
-    if (deviceId === isAgree) {
-      statementPopup.style.display = 'none';
-      backgroundColor.style.display = 'none';
-    } else {
-      backgroundColor.style.display = 'block';
-      statementPopup.style.display = 'block';
-    }
-  }
-}
+//     if (deviceId === isAgree) {
+//       statementPopup.style.display = 'none';
+//       backgroundColor.style.display = 'none';
+//     } else {
+//       backgroundColor.style.display = 'block';
+//       statementPopup.style.display = 'block';
+//     }
+//   }
+// }
 
-stateRight.addEventListener('click', function(event) {
-  localStorage.setItem("devId", deviceId);
-  statementPopup.style.display = 'none';
-  backgroundColor.style.display = 'none';
-  event.stopPropagation();
-})
+// stateRight.addEventListener('click', function(event) {
+//   localStorage.setItem("devId", deviceId);
+//   statementPopup.style.display = 'none';
+//   backgroundColor.style.display = 'none';
+//   event.stopPropagation();
+// })
 
 
-stateLeft.addEventListener('click', function(event) {
-  if (window.hilink) {
-    window.hilink.finishDeviceActivity();
-  }
-  event.stopPropagation();
-})
+// stateLeft.addEventListener('click', function(event) {
+//   if (window.hilink) {
+//     window.hilink.finishDeviceActivity();
+//   }
+//   event.stopPropagation();
+// })
 
 
 // 查看隐私协议&取消协议

@@ -59,7 +59,9 @@
             </div>
           </div>
         </div>
-        <div class="deviceImg"></div>
+        <div class="deviceImg">
+          <img src="./img/light/icon_D_1008px.png" class="deviceImg_png" alt="">
+        </div>
         <div class="logo"></div>
       </section>
 
@@ -645,14 +647,20 @@
       console.log('-发-关机')
       sendCommand("FA01060400000000")
     }
+    console.log('-发-查询历史')
+    sendCommand("FA010A0400000000")
   })
   $('#eco').click(function() {
     console.log('-发-节能模式')
     sendCommand("FA01050400000000")
+    console.log('-发-查询历史')
+    sendCommand("FA010A0400000000")
   })
   $('#turbo').click(function() {
     console.log('-发-强劲模式')
     sendCommand("FA01050401000000")
+    console.log('-发-查询历史')
+    sendCommand("FA010A0400000000")
   })
 
   // LED开关
@@ -665,6 +673,8 @@
       console.log('-发-开灯')
       sendCommand("FA01080401000000")
     }
+    console.log('-发-查询历史')
+    sendCommand("FA010A0400000000")
   })
 
   $(".devMore").click(function() {

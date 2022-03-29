@@ -223,11 +223,15 @@
 }
 
 .devImg .deviceImg {
+    width: 100%;
+    height: 252px;
+    display: flex;
+    justify-content: center;
+}
+
+.deviceImg_png {
     width: 252px;
     height: 252px;
-    align-self: center;
-    background: url('../img/light/icon_D_1008px.png') no-repeat;
-    background-size: cover;
 }
 
 .dark .devImg .deviceImg {

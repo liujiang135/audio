@@ -403,10 +403,10 @@
     let phoneType = sessionStorage.getItem('phoneType')
     if (phoneType == 'isPadVertical') {
       console.log('pad竖屏')
-      gridAdaptation(2, 2)
+      gridAdaptation(2)
     } else if (phoneType == 'isScreenSpreaded') {
       console.log('折叠屏')
-      gridAdaptation(1, 2)
+      gridAdaptation(1)
     } else {
       setEcharts()
     }

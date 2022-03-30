@@ -48,6 +48,8 @@ let disconnectTimeStart = ""; // 重连计时
 let jishiErrorFlag = false; // 报警轮播
 let errorArr = []; // 报警arr
 
+let changeName = false;
+
 function connectBleInit() {
   console.log('connectBleInit')
   if (window.hilink) {
@@ -270,6 +272,9 @@ function analyseBleInfo(str) {
   } else {
     jishiErrorFlag = false;
     hideAlert();
+  }
+  if (changeName) {
+    setH5Title();
   }
 }
 
@@ -711,10 +716,10 @@ function unSubscribeBleEventFun(hilinkDevId, deviceIdMac) {
 }
 
 function setH5Title() {
-  console.log('设置名称')
+  // console.log('设置名称')
   if (window.hilink && window.hilink.getStorageSync('cs2DevName')) {
     let cs2DevName = window.hilink.getStorageSync('cs2DevName');
-    console.log('-get缓存设备名：', cs2DevName)
+    // console.log('-get缓存设备名：', cs2DevName)
     if (cs2DevName && cs2DevName != 'undefined') {
       $('.devName').html(cs2DevName)
     }
@@ -746,6 +751,8 @@ function disconnectBleFun(num) {
       onBluetoothAdapterStateChange(); // 监听蓝牙模块开启/关闭 触发
       onBLEConnectionStateChange(); // 监听低功耗蓝牙设备连接状态的改变
       getBluetoothAdapterState(); // 蓝牙模块状态是否打开
+    } else {
+      window.hilink.finishDeviceActivity();
     }
   }
 }

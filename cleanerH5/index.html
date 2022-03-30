@@ -683,6 +683,7 @@
     window.jumpToCallback = res => {
       let data = dataChange(res);
       console.log('设置res:', data);
+      changeName = true;
     }
   })
 
@@ -1008,7 +1009,7 @@
     if (window.hilink) {
       unSubscribeBleEventFun(hilinkDevId, deviceIdMac)
       disconnectBleFun();
-      window.hilink.finishDeviceActivity();
+      // window.hilink.finishDeviceActivity();
     }
   }
 

@@ -114,7 +114,7 @@ barLeft.addEventListener('click', function(event) {
     unSubscribeBleEventFun(hilinkDevId, deviceIdMac)
     disconnectBleFun();
     // window.hilink.closeBLEConnection(hilinkDevId)
-    window.hilink.finishDeviceActivity();
+    // window.hilink.finishDeviceActivity();
   }
   event.stopPropagation();
 })

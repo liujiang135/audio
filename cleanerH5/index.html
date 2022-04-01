@@ -449,12 +449,14 @@
         <div class="msg-footer">
           <div class="btn_ok btn_l cancleConnectFail" id="btn_ok">
             <span class="cn_lang">稍后重试</span>
-            <span class="en_lang">Tr Again</span>
+            <!-- <span class="en_lang">Try Again</span> -->
+            <span class="en_lang">TRY AGAIN</span>
           </div>
           <div class="line"></div>
           <div class="btn_ok btn_r connectFailBtn" id="btn_ok">
             <span class="cn_lang">重新连接</span>
-            <span class="en_lang">Reconnect</span>
+            <!-- <span class="en_lang">Reconnect</span> -->
+            <span class="en_lang">RECONNECT</span>
           </div>
         </div>
       </div>
@@ -497,13 +499,17 @@
         </li>
 
         <li>
-          <input type="radio" value="1" name="shange1">栅格化
-          <input type="radio" value="2" name="shange1">正常
+          <input type="radio" value="1" name="shange1">pad
+          <input type="radio" value="2" name="shange1">折叠屏
+          <input type="radio" value="3" name="shange1">正常
         </li>
         <li>
           <input type="radio" value="1" name="yinsisss">隐私声明
         </li>
-
+        <li>
+          <input type="radio" value="1" name="jianshi">开启检视
+          <input type="radio" value="2" name="jianshi">右上角关闭检视
+        </li>
 
         <li>
           <button class="queding">确定</button>
@@ -511,6 +517,25 @@
       </ul>
 
     </div>
+  </div>
+  <div class="shange8ll">
+    <div class="gekai"></div>
+    <div class="shangege"></div>
+    <div class="gekai"></div>
+    <div class="shangege"></div>
+    <div class="gekai"></div>
+    <div class="shangege"></div>
+    <div class="gekai"></div>
+    <div class="shangege"></div>
+    <div class="gekai"></div>
+    <div class="shangege"></div>
+    <div class="gekai"></div>
+    <div class="shangege"></div>
+    <div class="gekai"></div>
+    <div class="shangege"></div>
+    <div class="gekai"></div>
+    <div class="shangege"></div>
+    <div class="gekai"></div>
   </div>
 </body>
 
@@ -906,7 +931,7 @@
   }
 
   // 栅格化适配
-  function gridAdaptation() {
+  function gridAdaptation(str) {
     this.document.getElementsByClassName("statusLeft")[0].classList.add('textAlignCenter')
     this.document.getElementsByClassName("statusRight")[0].classList.add('textAlignCenter')
     console.log('-栅格化适配-')
@@ -926,6 +951,10 @@
     this.document.getElementsByClassName("msg-div")[0].style.bottom = "0";
     this.document.getElementsByClassName("msg-div")[0].style.height = "fit-content";
     this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
+    if (str == 'pad') {
+      $(".btn_ok").css("font-size", "1.6rem");
+      $(".appMargin").css("margin", "0 24px");
+    }
   }
 
   // 弹框截图 模式选择
@@ -957,8 +986,10 @@
         lastcleansecond = '36'
         allcleanmin = '36'
         allcleansecond = 20
+        analyseBleInfo('FA010A0703623320150019623320150019623320150019F006FB'); // 清扫历史3
       }
       initStatus(moshi11, 1);
+      removeBatterFun()
     }
 
     let gaojing11 = $("input[name='gaojing1']:checked").val();
@@ -976,7 +1007,9 @@
 
     let shange1 = $("input[name='shange1']:checked").val();
     if (shange1 == 1) {
-      gridAdaptation(); // 栅格化适配
+      gridAdaptation('pad'); // 栅格化适配
+    } else if (shange1 == 2) {
+      gridAdaptation('zhedie'); // 栅格化适配
     }
 
     let yinsisss = $("input[name='yinsisss']:checked").val();
@@ -985,6 +1018,13 @@
       statementPopup.style.display = 'block';
     }
 
+    let jianshi = $("input[name='jianshi']:checked").val();
+    if (jianshi == 1) {
+      $('.shange8ll').css('display', 'flex');
+    }
+    if (jianshi == 2) {
+      $('.shange8ll').css('display', 'none');
+    }
     document.getElementsByClassName("xuanxiang")[0].style.display = "none";
   })
 
@@ -1079,12 +1119,12 @@
     if (isScreenSpreaded) {
       console.log('折叠屏')
       sessionStorage.setItem('phoneType', 'isScreenSpreaded')
-      gridAdaptation();
+      gridAdaptation('zhedie');
     }
     if (isPad && !isLandscape) {
       console.log('pad竖屏')
       sessionStorage.setItem('phoneType', 'isPadVertical')
-      gridAdaptation();
+      gridAdaptation('pad');
     }
     console.log('---------------  手机信息  ---------------')
   }

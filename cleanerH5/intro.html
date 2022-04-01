@@ -114,9 +114,32 @@
           <input type="radio" value="2" name="shange1">正常
         </li>
         <li>
+          <input type="radio" value="1" name="jianshi">开启检视
+          <input type="radio" value="2" name="jianshi">右上角关闭检视
+        </li>
+        <li>
           <button class="queding">确定</button>
         </li>
       </ul>
+    </div>
+    <div class="shange8ll">
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
     </div>
 </body>
 
@@ -184,8 +207,15 @@
       let shange1 = $("input[name='shange1']:checked").val();
       if (shange1 == 1) {
         console.log('栅格化适配');
-        $('.appMargin')[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
+        $('.appMargin')[0].style.width = "calc(100% - ((25% - 27px) + 48px) + 24px)";
         $('.appMargin')[0].style.margin = "0 auto";
+      }
+      let jianshi = $("input[name='jianshi']:checked").val();
+      if (jianshi == 1) {
+        $('.shange8ll').css('display', 'flex');
+      }
+      if (jianshi == 2) {
+        $('.shange8ll').css('display', 'none');
       }
       document.getElementsByClassName("xuanxiang")[0].style.display = "none";
     })
@@ -208,7 +238,7 @@
     let phoneType = sessionStorage.getItem('phoneType')
     if (phoneType == 'isPadVertical' || phoneType == 'isScreenSpreaded') {
       console.log('栅格化适配');
-      $('.appMargin')[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
+      $('.appMargin')[0].style.width = "calc(100% - ((25% - 27px) + 48px) + 24px)";
       $('.appMargin')[0].style.margin = "0 auto";
     }
 

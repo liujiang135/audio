@@ -44,7 +44,8 @@
         <div class="btnContainer" id="btnContainer">
           <div class="btn" onclick="finishDeviceActivity()">
             <span class="cn_lang">重置滤芯</span>
-            <span class="en_lang">Reset Filter</span>
+            <!-- <span class="en_lang">Reset Filter</span> -->
+            <span class="en_lang">RESET FILTER</span>
           </div>
         </div>
       </div>
@@ -67,12 +68,14 @@
         <div class="msg-footer">
           <div class="btn_ok btn_l" id="btn_ok">
             <span class="cn_lang">取消</span>
-            <span class="en_lang">Cancel</span>
+            <!-- <span class="en_lang">Cancel</span> -->
+            <span class="en_lang">CANCEL</span>
           </div>
           <div class="line"></div>
           <div class="btn_ok btn_r" id="btn_ok">
             <span class="cn_lang">确定</span>
-            <span class="en_lang">Reset</span>
+            <!-- <span class="en_lang">Reset</span> -->
+            <span class="en_lang">RESET</span>
           </div>
         </div>
       </div>
@@ -104,12 +107,35 @@
           <input type="radio" value="2" name="didian">50%寿命
           <input type="radio" value="1" name="didian">10%寿命
         </li>
+        <li>
+          <input type="radio" value="1" name="jianshi">开启检视
+          <input type="radio" value="2" name="jianshi">右上角关闭检视
+        </li>
 
         <li>
           <button class="queding">确定</button>
         </li>
       </ul>
 
+    </div>
+    <div class="shange8ll">
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
+      <div class="shangege"></div>
+      <div class="gekai"></div>
     </div>
 
 </body>
@@ -182,7 +208,7 @@
   function gridAdaptation(num) {
     if (num == 1 || num == 2) {
       console.log('-栅格化适配-')
-      this.document.getElementsByClassName("msg")[0].style.width = "calc(100% - ((25% - 27px) + 48px))";
+      this.document.getElementsByClassName("msg")[0].style.width = "calc(100% - ((25% - 27px) + 48px) + 18px)";
       this.document.getElementsByClassName("msg-div")[0].style.width = "calc(50% + 6px)";
       this.document.getElementsByClassName("msg-div")[0].style.left = "0";
       this.document.getElementsByClassName("msg-div")[0].style.right = "0";
@@ -190,6 +216,7 @@
       this.document.getElementsByClassName("msg-div")[0].style.bottom = "0";
       this.document.getElementsByClassName("msg-div")[0].style.height = "fit-content";
       this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
+      $('.btn').css('width', 'calc((100% - 12px*9)/8 *3 + 24px)');
     }
 
     if (num == 1) { // 1 折叠屏
@@ -267,6 +294,7 @@
 
     // 弹框截图 模式选择
     document.getElementsByClassName("queding")[0].addEventListener('click', function(event) {
+      console.log(11111)
       setEcharts(); // PC test
       let lang11 = $("input[name='lang']:checked").val();
       console.log('lang11--', lang11)
@@ -295,19 +323,19 @@
         setEcharts()
       }
 
-      let moshi11 = $("input[name='moshi']:checked").val();
-      console.log(moshi11)
-      if (moshi11 === '0' || moshi11) {
-        initStatus(moshi11, 0);
-      }
+      // let moshi11 = $("input[name='moshi']:checked").val();
+      // console.log(moshi11)
+      // if (moshi11 === '0' || moshi11) {
+      //   initStatus(moshi11, 0);
+      // }
 
-      let gaojing11 = $("input[name='gaojing1']:checked").val();
-      if (gaojing11 === '0' || gaojing11 === '1' || gaojing11 === '2') {
-        showErrorTip(gaojing11)
-      }
-      if (gaojing11 == 3) {
-        hideAlert();
-      }
+      // let gaojing11 = $("input[name='gaojing1']:checked").val();
+      // if (gaojing11 === '0' || gaojing11 === '1' || gaojing11 === '2') {
+      //   showErrorTip(gaojing11)
+      // }
+      // if (gaojing11 == 3) {
+      //   hideAlert();
+      // }
 
       let shange1 = $("input[name='shange1']:checked").val();
       gridAdaptation(shange1); // 栅格化适配
@@ -321,6 +349,15 @@
         batterVal = 50
         setEcharts();
       }
+
+      let jianshi = $("input[name='jianshi']:checked").val();
+      if (jianshi == 1) {
+        $('.shange8ll').css('display', 'flex');
+      }
+      if (jianshi == 2) {
+        $('.shange8ll').css('display', 'none');
+      }
+
 
       document.getElementsByClassName("xuanxiang")[0].style.display = "none";
     })
@@ -372,6 +409,7 @@
   $(function() {
     console.log("------滤芯信息页-----")
 
+    test();
 
     ctLanguage = sessionStorage.getItem('ctLanguage')
     isDark = sessionStorage.getItem('isDark')
@@ -414,7 +452,6 @@
     //dosomethings 订阅蓝牙事件
     subscribeBleEventFun()
 
-    test();
   })
 
   var chartDom = document.getElementById('echarts_warp');

@@ -154,6 +154,7 @@
   var gaugeColor = '#00000008'; //进度条底色
   var batterVal = 45;
   let radiusEcharts = '120px'; // 半径
+  let eChartsBarWidth = 24;
   let echartsWidth = '252'; // 宽
   let echartsHeight = '188'; // 高
   let isDark = 1; // 1 白天模式   2夜间模式
@@ -170,6 +171,8 @@
 
   // 中文 zh   英文 en
   var ctLanguage = 'zh'; // 语言
+  let screenWidth;
+  let screenHeight;
 
   console.log('开始调试');
 
@@ -217,20 +220,16 @@
       this.document.getElementsByClassName("msg-div")[0].style.height = "fit-content";
       this.document.getElementsByClassName("msg-div")[0].style.margin = "auto";
       $('.btn').css('width', 'calc((100% - 12px*9)/8 *3 + 24px)');
-    }
 
-    if (num == 1) { // 1 折叠屏
-      $('.main')[0].style.width = "305px";
-      $('.main')[0].style.height = "227px";
-      echartsWidth = '305'; // 宽
-      echartsHeight = '227'; // 高
-      radiusEcharts = '132px'
-    } else if (num == 2) { // 平板竖屏
-      $('.main')[0].style.width = "512px";
-      $('.main')[0].style.height = "382px";
-      echartsWidth = '512'; // 宽
-      echartsHeight = '382'; // 高
-      radiusEcharts = '224px'
+      if (screenWidth > screenHeight) {
+        echartsWidth = (screenHeight / 2) * 0.8
+      } else {
+        echartsWidth = (screenWidth / 2) * 0.8
+      }
+      echartsHeight = echartsWidth * 188 / 252
+      $('.main')[0].style.width = echartsWidth + 'px';
+      $('.main')[0].style.height = echartsHeight + "px";
+      radiusEcharts = echartsWidth * 265 / 305 / 2 + 'px'
     } else {
       $('.main')[0].style.width = "252px";
       $('.main')[0].style.height = "188px";
@@ -238,6 +237,42 @@
       echartsHeight = '188'; // 高
       radiusEcharts = '120px' // 252 - 188
     }
+
+    // if (num == 1) { // 1 折叠屏
+    //   if (screenWidth > screenHeight) {
+    //     echartsWidth = (screenHeight / 2) * 0.8
+    //   } else {
+    //     echartsWidth = (screenWidth / 2) * 0.8
+    //   }
+    //   echartsHeight = echartsWidth * 188 / 252
+    //   $('.main')[0].style.width = echartsWidth + 'px';
+    //   $('.main')[0].style.height = echartsHeight + "px";
+    //   radiusEcharts = echartsWidth * 265 / 305 + 'px'
+    //     // echartsWidth = '305'; // 宽
+    //     // echartsHeight = '227'; // 高
+    //     // $('.main')[0].style.width = "305px";
+    //     // $('.main')[0].style.height = "227px";
+    //     // echartsWidth = '305'; // 宽
+    //     // echartsHeight = '227'; // 高
+    //     // radiusEcharts = '132px'
+    // } else if (num == 2) { // 平板竖屏
+    //   $('.main')[0].style.width = "512px";
+    //   $('.main')[0].style.height = "382px";
+    //   echartsWidth = '512'; // 宽
+    //   echartsHeight = '382'; // 高
+    //   radiusEcharts = '224px'
+    // } else {
+    //   $('.main')[0].style.width = "252px";
+    //   $('.main')[0].style.height = "188px";
+    //   echartsWidth = '252'; // 宽
+    //   echartsHeight = '188'; // 高
+    //   radiusEcharts = '120px' // 252 - 188
+    // }
+
+    console.log('echartsWidth-:', echartsWidth)
+    console.log('echartsHeight-:', echartsHeight)
+    console.log('radiusEcharts-:', radiusEcharts)
+    console.log('main style-:', $('.main')[0].style)
     setEcharts();
     myChart.resize();
   }
@@ -323,21 +358,17 @@
         setEcharts()
       }
 
-      // let moshi11 = $("input[name='moshi']:checked").val();
-      // console.log(moshi11)
-      // if (moshi11 === '0' || moshi11) {
-      //   initStatus(moshi11, 0);
-      // }
-
-      // let gaojing11 = $("input[name='gaojing1']:checked").val();
-      // if (gaojing11 === '0' || gaojing11 === '1' || gaojing11 === '2') {
-      //   showErrorTip(gaojing11)
-      // }
-      // if (gaojing11 == 3) {
-      //   hideAlert();
-      // }
-
       let shange1 = $("input[name='shange1']:checked").val();
+      if (shange1 == 1) { // 1 折叠屏  2 平板竖屏
+        screenWidth = 720
+        screenHeight = 811
+      }
+      if (shange1 == 2) {
+        screenWidth = window.screen.width;
+        screenHeight = window.screen.height;
+        console.log('screenWidth-height', screenWidth, screenHeight)
+        eChartsBarWidth = 30
+      }
       gridAdaptation(shange1); // 栅格化适配
 
       let didian = $("input[name='didian']:checked").val();
@@ -410,6 +441,9 @@
     console.log("------滤芯信息页-----")
 
     test();
+
+    screenWidth = sessionStorage.getItem('screenWidth')
+    screenHeight = sessionStorage.getItem('screenHeight')
 
     ctLanguage = sessionStorage.getItem('ctLanguage')
     isDark = sessionStorage.getItem('isDark')
@@ -494,12 +528,12 @@
           progress: {
             show: true,
             roundCap: true,
-            width: 24
+            width: eChartsBarWidth
           },
           axisLine: {
             roundCap: true,
             lineStyle: {
-              width: 24,
+              width: eChartsBarWidth,
               color: [
                 [1, new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
                   offset: 0.1,
@@ -605,12 +639,12 @@
           progress: {
             show: true,
             roundCap: true,
-            width: 24
+            width: eChartsBarWidth
           },
           axisLine: {
             roundCap: true,
             lineStyle: {
-              width: 24,
+              width: eChartsBarWidth,
               color: [
                 [1, new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
                   offset: 0.1,

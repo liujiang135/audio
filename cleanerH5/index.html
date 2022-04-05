@@ -1102,8 +1102,10 @@
       if (window.hilink) {
         let screenWidth = window.hilink.screenWidth
         let screenHeight = window.hilink.screenHeight
+        sessionStorage.setItem('screenWidth', screenWidth)
+        sessionStorage.setItem('screenHeight', screenHeight)
         if (screenWidth > screenHeight) {
-          isLandscape = true;
+          isLandscape = true; // false 竖屏    true 横屏
         }
       }
       isScreenSpreaded = (window.hilink && window.hilink.screenWidth && window.hilink.isScreenSpreaded()) || false, // 折叠屏展开
@@ -1129,6 +1131,18 @@
     console.log('---------------  手机信息  ---------------')
   }
 
+  // 获取手机系统信息,判断手机操作系统是 Android 还是 iOS
+  // function getSystemInfo() {
+  //   window.hilink.getSystemInfoSync('getSystemInfoSyncCallBack')
+  //   window.getSystemInfoSyncCallBack = (info) => {
+  //     let data = JSON.parse(info);
+  //     console.log('设备信息~~~~~~~~~~~~~~~~', data);
+  //     let screenWidth = data.screenWidth;
+  //     let screenHeight = data.screenHeight;
+
+  //   }
+  // }
+
   $(function() {
     console.log("-- $ init --")
 
@@ -1148,6 +1162,8 @@
 
     // 启用重写安卓物理返回键
     initBack();
+
+    // getSystemInfo();
 
     test()
   })
